@@ -2,6 +2,7 @@ import type { Course, Section, Unit } from '../core/types'
 import u01 from './units/u01.json'
 import u02 from './units/u02.json'
 import u03 from './units/u03.json'
+import u04 from './units/u04.json'
 
 /**
  * The English course. Units are plain JSON (words + sentences with uz / ru / tr
@@ -10,7 +11,7 @@ import u03 from './units/u03.json'
  * To add a unit: drop `uNN.json` into ./units, import it here and list its id
  * in a section. `npm run content:check` validates the whole course.
  */
-const UNITS = [u01, u02, u03] as unknown as Unit[]
+const UNITS = [u01, u02, u03, u04] as unknown as Unit[]
 
 const SECTION_PLAN: Array<Omit<Section, 'unitIds'> & { unitIds: string[] }> = [
   {

@@ -8,7 +8,7 @@ import { CHEST_GEMS, XP_RULES } from '../../core/progress'
 import { useT } from '../../i18n'
 import { tapFeedback } from '../../lib/haptics'
 import { useApp } from '../../state/store'
-import { colors, radius, space } from '../../theme/tokens'
+import { NATIVE_DRIVER, colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
 import { Mascot } from '../../ui/Mascot'
 import { Screen } from '../../ui/Screen'
@@ -80,7 +80,7 @@ export function PathScreen() {
           >
             <UnitHeader pu={pu} index={unitIndex} title={pu.unit.title[lang]} goal={pu.unit.goal[lang]} label={t('learn.unit', { n: unitIndex + 1 })} guidebook={t('learn.guidebook')} onGuidebook={() => router.push(`/unit/${pu.unit.id}`)} />
             <View style={styles.nodes}>
-              <View style={[styles.mascot, unitIndex % 2 === 0 ? styles.mascotRight : styles.mascotLeft]} pointerEvents="none">
+              <View style={[styles.mascot, styles.untouchable, unitIndex % 2 === 0 ? styles.mascotRight : styles.mascotLeft]}>
                 <Mascot id={pu.unit.guide} size={120} style={pu.locked ? styles.dim : undefined} />
               </View>
               {pu.nodes.map((node, i) => {
@@ -117,7 +117,7 @@ export function PathScreen() {
         </View>
       </ScrollView>
       {toast ? (
-        <View style={styles.toast} pointerEvents="none">
+        <View style={[styles.toast, styles.untouchable]}>
           <Ionicons name="diamond" size={22} color={colors.gem} />
           <Txt variant="label" color={colors.white}>
             {toast}
@@ -184,15 +184,15 @@ function StartBubble({ label, color }: { label: string; color: string }) {
   useEffect(() => {
     const loop = Animated.loop(
       Animated.sequence([
-        Animated.timing(bob, { toValue: -6, duration: 600, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
-        Animated.timing(bob, { toValue: 0, duration: 600, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
+        Animated.timing(bob, { toValue: -6, duration: 600, easing: Easing.inOut(Easing.quad), useNativeDriver: NATIVE_DRIVER }),
+        Animated.timing(bob, { toValue: 0, duration: 600, easing: Easing.inOut(Easing.quad), useNativeDriver: NATIVE_DRIVER }),
       ])
     )
     loop.start()
     return () => loop.stop()
   }, [bob])
   return (
-    <Animated.View style={[styles.startBubble, { transform: [{ translateY: bob }] }]} pointerEvents="none">
+    <Animated.View style={[styles.startBubble, styles.untouchable, { transform: [{ translateY: bob }] }]}>
       <Txt variant="label" color={color}>
         {label}
       </Txt>
@@ -229,6 +229,8 @@ function NodeCard({ node, pu, lessonTitle, onStart }: { node: PathNode; pu: Path
 
 const styles = StyleSheet.create({
   scroll: { paddingBottom: 48 },
+  // decoration must never swallow taps meant for the nodes underneath
+  untouchable: { pointerEvents: 'none' },
   unitHeader: { margin: space.lg, marginBottom: space.md, borderRadius: radius.lg, padding: space.lg, flexDirection: 'row', alignItems: 'center', gap: space.md },
   unitText: { flex: 1 },
   unitLabel: { textTransform: 'uppercase', letterSpacing: 1, marginBottom: 2 },

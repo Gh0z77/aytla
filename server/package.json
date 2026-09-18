@@ -1,0 +1,24 @@
+{
+  "name": "everest-ai-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "EVEREST AI API: accounts, cloud sync, weekly leagues, AI conversation practice",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node src/index.ts",
+    "dev": "node --watch src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm run test"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.0",
+    "hono": "^4.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.1"
+  }
+}

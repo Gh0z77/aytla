@@ -1,0 +1,143 @@
+{
+  "id": "u04",
+  "section": 1,
+  "order": 4,
+  "title": { "en": "Food and drinks", "uz": "Ovqat va ichimliklar", "ru": "Еда и напитки", "tr": "Yiyecek ve içecekler" },
+  "goal": {
+    "en": "Order food and drinks and say what you like.",
+    "uz": "Ovqat va ichimlik buyurtma qiling, nimani yoqtirishingizni ayting.",
+    "ru": "Закажите еду и напитки и скажите, что вам нравится.",
+    "tr": "Yiyecek ve içecek sipariş et, neyi sevdiğini söyle."
+  },
+  "guide": "rocky",
+  "color": "#EF4444",
+  "tip": {
+    "title": { "en": "I like, he likes", "uz": "I like, he likes", "ru": "I like, he likes", "tr": "I like, he likes" },
+    "body": {
+      "en": "With I, you, we and they the verb stays the same: I like tea. With he, she or one person add -s: She likes tea. For a question use \"Do\": Do you like fish? For \"no\" use \"do not\" (don't): I do not like meat.",
+      "uz": "I, you, we, they bilan fe'l o'zgarmaydi: I like tea. He, she yoki bitta odam bilan -s qo'shiladi: She likes tea. Savol \"Do\" bilan boshlanadi: Do you like fish? Inkor uchun \"do not\" (don't): I do not like meat.",
+      "ru": "С I, you, we, they глагол не меняется: I like tea. С he, she или одним человеком добавляется -s: She likes tea. Вопрос начинается с \"Do\": Do you like fish? Отрицание — \"do not\" (don't): I do not like meat.",
+      "tr": "I, you, we, they ile fiil değişmez: I like tea. He, she ya da tek bir kişiyle -s eklenir: She likes tea. Soru \"Do\" ile başlar: Do you like fish? Olumsuzluk için \"do not\" (don't): I do not like meat."
+    },
+    "examples": [
+      { "en": "I like apples.", "native": { "uz": "Men olmani yoqtiraman.", "ru": "Мне нравятся яблоки.", "tr": "Ben elma severim." } },
+      { "en": "She likes fruit.", "native": { "uz": "U mevani yoqtiradi.", "ru": "Ей нравятся фрукты.", "tr": "O meyve sever." } },
+      { "en": "I do not like meat.", "native": { "uz": "Men go'shtni yoqtirmayman.", "ru": "Мне не нравится мясо.", "tr": "Ben et sevmem." } }
+    ]
+  },
+  "words": [
+    { "id": "u04.w.water", "en": "water", "pos": "noun", "emoji": "💧", "native": { "uz": "suv", "ru": "вода", "tr": "su" } },
+    { "id": "u04.w.tea", "en": "tea", "pos": "noun", "emoji": "🍵", "native": { "uz": "choy", "ru": "чай", "tr": "çay" } },
+    { "id": "u04.w.coffee", "en": "coffee", "pos": "noun", "emoji": "☕", "native": { "uz": "qahva", "ru": "кофе", "tr": "kahve" } },
+    { "id": "u04.w.milk", "en": "milk", "pos": "noun", "emoji": "🥛", "native": { "uz": "sut", "ru": "молоко", "tr": "süt" } },
+    { "id": "u04.w.want", "en": "want", "pos": "verb", "native": { "uz": "xohlamoq", "ru": "хотеть", "tr": "istemek" } },
+    { "id": "u04.w.drink", "en": "drink", "pos": "verb", "emoji": "🥤", "native": { "uz": "ichmoq", "ru": "пить", "tr": "içmek" } },
+
+    { "id": "u04.w.hungry", "en": "hungry", "pos": "adj", "emoji": "🤤", "native": { "uz": "och", "ru": "голодный", "tr": "aç" } },
+    { "id": "u04.w.thirsty", "en": "thirsty", "pos": "adj", "emoji": "🥵", "native": { "uz": "chanqagan", "ru": "жаждущий", "tr": "susamış" }, "altNative": { "ru": ["хочет пить"] } },
+    { "id": "u04.w.bread", "en": "bread", "pos": "noun", "emoji": "🍞", "native": { "uz": "non", "ru": "хлеб", "tr": "ekmek" } },
+    { "id": "u04.w.soup", "en": "soup", "pos": "noun", "emoji": "🍲", "native": { "uz": "sho'rva", "ru": "суп", "tr": "çorba" } },
+    { "id": "u04.w.eat", "en": "eat", "pos": "verb", "emoji": "🍽️", "native": { "uz": "yemoq", "ru": "есть", "tr": "yemek" } },
+    { "id": "u04.w.rice", "en": "rice", "pos": "noun", "emoji": "🍚", "native": { "uz": "guruch", "ru": "рис", "tr": "pirinç" }, "altNative": { "tr": ["pilav"] } },
+
+    { "id": "u04.w.like", "en": "like", "pos": "verb", "emoji": "😍", "native": { "uz": "yoqtirmoq", "ru": "нравиться", "tr": "sevmek" }, "altNative": { "ru": ["любить"], "tr": ["hoşlanmak"] } },
+    { "id": "u04.w.apple", "en": "apple", "pos": "noun", "emoji": "🍎", "native": { "uz": "olma", "ru": "яблоко", "tr": "elma" } },
+    { "id": "u04.w.fruit", "en": "fruit", "pos": "noun", "emoji": "🍇", "native": { "uz": "meva", "ru": "фрукты", "tr": "meyve" } },
+    { "id": "u04.w.meat", "en": "meat", "pos": "noun", "emoji": "🥩", "native": { "uz": "go'sht", "ru": "мясо", "tr": "et" } },
+    { "id": "u04.w.fish", "en": "fish", "pos": "noun", "emoji": "🐟", "native": { "uz": "baliq", "ru": "рыба", "tr": "balık" } },
+    { "id": "u04.w.egg", "en": "egg", "pos": "noun", "emoji": "🥚", "native": { "uz": "tuxum", "ru": "яйцо", "tr": "yumurta" } },
+
+    { "id": "u04.w.breakfast", "en": "breakfast", "pos": "noun", "emoji": "🍳", "native": { "uz": "nonushta", "ru": "завтрак", "tr": "kahvaltı" } },
+    { "id": "u04.w.lunch", "en": "lunch", "pos": "noun", "emoji": "🥪", "native": { "uz": "tushlik", "ru": "обед", "tr": "öğle yemeği" } },
+    { "id": "u04.w.dinner", "en": "dinner", "pos": "noun", "emoji": "🍝", "native": { "uz": "kechki ovqat", "ru": "ужин", "tr": "akşam yemeği" } },
+    { "id": "u04.w.cheese", "en": "cheese", "pos": "noun", "emoji": "🧀", "native": { "uz": "pishloq", "ru": "сыр", "tr": "peynir" } },
+    { "id": "u04.w.juice", "en": "juice", "pos": "noun", "emoji": "🧃", "native": { "uz": "sharbat", "ru": "сок", "tr": "meyve suyu" } },
+    { "id": "u04.w.delicious", "en": "delicious", "pos": "adj", "emoji": "😋", "native": { "uz": "mazali", "ru": "вкусный", "tr": "lezzetli" } },
+
+    { "id": "u04.w.menu", "en": "menu", "pos": "noun", "emoji": "📋", "native": { "uz": "menyu", "ru": "меню", "tr": "menü" } },
+    { "id": "u04.w.cup", "en": "cup", "pos": "noun", "native": { "uz": "chashka", "ru": "чашка", "tr": "fincan" }, "altNative": { "uz": ["piyola", "finjon"] } },
+    { "id": "u04.w.hot", "en": "hot", "pos": "adj", "emoji": "🔥", "native": { "uz": "issiq", "ru": "горячий", "tr": "sıcak" } },
+    { "id": "u04.w.cold", "en": "cold", "pos": "adj", "emoji": "🧊", "native": { "uz": "sovuq", "ru": "холодный", "tr": "soğuk" } },
+    { "id": "u04.w.sugar", "en": "sugar", "pos": "noun", "emoji": "🍬", "native": { "uz": "shakar", "ru": "сахар", "tr": "şeker" } },
+    { "id": "u04.w.with", "en": "with", "pos": "prep", "native": { "uz": "bilan", "ru": "с", "tr": "ile" } },
+    { "id": "u04.w.cafe", "en": "cafe", "pos": "noun", "emoji": "🍰", "native": { "uz": "kafe", "ru": "кафе", "tr": "kafe" } }
+  ],
+  "sentences": [
+    { "id": "u04.s.01", "en": "I want tea.", "native": { "uz": "Men choy xohlayman.", "ru": "Я хочу чай.", "tr": "Ben çay istiyorum." }, "altNative": { "ru": ["Я хочу чаю."], "tr": ["Çay istiyorum."] } },
+    { "id": "u04.s.02", "en": "I want water, please.", "native": { "uz": "Men suv xohlayman, iltimos.", "ru": "Я хочу воды, пожалуйста.", "tr": "Su istiyorum, lütfen." }, "altNative": { "uz": ["Iltimos, men suv xohlayman.", "Menga suv kerak, iltimos."], "ru": ["Я хочу воду, пожалуйста.", "Мне воды, пожалуйста."], "tr": ["Ben su istiyorum, lütfen.", "Lütfen su istiyorum."] } },
+    { "id": "u04.s.03", "en": "Tea or coffee?", "native": { "uz": "Choymi yoki qahva?", "ru": "Чай или кофе?", "tr": "Çay mı kahve mi?" }, "altNative": { "uz": ["Choy yoki qahva?", "Choymi yoki qahvami?"], "tr": ["Çay mı yoksa kahve mi?"] } },
+    { "id": "u04.s.04", "en": "I drink coffee.", "native": { "uz": "Men qahva ichaman.", "ru": "Я пью кофе.", "tr": "Ben kahve içiyorum." }, "altNative": { "tr": ["Kahve içiyorum.", "Ben kahve içerim.", "Kahve içerim."] } },
+    { "id": "u04.s.05", "en": "Do you want milk?", "native": { "uz": "Sen sut xohlaysanmi?", "ru": "Ты хочешь молоко?", "tr": "Süt ister misin?" }, "altNative": { "uz": ["Sut xohlaysanmi?"], "ru": ["Ты хочешь молока?", "Хочешь молока?"], "tr": ["Sen süt ister misin?", "Süt istiyor musun?"] } },
+    { "id": "u04.s.06", "en": "I drink water.", "native": { "uz": "Men suv ichaman.", "ru": "Я пью воду.", "tr": "Ben su içiyorum." }, "altNative": { "tr": ["Su içiyorum.", "Ben su içerim.", "Su içerim."] } },
+    { "id": "u04.s.07", "en": "Coffee and milk, please.", "native": { "uz": "Qahva va sut, iltimos.", "ru": "Кофе и молоко, пожалуйста.", "tr": "Kahve ve süt, lütfen." } },
+    { "id": "u04.s.08", "en": "No, thanks. I want tea.", "native": { "uz": "Yo'q, rahmat. Men choy xohlayman.", "ru": "Нет, спасибо. Я хочу чай.", "tr": "Hayır, teşekkürler. Çay istiyorum." }, "altNative": { "ru": ["Нет, спасибо. Я хочу чаю."], "tr": ["Hayır, teşekkürler. Ben çay istiyorum."] } },
+
+    { "id": "u04.s.09", "en": "I am hungry.", "native": { "uz": "Men ochman.", "ru": "Я голоден.", "tr": "Ben açım." }, "altNative": { "uz": ["Qornim och."], "ru": ["Я голодна.", "Я хочу есть."], "tr": ["Açım.", "Karnım aç."] } },
+    { "id": "u04.s.10", "en": "I am thirsty.", "native": { "uz": "Men chanqadim.", "ru": "Я хочу пить.", "tr": "Ben susadım." }, "altNative": { "uz": ["Men chanqaganman.", "Chanqadim."], "tr": ["Susadım."] } },
+    { "id": "u04.s.11", "en": "Are you hungry?", "native": { "uz": "Sen ochmisan?", "ru": "Ты голоден?", "tr": "Sen aç mısın?" }, "altNative": { "uz": ["Qorning ochmi?"], "ru": ["Ты голодна?", "Ты хочешь есть?"], "tr": ["Aç mısın?"] } },
+    { "id": "u04.s.12", "en": "I eat bread.", "native": { "uz": "Men non yeyman.", "ru": "Я ем хлеб.", "tr": "Ben ekmek yiyorum." }, "altNative": { "tr": ["Ekmek yiyorum.", "Ben ekmek yerim.", "Ekmek yerim."] } },
+    { "id": "u04.s.13", "en": "I want soup and bread.", "native": { "uz": "Men sho'rva va non xohlayman.", "ru": "Я хочу суп и хлеб.", "tr": "Ben çorba ve ekmek istiyorum." }, "altNative": { "tr": ["Çorba ve ekmek istiyorum."] } },
+    { "id": "u04.s.14", "en": "We eat rice.", "native": { "uz": "Biz guruch yeymiz.", "ru": "Мы едим рис.", "tr": "Biz pilav yiyoruz." }, "altNative": { "tr": ["Pilav yiyoruz.", "Biz pirinç yiyoruz.", "Biz pilav yeriz."] } },
+    { "id": "u04.s.15", "en": "My brother is very hungry.", "native": { "uz": "Mening akam juda och.", "ru": "Мой брат очень голоден.", "tr": "Erkek kardeşim çok aç." }, "altNative": { "uz": ["Mening ukam juda och.", "Akam juda och.", "Ukam juda och."], "ru": ["Мой брат очень голодный."], "tr": ["Benim erkek kardeşim çok aç.", "Abim çok aç."] } },
+    { "id": "u04.s.16", "en": "The soup is good.", "native": { "uz": "Sho'rva yaxshi.", "ru": "Суп хороший.", "tr": "Çorba iyi." }, "altNative": { "uz": ["Sho'rva mazali."], "ru": ["Суп вкусный."], "tr": ["Çorba güzel."] } },
+
+    { "id": "u04.s.17", "en": "I like apples.", "native": { "uz": "Men olmani yoqtiraman.", "ru": "Мне нравятся яблоки.", "tr": "Ben elma severim." }, "altNative": { "uz": ["Menga olma yoqadi.", "Men olmalarni yoqtiraman."], "ru": ["Я люблю яблоки."], "tr": ["Elma severim.", "Elmayı severim.", "Ben elmayı severim."] } },
+    { "id": "u04.s.18", "en": "Do you like fish?", "native": { "uz": "Sen baliqni yoqtirasanmi?", "ru": "Тебе нравится рыба?", "tr": "Balık sever misin?" }, "altNative": { "uz": ["Senga baliq yoqadimi?", "Baliqni yoqtirasanmi?"], "ru": ["Ты любишь рыбу?"], "tr": ["Sen balık sever misin?", "Balığı sever misin?"] } },
+    { "id": "u04.s.19", "en": "I do not like meat.", "native": { "uz": "Men go'shtni yoqtirmayman.", "ru": "Мне не нравится мясо.", "tr": "Ben et sevmem." }, "altNative": { "uz": ["Menga go'sht yoqmaydi."], "ru": ["Я не люблю мясо."], "tr": ["Et sevmem.", "Ben eti sevmem.", "Eti sevmem."] } },
+    { "id": "u04.s.20", "en": "She likes fruit.", "native": { "uz": "U mevani yoqtiradi.", "ru": "Ей нравятся фрукты.", "tr": "O meyve sever." }, "altEnFor": { "uz": ["He likes fruit."], "tr": ["He likes fruit."] }, "altNative": { "uz": ["Unga meva yoqadi."], "ru": ["Она любит фрукты."], "tr": ["O meyveyi sever."] } },
+    { "id": "u04.s.21", "en": "He eats an egg.", "native": { "uz": "U tuxum yeydi.", "ru": "Он ест яйцо.", "tr": "O bir yumurta yiyor." }, "altEnFor": { "uz": ["She eats an egg."], "tr": ["She eats an egg."] }, "altNative": { "uz": ["U bitta tuxum yeydi."], "tr": ["O yumurta yiyor.", "O bir yumurta yer."] } },
+    { "id": "u04.s.22", "en": "I eat an apple.", "native": { "uz": "Men olma yeyman.", "ru": "Я ем яблоко.", "tr": "Ben bir elma yiyorum." }, "altNative": { "uz": ["Men bitta olma yeyman."], "tr": ["Bir elma yiyorum.", "Ben elma yiyorum."] } },
+    { "id": "u04.s.23", "en": "We like meat and fish.", "native": { "uz": "Biz go'sht va baliqni yoqtiramiz.", "ru": "Нам нравятся мясо и рыба.", "tr": "Biz et ve balık severiz." }, "altNative": { "uz": ["Bizga go'sht va baliq yoqadi."], "ru": ["Мы любим мясо и рыбу."], "tr": ["Et ve balık severiz."] } },
+    { "id": "u04.s.24", "en": "My mother likes fruit.", "native": { "uz": "Mening onam mevani yoqtiradi.", "ru": "Моей маме нравятся фрукты.", "tr": "Annem meyve sever." }, "altNative": { "uz": ["Onam mevani yoqtiradi.", "Onamga meva yoqadi."], "ru": ["Моя мама любит фрукты."], "tr": ["Benim annem meyve sever.", "Annem meyveyi sever."] } },
+
+    { "id": "u04.s.25", "en": "Breakfast is delicious.", "native": { "uz": "Nonushta mazali.", "ru": "Завтрак вкусный.", "tr": "Kahvaltı lezzetli." } },
+    { "id": "u04.s.26", "en": "I eat cheese for breakfast.", "native": { "uz": "Men nonushtaga pishloq yeyman.", "ru": "Я ем сыр на завтрак.", "tr": "Kahvaltıda peynir yiyorum." }, "altNative": { "uz": ["Nonushtaga men pishloq yeyman."], "ru": ["На завтрак я ем сыр."], "tr": ["Ben kahvaltıda peynir yiyorum.", "Kahvaltıda peynir yerim."] } },
+    { "id": "u04.s.27", "en": "I drink juice in the morning.", "native": { "uz": "Men ertalab sharbat ichaman.", "ru": "Утром я пью сок.", "tr": "Sabah meyve suyu içiyorum." }, "altNative": { "uz": ["Ertalab men sharbat ichaman."], "ru": ["Я пью сок утром."], "tr": ["Ben sabah meyve suyu içiyorum.", "Sabahları meyve suyu içerim."] } },
+    { "id": "u04.s.28", "en": "We eat lunch together.", "native": { "uz": "Biz birga tushlik qilamiz.", "ru": "Мы обедаем вместе.", "tr": "Biz birlikte öğle yemeği yiyoruz." }, "altNative": { "uz": ["Biz tushlikni birga qilamiz."], "ru": ["Мы вместе обедаем."], "tr": ["Birlikte öğle yemeği yiyoruz.", "Öğle yemeğini birlikte yiyoruz."] } },
+    { "id": "u04.s.29", "en": "Dinner is at home.", "native": { "uz": "Kechki ovqat uyda.", "ru": "Ужин дома.", "tr": "Akşam yemeği evde." } },
+    { "id": "u04.s.30", "en": "What do you want for lunch?", "native": { "uz": "Tushlikka nima xohlaysan?", "ru": "Что ты хочешь на обед?", "tr": "Öğle yemeğinde ne istersin?" }, "altNative": { "uz": ["Sen tushlikka nima xohlaysan?"], "tr": ["Öğle yemeği için ne istersin?", "Öğle yemeğinde ne istiyorsun?"] } },
+    { "id": "u04.s.31", "en": "The cheese is very good.", "native": { "uz": "Pishloq juda yaxshi.", "ru": "Сыр очень хороший.", "tr": "Peynir çok iyi." }, "altNative": { "uz": ["Pishloq juda mazali."], "ru": ["Сыр очень вкусный."], "tr": ["Peynir çok güzel."] } },
+    { "id": "u04.s.32", "en": "My family eats dinner together.", "native": { "uz": "Mening oilam birga kechki ovqat qiladi.", "ru": "Моя семья ужинает вместе.", "tr": "Ailem birlikte akşam yemeği yer." }, "altNative": { "uz": ["Oilam birga kechki ovqat qiladi.", "Mening oilam kechki ovqatni birga yeydi."], "ru": ["Моя семья вместе ужинает."], "tr": ["Benim ailem birlikte akşam yemeği yer.", "Ailem birlikte akşam yemeği yiyor."] } },
+
+    { "id": "u04.s.33", "en": "The menu, please.", "native": { "uz": "Menyuni bering, iltimos.", "ru": "Меню, пожалуйста.", "tr": "Menü, lütfen." }, "altNative": { "uz": ["Menyu, iltimos."] } },
+    { "id": "u04.s.34", "en": "A cup of tea, please.", "native": { "uz": "Bir chashka choy, iltimos.", "ru": "Чашку чая, пожалуйста.", "tr": "Bir fincan çay, lütfen." }, "altNative": { "uz": ["Bir piyola choy, iltimos.", "Bir finjon choy, iltimos."], "ru": ["Чашка чая, пожалуйста."] } },
+    { "id": "u04.s.35", "en": "The coffee is hot.", "native": { "uz": "Qahva issiq.", "ru": "Кофе горячий.", "tr": "Kahve sıcak." } },
+    { "id": "u04.s.36", "en": "The water is cold.", "native": { "uz": "Suv sovuq.", "ru": "Вода холодная.", "tr": "Su soğuk." } },
+    { "id": "u04.s.37", "en": "I want tea with sugar.", "native": { "uz": "Men shakarli choy xohlayman.", "ru": "Я хочу чай с сахаром.", "tr": "Şekerli çay istiyorum." }, "altNative": { "uz": ["Men shakar bilan choy xohlayman."], "tr": ["Ben şekerli çay istiyorum."] } },
+    { "id": "u04.s.38", "en": "Coffee with milk, please.", "native": { "uz": "Sutli qahva, iltimos.", "ru": "Кофе с молоком, пожалуйста.", "tr": "Sütlü kahve, lütfen." }, "altNative": { "uz": ["Sut bilan qahva, iltimos."] } },
+    { "id": "u04.s.39", "en": "This cafe is very nice.", "native": { "uz": "Bu kafe juda yoqimli.", "ru": "Это кафе очень приятное.", "tr": "Bu kafe çok hoş." }, "altNative": { "uz": ["Bu kafe juda yaxshi."], "ru": ["Это кафе очень хорошее."], "tr": ["Bu kafe çok güzel."] } },
+    { "id": "u04.s.40", "en": "Do you want hot or cold tea?", "native": { "uz": "Issiq choy xohlaysanmi yoki sovuqmi?", "ru": "Ты хочешь горячий или холодный чай?", "tr": "Sıcak mı soğuk mu çay istersin?" }, "altNative": { "uz": ["Issiq yoki sovuq choy xohlaysanmi?", "Sen issiq yoki sovuq choy xohlaysanmi?"], "tr": ["Sıcak çay mı soğuk çay mı istersin?", "Sıcak mı yoksa soğuk mu çay istersin?"] } }
+  ],
+  "lessons": [
+    {
+      "id": "u04-l1",
+      "title": { "en": "Tea or coffee?", "uz": "Choymi yoki qahva?", "ru": "Чай или кофе?", "tr": "Çay mı kahve mi?" },
+      "words": ["u04.w.water", "u04.w.tea", "u04.w.coffee", "u04.w.milk", "u04.w.want", "u04.w.drink"],
+      "sentences": ["u04.s.01", "u04.s.02", "u04.s.03", "u04.s.04", "u04.s.05", "u04.s.06", "u04.s.07", "u04.s.08"]
+    },
+    {
+      "id": "u04-l2",
+      "title": { "en": "I am hungry", "uz": "Men ochman", "ru": "Я голоден", "tr": "Açım" },
+      "words": ["u04.w.hungry", "u04.w.thirsty", "u04.w.bread", "u04.w.soup", "u04.w.eat", "u04.w.rice"],
+      "sentences": ["u04.s.09", "u04.s.10", "u04.s.11", "u04.s.12", "u04.s.13", "u04.s.14", "u04.s.15", "u04.s.16"]
+    },
+    {
+      "id": "u04-l3",
+      "title": { "en": "I like apples", "uz": "Men olmani yoqtiraman", "ru": "Мне нравятся яблоки", "tr": "Elma severim" },
+      "words": ["u04.w.like", "u04.w.apple", "u04.w.fruit", "u04.w.meat", "u04.w.fish", "u04.w.egg"],
+      "sentences": ["u04.s.17", "u04.s.18", "u04.s.19", "u04.s.20", "u04.s.21", "u04.s.22", "u04.s.23", "u04.s.24"]
+    },
+    {
+      "id": "u04-l4",
+      "title": { "en": "Breakfast", "uz": "Nonushta", "ru": "Завтрак", "tr": "Kahvaltı" },
+      "words": ["u04.w.breakfast", "u04.w.lunch", "u04.w.dinner", "u04.w.cheese", "u04.w.juice", "u04.w.delicious"],
+      "sentences": ["u04.s.25", "u04.s.26", "u04.s.27", "u04.s.28", "u04.s.29", "u04.s.30", "u04.s.31", "u04.s.32"]
+    },
+    {
+      "id": "u04-l5",
+      "title": { "en": "At the cafe", "uz": "Kafeda", "ru": "В кафе", "tr": "Kafede" },
+      "words": ["u04.w.menu", "u04.w.cup", "u04.w.hot", "u04.w.cold", "u04.w.sugar", "u04.w.with", "u04.w.cafe"],
+      "sentences": ["u04.s.33", "u04.s.34", "u04.s.35", "u04.s.36", "u04.s.37", "u04.s.38", "u04.s.39", "u04.s.40"]
+    }
+  ]
+}

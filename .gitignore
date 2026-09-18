@@ -44,3 +44,7 @@ example
 
 # local tooling output
 walkthrough-shots/
+
+# API server: local database and secrets
+server/data/
+server/.env

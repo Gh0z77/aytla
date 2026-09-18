@@ -161,6 +161,22 @@ async function playLesson(page, label) {
   throw new Error('lesson did not finish within 60 exercises')
 }
 
+/** Metro needs a while after `expo start`; wait for it instead of failing on the first request. */
+async function waitForServer(url, timeoutMs = 120_000) {
+  const deadline = Date.now() + timeoutMs
+  while (Date.now() < deadline) {
+    try {
+      const res = await fetch(url)
+      if (res.ok) return
+    } catch {
+      // not listening yet
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+  }
+  throw new Error(`dev server did not answer at ${url} within ${timeoutMs / 1000}s (start it with: npx expo start --port 8081)`)
+}
+
+await waitForServer(base)
 const browser = await chromium.launch({ channel: 'msedge', headless: true })
 try {
   // ── desktop landing ─────────────────────────────────────────────────────────

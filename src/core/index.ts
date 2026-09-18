@@ -1,4 +1,5 @@
 export * from './types'
+export * from './characters'
 export * from './rng'
 export * from './text'
 export * from './time'

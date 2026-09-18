@@ -205,6 +205,8 @@ export interface Profile {
   hapticsOn: boolean
   onboarded: boolean
   createdAt: number
+  /** local hour (0-23) of the daily practice reminder; null or missing = off */
+  reminderHour?: number | null
 }
 
 export interface HeartsState {

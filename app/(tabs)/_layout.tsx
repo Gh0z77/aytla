@@ -24,6 +24,7 @@ export default function TabsLayout() {
     >
       <Tabs.Screen name="learn" options={{ title: t('tabs.learn'), tabBarIcon: icon('home') }} />
       <Tabs.Screen name="practice" options={{ title: t('tabs.practice'), tabBarIcon: icon('barbell') }} />
+      <Tabs.Screen name="league" options={{ title: t('tabs.league'), tabBarIcon: icon('trophy') }} />
       <Tabs.Screen name="quests" options={{ title: t('tabs.quests'), tabBarIcon: icon('ribbon') }} />
       <Tabs.Screen name="shop" options={{ title: t('tabs.shop'), tabBarIcon: icon('storefront') }} />
       <Tabs.Screen name="profile" options={{ title: t('tabs.profile'), tabBarIcon: icon('person') }} />

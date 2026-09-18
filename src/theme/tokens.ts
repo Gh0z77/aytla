@@ -58,3 +58,6 @@ export const font = {
 export const layout = { column: 560, wide: 1120 } as const
 
 export const EDGE = 4
+
+/** The native animation driver does not exist on the web; asking for it there only logs a warning. */
+export const NATIVE_DRIVER = Platform.OS !== 'web'

@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { useEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { Pressable, StyleSheet, View } from 'react-native'
 import { MAX_HEARTS, dueItems, msUntilNextHeart, weakItems } from '../../core/progress'
 import { useT } from '../../i18n'
 import { useApp } from '../../state/store'
@@ -59,6 +59,17 @@ export function PracticeScreen() {
           <Button label={t('practice.start')} disabled={seen === 0} onPress={() => router.push(`/lesson/${PRACTICE_ID}`)} testID="start-practice" />
         </View>
 
+        <Pressable accessibilityRole="button" accessibilityLabel={t('coach.title')} onPress={() => router.push('/coach')} style={({ pressed }) => [styles.card, styles.coach, { opacity: pressed ? 0.85 : 1 }]} testID="open-coach">
+          <Mascot id="lumi" size={72} />
+          <View style={styles.heroText}>
+            <Txt style={styles.coachTitle}>{t('coach.title')}</Txt>
+            <Txt color={colors.textSoft} style={styles.coachBody}>
+              {t('coach.body')}
+            </Txt>
+          </View>
+          <Ionicons name="chevron-forward" size={22} color={colors.textMuted} />
+        </Pressable>
+
         <View style={styles.card}>
           <View style={styles.hearts}>
             {Array.from({ length: MAX_HEARTS }, (_, i) => (
@@ -91,6 +102,9 @@ const styles = StyleSheet.create({
   hero: { flexDirection: 'row', alignItems: 'center', gap: space.md },
   heroText: { flex: 1, gap: 4 },
   card: { borderWidth: 2, borderColor: colors.border, borderRadius: radius.lg, padding: space.lg, gap: space.md },
+  coach: { flexDirection: 'row', alignItems: 'center', backgroundColor: colors.primaryTint, borderColor: colors.primarySoft },
+  coachTitle: { fontWeight: '700', fontSize: 17 },
+  coachBody: { fontSize: 14, lineHeight: 20 },
   row: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
   rowText: { flex: 1 },
   hearts: { flexDirection: 'row', justifyContent: 'center', gap: 6 },

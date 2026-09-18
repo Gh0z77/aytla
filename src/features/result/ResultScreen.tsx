@@ -6,7 +6,7 @@ import type { AchievementId } from '../../core/progress'
 import type { Quest } from '../../core/types'
 import { useT, type StringKey, type Translate } from '../../i18n'
 import { useApp } from '../../state/store'
-import { colors, radius, space } from '../../theme/tokens'
+import { NATIVE_DRIVER, colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
 import { Mascot } from '../../ui/Mascot'
 import { Screen } from '../../ui/Screen'
@@ -28,7 +28,7 @@ export function ResultScreen() {
 
   const pop = useRef(new Animated.Value(0)).current
   useEffect(() => {
-    Animated.timing(pop, { toValue: 1, duration: 450, easing: Easing.out(Easing.back(1.6)), useNativeDriver: true }).start()
+    Animated.timing(pop, { toValue: 1, duration: 450, easing: Easing.out(Easing.back(1.6)), useNativeDriver: NATIVE_DRIVER }).start()
   }, [pop])
 
   if (!rewards) return <Redirect href="/learn" />
