@@ -1,0 +1,140 @@
+{
+  "id": "u03",
+  "section": 1,
+  "order": 3,
+  "title": { "en": "Family", "uz": "Oila", "ru": "Семья", "tr": "Aile" },
+  "goal": {
+    "en": "Talk about your family and say what you have.",
+    "uz": "Oilangiz haqida gapiring va nimangiz borligini ayting.",
+    "ru": "Расскажите о своей семье и скажите, что у вас есть.",
+    "tr": "Ailen hakkında konuş ve neye sahip olduğunu söyle."
+  },
+  "guide": "nubi",
+  "color": "#F59E0B",
+  "tip": {
+    "title": { "en": "Have and has", "uz": "Have va has", "ru": "Have и has", "tr": "Have ve has" },
+    "body": {
+      "en": "To say something is yours, use \"have\": I have a brother. With he, she or one person, it changes to \"has\": My sister has a baby. For a question, start with \"Do\": Do you have children?",
+      "uz": "Biror narsangiz borligini aytish uchun \"have\" ishlatiladi: I have a brother (Mening akam bor). He, she yoki bitta odam bilan \"has\" bo'ladi: My sister has a baby. Savol \"Do\" bilan boshlanadi: Do you have children?",
+      "ru": "\"У меня есть\" по-английски — \"I have\": I have a brother. С he, she или одним человеком используется \"has\": My sister has a baby. Вопрос начинается с \"Do\": Do you have children?",
+      "tr": "Bir şeye sahip olduğunu söylemek için \"have\" kullanılır: I have a brother (Bir erkek kardeşim var). He, she ya da tek bir kişiyle \"has\" olur: My sister has a baby. Soru \"Do\" ile başlar: Do you have children?"
+    },
+    "examples": [
+      { "en": "I have a sister.", "native": { "uz": "Mening opam bor.", "ru": "У меня есть сестра.", "tr": "Benim bir kız kardeşim var." } },
+      { "en": "My sister has a baby.", "native": { "uz": "Mening opamning chaqalog'i bor.", "ru": "У моей сестры есть малыш.", "tr": "Kız kardeşimin bir bebeği var." } },
+      { "en": "Do you have children?", "native": { "uz": "Sening bolalaring bormi?", "ru": "У тебя есть дети?", "tr": "Senin çocukların var mı?" } }
+    ]
+  },
+  "words": [
+    { "id": "u03.w.mother", "en": "mother", "pos": "noun", "emoji": "👩", "native": { "uz": "ona", "ru": "мама", "tr": "anne" }, "altNative": { "ru": ["мать"] } },
+    { "id": "u03.w.father", "en": "father", "pos": "noun", "emoji": "👨", "native": { "uz": "ota", "ru": "папа", "tr": "baba" }, "altNative": { "ru": ["отец"] } },
+    { "id": "u03.w.family", "en": "family", "pos": "noun", "emoji": "👨‍👩‍👧", "native": { "uz": "oila", "ru": "семья", "tr": "aile" } },
+    { "id": "u03.w.love", "en": "love", "pos": "verb", "emoji": "❤️", "native": { "uz": "sevmoq", "ru": "любить", "tr": "sevmek" } },
+    { "id": "u03.w.have", "en": "have", "pos": "verb", "emoji": "🤲", "native": { "uz": "ega bo'lmoq", "ru": "иметь", "tr": "sahip olmak" } },
+    { "id": "u03.w.our", "en": "our", "pos": "pron", "native": { "uz": "bizning", "ru": "наш", "tr": "bizim" } },
+
+    { "id": "u03.w.brother", "en": "brother", "pos": "noun", "emoji": "🧑", "native": { "uz": "aka", "ru": "брат", "tr": "erkek kardeş" }, "altNative": { "uz": ["uka"], "tr": ["abi", "ağabey"] } },
+    { "id": "u03.w.sister", "en": "sister", "pos": "noun", "emoji": "👧", "native": { "uz": "opa", "ru": "сестра", "tr": "kız kardeş" }, "altNative": { "uz": ["singil"], "tr": ["abla"] } },
+    { "id": "u03.w.big", "en": "big", "pos": "adj", "emoji": "🐘", "native": { "uz": "katta", "ru": "большой", "tr": "büyük" } },
+    { "id": "u03.w.small", "en": "small", "pos": "adj", "emoji": "🐜", "native": { "uz": "kichik", "ru": "маленький", "tr": "küçük" } },
+    { "id": "u03.w.baby", "en": "baby", "pos": "noun", "emoji": "👶", "native": { "uz": "chaqaloq", "ru": "малыш", "tr": "bebek" } },
+
+    { "id": "u03.w.son", "en": "son", "pos": "noun", "emoji": "👦", "native": { "uz": "o'g'il", "ru": "сын", "tr": "oğul" } },
+    { "id": "u03.w.daughter", "en": "daughter", "pos": "noun", "emoji": "👧🏻", "native": { "uz": "qiz", "ru": "дочь", "tr": "kız" } },
+    { "id": "u03.w.husband", "en": "husband", "pos": "noun", "emoji": "🤵", "native": { "uz": "er", "ru": "муж", "tr": "koca" }, "altNative": { "uz": ["turmush o'rtoq"], "tr": ["eş"] } },
+    { "id": "u03.w.wife", "en": "wife", "pos": "noun", "emoji": "👰", "native": { "uz": "xotin", "ru": "жена", "tr": "karı" }, "altNative": { "uz": ["rafiqa"], "tr": ["eş", "hanım"] } },
+    { "id": "u03.w.children", "en": "children", "pos": "noun", "emoji": "🧒", "native": { "uz": "bolalar", "ru": "дети", "tr": "çocuklar" } },
+    { "id": "u03.w.home", "en": "home", "pos": "noun", "emoji": "🏡", "native": { "uz": "uy", "ru": "дом", "tr": "ev" } },
+
+    { "id": "u03.w.his", "en": "his", "pos": "pron", "native": { "uz": "uning (erkak)", "ru": "его", "tr": "onun (erkek)" } },
+    { "id": "u03.w.her", "en": "her", "pos": "pron", "native": { "uz": "uning (ayol)", "ru": "её", "tr": "onun (kadın)" } },
+    { "id": "u03.w.grandmother", "en": "grandmother", "pos": "noun", "emoji": "👵", "native": { "uz": "buvi", "ru": "бабушка", "tr": "büyükanne" }, "altNative": { "tr": ["nine", "babaanne", "anneanne"] } },
+    { "id": "u03.w.grandfather", "en": "grandfather", "pos": "noun", "emoji": "👴", "native": { "uz": "bobo", "ru": "дедушка", "tr": "büyükbaba" }, "altNative": { "tr": ["dede"] } },
+    { "id": "u03.w.old", "en": "old", "pos": "adj", "emoji": "🧓", "native": { "uz": "keksa", "ru": "старый", "tr": "yaşlı" } },
+    { "id": "u03.w.young", "en": "young", "pos": "adj", "emoji": "🌱", "native": { "uz": "yosh", "ru": "молодой", "tr": "genç" } },
+
+    { "id": "u03.w.man", "en": "man", "pos": "noun", "emoji": "🧔", "native": { "uz": "erkak", "ru": "мужчина", "tr": "adam" }, "altNative": { "tr": ["erkek"] } },
+    { "id": "u03.w.woman", "en": "woman", "pos": "noun", "emoji": "👩‍🦰", "native": { "uz": "ayol", "ru": "женщина", "tr": "kadın" } },
+    { "id": "u03.w.kind", "en": "kind", "pos": "adj", "emoji": "💗", "native": { "uz": "mehribon", "ru": "добрый", "tr": "nazik" } },
+    { "id": "u03.w.together", "en": "together", "pos": "adv", "emoji": "🫂", "native": { "uz": "birga", "ru": "вместе", "tr": "birlikte" }, "altNative": { "uz": ["birgalikda"], "tr": ["beraber"] } },
+    { "id": "u03.w.parents", "en": "parents", "pos": "noun", "emoji": "👫", "native": { "uz": "ota-ona", "ru": "родители", "tr": "ebeveynler" }, "altNative": { "tr": ["anne baba"] } }
+  ],
+  "sentences": [
+    { "id": "u03.s.01", "en": "This is my mother.", "native": { "uz": "Bu mening onam.", "ru": "Это моя мама.", "tr": "Bu benim annem." }, "altNative": { "uz": ["Bu onam."], "ru": ["Это моя мать."], "tr": ["Bu annem."] } },
+    { "id": "u03.s.02", "en": "This is my father.", "native": { "uz": "Bu mening otam.", "ru": "Это мой папа.", "tr": "Bu benim babam." }, "altNative": { "uz": ["Bu otam."], "ru": ["Это мой отец."], "tr": ["Bu babam."] } },
+    { "id": "u03.s.03", "en": "I love my family.", "native": { "uz": "Men oilamni sevaman.", "ru": "Я люблю свою семью.", "tr": "Ben ailemi seviyorum." }, "altNative": { "uz": ["Men o'z oilamni sevaman."], "ru": ["Я люблю мою семью."], "tr": ["Ailemi seviyorum."] } },
+    { "id": "u03.s.04", "en": "I have a family.", "native": { "uz": "Mening oilam bor.", "ru": "У меня есть семья.", "tr": "Benim bir ailem var." }, "altNative": { "uz": ["Oilam bor."], "tr": ["Bir ailem var."] } },
+    { "id": "u03.s.05", "en": "My mother is a teacher.", "native": { "uz": "Mening onam o'qituvchi.", "ru": "Моя мама — учительница.", "tr": "Benim annem öğretmen." }, "altNative": { "uz": ["Onam o'qituvchi."], "ru": ["Моя мама учитель."], "tr": ["Annem öğretmen.", "Annem bir öğretmen."] } },
+    { "id": "u03.s.06", "en": "My father is a doctor.", "native": { "uz": "Mening otam shifokor.", "ru": "Мой папа — врач.", "tr": "Benim babam doktor." }, "altNative": { "uz": ["Otam shifokor."], "ru": ["Мой отец — врач."], "tr": ["Babam doktor.", "Babam bir doktor."] } },
+    { "id": "u03.s.07", "en": "I love my mother and father.", "native": { "uz": "Men onam va otamni sevaman.", "ru": "Я люблю маму и папу.", "tr": "Ben annemi ve babamı seviyorum." }, "altNative": { "uz": ["Men onamni va otamni sevaman."], "ru": ["Я люблю свою маму и папу.", "Я люблю мою маму и папу."], "tr": ["Annemi ve babamı seviyorum."] } },
+    { "id": "u03.s.08", "en": "This is our family.", "native": { "uz": "Bu bizning oilamiz.", "ru": "Это наша семья.", "tr": "Bu bizim ailemiz." } },
+
+    { "id": "u03.s.09", "en": "I have a brother.", "native": { "uz": "Mening akam bor.", "ru": "У меня есть брат.", "tr": "Benim bir erkek kardeşim var." }, "altNative": { "uz": ["Mening ukam bor.", "Akam bor.", "Ukam bor."], "tr": ["Bir erkek kardeşim var.", "Benim bir abim var.", "Bir abim var."] } },
+    { "id": "u03.s.10", "en": "I have a sister.", "native": { "uz": "Mening opam bor.", "ru": "У меня есть сестра.", "tr": "Benim bir kız kardeşim var." }, "altNative": { "uz": ["Mening singlim bor.", "Opam bor.", "Singlim bor."], "tr": ["Bir kız kardeşim var.", "Benim bir ablam var.", "Bir ablam var."] } },
+    { "id": "u03.s.11", "en": "My brother is a student.", "native": { "uz": "Mening akam talaba.", "ru": "Мой брат — студент.", "tr": "Benim erkek kardeşim öğrenci." }, "altNative": { "uz": ["Mening ukam talaba.", "Akam talaba.", "Ukam talaba."], "tr": ["Erkek kardeşim öğrenci.", "Abim öğrenci.", "Erkek kardeşim bir öğrenci."] } },
+    { "id": "u03.s.12", "en": "My sister has a baby.", "native": { "uz": "Mening opamning chaqalog'i bor.", "ru": "У моей сестры есть малыш.", "tr": "Kız kardeşimin bir bebeği var." }, "altNative": { "uz": ["Opamning chaqalog'i bor.", "Mening singlimning chaqalog'i bor.", "Singlimning chaqalog'i bor."], "ru": ["У моей сестры есть ребёнок."], "tr": ["Benim kız kardeşimin bir bebeği var.", "Ablamın bir bebeği var."] } },
+    { "id": "u03.s.13", "en": "Our family is big.", "native": { "uz": "Bizning oilamiz katta.", "ru": "Наша семья большая.", "tr": "Bizim ailemiz büyük." }, "altNative": { "uz": ["Oilamiz katta."], "ru": ["У нас большая семья."], "tr": ["Ailemiz büyük."] } },
+    { "id": "u03.s.14", "en": "The baby is very small.", "native": { "uz": "Chaqaloq juda kichik.", "ru": "Малыш очень маленький.", "tr": "Bebek çok küçük." }, "altNative": { "ru": ["Ребёнок очень маленький."] } },
+    { "id": "u03.s.15", "en": "Do you have a brother?", "native": { "uz": "Sening akang bormi?", "ru": "У тебя есть брат?", "tr": "Senin bir erkek kardeşin var mı?" }, "altNative": { "uz": ["Sening ukang bormi?", "Akang bormi?", "Ukang bormi?"], "tr": ["Bir erkek kardeşin var mı?", "Erkek kardeşin var mı?", "Senin erkek kardeşin var mı?"] } },
+    { "id": "u03.s.16", "en": "I love my sister.", "native": { "uz": "Men opamni sevaman.", "ru": "Я люблю свою сестру.", "tr": "Ben kız kardeşimi seviyorum." }, "altNative": { "uz": ["Men singlimni sevaman."], "ru": ["Я люблю мою сестру.", "Я люблю сестру."], "tr": ["Kız kardeşimi seviyorum.", "Ablamı seviyorum."] } },
+
+    { "id": "u03.s.17", "en": "This is my son.", "native": { "uz": "Bu mening o'g'lim.", "ru": "Это мой сын.", "tr": "Bu benim oğlum." }, "altNative": { "uz": ["Bu o'g'lim."], "tr": ["Bu oğlum."] } },
+    { "id": "u03.s.18", "en": "This is my daughter.", "native": { "uz": "Bu mening qizim.", "ru": "Это моя дочь.", "tr": "Bu benim kızım." }, "altNative": { "uz": ["Bu qizim."], "ru": ["Это моя дочка."], "tr": ["Bu kızım."] } },
+    { "id": "u03.s.19", "en": "My husband is a doctor.", "native": { "uz": "Mening erim shifokor.", "ru": "Мой муж — врач.", "tr": "Benim kocam doktor." }, "altNative": { "uz": ["Erim shifokor.", "Mening turmush o'rtog'im shifokor."], "tr": ["Kocam doktor.", "Eşim doktor.", "Kocam bir doktor."] } },
+    { "id": "u03.s.20", "en": "My wife is a teacher.", "native": { "uz": "Mening xotinim o'qituvchi.", "ru": "Моя жена — учительница.", "tr": "Benim karım öğretmen." }, "altNative": { "uz": ["Xotinim o'qituvchi.", "Mening turmush o'rtog'im o'qituvchi.", "Mening rafiqam o'qituvchi."], "ru": ["Моя жена учитель."], "tr": ["Karım öğretmen.", "Eşim öğretmen.", "Karım bir öğretmen."] } },
+    { "id": "u03.s.21", "en": "We have a son and a daughter.", "native": { "uz": "Bizning bir o'g'il va bir qizimiz bor.", "ru": "У нас есть сын и дочь.", "tr": "Bizim bir oğlumuz ve bir kızımız var." }, "altNative": { "uz": ["Bizning o'g'limiz va qizimiz bor.", "Bizning bir o'g'limiz va bir qizimiz bor."], "ru": ["У нас есть сын и дочка."], "tr": ["Bir oğlumuz ve bir kızımız var."] } },
+    { "id": "u03.s.22", "en": "The children are at home.", "native": { "uz": "Bolalar uyda.", "ru": "Дети дома.", "tr": "Çocuklar evde." } },
+    { "id": "u03.s.23", "en": "My family is at home.", "native": { "uz": "Mening oilam uyda.", "ru": "Моя семья дома.", "tr": "Benim ailem evde." }, "altNative": { "uz": ["Oilam uyda."], "tr": ["Ailem evde."] } },
+    { "id": "u03.s.24", "en": "Do you have children?", "native": { "uz": "Sening bolalaring bormi?", "ru": "У тебя есть дети?", "tr": "Senin çocukların var mı?" }, "altNative": { "uz": ["Bolalaring bormi?", "Farzandlaring bormi?"], "tr": ["Çocukların var mı?", "Çocuğun var mı?"] } },
+
+    { "id": "u03.s.25", "en": "This is his mother.", "native": { "uz": "Bu uning onasi.", "ru": "Это его мама.", "tr": "Bu onun annesi." }, "altEnFor": { "uz": ["This is her mother."], "tr": ["This is her mother."] }, "altNative": { "ru": ["Это его мать."] } },
+    { "id": "u03.s.26", "en": "Her father is a teacher.", "native": { "uz": "Uning otasi o'qituvchi.", "ru": "Её папа — учитель.", "tr": "Onun babası öğretmen." }, "altEnFor": { "uz": ["His father is a teacher."], "tr": ["His father is a teacher."] }, "altNative": { "ru": ["Её отец — учитель."], "tr": ["Onun babası bir öğretmen."] } },
+    { "id": "u03.s.27", "en": "My grandmother is very old.", "native": { "uz": "Mening buvim juda keksa.", "ru": "Моя бабушка очень старая.", "tr": "Benim büyükannem çok yaşlı." }, "altNative": { "uz": ["Buvim juda keksa."], "tr": ["Büyükannem çok yaşlı.", "Ninem çok yaşlı.", "Babaannem çok yaşlı.", "Anneannem çok yaşlı."] } },
+    { "id": "u03.s.28", "en": "My grandfather is at home.", "native": { "uz": "Mening bobom uyda.", "ru": "Мой дедушка дома.", "tr": "Benim büyükbabam evde." }, "altNative": { "uz": ["Bobom uyda."], "tr": ["Büyükbabam evde.", "Dedem evde."] } },
+    { "id": "u03.s.29", "en": "His sister is young.", "native": { "uz": "Uning opasi yosh.", "ru": "Его сестра молодая.", "tr": "Onun kız kardeşi genç." }, "altEnFor": { "uz": ["Her sister is young."], "tr": ["Her sister is young."] }, "altNative": { "uz": ["Uning singlisi yosh."], "tr": ["Onun ablası genç."] } },
+    { "id": "u03.s.30", "en": "Her brother is a student.", "native": { "uz": "Uning akasi talaba.", "ru": "Её брат — студент.", "tr": "Onun erkek kardeşi öğrenci." }, "altEnFor": { "uz": ["His brother is a student."], "tr": ["His brother is a student."] }, "altNative": { "uz": ["Uning ukasi talaba."], "tr": ["Onun abisi öğrenci.", "Onun erkek kardeşi bir öğrenci."] } },
+    { "id": "u03.s.31", "en": "I love my grandmother and grandfather.", "native": { "uz": "Men buvim va bobomni sevaman.", "ru": "Я люблю бабушку и дедушку.", "tr": "Ben büyükannemi ve büyükbabamı seviyorum." }, "altNative": { "uz": ["Men buvimni va bobomni sevaman."], "ru": ["Я люблю свою бабушку и дедушку.", "Я люблю мою бабушку и дедушку."], "tr": ["Büyükannemi ve büyükbabamı seviyorum.", "Ninemi ve dedemi seviyorum."] } },
+    { "id": "u03.s.32", "en": "Is her mother young?", "native": { "uz": "Uning onasi yoshmi?", "ru": "Её мама молодая?", "tr": "Onun annesi genç mi?" }, "altEnFor": { "uz": ["Is his mother young?"], "tr": ["Is his mother young?"] } },
+
+    { "id": "u03.s.33", "en": "The man is my father.", "native": { "uz": "Bu erkak mening otam.", "ru": "Этот мужчина — мой папа.", "tr": "Bu adam benim babam." }, "altNative": { "uz": ["Erkak mening otam.", "Bu kishi mening otam."], "ru": ["Мужчина — мой папа.", "Этот мужчина — мой отец."], "tr": ["Adam benim babam."] } },
+    { "id": "u03.s.34", "en": "The woman is very kind.", "native": { "uz": "Ayol juda mehribon.", "ru": "Женщина очень добрая.", "tr": "Kadın çok nazik." }, "altNative": { "uz": ["Bu ayol juda mehribon."], "ru": ["Эта женщина очень добрая."], "tr": ["Bu kadın çok nazik."] } },
+    { "id": "u03.s.35", "en": "My parents are kind.", "native": { "uz": "Mening ota-onam mehribon.", "ru": "Мои родители добрые.", "tr": "Benim ebeveynlerim nazik." }, "altNative": { "uz": ["Ota-onam mehribon."], "tr": ["Ebeveynlerim nazik.", "Annem babam nazik."] } },
+    { "id": "u03.s.36", "en": "We are together at home.", "native": { "uz": "Biz uyda birgamiz.", "ru": "Мы вместе дома.", "tr": "Biz evde birlikteyiz." }, "altNative": { "uz": ["Biz birga uydamiz."], "ru": ["Мы дома вместе."], "tr": ["Evde birlikteyiz.", "Biz evde beraberiz."] } },
+    { "id": "u03.s.37", "en": "I live with my parents.", "native": { "uz": "Men ota-onam bilan yashayman.", "ru": "Я живу с родителями.", "tr": "Ben ebeveynlerimle yaşıyorum." }, "altNative": { "ru": ["Я живу со своими родителями.", "Я живу с моими родителями."], "tr": ["Ebeveynlerimle yaşıyorum.", "Ailemle yaşıyorum.", "Annem ve babamla yaşıyorum."] } },
+    { "id": "u03.s.38", "en": "Who is this woman?", "native": { "uz": "Bu ayol kim?", "ru": "Кто эта женщина?", "tr": "Bu kadın kim?" } },
+    { "id": "u03.s.39", "en": "He is a kind man.", "native": { "uz": "U mehribon erkak.", "ru": "Он добрый мужчина.", "tr": "O nazik bir adam." }, "altNative": { "uz": ["U mehribon odam."], "ru": ["Он добрый человек."] } },
+    { "id": "u03.s.40", "en": "Our family is happy together.", "native": { "uz": "Bizning oilamiz birga baxtli.", "ru": "Наша семья счастлива вместе.", "tr": "Bizim ailemiz birlikte mutlu." }, "altNative": { "uz": ["Bizning oilamiz birga xursand.", "Oilamiz birga baxtli."], "ru": ["Вместе наша семья счастлива."], "tr": ["Ailemiz birlikte mutlu."] } }
+  ],
+  "lessons": [
+    {
+      "id": "u03-l1",
+      "title": { "en": "Mother and father", "uz": "Ona va ota", "ru": "Мама и папа", "tr": "Anne ve baba" },
+      "words": ["u03.w.mother", "u03.w.father", "u03.w.family", "u03.w.love", "u03.w.have", "u03.w.our"],
+      "sentences": ["u03.s.01", "u03.s.02", "u03.s.03", "u03.s.04", "u03.s.05", "u03.s.06", "u03.s.07", "u03.s.08"]
+    },
+    {
+      "id": "u03-l2",
+      "title": { "en": "Brothers and sisters", "uz": "Aka-uka va opa-singillar", "ru": "Братья и сёстры", "tr": "Kardeşler" },
+      "words": ["u03.w.brother", "u03.w.sister", "u03.w.big", "u03.w.small", "u03.w.baby"],
+      "sentences": ["u03.s.09", "u03.s.10", "u03.s.11", "u03.s.12", "u03.s.13", "u03.s.14", "u03.s.15", "u03.s.16"]
+    },
+    {
+      "id": "u03-l3",
+      "title": { "en": "My family", "uz": "Mening oilam", "ru": "Моя семья", "tr": "Benim ailem" },
+      "words": ["u03.w.son", "u03.w.daughter", "u03.w.husband", "u03.w.wife", "u03.w.children", "u03.w.home"],
+      "sentences": ["u03.s.17", "u03.s.18", "u03.s.19", "u03.s.20", "u03.s.21", "u03.s.22", "u03.s.23", "u03.s.24"]
+    },
+    {
+      "id": "u03-l4",
+      "title": { "en": "His and her", "uz": "His va her", "ru": "Его и её", "tr": "His ve her" },
+      "words": ["u03.w.his", "u03.w.her", "u03.w.grandmother", "u03.w.grandfather", "u03.w.old", "u03.w.young"],
+      "sentences": ["u03.s.25", "u03.s.26", "u03.s.27", "u03.s.28", "u03.s.29", "u03.s.30", "u03.s.31", "u03.s.32"]
+    },
+    {
+      "id": "u03-l5",
+      "title": { "en": "People", "uz": "Odamlar", "ru": "Люди", "tr": "İnsanlar" },
+      "words": ["u03.w.man", "u03.w.woman", "u03.w.kind", "u03.w.together", "u03.w.parents"],
+      "sentences": ["u03.s.33", "u03.s.34", "u03.s.35", "u03.s.36", "u03.s.37", "u03.s.38", "u03.s.39", "u03.s.40"]
+    }
+  ]
+}

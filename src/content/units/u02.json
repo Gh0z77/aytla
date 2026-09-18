@@ -1,0 +1,141 @@
+{
+  "id": "u02",
+  "section": 1,
+  "order": 2,
+  "title": { "en": "Introductions", "uz": "Tanishuv", "ru": "Знакомство", "tr": "Tanışma" },
+  "goal": {
+    "en": "Introduce yourself: your name, where you are from and what you do.",
+    "uz": "O'zingizni tanishtiring: ismingiz, qayerdanligingiz va kasbingiz.",
+    "ru": "Представьтесь: ваше имя, откуда вы и чем занимаетесь.",
+    "tr": "Kendini tanıt: adın, nereli olduğun ve ne iş yaptığın."
+  },
+  "guide": "lumi",
+  "color": "#10B981",
+  "tip": {
+    "title": { "en": "He, she and \"is\"", "uz": "He, she va \"is\"", "ru": "He, she и \"is\"", "tr": "He, she ve \"is\"" },
+    "body": {
+      "en": "English has two words where Uzbek and Turkish have one: \"he\" for a man and \"she\" for a woman. With he, she, a name or \"this\", use \"is\": He is a student. Anna is a doctor. For a question, put \"is\" first: Is he a doctor?",
+      "uz": "O'zbek tilidagi \"u\" so'zi ingliz tilida ikkita: erkak uchun \"he\", ayol uchun \"she\". He, she, ism yoki \"this\" bilan \"is\" ishlatiladi: He is a student. Anna is a doctor. Savolda \"is\" oldinga chiqadi: Is he a doctor?",
+      "ru": "\"He\" — это он, \"she\" — она. С he, she, именем или \"this\" используется \"is\": He is a student. Anna is a doctor. В вопросе \"is\" ставится первым: Is he a doctor? Глагол-связку в английском пропускать нельзя.",
+      "tr": "Türkçedeki \"o\" İngilizcede iki kelimedir: erkek için \"he\", kadın için \"she\". He, she, bir isim ya da \"this\" ile \"is\" kullanılır: He is a student. Anna is a doctor. Soruda \"is\" başa gelir: Is he a doctor?"
+    },
+    "examples": [
+      { "en": "My name is Ali.", "native": { "uz": "Mening ismim Ali.", "ru": "Меня зовут Али.", "tr": "Benim adım Ali." } },
+      { "en": "She is a teacher.", "native": { "uz": "U o'qituvchi.", "ru": "Она учительница.", "tr": "O bir öğretmen." } },
+      { "en": "I am from Uzbekistan.", "native": { "uz": "Men O'zbekistondanman.", "ru": "Я из Узбекистана.", "tr": "Ben Özbekistanlıyım." } }
+    ]
+  },
+  "words": [
+    { "id": "u02.w.name", "en": "name", "pos": "noun", "emoji": "🏷️", "native": { "uz": "ism", "ru": "имя", "tr": "isim" }, "altNative": { "tr": ["ad"] } },
+    { "id": "u02.w.what", "en": "what", "pos": "pron", "emoji": "❓", "native": { "uz": "nima", "ru": "что", "tr": "ne" } },
+    { "id": "u02.w.your", "en": "your", "pos": "pron", "native": { "uz": "sening", "ru": "твой", "tr": "senin" } },
+    { "id": "u02.w.who", "en": "who", "pos": "pron", "emoji": "🕵️", "native": { "uz": "kim", "ru": "кто", "tr": "kim" } },
+    { "id": "u02.w.this", "en": "this", "pos": "pron", "emoji": "👇", "native": { "uz": "bu", "ru": "это", "tr": "bu" } },
+
+    { "id": "u02.w.where", "en": "where", "pos": "adv", "emoji": "📍", "native": { "uz": "qayerda", "ru": "где", "tr": "nerede" } },
+    { "id": "u02.w.from", "en": "from", "pos": "prep", "native": { "uz": "-dan", "ru": "из", "tr": "-den" } },
+    { "id": "u02.w.uzbekistan", "en": "Uzbekistan", "pos": "noun", "emoji": "🇺🇿", "native": { "uz": "O'zbekiston", "ru": "Узбекистан", "tr": "Özbekistan" } },
+    { "id": "u02.w.turkey", "en": "Turkey", "pos": "noun", "emoji": "🇹🇷", "native": { "uz": "Turkiya", "ru": "Турция", "tr": "Türkiye" } },
+    { "id": "u02.w.russia", "en": "Russia", "pos": "noun", "emoji": "🇷🇺", "native": { "uz": "Rossiya", "ru": "Россия", "tr": "Rusya" } },
+    { "id": "u02.w.brazil", "en": "Brazil", "pos": "noun", "emoji": "🇧🇷", "native": { "uz": "Braziliya", "ru": "Бразилия", "tr": "Brezilya" } },
+    { "id": "u02.w.country", "en": "country", "pos": "noun", "emoji": "🌍", "native": { "uz": "mamlakat", "ru": "страна", "tr": "ülke" } },
+
+    { "id": "u02.w.nice", "en": "nice", "pos": "adj", "emoji": "😊", "native": { "uz": "yoqimli", "ru": "приятный", "tr": "hoş" } },
+    { "id": "u02.w.meet", "en": "meet", "pos": "verb", "emoji": "🤝", "native": { "uz": "tanishmoq", "ru": "знакомиться", "tr": "tanışmak" } },
+    { "id": "u02.w.here", "en": "here", "pos": "adv", "emoji": "📌", "native": { "uz": "shu yerda", "ru": "здесь", "tr": "burada" }, "altNative": { "uz": ["bu yerda"], "ru": ["тут"] } },
+    { "id": "u02.w.new", "en": "new", "pos": "adj", "emoji": "✨", "native": { "uz": "yangi", "ru": "новый", "tr": "yeni" } },
+    { "id": "u02.w.live", "en": "live", "pos": "verb", "emoji": "🏠", "native": { "uz": "yashamoq", "ru": "жить", "tr": "yaşamak" } },
+    { "id": "u02.w.city", "en": "city", "pos": "noun", "emoji": "🏙️", "native": { "uz": "shahar", "ru": "город", "tr": "şehir" } },
+
+    { "id": "u02.w.he", "en": "he", "pos": "pron", "emoji": "👦", "native": { "uz": "u (erkak)", "ru": "он", "tr": "o (erkek)" } },
+    { "id": "u02.w.she", "en": "she", "pos": "pron", "emoji": "👧", "native": { "uz": "u (ayol)", "ru": "она", "tr": "o (kadın)" } },
+    { "id": "u02.w.student", "en": "student", "pos": "noun", "emoji": "🎓", "native": { "uz": "talaba", "ru": "студент", "tr": "öğrenci" } },
+    { "id": "u02.w.teacher", "en": "teacher", "pos": "noun", "emoji": "👩‍🏫", "native": { "uz": "o'qituvchi", "ru": "учитель", "tr": "öğretmen" } },
+    { "id": "u02.w.doctor", "en": "doctor", "pos": "noun", "emoji": "🩺", "native": { "uz": "shifokor", "ru": "врач", "tr": "doktor" } },
+
+    { "id": "u02.w.english", "en": "English", "pos": "noun", "emoji": "🇬🇧", "native": { "uz": "ingliz tili", "ru": "английский", "tr": "İngilizce" } },
+    { "id": "u02.w.speak", "en": "speak", "pos": "verb", "emoji": "🗣️", "native": { "uz": "gapirmoq", "ru": "говорить", "tr": "konuşmak" } },
+    { "id": "u02.w.a-little", "en": "a little", "pos": "adv", "emoji": "🤏", "native": { "uz": "biroz", "ru": "немного", "tr": "biraz" } },
+    { "id": "u02.w.people", "en": "people", "pos": "noun", "emoji": "👥", "native": { "uz": "odamlar", "ru": "люди", "tr": "insanlar" } },
+    { "id": "u02.w.language", "en": "language", "pos": "noun", "emoji": "💬", "native": { "uz": "til", "ru": "язык", "tr": "dil" } },
+    { "id": "u02.w.learn", "en": "learn", "pos": "verb", "emoji": "📚", "native": { "uz": "o'rganmoq", "ru": "учить", "tr": "öğrenmek" } }
+  ],
+  "sentences": [
+    { "id": "u02.s.01", "en": "My name is Anna.", "native": { "uz": "Mening ismim Anna.", "ru": "Меня зовут Анна.", "tr": "Benim adım Anna." }, "altNative": { "uz": ["Ismim Anna."], "ru": ["Моё имя Анна."], "tr": ["Adım Anna.", "Benim ismim Anna."] } },
+    { "id": "u02.s.02", "en": "What is your name?", "native": { "uz": "Isming nima?", "ru": "Как тебя зовут?", "tr": "Adın ne?" }, "altNative": { "uz": ["Sening isming nima?"], "tr": ["Senin adın ne?", "İsmin ne?"] } },
+    { "id": "u02.s.03", "en": "My name is Ali.", "native": { "uz": "Mening ismim Ali.", "ru": "Меня зовут Али.", "tr": "Benim adım Ali." }, "altNative": { "uz": ["Ismim Ali."], "ru": ["Моё имя Али."], "tr": ["Adım Ali.", "Benim ismim Ali."] } },
+    { "id": "u02.s.04", "en": "Who is this?", "native": { "uz": "Bu kim?", "ru": "Кто это?", "tr": "Bu kim?" } },
+    { "id": "u02.s.05", "en": "This is Anna.", "native": { "uz": "Bu Anna.", "ru": "Это Анна.", "tr": "Bu Anna." } },
+    { "id": "u02.s.06", "en": "This is my friend.", "native": { "uz": "Bu mening do'stim.", "ru": "Это мой друг.", "tr": "Bu benim arkadaşım." }, "altNative": { "uz": ["Bu do'stim."], "ru": ["Это моя подруга."], "tr": ["Bu arkadaşım."] } },
+    { "id": "u02.s.07", "en": "Hello! What is your name?", "native": { "uz": "Salom! Isming nima?", "ru": "Привет! Как тебя зовут?", "tr": "Merhaba! Adın ne?" }, "altNative": { "uz": ["Salom! Sening isming nima?"], "tr": ["Merhaba! Senin adın ne?"] } },
+    { "id": "u02.s.08", "en": "Who is your friend?", "native": { "uz": "Sening do'sting kim?", "ru": "Кто твой друг?", "tr": "Senin arkadaşın kim?" }, "altNative": { "uz": ["Do'sting kim?"], "tr": ["Arkadaşın kim?"] } },
+
+    { "id": "u02.s.09", "en": "Where are you from?", "native": { "uz": "Sen qayerdansan?", "ru": "Откуда ты?", "tr": "Nerelisin?" }, "altNative": { "uz": ["Qayerdansan?"], "ru": ["Ты откуда?"], "tr": ["Sen nerelisin?"] } },
+    { "id": "u02.s.10", "en": "I am from Uzbekistan.", "native": { "uz": "Men O'zbekistondanman.", "ru": "Я из Узбекистана.", "tr": "Ben Özbekistanlıyım." }, "altNative": { "tr": ["Ben Özbekistan'danım.", "Özbekistanlıyım."] } },
+    { "id": "u02.s.11", "en": "I am from Turkey.", "native": { "uz": "Men Turkiyadanman.", "ru": "Я из Турции.", "tr": "Ben Türkiyeliyim." }, "altNative": { "tr": ["Ben Türkiye'denim.", "Türkiyeliyim."] } },
+    { "id": "u02.s.12", "en": "Are you from Russia?", "native": { "uz": "Sen Rossiyadanmisan?", "ru": "Ты из России?", "tr": "Sen Rusyalı mısın?" }, "altNative": { "tr": ["Sen Rusya'dan mısın?", "Rusyalı mısın?"] } },
+    { "id": "u02.s.13", "en": "My friend is from Brazil.", "native": { "uz": "Mening do'stim Braziliyadan.", "ru": "Мой друг из Бразилии.", "tr": "Benim arkadaşım Brezilyalı." }, "altNative": { "uz": ["Do'stim Braziliyadan."], "ru": ["Моя подруга из Бразилии."], "tr": ["Arkadaşım Brezilyalı."] } },
+    { "id": "u02.s.14", "en": "Uzbekistan is my country.", "native": { "uz": "O'zbekiston mening mamlakatim.", "ru": "Узбекистан — моя страна.", "tr": "Özbekistan benim ülkem." } },
+    { "id": "u02.s.15", "en": "Turkey is a great country.", "native": { "uz": "Turkiya zo'r mamlakat.", "ru": "Турция — отличная страна.", "tr": "Türkiye harika bir ülke." } },
+    { "id": "u02.s.16", "en": "Where is your friend from?", "native": { "uz": "Sening do'sting qayerdan?", "ru": "Откуда твой друг?", "tr": "Senin arkadaşın nereli?" }, "altNative": { "uz": ["Do'sting qayerdan?"], "tr": ["Arkadaşın nereli?"] } },
+
+    { "id": "u02.s.17", "en": "Nice to meet you!", "native": { "uz": "Tanishganimdan xursandman!", "ru": "Приятно познакомиться!", "tr": "Tanıştığıma memnun oldum!" }, "altNative": { "ru": ["Рад познакомиться!", "Рада познакомиться!"], "tr": ["Memnun oldum!"] } },
+    { "id": "u02.s.18", "en": "Nice to meet you too.", "native": { "uz": "Men ham tanishganimdan xursandman.", "ru": "Мне тоже приятно познакомиться.", "tr": "Ben de memnun oldum." }, "altNative": { "ru": ["Мне тоже приятно."], "tr": ["Ben de tanıştığıma memnun oldum."] } },
+    { "id": "u02.s.19", "en": "I am new here.", "native": { "uz": "Men shu yerda yangiman.", "ru": "Я здесь новенький.", "tr": "Ben burada yeniyim." }, "altNative": { "uz": ["Men bu yerda yangiman."], "ru": ["Я здесь новенькая.", "Я тут новенький.", "Я тут новенькая."], "tr": ["Burada yeniyim."] } },
+    { "id": "u02.s.20", "en": "I live in Uzbekistan.", "native": { "uz": "Men O'zbekistonda yashayman.", "ru": "Я живу в Узбекистане.", "tr": "Ben Özbekistan'da yaşıyorum." }, "altNative": { "tr": ["Özbekistan'da yaşıyorum."] } },
+    { "id": "u02.s.21", "en": "Do you live here?", "native": { "uz": "Sen shu yerda yashaysanmi?", "ru": "Ты живёшь здесь?", "tr": "Sen burada mı yaşıyorsun?" }, "altNative": { "uz": ["Sen bu yerda yashaysanmi?"], "ru": ["Ты здесь живёшь?"], "tr": ["Burada mı yaşıyorsun?"] } },
+    { "id": "u02.s.22", "en": "My city is very nice.", "native": { "uz": "Mening shahrim juda yoqimli.", "ru": "Мой город очень приятный.", "tr": "Benim şehrim çok hoş." }, "altNative": { "uz": ["Shahrim juda yoqimli."], "tr": ["Şehrim çok hoş."] } },
+    { "id": "u02.s.23", "en": "This is a new city.", "native": { "uz": "Bu yangi shahar.", "ru": "Это новый город.", "tr": "Bu yeni bir şehir." } },
+    { "id": "u02.s.24", "en": "Where do you live?", "native": { "uz": "Sen qayerda yashaysan?", "ru": "Где ты живёшь?", "tr": "Sen nerede yaşıyorsun?" }, "altNative": { "uz": ["Qayerda yashaysan?"], "tr": ["Nerede yaşıyorsun?"] } },
+
+    { "id": "u02.s.25", "en": "He is a student.", "native": { "uz": "U talaba.", "ru": "Он студент.", "tr": "O bir öğrenci." }, "altEnFor": { "uz": ["She is a student."], "tr": ["She is a student."] }, "altNative": { "tr": ["O öğrenci."] } },
+    { "id": "u02.s.26", "en": "She is a teacher.", "native": { "uz": "U o'qituvchi.", "ru": "Она учительница.", "tr": "O bir öğretmen." }, "altEnFor": { "uz": ["He is a teacher."], "tr": ["He is a teacher."] }, "altNative": { "ru": ["Она учитель."], "tr": ["O öğretmen."] } },
+    { "id": "u02.s.27", "en": "Is he a doctor?", "native": { "uz": "U shifokormi?", "ru": "Он врач?", "tr": "O bir doktor mu?" }, "altEnFor": { "uz": ["Is she a doctor?"], "tr": ["Is she a doctor?"] }, "altNative": { "tr": ["O doktor mu?"] } },
+    { "id": "u02.s.28", "en": "She is from Brazil.", "native": { "uz": "U Braziliyadan.", "ru": "Она из Бразилии.", "tr": "O Brezilyalı." }, "altEnFor": { "uz": ["He is from Brazil."], "tr": ["He is from Brazil."] } },
+    { "id": "u02.s.29", "en": "He is my teacher.", "native": { "uz": "U mening o'qituvchim.", "ru": "Он мой учитель.", "tr": "O benim öğretmenim." }, "altEnFor": { "uz": ["She is my teacher."], "tr": ["She is my teacher."] } },
+    { "id": "u02.s.30", "en": "Anna is a doctor.", "native": { "uz": "Anna shifokor.", "ru": "Анна — врач.", "tr": "Anna bir doktor." }, "altNative": { "tr": ["Anna doktor."] } },
+    { "id": "u02.s.31", "en": "Ali is a new student.", "native": { "uz": "Ali yangi talaba.", "ru": "Али — новый студент.", "tr": "Ali yeni bir öğrenci." } },
+    { "id": "u02.s.32", "en": "Who is she?", "native": { "uz": "U kim?", "ru": "Кто она?", "tr": "O kim?" }, "altEnFor": { "uz": ["Who is he?"], "tr": ["Who is he?"] } },
+
+    { "id": "u02.s.33", "en": "I speak English.", "native": { "uz": "Men ingliz tilida gapiraman.", "ru": "Я говорю по-английски.", "tr": "Ben İngilizce konuşuyorum." }, "altNative": { "uz": ["Men inglizcha gapiraman."], "tr": ["İngilizce konuşuyorum."] } },
+    { "id": "u02.s.34", "en": "Do you speak English?", "native": { "uz": "Sen ingliz tilida gapirasanmi?", "ru": "Ты говоришь по-английски?", "tr": "Sen İngilizce konuşuyor musun?" }, "altNative": { "uz": ["Sen inglizcha gapirasanmi?"], "tr": ["İngilizce konuşuyor musun?"] } },
+    { "id": "u02.s.35", "en": "I speak a little English.", "native": { "uz": "Men ingliz tilida biroz gapiraman.", "ru": "Я немного говорю по-английски.", "tr": "Ben biraz İngilizce konuşuyorum." }, "altNative": { "uz": ["Men biroz ingliz tilida gapiraman.", "Men biroz inglizcha gapiraman."], "ru": ["Я говорю немного по-английски."], "tr": ["Biraz İngilizce konuşuyorum."] } },
+    { "id": "u02.s.36", "en": "I learn English.", "altEn": ["I am learning English."], "native": { "uz": "Men ingliz tilini o'rganaman.", "ru": "Я учу английский.", "tr": "Ben İngilizce öğreniyorum." }, "altNative": { "uz": ["Men ingliz tilini o'rganyapman."], "tr": ["İngilizce öğreniyorum."] } },
+    { "id": "u02.s.37", "en": "English is a great language.", "native": { "uz": "Ingliz tili zo'r til.", "ru": "Английский — отличный язык.", "tr": "İngilizce harika bir dil." } },
+    { "id": "u02.s.38", "en": "Are you a student or a teacher?", "native": { "uz": "Sen talabamisan yoki o'qituvchimi?", "ru": "Ты студент или учитель?", "tr": "Sen öğrenci misin yoksa öğretmen mi?" }, "altNative": { "uz": ["Sen talabamisan yoki o'qituvchimisan?"], "ru": ["Ты студентка или учительница?"], "tr": ["Öğrenci misin yoksa öğretmen mi?"] } },
+    { "id": "u02.s.39", "en": "The people here are very nice.", "native": { "uz": "Shu yerdagi odamlar juda yoqimli.", "ru": "Люди здесь очень приятные.", "tr": "Buradaki insanlar çok hoş." }, "altNative": { "uz": ["Bu yerdagi odamlar juda yoqimli."], "ru": ["Здесь очень приятные люди."] } },
+    { "id": "u02.s.40", "en": "My teacher is from Russia.", "native": { "uz": "Mening o'qituvchim Rossiyadan.", "ru": "Мой учитель из России.", "tr": "Benim öğretmenim Rusyalı." }, "altNative": { "uz": ["O'qituvchim Rossiyadan."], "ru": ["Моя учительница из России."], "tr": ["Öğretmenim Rusyalı."] } }
+  ],
+  "lessons": [
+    {
+      "id": "u02-l1",
+      "title": { "en": "My name", "uz": "Mening ismim", "ru": "Моё имя", "tr": "Benim adım" },
+      "words": ["u02.w.name", "u02.w.what", "u02.w.your", "u02.w.who", "u02.w.this"],
+      "sentences": ["u02.s.01", "u02.s.02", "u02.s.03", "u02.s.04", "u02.s.05", "u02.s.06", "u02.s.07", "u02.s.08"]
+    },
+    {
+      "id": "u02-l2",
+      "title": { "en": "Where are you from?", "uz": "Qayerdansan?", "ru": "Откуда ты?", "tr": "Nerelisin?" },
+      "words": ["u02.w.where", "u02.w.from", "u02.w.uzbekistan", "u02.w.turkey", "u02.w.russia", "u02.w.brazil", "u02.w.country"],
+      "sentences": ["u02.s.09", "u02.s.10", "u02.s.11", "u02.s.12", "u02.s.13", "u02.s.14", "u02.s.15", "u02.s.16"]
+    },
+    {
+      "id": "u02-l3",
+      "title": { "en": "Nice to meet you", "uz": "Tanishganimdan xursandman", "ru": "Приятно познакомиться", "tr": "Memnun oldum" },
+      "words": ["u02.w.nice", "u02.w.meet", "u02.w.here", "u02.w.new", "u02.w.live", "u02.w.city"],
+      "sentences": ["u02.s.17", "u02.s.18", "u02.s.19", "u02.s.20", "u02.s.21", "u02.s.22", "u02.s.23", "u02.s.24"]
+    },
+    {
+      "id": "u02-l4",
+      "title": { "en": "He and she", "uz": "He va she", "ru": "Он и она", "tr": "He ve she" },
+      "words": ["u02.w.he", "u02.w.she", "u02.w.student", "u02.w.teacher", "u02.w.doctor"],
+      "sentences": ["u02.s.25", "u02.s.26", "u02.s.27", "u02.s.28", "u02.s.29", "u02.s.30", "u02.s.31", "u02.s.32"]
+    },
+    {
+      "id": "u02-l5",
+      "title": { "en": "Student or teacher?", "uz": "Talabami yoki o'qituvchi?", "ru": "Студент или учитель?", "tr": "Öğrenci mi, öğretmen mi?" },
+      "words": ["u02.w.english", "u02.w.speak", "u02.w.a-little", "u02.w.people", "u02.w.language", "u02.w.learn"],
+      "sentences": ["u02.s.33", "u02.s.34", "u02.s.35", "u02.s.36", "u02.s.37", "u02.s.38", "u02.s.39", "u02.s.40"]
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "id": "u01",
+  "section": 1,
+  "order": 1,
+  "title": { "en": "Greetings", "uz": "Salomlashish", "ru": "Приветствия", "tr": "Selamlaşma" },
+  "goal": {
+    "en": "Say hello and goodbye, and ask how someone is.",
+    "uz": "Salomlashish, xayrlashish va hol-ahvol so'rashni o'rganing.",
+    "ru": "Научитесь здороваться, прощаться и спрашивать, как дела.",
+    "tr": "Selam vermeyi, vedalaşmayı ve hal hatır sormayı öğren."
+  },
+  "guide": "everest",
+  "color": "#2563EB",
+  "tip": {
+    "title": { "en": "I am, you are", "uz": "I am, you are", "ru": "I am, you are", "tr": "I am, you are" },
+    "body": {
+      "en": "English always needs a verb. With \"I\" use \"am\": I am happy. With \"you\" use \"are\": You are happy. To ask a question, put \"are\" first: Are you happy?",
+      "uz": "Ingliz tilida gapda doim fe'l bo'ladi. \"I\" bilan \"am\" ishlatiladi: I am happy. \"You\" bilan \"are\": You are happy. Savol berish uchun \"are\" oldinga chiqadi: Are you happy?",
+      "ru": "В английском предложении всегда есть глагол. С \"I\" используется \"am\": I am happy. С \"you\" — \"are\": You are happy. В вопросе \"are\" ставится первым: Are you happy?",
+      "tr": "İngilizcede cümlede her zaman bir fiil olur. \"I\" ile \"am\" kullanılır: I am happy. \"You\" ile \"are\": You are happy. Soru sormak için \"are\" başa gelir: Are you happy?"
+    },
+    "examples": [
+      { "en": "I am happy.", "native": { "uz": "Men xursandman.", "ru": "Я счастлив.", "tr": "Ben mutluyum." } },
+      { "en": "Are you tired?", "native": { "uz": "Sen charchadingmi?", "ru": "Ты устал?", "tr": "Sen yorgun musun?" } }
+    ]
+  },
+  "words": [
+    { "id": "u01.w.hello", "en": "hello", "pos": "phrase", "emoji": "👋", "native": { "uz": "salom", "ru": "привет", "tr": "merhaba" } },
+    { "id": "u01.w.goodbye", "en": "goodbye", "pos": "phrase", "native": { "uz": "xayr", "ru": "пока", "tr": "hoşça kal" } },
+    { "id": "u01.w.yes", "en": "yes", "pos": "other", "emoji": "✅", "native": { "uz": "ha", "ru": "да", "tr": "evet" } },
+    { "id": "u01.w.no", "en": "no", "pos": "other", "emoji": "❌", "native": { "uz": "yo'q", "ru": "нет", "tr": "hayır" } },
+    { "id": "u01.w.please", "en": "please", "pos": "other", "emoji": "🙏", "native": { "uz": "iltimos", "ru": "пожалуйста", "tr": "lütfen" } },
+    { "id": "u01.w.thanks", "en": "thanks", "pos": "phrase", "emoji": "💙", "native": { "uz": "rahmat", "ru": "спасибо", "tr": "teşekkürler" } },
+    { "id": "u01.w.and", "en": "and", "pos": "other", "native": { "uz": "va", "ru": "и", "tr": "ve" } },
+
+    { "id": "u01.w.good", "en": "good", "pos": "adj", "emoji": "👍", "native": { "uz": "yaxshi", "ru": "хороший", "tr": "iyi" } },
+    { "id": "u01.w.morning", "en": "morning", "pos": "noun", "emoji": "🌅", "native": { "uz": "tong", "ru": "утро", "tr": "sabah" } },
+    { "id": "u01.w.evening", "en": "evening", "pos": "noun", "emoji": "🌆", "native": { "uz": "kech", "ru": "вечер", "tr": "akşam" } },
+    { "id": "u01.w.night", "en": "night", "pos": "noun", "emoji": "🌙", "native": { "uz": "tun", "ru": "ночь", "tr": "gece" } },
+    { "id": "u01.w.friend", "en": "friend", "pos": "noun", "emoji": "🤝", "native": { "uz": "do'st", "ru": "друг", "tr": "arkadaş" } },
+    { "id": "u01.w.my", "en": "my", "pos": "pron", "native": { "uz": "mening", "ru": "мой", "tr": "benim" } },
+
+    { "id": "u01.w.how", "en": "how", "pos": "adv", "emoji": "❓", "native": { "uz": "qanday", "ru": "как", "tr": "nasıl" } },
+    { "id": "u01.w.you", "en": "you", "pos": "pron", "emoji": "👉", "native": { "uz": "sen", "ru": "ты", "tr": "sen" } },
+    { "id": "u01.w.i", "en": "I", "pos": "pron", "emoji": "🙋", "native": { "uz": "men", "ru": "я", "tr": "ben" } },
+    { "id": "u01.w.great", "en": "great", "pos": "adj", "emoji": "🌟", "native": { "uz": "zo'r", "ru": "отлично", "tr": "harika" } },
+    { "id": "u01.w.happy", "en": "happy", "pos": "adj", "emoji": "😊", "native": { "uz": "xursand", "ru": "счастливый", "tr": "mutlu" } },
+    { "id": "u01.w.tired", "en": "tired", "pos": "adj", "emoji": "😴", "native": { "uz": "charchagan", "ru": "уставший", "tr": "yorgun" } },
+
+    { "id": "u01.w.welcome", "en": "welcome", "pos": "phrase", "emoji": "🎉", "native": { "uz": "xush kelibsiz", "ru": "добро пожаловать", "tr": "hoş geldiniz" } },
+    { "id": "u01.w.sorry", "en": "sorry", "pos": "phrase", "emoji": "😔", "native": { "uz": "kechirasiz", "ru": "извините", "tr": "özür dilerim" } },
+    { "id": "u01.w.okay", "en": "okay", "pos": "other", "emoji": "👌", "native": { "uz": "mayli", "ru": "ладно", "tr": "tamam" } },
+    { "id": "u01.w.very", "en": "very", "pos": "adv", "native": { "uz": "juda", "ru": "очень", "tr": "çok" } },
+    { "id": "u01.w.sad", "en": "sad", "pos": "adj", "emoji": "😢", "native": { "uz": "xafa", "ru": "грустный", "tr": "üzgün" } },
+    { "id": "u01.w.too", "en": "too", "pos": "adv", "native": { "uz": "ham", "ru": "тоже", "tr": "de" } },
+
+    { "id": "u01.w.see", "en": "see", "pos": "verb", "emoji": "👀", "native": { "uz": "ko'rmoq", "ru": "видеть", "tr": "görmek" } },
+    { "id": "u01.w.tomorrow", "en": "tomorrow", "pos": "adv", "emoji": "📅", "native": { "uz": "ertaga", "ru": "завтра", "tr": "yarın" } },
+    { "id": "u01.w.today", "en": "today", "pos": "adv", "emoji": "☀️", "native": { "uz": "bugun", "ru": "сегодня", "tr": "bugün" } },
+    { "id": "u01.w.later", "en": "later", "pos": "adv", "emoji": "⏳", "native": { "uz": "keyinroq", "ru": "позже", "tr": "sonra" } },
+    { "id": "u01.w.soon", "en": "soon", "pos": "adv", "emoji": "🔜", "native": { "uz": "tez orada", "ru": "скоро", "tr": "yakında" } },
+    { "id": "u01.w.now", "en": "now", "pos": "adv", "emoji": "⏰", "native": { "uz": "hozir", "ru": "сейчас", "tr": "şimdi" } }
+  ],
+  "sentences": [
+    { "id": "u01.s.01", "en": "Hello!", "native": { "uz": "Salom!", "ru": "Привет!", "tr": "Merhaba!" } },
+    { "id": "u01.s.02", "en": "Goodbye!", "native": { "uz": "Xayr!", "ru": "Пока!", "tr": "Hoşça kal!" } },
+    { "id": "u01.s.03", "en": "Yes, please.", "native": { "uz": "Ha, iltimos.", "ru": "Да, пожалуйста.", "tr": "Evet, lütfen." } },
+    { "id": "u01.s.04", "en": "No, thanks.", "native": { "uz": "Yo'q, rahmat.", "ru": "Нет, спасибо.", "tr": "Hayır, teşekkürler." } },
+    { "id": "u01.s.05", "en": "Hello and goodbye.", "native": { "uz": "Salom va xayr.", "ru": "Привет и пока.", "tr": "Merhaba ve hoşça kal." } },
+    { "id": "u01.s.06", "en": "Yes and no.", "native": { "uz": "Ha va yo'q.", "ru": "Да и нет.", "tr": "Evet ve hayır." } },
+    { "id": "u01.s.07", "en": "Thanks, goodbye!", "native": { "uz": "Rahmat, xayr!", "ru": "Спасибо, пока!", "tr": "Teşekkürler, hoşça kal!" } },
+    { "id": "u01.s.08", "en": "Please and thanks.", "native": { "uz": "Iltimos va rahmat.", "ru": "Пожалуйста и спасибо.", "tr": "Lütfen ve teşekkürler." } },
+
+    { "id": "u01.s.09", "en": "Good morning!", "native": { "uz": "Xayrli tong!", "ru": "Доброе утро!", "tr": "Günaydın!" } },
+    { "id": "u01.s.10", "en": "Good evening!", "native": { "uz": "Xayrli kech!", "ru": "Добрый вечер!", "tr": "İyi akşamlar!" } },
+    { "id": "u01.s.11", "en": "Good night!", "native": { "uz": "Xayrli tun!", "ru": "Спокойной ночи!", "tr": "İyi geceler!" } },
+    { "id": "u01.s.12", "en": "Hello, my friend!", "native": { "uz": "Salom, do'stim!", "ru": "Привет, мой друг!", "tr": "Merhaba, arkadaşım!" } },
+    { "id": "u01.s.13", "en": "Good morning, my friend!", "native": { "uz": "Xayrli tong, do'stim!", "ru": "Доброе утро, мой друг!", "tr": "Günaydın, arkadaşım!" } },
+    { "id": "u01.s.14", "en": "Good night, my friend.", "native": { "uz": "Xayrli tun, do'stim.", "ru": "Спокойной ночи, мой друг.", "tr": "İyi geceler, arkadaşım." } },
+    { "id": "u01.s.15", "en": "Good evening and goodbye.", "native": { "uz": "Xayrli kech va xayr.", "ru": "Добрый вечер и пока.", "tr": "İyi akşamlar ve hoşça kal." } },
+    { "id": "u01.s.16", "en": "Thanks, my friend!", "native": { "uz": "Rahmat, do'stim!", "ru": "Спасибо, мой друг!", "tr": "Teşekkürler, arkadaşım!" } },
+
+    { "id": "u01.s.17", "en": "How are you?", "native": { "uz": "Qalaysan?", "ru": "Как дела?", "tr": "Nasılsın?" }, "altNative": { "uz": ["Qandaysan?", "Ahvoling qanday?"], "ru": ["Как ты?"] } },
+    { "id": "u01.s.18", "en": "I am great!", "altEn": ["I'm great!"], "native": { "uz": "Men zo'rman!", "ru": "У меня всё отлично!", "tr": "Ben harikayım!" } },
+    { "id": "u01.s.19", "en": "I am happy.", "native": { "uz": "Men xursandman.", "ru": "Я счастлив.", "tr": "Ben mutluyum." }, "altNative": { "ru": ["Я счастлива."] } },
+    { "id": "u01.s.20", "en": "I am tired.", "native": { "uz": "Men charchadim.", "ru": "Я устал.", "tr": "Ben yorgunum." }, "altNative": { "ru": ["Я устала."], "uz": ["Men charchaganman."] } },
+    { "id": "u01.s.21", "en": "Are you happy?", "native": { "uz": "Sen xursandmisan?", "ru": "Ты счастлив?", "tr": "Sen mutlu musun?" }, "altNative": { "ru": ["Ты счастлива?"] } },
+    { "id": "u01.s.22", "en": "Are you tired?", "native": { "uz": "Sen charchadingmi?", "ru": "Ты устал?", "tr": "Sen yorgun musun?" }, "altNative": { "ru": ["Ты устала?"] } },
+    { "id": "u01.s.23", "en": "I am great, thanks!", "native": { "uz": "Men zo'rman, rahmat!", "ru": "У меня всё отлично, спасибо!", "tr": "Ben harikayım, teşekkürler!" } },
+    { "id": "u01.s.24", "en": "Hello! How are you?", "native": { "uz": "Salom! Qalaysan?", "ru": "Привет! Как дела?", "tr": "Merhaba! Nasılsın?" } },
+
+    { "id": "u01.s.25", "en": "Welcome!", "native": { "uz": "Xush kelibsiz!", "ru": "Добро пожаловать!", "tr": "Hoş geldiniz!" } },
+    { "id": "u01.s.26", "en": "I am sorry.", "native": { "uz": "Kechirasiz.", "ru": "Извините.", "tr": "Özür dilerim." }, "altNative": { "uz": ["Uzr."], "ru": ["Простите."] } },
+    { "id": "u01.s.27", "en": "I am very happy.", "native": { "uz": "Men juda xursandman.", "ru": "Я очень счастлив.", "tr": "Ben çok mutluyum." }, "altNative": { "ru": ["Я очень счастлива."] } },
+    { "id": "u01.s.28", "en": "I am very tired.", "native": { "uz": "Men juda charchadim.", "ru": "Я очень устал.", "tr": "Ben çok yorgunum." }, "altNative": { "ru": ["Я очень устала."] } },
+    { "id": "u01.s.29", "en": "Are you sad?", "native": { "uz": "Sen xafamisan?", "ru": "Тебе грустно?", "tr": "Sen üzgün müsün?" } },
+    { "id": "u01.s.30", "en": "I am sad too.", "native": { "uz": "Men ham xafaman.", "ru": "Мне тоже грустно.", "tr": "Ben de üzgünüm." } },
+    { "id": "u01.s.31", "en": "Okay, thanks!", "native": { "uz": "Mayli, rahmat!", "ru": "Ладно, спасибо!", "tr": "Tamam, teşekkürler!" } },
+    { "id": "u01.s.32", "en": "Welcome, my friend!", "native": { "uz": "Xush kelibsiz, do'stim!", "ru": "Добро пожаловать, мой друг!", "tr": "Hoş geldin, arkadaşım!" } },
+
+    { "id": "u01.s.33", "en": "See you tomorrow!", "native": { "uz": "Ertaga ko'rishguncha!", "ru": "До завтра!", "tr": "Yarın görüşürüz!" } },
+    { "id": "u01.s.34", "en": "See you later!", "native": { "uz": "Keyinroq ko'rishguncha!", "ru": "Увидимся позже!", "tr": "Sonra görüşürüz!" } },
+    { "id": "u01.s.35", "en": "See you soon!", "native": { "uz": "Tez orada ko'rishguncha!", "ru": "До скорой встречи!", "tr": "Yakında görüşürüz!" } },
+    { "id": "u01.s.36", "en": "I am happy today.", "native": { "uz": "Men bugun xursandman.", "ru": "Сегодня я счастлив.", "tr": "Ben bugün mutluyum." }, "altNative": { "ru": ["Сегодня я счастлива.", "Я сегодня счастлив.", "Я сегодня счастлива."], "uz": ["Bugun men xursandman."], "tr": ["Bugün ben mutluyum."] } },
+    { "id": "u01.s.37", "en": "Are you tired now?", "native": { "uz": "Sen hozir charchadingmi?", "ru": "Ты сейчас устал?", "tr": "Sen şimdi yorgun musun?" }, "altNative": { "ru": ["Ты сейчас устала?"] } },
+    { "id": "u01.s.38", "en": "Good night! See you tomorrow.", "native": { "uz": "Xayrli tun! Ertaga ko'rishguncha.", "ru": "Спокойной ночи! До завтра.", "tr": "İyi geceler! Yarın görüşürüz." } },
+    { "id": "u01.s.39", "en": "Goodbye, see you soon!", "native": { "uz": "Xayr, tez orada ko'rishguncha!", "ru": "Пока, до скорой встречи!", "tr": "Hoşça kal, yakında görüşürüz!" } },
+    { "id": "u01.s.40", "en": "How are you today?", "native": { "uz": "Bugun qalaysan?", "ru": "Как дела сегодня?", "tr": "Bugün nasılsın?" }, "altNative": { "uz": ["Bugun qandaysan?"], "ru": ["Как ты сегодня?"] } }
+  ],
+  "lessons": [
+    {
+      "id": "u01-l1",
+      "title": { "en": "Hello!", "uz": "Salom!", "ru": "Привет!", "tr": "Merhaba!" },
+      "words": ["u01.w.hello", "u01.w.goodbye", "u01.w.yes", "u01.w.no", "u01.w.please", "u01.w.thanks", "u01.w.and"],
+      "sentences": ["u01.s.01", "u01.s.02", "u01.s.03", "u01.s.04", "u01.s.05", "u01.s.06", "u01.s.07", "u01.s.08"]
+    },
+    {
+      "id": "u01-l2",
+      "title": { "en": "Good morning", "uz": "Xayrli tong", "ru": "Доброе утро", "tr": "Günaydın" },
+      "words": ["u01.w.good", "u01.w.morning", "u01.w.evening", "u01.w.night", "u01.w.friend", "u01.w.my"],
+      "sentences": ["u01.s.09", "u01.s.10", "u01.s.11", "u01.s.12", "u01.s.13", "u01.s.14", "u01.s.15", "u01.s.16"]
+    },
+    {
+      "id": "u01-l3",
+      "title": { "en": "How are you?", "uz": "Qalaysan?", "ru": "Как дела?", "tr": "Nasılsın?" },
+      "words": ["u01.w.how", "u01.w.you", "u01.w.i", "u01.w.great", "u01.w.happy", "u01.w.tired"],
+      "sentences": ["u01.s.17", "u01.s.18", "u01.s.19", "u01.s.20", "u01.s.21", "u01.s.22", "u01.s.23", "u01.s.24"]
+    },
+    {
+      "id": "u01-l4",
+      "title": { "en": "Feelings", "uz": "His-tuyg'ular", "ru": "Чувства", "tr": "Duygular" },
+      "words": ["u01.w.welcome", "u01.w.sorry", "u01.w.okay", "u01.w.very", "u01.w.sad", "u01.w.too"],
+      "sentences": ["u01.s.25", "u01.s.26", "u01.s.27", "u01.s.28", "u01.s.29", "u01.s.30", "u01.s.31", "u01.s.32"]
+    },
+    {
+      "id": "u01-l5",
+      "title": { "en": "See you!", "uz": "Ko'rishguncha!", "ru": "До встречи!", "tr": "Görüşürüz!" },
+      "words": ["u01.w.see", "u01.w.tomorrow", "u01.w.today", "u01.w.later", "u01.w.soon", "u01.w.now"],
+      "sentences": ["u01.s.33", "u01.s.34", "u01.s.35", "u01.s.36", "u01.s.37", "u01.s.38", "u01.s.39", "u01.s.40"]
+    }
+  ]
+}
