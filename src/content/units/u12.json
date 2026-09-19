@@ -1,0 +1,143 @@
+{
+  "id": "u12",
+  "section": 2,
+  "order": 6,
+  "title": { "en": "Weather and seasons", "uz": "Ob-havo va fasllar", "ru": "Погода и времена года", "tr": "Hava durumu ve mevsimler" },
+  "goal": {
+    "en": "Talk about the weather, the seasons and what to wear.",
+    "uz": "Ob-havo, fasllar va nima kiyish haqida gapiring.",
+    "ru": "Говорите о погоде, временах года и о том, что надеть.",
+    "tr": "Hava durumu, mevsimler ve ne giyeceğin hakkında konuş."
+  },
+  "guide": "rocky",
+  "color": "#0EA5E9",
+  "tip": {
+    "title": { "en": "It is cold, it is raining", "uz": "It is cold, it is raining", "ru": "It is cold, it is raining", "tr": "It is cold, it is raining" },
+    "body": {
+      "en": "An English sentence always needs a subject, so weather sentences start with \"It is\": It is cold. It is sunny. It is raining. Here \"it\" means nothing, so do not translate it. Question: Is it cold? Negative: It is not cold. Use \"in\" with seasons: in winter. \"What is the weather like?\" means \"How is the weather?\"; here \"like\" is not the verb \"to like\".",
+      "uz": "Ingliz tilida gap egasiz bo'lmaydi, shuning uchun ob-havo haqidagi gap \"It is\" bilan boshlanadi: It is cold (Sovuq). It is raining (Yomg'ir yog'yapti). Bu yerda \"it\" hech narsani bildirmaydi va tarjima qilinmaydi. Savol: Is it cold? Inkor: It is not cold. Fasllar \"in\" bilan keladi: in winter (qishda). \"What is the weather like?\" degani \"Ob-havo qanday?\"; bu yerda \"like\" \"yoqtirmoq\" emas.",
+      "ru": "В английском предложении всегда нужно подлежащее, поэтому о погоде говорят с \"It is\": It is cold — Холодно. It is raining — Идёт дождь. Слово \"it\" здесь ничего не значит и не переводится. Вопрос: Is it cold? Отрицание: It is not cold. С временами года используется \"in\": in winter — зимой. \"What is the weather like?\" значит \"Какая погода?\"; здесь \"like\" — не глагол \"нравиться\".",
+      "tr": "İngilizcede cümle öznesiz olmaz, bu yüzden hava hakkındaki cümleler \"It is\" ile başlar: It is cold (Hava soğuk). It is raining (Yağmur yağıyor). Buradaki \"it\" bir anlam taşımaz ve çevrilmez. Soru: Is it cold? Olumsuz: It is not cold. Mevsimlerle \"in\" kullanılır: in winter (kışın). \"What is the weather like?\" \"Hava nasıl?\" demektir; buradaki \"like\" \"sevmek\" değildir."
+    },
+    "examples": [
+      { "en": "It is cold today.", "native": { "uz": "Bugun havo sovuq.", "ru": "Сегодня холодно.", "tr": "Bugün hava soğuk." } },
+      { "en": "It is raining.", "native": { "uz": "Yomg'ir yog'yapti.", "ru": "Идёт дождь.", "tr": "Yağmur yağıyor." } },
+      { "en": "What is the weather like?", "native": { "uz": "Ob-havo qanday?", "ru": "Какая погода?", "tr": "Hava nasıl?" } }
+    ]
+  },
+  "words": [
+    { "id": "u12.w.weather", "en": "weather", "pos": "noun", "emoji": "🌦️", "native": { "uz": "ob-havo", "ru": "погода", "tr": "hava" }, "altNative": { "uz": ["havo"], "tr": ["hava durumu"] } },
+    { "id": "u12.w.sun", "en": "sun", "pos": "noun", "emoji": "☀️", "native": { "uz": "quyosh", "ru": "солнце", "tr": "güneş" } },
+    { "id": "u12.w.sunny", "en": "sunny", "pos": "adj", "emoji": "🌞", "native": { "uz": "quyoshli", "ru": "солнечный", "tr": "güneşli" } },
+    { "id": "u12.w.rain", "en": "rain", "pos": "noun", "emoji": "🌧️", "native": { "uz": "yomg'ir", "ru": "дождь", "tr": "yağmur" } },
+    { "id": "u12.w.rainy", "en": "rainy", "pos": "adj", "emoji": "☔", "native": { "uz": "yomg'irli", "ru": "дождливый", "tr": "yağmurlu" } },
+    { "id": "u12.w.sky", "en": "sky", "pos": "noun", "emoji": "🌌", "native": { "uz": "osmon", "ru": "небо", "tr": "gökyüzü" }, "altNative": { "tr": ["gök"] } },
+
+    { "id": "u12.w.warm", "en": "warm", "pos": "adj", "native": { "uz": "iliq", "ru": "тёплый", "tr": "ılık" } },
+    { "id": "u12.w.cool", "en": "cool", "pos": "adj", "native": { "uz": "salqin", "ru": "прохладный", "tr": "serin" } },
+    { "id": "u12.w.wind", "en": "wind", "pos": "noun", "emoji": "💨", "native": { "uz": "shamol", "ru": "ветер", "tr": "rüzgar" }, "altNative": { "tr": ["rüzgâr"] } },
+    { "id": "u12.w.windy", "en": "windy", "pos": "adj", "emoji": "🌬️", "native": { "uz": "shamolli", "ru": "ветреный", "tr": "rüzgarlı" }, "altNative": { "tr": ["rüzgârlı"] } },
+    { "id": "u12.w.outside", "en": "outside", "pos": "adv", "emoji": "🏞️", "native": { "uz": "tashqarida", "ru": "на улице", "tr": "dışarıda" }, "altNative": { "uz": ["ko'chada", "tashqari"], "ru": ["снаружи"], "tr": ["dışarda", "dışarı"] } },
+    { "id": "u12.w.inside", "en": "inside", "pos": "adv", "emoji": "🏠", "native": { "uz": "ichkarida", "ru": "внутри", "tr": "içeride" }, "altNative": { "uz": ["ichkari", "ichida"], "ru": ["в помещении"], "tr": ["içerde", "içeri"] } },
+
+    { "id": "u12.w.season", "en": "season", "pos": "noun", "native": { "uz": "fasl", "ru": "время года", "tr": "mevsim" }, "altNative": { "uz": ["yil fasli", "mavsum"], "ru": ["сезон"] } },
+    { "id": "u12.w.spring", "en": "spring", "pos": "noun", "emoji": "🌸", "native": { "uz": "bahor", "ru": "весна", "tr": "ilkbahar" }, "altNative": { "uz": ["ko'klam"], "tr": ["bahar"] } },
+    { "id": "u12.w.summer", "en": "summer", "pos": "noun", "emoji": "🏖️", "native": { "uz": "yoz", "ru": "лето", "tr": "yaz" } },
+    { "id": "u12.w.autumn", "en": "autumn", "pos": "noun", "emoji": "🍂", "native": { "uz": "kuz", "ru": "осень", "tr": "sonbahar" }, "altNative": { "tr": ["güz"] } },
+    { "id": "u12.w.winter", "en": "winter", "pos": "noun", "emoji": "⛄", "native": { "uz": "qish", "ru": "зима", "tr": "kış" } },
+    { "id": "u12.w.snow", "en": "snow", "pos": "noun", "emoji": "❄️", "native": { "uz": "qor", "ru": "снег", "tr": "kar" } },
+    { "id": "u12.w.ice", "en": "ice", "pos": "noun", "emoji": "🧊", "native": { "uz": "muz", "ru": "лёд", "tr": "buz" } },
+
+    { "id": "u12.w.cloud", "en": "cloud", "pos": "noun", "emoji": "☁️", "native": { "uz": "bulut", "ru": "облако", "tr": "bulut" }, "altNative": { "ru": ["туча"] } },
+    { "id": "u12.w.cloudy", "en": "cloudy", "pos": "adj", "emoji": "🌥️", "native": { "uz": "bulutli", "ru": "облачный", "tr": "bulutlu" }, "altNative": { "ru": ["пасмурный"] } },
+    { "id": "u12.w.storm", "en": "storm", "pos": "noun", "emoji": "⛈️", "native": { "uz": "bo'ron", "ru": "буря", "tr": "fırtına" }, "altNative": { "uz": ["dovul"], "ru": ["шторм", "гроза"] } },
+    { "id": "u12.w.degree", "en": "degree", "pos": "noun", "emoji": "🌡️", "native": { "uz": "daraja", "ru": "градус", "tr": "derece" }, "altNative": { "uz": ["gradus"] } },
+    { "id": "u12.w.bad", "en": "bad", "pos": "adj", "emoji": "👎", "native": { "uz": "yomon", "ru": "плохой", "tr": "kötü" } },
+
+    { "id": "u12.w.umbrella", "en": "umbrella", "pos": "noun", "emoji": "🌂", "native": { "uz": "soyabon", "ru": "зонт", "tr": "şemsiye" }, "altNative": { "uz": ["zontik"], "ru": ["зонтик"] } },
+    { "id": "u12.w.coat", "en": "coat", "pos": "noun", "emoji": "🧥", "native": { "uz": "palto", "ru": "пальто", "tr": "palto" }, "altNative": { "tr": ["mont", "kaban"] } },
+    { "id": "u12.w.boots", "en": "boots", "pos": "noun", "emoji": "👢", "native": { "uz": "etik", "ru": "сапоги", "tr": "çizme" }, "altNative": { "uz": ["etiklar", "botinka"], "ru": ["ботинки"], "tr": ["çizmeler", "bot"] } },
+    { "id": "u12.w.scarf", "en": "scarf", "pos": "noun", "emoji": "🧣", "native": { "uz": "sharf", "ru": "шарф", "tr": "atkı" }, "altNative": { "uz": ["bo'yinbog'"], "tr": ["kaşkol"] } },
+    { "id": "u12.w.gloves", "en": "gloves", "pos": "noun", "emoji": "🧤", "native": { "uz": "qo'lqop", "ru": "перчатки", "tr": "eldiven" }, "altNative": { "uz": ["qo'lqoplar"], "tr": ["eldivenler"] } },
+    { "id": "u12.w.wet", "en": "wet", "pos": "adj", "emoji": "💦", "native": { "uz": "ho'l", "ru": "мокрый", "tr": "ıslak" }, "altNative": { "uz": ["nam"] } },
+    { "id": "u12.w.dry", "en": "dry", "pos": "adj", "emoji": "🏜️", "native": { "uz": "quruq", "ru": "сухой", "tr": "kuru" } }
+  ],
+  "sentences": [
+    { "id": "u12.s.01", "en": "It is sunny.", "native": { "uz": "Havo quyoshli.", "ru": "Солнечно.", "tr": "Hava güneşli." }, "altNative": { "uz": ["Ob-havo quyoshli.", "Quyoshli."], "ru": ["Сейчас солнечно.", "На улице солнечно."], "tr": ["Güneşli."] } },
+    { "id": "u12.s.02", "en": "It is raining now.", "altEn": ["Now it is raining."], "native": { "uz": "Hozir yomg'ir yog'yapti.", "ru": "Сейчас идёт дождь.", "tr": "Şimdi yağmur yağıyor." }, "altNative": { "uz": ["Yomg'ir yog'yapti hozir.", "Hozir yomg'ir yog'moqda."], "ru": ["Сейчас дождь.", "Дождь идёт сейчас."], "tr": ["Şu an yağmur yağıyor.", "Şu anda yağmur yağıyor."] } },
+    { "id": "u12.s.03", "en": "I like the sun.", "native": { "uz": "Men quyoshni yoqtiraman.", "ru": "Мне нравится солнце.", "tr": "Ben güneşi severim." }, "altNative": { "uz": ["Menga quyosh yoqadi.", "Quyoshni yoqtiraman."], "ru": ["Я люблю солнце."], "tr": ["Güneşi severim.", "Ben güneşi seviyorum.", "Güneşi seviyorum."] } },
+    { "id": "u12.s.04", "en": "The weather is good today.", "altEn": ["Today the weather is good.", "The weather is nice today."], "native": { "uz": "Bugun ob-havo yaxshi.", "ru": "Сегодня хорошая погода.", "tr": "Bugün hava güzel." }, "altNative": { "uz": ["Ob-havo bugun yaxshi.", "Bugun havo yaxshi."], "ru": ["Погода сегодня хорошая.", "Сегодня погода хорошая."], "tr": ["Bugün hava iyi.", "Hava bugün güzel.", "Hava bugün iyi."] } },
+    { "id": "u12.s.05", "en": "Is it rainy today?", "altEn": ["Is it raining today?"], "native": { "uz": "Bugun havo yomg'irlimi?", "ru": "Сегодня дождливо?", "tr": "Bugün hava yağmurlu mu?" }, "altNative": { "uz": ["Bugun yomg'irlimi?", "Bugun yomg'irli kunmi?"], "ru": ["Сегодня дождливая погода?", "Сегодня дождливый день?"], "tr": ["Bugün yağmurlu mu?"] } },
+    { "id": "u12.s.06", "en": "I do not like rain.", "altEn": ["I do not like the rain."], "native": { "uz": "Men yomg'irni yoqtirmayman.", "ru": "Мне не нравится дождь.", "tr": "Ben yağmuru sevmem." }, "altNative": { "uz": ["Menga yomg'ir yoqmaydi.", "Yomg'irni yoqtirmayman."], "ru": ["Я не люблю дождь."], "tr": ["Yağmuru sevmem.", "Ben yağmuru sevmiyorum.", "Yağmuru sevmiyorum.", "Ben yağmur sevmem."] } },
+    { "id": "u12.s.07", "en": "It is not sunny today.", "altEn": ["Today it is not sunny."], "native": { "uz": "Bugun havo quyoshli emas.", "ru": "Сегодня не солнечно.", "tr": "Bugün hava güneşli değil." }, "altNative": { "uz": ["Bugun quyoshli emas.", "Havo bugun quyoshli emas."], "ru": ["Сегодня нет солнца.", "Сегодня несолнечно."], "tr": ["Bugün güneşli değil.", "Hava bugün güneşli değil."] } },
+    { "id": "u12.s.08", "en": "The sun is in the sky.", "native": { "uz": "Quyosh osmonda.", "ru": "Солнце на небе.", "tr": "Güneş gökyüzünde." }, "altNative": { "ru": ["Солнце в небе."], "tr": ["Güneş gökte."] } },
+
+    { "id": "u12.s.09", "en": "It is hot today.", "altEn": ["Today it is hot.", "The weather is hot today."], "native": { "uz": "Bugun havo issiq.", "ru": "Сегодня жарко.", "tr": "Bugün hava sıcak." }, "altNative": { "uz": ["Bugun issiq.", "Bugun kun issiq."], "tr": ["Bugün sıcak.", "Hava bugün sıcak."] } },
+    { "id": "u12.s.10", "en": "It is cold outside.", "altEn": ["Outside it is cold."], "native": { "uz": "Tashqarida sovuq.", "ru": "На улице холодно.", "tr": "Dışarısı soğuk." }, "altNative": { "uz": ["Tashqari sovuq.", "Tashqarida havo sovuq.", "Ko'chada sovuq."], "ru": ["Снаружи холодно."], "tr": ["Dışarıda hava soğuk.", "Dışarıda soğuk.", "Dışarda hava soğuk.", "Dışarı soğuk."] } },
+    { "id": "u12.s.11", "en": "Is it windy outside?", "native": { "uz": "Tashqarida shamol bormi?", "ru": "На улице ветрено?", "tr": "Dışarısı rüzgarlı mı?" }, "altNative": { "uz": ["Tashqarida shamollimi?", "Tashqarida shamol esyaptimi?", "Ko'chada shamol bormi?"], "ru": ["На улице ветер?", "Снаружи ветрено?"], "tr": ["Dışarıda hava rüzgarlı mı?", "Dışarıda rüzgar var mı?", "Dışarı rüzgarlı mı?"] } },
+    { "id": "u12.s.12", "en": "The wind is very cold.", "native": { "uz": "Shamol juda sovuq.", "ru": "Ветер очень холодный.", "tr": "Rüzgar çok soğuk." } },
+    { "id": "u12.s.13", "en": "It is not cold inside.", "altEn": ["Inside it is not cold."], "native": { "uz": "Ichkarida sovuq emas.", "ru": "Внутри не холодно.", "tr": "İçerisi soğuk değil." }, "altNative": { "uz": ["Ichkari sovuq emas.", "Ichkarida havo sovuq emas."], "ru": ["В помещении не холодно.", "Внутри нехолодно."], "tr": ["İçeride hava soğuk değil.", "İçeride soğuk değil.", "İçerde soğuk değil.", "İçeri soğuk değil."] } },
+    { "id": "u12.s.14", "en": "It is cool in the evening.", "altEn": ["In the evening it is cool.", "It is cool in the evenings."], "native": { "uz": "Kechqurun havo salqin.", "ru": "Вечером прохладно.", "tr": "Akşam hava serin." }, "altNative": { "uz": ["Kechqurun salqin.", "Kechqurun salqin bo'ladi.", "Kechqurun havo salqin bo'ladi.", "Kechki payt havo salqin."], "ru": ["По вечерам прохладно."], "tr": ["Akşamları hava serin.", "Akşam serin.", "Akşam hava serin olur.", "Akşamları hava serin olur."] } },
+    { "id": "u12.s.15", "en": "It is warm and sunny today.", "altEn": ["Today it is warm and sunny."], "native": { "uz": "Bugun havo iliq va quyoshli.", "ru": "Сегодня тепло и солнечно.", "tr": "Bugün hava ılık ve güneşli." }, "altNative": { "uz": ["Bugun iliq va quyoshli.", "Havo bugun iliq va quyoshli."], "tr": ["Bugün ılık ve güneşli.", "Hava bugün ılık ve güneşli."] } },
+    { "id": "u12.s.16", "en": "My friend likes cool weather.", "native": { "uz": "Mening do'stim salqin ob-havoni yoqtiradi.", "ru": "Моему другу нравится прохладная погода.", "tr": "Arkadaşım serin havayı sever." }, "altNative": { "uz": ["Do'stim salqin ob-havoni yoqtiradi.", "Do'stimga salqin ob-havo yoqadi.", "Mening do'stimga salqin ob-havo yoqadi.", "Mening do'stim salqin havoni yoqtiradi.", "Do'stim salqin havoni yoqtiradi."], "ru": ["Мой друг любит прохладную погоду.", "Моей подруге нравится прохладная погода.", "Моя подруга любит прохладную погоду."], "tr": ["Benim arkadaşım serin havayı sever.", "Arkadaşım serin hava sever.", "Arkadaşım serin havayı seviyor.", "Benim arkadaşım serin havayı seviyor."] } },
+
+    { "id": "u12.s.17", "en": "I like summer.", "altEn": ["I like the summer."], "native": { "uz": "Men yozni yoqtiraman.", "ru": "Мне нравится лето.", "tr": "Ben yazı severim." }, "altNative": { "uz": ["Menga yoz yoqadi.", "Yozni yoqtiraman."], "ru": ["Я люблю лето."], "tr": ["Yazı severim.", "Ben yazı seviyorum.", "Yazı seviyorum."] } },
+    { "id": "u12.s.18", "en": "It is cold in winter.", "altEn": ["In winter it is cold.", "It is cold in the winter."], "native": { "uz": "Qishda havo sovuq bo'ladi.", "ru": "Зимой холодно.", "tr": "Kışın hava soğuk olur." }, "altNative": { "uz": ["Qishda sovuq bo'ladi.", "Qishda sovuq.", "Qishda havo sovuq."], "tr": ["Kışın hava soğuk.", "Kışın soğuk olur.", "Kışın hava soğuktur.", "Kışın soğuk."] } },
+    { "id": "u12.s.19", "en": "Spring is warm and sunny.", "native": { "uz": "Bahor iliq va quyoshli.", "ru": "Весна тёплая и солнечная.", "tr": "İlkbahar ılık ve güneşli." }, "altNative": { "uz": ["Bahor iliq va quyoshli bo'ladi.", "Bahorda havo iliq va quyoshli.", "Bahorda havo iliq va quyoshli bo'ladi."], "ru": ["Весной тепло и солнечно."], "tr": ["Bahar ılık ve güneşli.", "İlkbahar ılık ve güneşlidir.", "İlkbahar ılık ve güneşli olur.", "İlkbahar ılık ve güneşli geçer."] } },
+    { "id": "u12.s.20", "en": "There are four seasons.", "native": { "uz": "To'rt fasl bor.", "ru": "Есть четыре времени года.", "tr": "Dört mevsim var." }, "altNative": { "uz": ["To'rtta fasl bor.", "Yilda to'rt fasl bor.", "To'rtta yil fasli bor."], "ru": ["Существует четыре времени года.", "Всего четыре времени года.", "В году четыре времени года.", "Есть четыре сезона."], "tr": ["Dört mevsim vardır."] } },
+    { "id": "u12.s.21", "en": "What season do you like?", "altEn": ["Which season do you like?"], "native": { "uz": "Sen qaysi faslni yoqtirasan?", "ru": "Какое время года тебе нравится?", "tr": "Hangi mevsimi seversin?" }, "altNative": { "uz": ["Qaysi faslni yoqtirasan?", "Senga qaysi fasl yoqadi?", "Qaysi fasl senga yoqadi?"], "ru": ["Какое время года ты любишь?", "Какой сезон тебе нравится?"], "tr": ["Sen hangi mevsimi seversin?", "Hangi mevsimi seviyorsun?", "Sen hangi mevsimi seviyorsun?"] } },
+    { "id": "u12.s.22", "en": "We have snow in winter.", "altEn": ["In winter we have snow.", "We have snow in the winter."], "native": { "uz": "Bizda qishda qor yog'adi.", "ru": "Зимой у нас снег.", "tr": "Bizde kışın kar yağar." }, "altNative": { "uz": ["Qishda bizda qor yog'adi.", "Bizda qishda qor bo'ladi."], "ru": ["У нас зимой снег.", "Зимой у нас идёт снег.", "У нас зимой идёт снег.", "Зимой у нас бывает снег."], "tr": ["Kışın bizde kar yağar.", "Bizde kışın kar olur.", "Bizde kışın kar var."] } },
+    { "id": "u12.s.23", "en": "Autumn is cool, but not cold.", "altEn": ["Fall is cool, but not cold.", "Autumn is cool, but it is not cold."], "native": { "uz": "Kuz salqin, lekin sovuq emas.", "ru": "Осень прохладная, но не холодная.", "tr": "Sonbahar serin ama soğuk değil." }, "altNative": { "uz": ["Kuz salqin, ammo sovuq emas.", "Kuz salqin, biroq sovuq emas.", "Kuzda havo salqin, lekin sovuq emas."], "ru": ["Осенью прохладно, но не холодно."], "tr": ["Sonbahar serin fakat soğuk değil.", "Güz serin ama soğuk değil.", "Sonbahar serindir ama soğuk değildir."] } },
+    { "id": "u12.s.24", "en": "There is ice outside today.", "altEn": ["Today there is ice outside."], "native": { "uz": "Bugun tashqarida muz bor.", "ru": "Сегодня на улице лёд.", "tr": "Bugün dışarıda buz var." }, "altNative": { "uz": ["Tashqarida bugun muz bor.", "Bugun ko'chada muz bor."], "ru": ["На улице сегодня лёд.", "Сегодня на улице гололёд."], "tr": ["Dışarıda bugün buz var.", "Bugün dışarda buz var."] } },
+
+    { "id": "u12.s.25", "en": "What is the weather like?", "altEn": ["How is the weather?"], "native": { "uz": "Ob-havo qanday?", "ru": "Какая погода?", "tr": "Hava nasıl?" }, "altNative": { "uz": ["Havo qanday?", "Ob-havo qanaqa?"], "ru": ["Какая сейчас погода?", "Как погода?"] } },
+    { "id": "u12.s.26", "en": "It is cloudy and cool today.", "altEn": ["Today it is cloudy and cool."], "native": { "uz": "Bugun havo bulutli va salqin.", "ru": "Сегодня облачно и прохладно.", "tr": "Bugün hava bulutlu ve serin." }, "altNative": { "uz": ["Bugun bulutli va salqin.", "Havo bugun bulutli va salqin."], "ru": ["Сегодня пасмурно и прохладно."], "tr": ["Bugün bulutlu ve serin.", "Hava bugün bulutlu ve serin."] } },
+    { "id": "u12.s.27", "en": "The weather is bad today.", "altEn": ["Today the weather is bad."], "native": { "uz": "Bugun ob-havo yomon.", "ru": "Сегодня плохая погода.", "tr": "Bugün hava kötü." }, "altNative": { "uz": ["Ob-havo bugun yomon.", "Bugun havo yomon."], "ru": ["Погода сегодня плохая.", "Сегодня погода плохая."], "tr": ["Hava bugün kötü."] } },
+    { "id": "u12.s.28", "en": "There is not a cloud in the sky.", "altEn": ["There is no cloud in the sky.", "There are no clouds in the sky.", "There is not a single cloud in the sky."], "native": { "uz": "Osmonda bitta ham bulut yo'q.", "ru": "На небе ни одного облака.", "tr": "Gökyüzünde tek bir bulut yok." }, "altNative": { "uz": ["Osmonda bulut yo'q.", "Osmonda birorta ham bulut yo'q.", "Osmonda bir dona ham bulut yo'q."], "ru": ["На небе нет ни одного облака.", "На небе ни облачка.", "В небе ни облачка.", "На небе нет облаков.", "В небе ни одного облака."], "tr": ["Gökyüzünde bir bulut bile yok.", "Gökyüzünde hiç bulut yok.", "Gökyüzünde bulut yok.", "Gökte tek bir bulut yok."] } },
+    { "id": "u12.s.29", "en": "It is ten degrees outside.", "altEn": ["Outside it is ten degrees.", "It is 10 degrees outside."], "native": { "uz": "Tashqarida o'n daraja.", "ru": "На улице десять градусов.", "tr": "Dışarısı on derece." }, "altNative": { "uz": ["Tashqarida o'n daraja issiq.", "Tashqarida havo o'n daraja.", "Ko'chada o'n daraja."], "ru": ["Снаружи десять градусов.", "На улице десять градусов тепла."], "tr": ["Dışarıda hava on derece.", "Dışarıda on derece.", "Dışarıda hava sıcaklığı on derece."] } },
+    { "id": "u12.s.30", "en": "Will it rain tomorrow?", "altEn": ["Is it going to rain tomorrow?"], "native": { "uz": "Ertaga yomg'ir yog'adimi?", "ru": "Завтра будет дождь?", "tr": "Yarın yağmur yağacak mı?" }, "altNative": { "uz": ["Ertaga yomg'ir bo'ladimi?"], "ru": ["Будет ли завтра дождь?", "Завтра пойдёт дождь?", "Дождь завтра будет?"], "tr": ["Yarın yağmur yağar mı?", "Yarın yağmur var mı?"] } },
+    { "id": "u12.s.31", "en": "There was a storm at night.", "altEn": ["At night there was a storm.", "There was a storm in the night.", "There was a storm last night."], "native": { "uz": "Kechasi bo'ron bo'ldi.", "ru": "Ночью была буря.", "tr": "Gece fırtına vardı." }, "altNative": { "uz": ["Tunda bo'ron bo'ldi.", "Kechasi bo'ron turdi.", "Kechasi dovul bo'ldi."], "ru": ["Ночью был шторм.", "Ночью была гроза."], "tr": ["Geceleyin fırtına vardı.", "Gece fırtına oldu.", "Gece fırtına çıktı."] } },
+    { "id": "u12.s.32", "en": "What is the weather like in Turkey?", "altEn": ["How is the weather in Turkey?"], "native": { "uz": "Turkiyada ob-havo qanday?", "ru": "Какая погода в Турции?", "tr": "Türkiye'de hava nasıl?" }, "altNative": { "uz": ["Turkiyada havo qanday?", "Turkiyadagi ob-havo qanday?"], "ru": ["Какая в Турции погода?", "Какая сейчас погода в Турции?"] } },
+
+    { "id": "u12.s.33", "en": "Do you have an umbrella?", "altEn": ["Have you got an umbrella?"], "native": { "uz": "Senda soyabon bormi?", "ru": "У тебя есть зонт?", "tr": "Şemsiyen var mı?" }, "altNative": { "uz": ["Sening soyaboning bormi?", "Soyaboning bormi?", "Senda zontik bormi?"], "ru": ["У тебя есть зонтик?", "У тебя зонт есть?"], "tr": ["Senin şemsiyen var mı?", "Sende şemsiye var mı?", "Bir şemsiyen var mı?"] } },
+    { "id": "u12.s.34", "en": "What do you wear in winter?", "altEn": ["What do you wear in the winter?"], "native": { "uz": "Sen qishda nima kiyasan?", "ru": "Что ты носишь зимой?", "tr": "Kışın ne giyersin?" }, "altNative": { "uz": ["Qishda nima kiyasan?", "Qishda sen nima kiyasan?"], "ru": ["Что ты зимой носишь?", "Что ты надеваешь зимой?"], "tr": ["Sen kışın ne giyersin?", "Kışın ne giyiyorsun?", "Sen kışın ne giyiyorsun?"] } },
+    { "id": "u12.s.35", "en": "My boots are wet from the rain.", "altEn": ["My boots are wet from rain."], "native": { "uz": "Etigim yomg'irdan ho'l bo'ldi.", "ru": "Мои сапоги мокрые от дождя.", "tr": "Çizmelerim yağmurdan ıslandı." }, "altNative": { "uz": ["Mening etigim yomg'irdan ho'l bo'ldi.", "Etigim yomg'irdan ho'l.", "Mening etigim yomg'irdan ho'l.", "Etiklarim yomg'irdan ho'l bo'ldi.", "Etiklarim yomg'irdan ho'l."], "ru": ["Мои сапоги промокли от дождя.", "Мои ботинки мокрые от дождя.", "Мои ботинки промокли от дождя."], "tr": ["Çizmelerim yağmurdan ıslak.", "Benim çizmelerim yağmurdan ıslandı.", "Botlarım yağmurdan ıslandı.", "Botlarım yağmurdan ıslak.", "Çizmelerim yağmurdan ıslanmış."] } },
+    { "id": "u12.s.36", "en": "Is your coat dry now?", "native": { "uz": "Palting hozir quruqmi?", "ru": "Твоё пальто сейчас сухое?", "tr": "Palton şimdi kuru mu?" }, "altNative": { "uz": ["Sening palting hozir quruqmi?", "Hozir palting quruqmi?", "Palting endi quruqmi?", "Sening palting endi quruqmi?"], "ru": ["Твоё пальто теперь сухое?", "Твоё пальто уже сухое?", "Твоё пальто уже высохло?"], "tr": ["Senin palton şimdi kuru mu?", "Palton artık kuru mu?", "Montun şimdi kuru mu?", "Şimdi palton kuru mu?"] } },
+    { "id": "u12.s.37", "en": "I wear a coat and boots in winter.", "altEn": ["In winter I wear a coat and boots.", "I wear a coat and boots in the winter."], "native": { "uz": "Men qishda palto va etik kiyaman.", "ru": "Зимой я ношу пальто и сапоги.", "tr": "Kışın palto ve çizme giyerim." }, "altNative": { "uz": ["Qishda palto va etik kiyaman.", "Qishda men palto va etik kiyaman."], "ru": ["Я ношу пальто и сапоги зимой.", "Я зимой ношу пальто и сапоги.", "Зимой я ношу пальто и ботинки."], "tr": ["Ben kışın palto ve çizme giyerim.", "Kışın palto ve çizme giyiyorum.", "Kışın palto ve bot giyerim.", "Kışın mont ve çizme giyerim."] } },
+    { "id": "u12.s.38", "en": "Wear your scarf and gloves today.", "altEn": ["Wear a scarf and gloves today.", "Wear your scarf and your gloves today.", "Put on your scarf and gloves today."], "native": { "uz": "Bugun sharf va qo'lqopingni kiy.", "ru": "Надень сегодня шарф и перчатки.", "tr": "Bugün atkını ve eldivenlerini tak." }, "altNative": { "uz": ["Bugun sharfing va qo'lqopingni kiy.", "Bugun sharf va qo'lqop kiy.", "Bugun sharf va qo'lqopingni kiygin.", "Bugun sharfingni o'ra, qo'lqopingni kiy."], "ru": ["Сегодня надень шарф и перчатки.", "Надень шарф и перчатки сегодня.", "Надень сегодня свой шарф и перчатки.", "Сегодня надень свой шарф и перчатки."], "tr": ["Bugün atkını ve eldivenini tak.", "Bugün atkını ve eldivenlerini giy.", "Bugün atkı ve eldiven tak.", "Atkını ve eldivenlerini tak bugün."] } },
+    { "id": "u12.s.39", "en": "I do not wear gloves in spring.", "altEn": ["In spring I do not wear gloves.", "I do not wear gloves in the spring."], "native": { "uz": "Men bahorda qo'lqop kiymayman.", "ru": "Весной я не ношу перчатки.", "tr": "İlkbaharda eldiven takmam." }, "altNative": { "uz": ["Bahorda qo'lqop kiymayman.", "Bahorda men qo'lqop kiymayman."], "ru": ["Я не ношу перчатки весной.", "Я весной не ношу перчатки.", "Весной я не ношу перчаток."], "tr": ["Ben ilkbaharda eldiven takmam.", "İlkbaharda eldiven giymem.", "Ben ilkbaharda eldiven giymem.", "Baharda eldiven takmam.", "İlkbaharda eldiven takmıyorum."] } },
+    { "id": "u12.s.40", "en": "It is raining, but I have an umbrella.", "native": { "uz": "Yomg'ir yog'yapti, lekin menda soyabon bor.", "ru": "Идёт дождь, но у меня есть зонт.", "tr": "Yağmur yağıyor ama şemsiyem var." }, "altNative": { "uz": ["Yomg'ir yog'yapti, ammo menda soyabon bor.", "Yomg'ir yog'yapti, biroq menda soyabon bor.", "Yomg'ir yog'yapti, lekin soyabonim bor.", "Yomg'ir yog'yapti, lekin mening soyabonim bor."], "ru": ["Идёт дождь, но у меня есть зонтик.", "Идёт дождь, но у меня зонт.", "Дождь идёт, но у меня есть зонт."], "tr": ["Yağmur yağıyor ama benim şemsiyem var.", "Yağmur yağıyor fakat şemsiyem var.", "Yağmur yağıyor ama bende şemsiye var."] } }
+  ],
+  "lessons": [
+    {
+      "id": "u12-l1",
+      "title": { "en": "Sun and rain", "uz": "Quyosh va yomg'ir", "ru": "Солнце и дождь", "tr": "Güneş ve yağmur" },
+      "words": ["u12.w.weather", "u12.w.sun", "u12.w.sunny", "u12.w.rain", "u12.w.rainy", "u12.w.sky"],
+      "sentences": ["u12.s.01", "u12.s.02", "u12.s.03", "u12.s.04", "u12.s.05", "u12.s.06", "u12.s.07", "u12.s.08"]
+    },
+    {
+      "id": "u12-l2",
+      "title": { "en": "Hot and cold days", "uz": "Issiq va sovuq kunlar", "ru": "Жаркие и холодные дни", "tr": "Sıcak ve soğuk günler" },
+      "words": ["u12.w.warm", "u12.w.cool", "u12.w.wind", "u12.w.windy", "u12.w.outside", "u12.w.inside"],
+      "sentences": ["u12.s.09", "u12.s.10", "u12.s.11", "u12.s.12", "u12.s.13", "u12.s.14", "u12.s.15", "u12.s.16"]
+    },
+    {
+      "id": "u12-l3",
+      "title": { "en": "Four seasons", "uz": "To'rt fasl", "ru": "Четыре времени года", "tr": "Dört mevsim" },
+      "words": ["u12.w.season", "u12.w.spring", "u12.w.summer", "u12.w.autumn", "u12.w.winter", "u12.w.snow", "u12.w.ice"],
+      "sentences": ["u12.s.17", "u12.s.18", "u12.s.19", "u12.s.20", "u12.s.21", "u12.s.22", "u12.s.23", "u12.s.24"]
+    },
+    {
+      "id": "u12-l4",
+      "title": { "en": "What is the weather like?", "uz": "Ob-havo qanday?", "ru": "Какая погода?", "tr": "Hava nasıl?" },
+      "words": ["u12.w.cloud", "u12.w.cloudy", "u12.w.storm", "u12.w.degree", "u12.w.bad"],
+      "sentences": ["u12.s.25", "u12.s.26", "u12.s.27", "u12.s.28", "u12.s.29", "u12.s.30", "u12.s.31", "u12.s.32"]
+    },
+    {
+      "id": "u12-l5",
+      "title": { "en": "What to wear", "uz": "Nima kiyish kerak?", "ru": "Что надеть", "tr": "Ne giymeli?" },
+      "words": ["u12.w.umbrella", "u12.w.coat", "u12.w.boots", "u12.w.scarf", "u12.w.gloves", "u12.w.wet", "u12.w.dry"],
+      "sentences": ["u12.s.33", "u12.s.34", "u12.s.35", "u12.s.36", "u12.s.37", "u12.s.38", "u12.s.39", "u12.s.40"]
+    }
+  ]
+}

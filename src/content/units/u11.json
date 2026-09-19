@@ -1,0 +1,144 @@
+{
+  "id": "u11",
+  "section": 2,
+  "order": 5,
+  "title": { "en": "Time and days", "uz": "Vaqt va kunlar", "ru": "Время и дни недели", "tr": "Saat ve günler" },
+  "goal": {
+    "en": "Tell the time, name the days of the week and say when things happen.",
+    "uz": "Soatni ayting, hafta kunlarini nomlang va biror narsa qachon bo'lishini ayting.",
+    "ru": "Скажите, который час, назовите дни недели и скажите, когда что происходит.",
+    "tr": "Saati söyle, haftanın günlerini say ve bir şeyin ne zaman olduğunu anlat."
+  },
+  "guide": "nubi",
+  "color": "#F59E0B",
+  "tip": {
+    "title": { "en": "at nine, on Monday", "uz": "at nine, on Monday", "ru": "at nine, on Monday", "tr": "at nine, on Monday" },
+    "body": {
+      "en": "To tell the time, start with \"It is\": It is five o'clock. \"Past\" counts minutes after the hour and \"to\" counts minutes before it: ten past nine is 9:10, quarter to six is 5:45. Use \"at\" with clock times (at nine, at noon), \"on\" with days (on Monday) and \"in\" with parts of the day (in the morning, in the afternoon).",
+      "uz": "Soatni aytganda gap \"It is\" bilan boshlanadi: It is five o'clock (Soat besh). \"Past\" soatdan o'tgan daqiqalarni, \"to\" esa soatga qolgan daqiqalarni bildiradi: ten past nine - 9:10, quarter to six - 5:45. O'zbek tilida bitta -da qo'shimchasi yetadi, ingliz tilida esa uch xil so'z bor: soat bilan \"at\" (at nine), kunlar bilan \"on\" (on Monday), kun qismlari bilan \"in\" (in the morning).",
+      "ru": "Чтобы сказать, который час, начните с \"It is\": It is five o'clock. \"Past\" - это минуты после часа, а \"to\" - минуты до часа: ten past nine - 9:10 (десять минут десятого), quarter to six - 5:45 (без четверти шесть). По-русски мы говорим \"в девять\" и \"в понедельник\" с одним предлогом, а в английском они разные: со временем \"at\" (at nine), с днями \"on\" (on Monday), с частями дня \"in\" (in the morning).",
+      "tr": "Saati söylerken cümle \"It is\" ile başlar: It is five o'clock (Saat beş). \"Past\" saati geçen dakikaları, \"to\" ise saate kalan dakikaları gösterir: ten past nine - 9:10 (dokuzu on geçiyor), quarter to six - 5:45 (altıya çeyrek var). Türkçede tek bir ek (-de/-da) yeter, İngilizcede ise üç ayrı kelime vardır: saatlerle \"at\" (at nine), günlerle \"on\" (on Monday), günün bölümleriyle \"in\" (in the morning)."
+    },
+    "examples": [
+      { "en": "It is half past six.", "native": { "uz": "Soat olti yarim.", "ru": "Половина седьмого.", "tr": "Saat altı buçuk." } },
+      { "en": "The meeting is on Monday.", "native": { "uz": "Yig'ilish dushanba kuni.", "ru": "Собрание в понедельник.", "tr": "Toplantı pazartesi günü." } },
+      { "en": "The cafe closes at ten.", "native": { "uz": "Kafe soat o'nda yopiladi.", "ru": "Кафе закрывается в десять.", "tr": "Kafe saat onda kapanıyor." } }
+    ]
+  },
+  "words": [
+    { "id": "u11.w.time", "en": "time", "pos": "noun", "emoji": "⏰", "native": { "uz": "vaqt", "ru": "время", "tr": "zaman" }, "altNative": { "uz": ["payt"], "tr": ["vakit"] } },
+    { "id": "u11.w.o-clock", "en": "o'clock", "pos": "adv", "emoji": "🕔", "native": { "uz": "soat (vaqtni aytishda)", "ru": "часов (о времени)", "tr": "saat (saati söylerken)" } },
+    { "id": "u11.w.clock", "en": "clock", "pos": "noun", "emoji": "🕰️", "native": { "uz": "soat (buyum)", "ru": "часы", "tr": "saat (eşya)" }, "altNative": { "uz": ["devor soati"], "ru": ["настенные часы"], "tr": ["duvar saati"] } },
+    { "id": "u11.w.half", "en": "half", "pos": "noun", "emoji": "🌗", "native": { "uz": "yarim", "ru": "половина", "tr": "yarım" }, "altNative": { "uz": ["yarmi"], "ru": ["пол"], "tr": ["buçuk"] } },
+    { "id": "u11.w.past", "en": "past", "pos": "prep", "native": { "uz": "o'tdi (vaqt haqida)", "ru": "после (о времени)", "tr": "geçe" }, "altNative": { "uz": ["o'tgan"], "tr": ["geçiyor"] } },
+    { "id": "u11.w.quarter", "en": "quarter", "pos": "noun", "native": { "uz": "chorak", "ru": "четверть", "tr": "çeyrek" } },
+
+    { "id": "u11.w.monday", "en": "Monday", "pos": "noun", "native": { "uz": "dushanba", "ru": "понедельник", "tr": "pazartesi" } },
+    { "id": "u11.w.tuesday", "en": "Tuesday", "pos": "noun", "native": { "uz": "seshanba", "ru": "вторник", "tr": "salı" } },
+    { "id": "u11.w.wednesday", "en": "Wednesday", "pos": "noun", "native": { "uz": "chorshanba", "ru": "среда", "tr": "çarşamba" } },
+    { "id": "u11.w.thursday", "en": "Thursday", "pos": "noun", "native": { "uz": "payshanba", "ru": "четверг", "tr": "perşembe" } },
+    { "id": "u11.w.friday", "en": "Friday", "pos": "noun", "native": { "uz": "juma", "ru": "пятница", "tr": "cuma" } },
+    { "id": "u11.w.saturday", "en": "Saturday", "pos": "noun", "native": { "uz": "shanba", "ru": "суббота", "tr": "cumartesi" } },
+    { "id": "u11.w.sunday", "en": "Sunday", "pos": "noun", "native": { "uz": "yakshanba", "ru": "воскресенье", "tr": "pazar" } },
+
+    { "id": "u11.w.day", "en": "day", "pos": "noun", "emoji": "☀️", "native": { "uz": "kun", "ru": "день", "tr": "gün" } },
+    { "id": "u11.w.meeting", "en": "meeting", "pos": "noun", "emoji": "👥", "native": { "uz": "yig'ilish", "ru": "собрание", "tr": "toplantı" }, "altNative": { "uz": ["majlis"], "ru": ["совещание"] } },
+    { "id": "u11.w.noon", "en": "noon", "pos": "noun", "emoji": "🕛", "native": { "uz": "tush payti", "ru": "полдень", "tr": "öğle" }, "altNative": { "uz": ["peshin", "tush"], "tr": ["öğlen", "öğle vakti"] } },
+    { "id": "u11.w.midnight", "en": "midnight", "pos": "noun", "emoji": "🌃", "native": { "uz": "yarim tun", "ru": "полночь", "tr": "gece yarısı" }, "altNative": { "uz": ["yarim kecha"] } },
+    { "id": "u11.w.afternoon", "en": "afternoon", "pos": "noun", "emoji": "🌤️", "native": { "uz": "tushdan keyin", "ru": "после полудня", "tr": "öğleden sonra" }, "altNative": { "uz": ["peshindan keyin"], "ru": ["вторая половина дня", "после обеда"] } },
+    { "id": "u11.w.tonight", "en": "tonight", "pos": "adv", "emoji": "🌙", "native": { "uz": "bugun kechqurun", "ru": "сегодня вечером", "tr": "bu gece" }, "altNative": { "uz": ["bugun kechasi", "bugun tunda"], "ru": ["сегодня ночью"], "tr": ["bu akşam"] } },
+
+    { "id": "u11.w.when", "en": "when", "pos": "adv", "native": { "uz": "qachon", "ru": "когда", "tr": "ne zaman" } },
+    { "id": "u11.w.open", "en": "open", "pos": "verb", "emoji": "🔓", "native": { "uz": "ochmoq", "ru": "открывать", "tr": "açmak" }, "altNative": { "uz": ["ochilmoq"], "ru": ["открываться", "открыть"], "tr": ["açılmak"] } },
+    { "id": "u11.w.close", "en": "close", "pos": "verb", "emoji": "🔒", "native": { "uz": "yopmoq", "ru": "закрывать", "tr": "kapatmak" }, "altNative": { "uz": ["yopilmoq"], "ru": ["закрываться", "закрыть"], "tr": ["kapanmak", "kapamak"] } },
+    { "id": "u11.w.until", "en": "until", "pos": "prep", "native": { "uz": "-gacha", "ru": "до", "tr": "-e kadar" }, "altNative": { "uz": ["qadar"], "tr": ["-a kadar", "kadar"] } },
+    { "id": "u11.w.wait", "en": "wait", "pos": "verb", "emoji": "🚏", "native": { "uz": "kutmoq", "ru": "ждать", "tr": "beklemek" }, "altNative": { "uz": ["kutib turmoq"], "ru": ["подождать"] } },
+    { "id": "u11.w.appointment", "en": "appointment", "pos": "noun", "emoji": "🤝", "native": { "uz": "uchrashuv", "ru": "встреча", "tr": "randevu" }, "altNative": { "uz": ["qabul"], "ru": ["запись", "приём"] } },
+    { "id": "u11.w.hour", "en": "hour", "pos": "noun", "emoji": "⏳", "native": { "uz": "soat (60 daqiqa)", "ru": "час", "tr": "saat (60 dakika)" } },
+
+    { "id": "u11.w.calendar", "en": "calendar", "pos": "noun", "emoji": "📅", "native": { "uz": "taqvim", "ru": "календарь", "tr": "takvim" }, "altNative": { "uz": ["kalendar"] } },
+    { "id": "u11.w.date", "en": "date", "pos": "noun", "emoji": "🗓️", "native": { "uz": "sana", "ru": "дата", "tr": "tarih" }, "altNative": { "ru": ["число"] } },
+    { "id": "u11.w.holiday", "en": "holiday", "pos": "noun", "emoji": "🎉", "native": { "uz": "bayram", "ru": "праздник", "tr": "tatil" }, "altNative": { "uz": ["ta'til", "dam olish kuni"], "ru": ["выходной"], "tr": ["bayram"] } },
+    { "id": "u11.w.weekday", "en": "weekday", "pos": "noun", "emoji": "💼", "native": { "uz": "ish kuni", "ru": "будний день", "tr": "hafta içi" }, "altNative": { "ru": ["будни", "рабочий день"], "tr": ["iş günü"] } },
+    { "id": "u11.w.every", "en": "every", "pos": "other", "emoji": "🔁", "native": { "uz": "har", "ru": "каждый", "tr": "her" }, "altNative": { "uz": ["har bir"] } },
+    { "id": "u11.w.next", "en": "next", "pos": "adj", "emoji": "⏭️", "native": { "uz": "keyingi", "ru": "следующий", "tr": "gelecek" }, "altNative": { "uz": ["kelasi"], "tr": ["sonraki", "bir sonraki", "önümüzdeki"] } }
+  ],
+  "sentences": [
+    { "id": "u11.s.01", "en": "What time is it?", "altEn": ["What is the time?", "What time is it now?"], "native": { "uz": "Soat necha?", "ru": "Который час?", "tr": "Saat kaç?" }, "altNative": { "uz": ["Soat necha bo'ldi?", "Hozir soat necha?"], "ru": ["Сколько времени?", "Сколько сейчас времени?", "Который сейчас час?"], "tr": ["Şu an saat kaç?", "Şimdi saat kaç?"] } },
+    { "id": "u11.s.02", "en": "It is five o'clock.", "altEn": ["It is five."], "native": { "uz": "Soat besh.", "ru": "Пять часов.", "tr": "Saat beş." }, "altNative": { "uz": ["Hozir soat besh.", "Soat besh bo'ldi."], "ru": ["Сейчас пять часов.", "Сейчас пять."], "tr": ["Şu an saat beş."] } },
+    { "id": "u11.s.03", "en": "It is half past six.", "altEn": ["It is six thirty."], "native": { "uz": "Soat olti yarim.", "ru": "Половина седьмого.", "tr": "Saat altı buçuk." }, "altNative": { "uz": ["Hozir soat olti yarim.", "Soat oltidan o'ttiz daqiqa o'tdi."], "ru": ["Полседьмого.", "Сейчас половина седьмого.", "Шесть тридцать."], "tr": ["Şu an saat altı buçuk."] } },
+    { "id": "u11.s.04", "en": "It is ten past nine.", "altEn": ["It is ten minutes past nine.", "It is nine ten.", "It is ten after nine."], "native": { "uz": "Soat to'qqizdan o'n daqiqa o'tdi.", "ru": "Десять минут десятого.", "tr": "Saat dokuzu on geçiyor." }, "altNative": { "uz": ["To'qqizdan o'n daqiqa o'tdi.", "Soat to'qqizdan o'nta o'tdi."], "ru": ["Сейчас десять минут десятого.", "Девять десять.", "Девять часов десять минут."], "tr": ["Dokuzu on geçiyor."] } },
+    { "id": "u11.s.05", "en": "It is quarter past two.", "altEn": ["It is a quarter past two.", "It is two fifteen."], "native": { "uz": "Soat ikkidan chorak o'tdi.", "ru": "Четверть третьего.", "tr": "Saat ikiyi çeyrek geçiyor." }, "altNative": { "uz": ["Ikkidan chorak o'tdi.", "Soat ikkidan o'n besh daqiqa o'tdi."], "ru": ["Сейчас четверть третьего.", "Пятнадцать минут третьего.", "Два пятнадцать."], "tr": ["İkiyi çeyrek geçiyor."] } },
+    { "id": "u11.s.06", "en": "It is quarter to six.", "altEn": ["It is a quarter to six."], "native": { "uz": "Soat chorak kam olti.", "ru": "Без четверти шесть.", "tr": "Saat altıya çeyrek var." }, "altNative": { "uz": ["Chorak kam olti.", "Soat oltiga chorak qoldi.", "Oltiga chorak qoldi."], "ru": ["Сейчас без четверти шесть.", "Без пятнадцати шесть."], "tr": ["Altıya çeyrek var."] } },
+    { "id": "u11.s.07", "en": "Is it eight o'clock now?", "altEn": ["Is it eight now?", "Is it now eight o'clock?"], "native": { "uz": "Hozir soat sakkizmi?", "ru": "Сейчас восемь часов?", "tr": "Şimdi saat sekiz mi?" }, "altNative": { "uz": ["Soat hozir sakkizmi?", "Hozir soat sakkiz bo'ldimi?"], "ru": ["Сейчас восемь?"], "tr": ["Saat şimdi sekiz mi?", "Şu an saat sekiz mi?"] } },
+    { "id": "u11.s.08", "en": "Where is the clock?", "native": { "uz": "Soat qayerda?", "ru": "Где часы?", "tr": "Saat nerede?" }, "altEnFor": { "uz": ["Where is the watch?"], "ru": ["Where is the watch?"], "tr": ["Where is the watch?"] } },
+
+    { "id": "u11.s.09", "en": "Today is Monday.", "altEn": ["It is Monday today.", "Today it is Monday."], "native": { "uz": "Bugun dushanba.", "ru": "Сегодня понедельник.", "tr": "Bugün pazartesi." } },
+    { "id": "u11.s.10", "en": "Tomorrow is Tuesday.", "altEn": ["It is Tuesday tomorrow."], "native": { "uz": "Ertaga seshanba.", "ru": "Завтра вторник.", "tr": "Yarın salı." } },
+    { "id": "u11.s.11", "en": "Is today Wednesday?", "altEn": ["Is it Wednesday today?"], "native": { "uz": "Bugun chorshanbami?", "ru": "Сегодня среда?", "tr": "Bugün çarşamba mı?" } },
+    { "id": "u11.s.12", "en": "No, today is Thursday.", "altEn": ["No, it is Thursday today."], "native": { "uz": "Yo'q, bugun payshanba.", "ru": "Нет, сегодня четверг.", "tr": "Hayır, bugün perşembe." } },
+    { "id": "u11.s.13", "en": "See you on Friday!", "altEn": ["See you Friday!"], "native": { "uz": "Juma kuni ko'rishguncha!", "ru": "Увидимся в пятницу!", "tr": "Cuma günü görüşürüz!" }, "altNative": { "uz": ["Jumada ko'rishguncha!", "Juma kuni ko'rishamiz!"], "ru": ["До пятницы!"], "tr": ["Cuma görüşürüz!", "Cumaya görüşürüz!"] } },
+    { "id": "u11.s.14", "en": "I love Saturday and Sunday.", "native": { "uz": "Men shanba va yakshanbani yaxshi ko'raman.", "ru": "Я люблю субботу и воскресенье.", "tr": "Cumartesiyi ve pazarı seviyorum." }, "altNative": { "uz": ["Shanba va yakshanbani yaxshi ko'raman.", "Men shanbani va yakshanbani yaxshi ko'raman.", "Men shanba va yakshanbani sevaman."], "tr": ["Ben cumartesiyi ve pazarı seviyorum.", "Cumartesi ve pazarı seviyorum.", "Ben cumartesi ve pazarı seviyorum.", "Cumartesi ve pazar günlerini seviyorum."] } },
+    { "id": "u11.s.15", "en": "Today is not Saturday.", "altEn": ["It is not Saturday today."], "native": { "uz": "Bugun shanba emas.", "ru": "Сегодня не суббота.", "tr": "Bugün cumartesi değil." } },
+    { "id": "u11.s.16", "en": "We are at home on Sunday.", "altEn": ["On Sunday we are at home."], "native": { "uz": "Biz yakshanba kuni uydamiz.", "ru": "В воскресенье мы дома.", "tr": "Pazar günü evdeyiz." }, "altNative": { "uz": ["Yakshanba kuni biz uydamiz.", "Yakshanba kuni uydamiz.", "Biz yakshanbada uydamiz."], "ru": ["Мы дома в воскресенье."], "tr": ["Biz pazar günü evdeyiz.", "Pazar günü biz evdeyiz."] } },
+
+    { "id": "u11.s.17", "en": "The meeting is on Monday.", "native": { "uz": "Yig'ilish dushanba kuni.", "ru": "Собрание в понедельник.", "tr": "Toplantı pazartesi günü." }, "altNative": { "uz": ["Yig'ilish dushanbada.", "Majlis dushanba kuni.", "Yig'ilish dushanba kuni bo'ladi."], "ru": ["Встреча в понедельник.", "Совещание в понедельник.", "Собрание будет в понедельник."], "tr": ["Toplantı pazartesi."] } },
+    { "id": "u11.s.18", "en": "The meeting is at nine o'clock.", "altEn": ["The meeting is at nine."], "native": { "uz": "Yig'ilish soat to'qqizda.", "ru": "Собрание в девять часов.", "tr": "Toplantı saat dokuzda." }, "altNative": { "uz": ["Majlis soat to'qqizda.", "Yig'ilish to'qqizda."], "ru": ["Собрание в девять.", "Встреча в девять часов.", "Встреча в девять.", "Совещание в девять часов."], "tr": ["Toplantı dokuzda."] } },
+    { "id": "u11.s.19", "en": "See you at noon!", "native": { "uz": "Tush payti ko'rishguncha!", "ru": "Увидимся в полдень!", "tr": "Öğlen görüşürüz!" }, "altNative": { "uz": ["Tushda ko'rishguncha!", "Tush payti ko'rishamiz!", "Peshinda ko'rishguncha!"], "ru": ["До встречи в полдень!"], "tr": ["Öğleyin görüşürüz!", "Öğle vakti görüşürüz!"] } },
+    { "id": "u11.s.20", "en": "I drink tea in the afternoon.", "altEn": ["In the afternoon I drink tea."], "native": { "uz": "Men tushdan keyin choy ichaman.", "ru": "Я пью чай после полудня.", "tr": "Öğleden sonra çay içiyorum." }, "altNative": { "uz": ["Tushdan keyin men choy ichaman.", "Tushdan keyin choy ichaman.", "Men peshindan keyin choy ichaman."], "ru": ["После полудня я пью чай.", "Я пью чай после обеда.", "После обеда я пью чай.", "Днём я пью чай.", "Я пью чай днём."], "tr": ["Ben öğleden sonra çay içiyorum.", "Öğleden sonra çay içerim.", "Ben öğleden sonra çay içerim."] } },
+    { "id": "u11.s.21", "en": "We do not eat at midnight.", "native": { "uz": "Biz yarim tunda ovqat yemaymiz.", "ru": "Мы не едим в полночь.", "tr": "Gece yarısı yemek yemiyoruz." }, "altNative": { "uz": ["Biz yarim tunda yemaymiz.", "Yarim tunda ovqat yemaymiz.", "Biz yarim kechasi ovqat yemaymiz."], "ru": ["В полночь мы не едим."], "tr": ["Biz gece yarısı yemek yemiyoruz.", "Gece yarısında yemek yemiyoruz.", "Gece yarısı yemek yemeyiz.", "Biz gece yarısı yemek yemeyiz."] } },
+    { "id": "u11.s.22", "en": "What day is it today?", "altEn": ["What day is today?"], "native": { "uz": "Bugun qaysi kun?", "ru": "Какой сегодня день?", "tr": "Bugün günlerden ne?" }, "altNative": { "uz": ["Bugun haftaning qaysi kuni?", "Bugun nima kun?"], "ru": ["Какой сегодня день недели?", "Какой день сегодня?"], "tr": ["Bugün hangi gün?"] } },
+    { "id": "u11.s.23", "en": "Are you at home tonight?", "altEn": ["Are you home tonight?"], "native": { "uz": "Bugun kechqurun uydamisan?", "ru": "Ты сегодня вечером дома?", "tr": "Bu gece evde misin?" }, "altNative": { "uz": ["Sen bugun kechqurun uydamisan?", "Bugun kechasi uydamisan?", "Bugun kechqurun uyda bo'lasanmi?"], "ru": ["Ты дома сегодня вечером?", "Сегодня вечером ты дома?", "Ты будешь дома сегодня вечером?"], "tr": ["Bu akşam evde misin?", "Sen bu gece evde misin?"] } },
+    { "id": "u11.s.24", "en": "Wednesday is a good day for a meeting.", "native": { "uz": "Chorshanba yig'ilish uchun yaxshi kun.", "ru": "Среда — хороший день для собрания.", "tr": "Çarşamba toplantı için iyi bir gün." }, "altNative": { "uz": ["Chorshanba majlis uchun yaxshi kun."], "ru": ["Среда — хороший день для встречи.", "Среда — хороший день для совещания."], "tr": ["Çarşamba toplantı için güzel bir gün."] } },
+
+    { "id": "u11.s.25", "en": "When is the meeting?", "native": { "uz": "Yig'ilish qachon?", "ru": "Когда собрание?", "tr": "Toplantı ne zaman?" }, "altNative": { "uz": ["Majlis qachon?", "Yig'ilish qachon bo'ladi?"], "ru": ["Когда встреча?", "Когда совещание?", "Когда будет собрание?"] } },
+    { "id": "u11.s.26", "en": "When does the cafe open?", "native": { "uz": "Kafe qachon ochiladi?", "ru": "Когда открывается кафе?", "tr": "Kafe ne zaman açılıyor?" }, "altNative": { "ru": ["Когда кафе открывается?"], "tr": ["Kafe ne zaman açılır?"] } },
+    { "id": "u11.s.27", "en": "The cafe closes at ten.", "altEn": ["The cafe closes at ten o'clock."], "native": { "uz": "Kafe soat o'nda yopiladi.", "ru": "Кафе закрывается в десять.", "tr": "Kafe saat onda kapanıyor." }, "altNative": { "uz": ["Kafe o'nda yopiladi."], "ru": ["Кафе закрывается в десять часов."], "tr": ["Kafe onda kapanıyor.", "Kafe saat onda kapanır."] } },
+    { "id": "u11.s.28", "en": "The cafe is open until midnight.", "native": { "uz": "Kafe yarim tungacha ochiq.", "ru": "Кафе открыто до полуночи.", "tr": "Kafe gece yarısına kadar açık." }, "altNative": { "uz": ["Kafe yarim kechagacha ochiq.", "Kafe yarim tungacha ishlaydi."], "ru": ["Кафе работает до полуночи."] } },
+    { "id": "u11.s.29", "en": "I have an appointment on Tuesday at three.", "altEn": ["I have an appointment on Tuesday at three o'clock.", "I have an appointment at three on Tuesday."], "native": { "uz": "Seshanba kuni soat uchda uchrashuvim bor.", "ru": "У меня встреча во вторник в три.", "tr": "Salı günü saat üçte randevum var." }, "altNative": { "uz": ["Mening seshanba kuni soat uchda uchrashuvim bor.", "Seshanba kuni soat uchda mening uchrashuvim bor.", "Seshanba kuni soat uchda qabulim bor."], "ru": ["У меня встреча во вторник в три часа.", "Во вторник в три у меня встреча.", "Во вторник в три часа у меня встреча."], "tr": ["Salı günü saat üçte bir randevum var.", "Salı saat üçte randevum var.", "Salı günü üçte randevum var."] } },
+    { "id": "u11.s.30", "en": "Can you wait an hour?", "altEn": ["Can you wait for an hour?", "Can you wait one hour?", "Can you wait for one hour?"], "native": { "uz": "Bir soat kuta olasanmi?", "ru": "Ты можешь подождать час?", "tr": "Bir saat bekleyebilir misin?" }, "altNative": { "uz": ["Sen bir soat kuta olasanmi?", "Bir soat kutib tura olasanmi?"], "ru": ["Можешь подождать час?", "Ты можешь подождать один час?", "Ты можешь час подождать?"], "tr": ["Sen bir saat bekleyebilir misin?", "Bir saat bekler misin?"] } },
+    { "id": "u11.s.31", "en": "Please wait until Friday.", "altEn": ["Wait until Friday, please."], "native": { "uz": "Iltimos, jumagacha kut.", "ru": "Пожалуйста, подожди до пятницы.", "tr": "Lütfen cumaya kadar bekle." }, "altNative": { "uz": ["Jumagacha kut, iltimos.", "Iltimos, juma kunigacha kut.", "Iltimos, jumagacha kutib tur."], "ru": ["Подожди до пятницы, пожалуйста.", "Пожалуйста, жди до пятницы."], "tr": ["Cumaya kadar bekle, lütfen.", "Lütfen cuma gününe kadar bekle."] } },
+    { "id": "u11.s.32", "en": "The cafe does not close at noon.", "native": { "uz": "Kafe tush payti yopilmaydi.", "ru": "Кафе не закрывается в полдень.", "tr": "Kafe öğlen kapanmıyor." }, "altNative": { "uz": ["Kafe tushda yopilmaydi.", "Kafe peshinda yopilmaydi."], "ru": ["В полдень кафе не закрывается."], "tr": ["Kafe öğleyin kapanmıyor.", "Kafe öğlen kapanmaz."] } },
+
+    { "id": "u11.s.33", "en": "What is the date today?", "altEn": ["What is today's date?", "What date is it today?"], "native": { "uz": "Bugun nechanchi sana?", "ru": "Какое сегодня число?", "tr": "Bugünün tarihi ne?" }, "altNative": { "uz": ["Bugun sana nechanchi?", "Bugun oyning nechanchi kuni?"], "ru": ["Какая сегодня дата?", "Какое число сегодня?"], "tr": ["Bugün ayın kaçı?", "Bugün tarih ne?", "Bugünün tarihi nedir?"] } },
+    { "id": "u11.s.34", "en": "Is next Monday a holiday?", "altEn": ["Is it a holiday next Monday?"], "native": { "uz": "Keyingi dushanba bayrammi?", "ru": "В следующий понедельник праздник?", "tr": "Gelecek pazartesi tatil mi?" }, "altNative": { "uz": ["Kelasi dushanba bayrammi?", "Keyingi dushanba dam olish kunimi?"], "ru": ["Следующий понедельник — праздник?", "В следующий понедельник выходной?", "Следующий понедельник — выходной?"], "tr": ["Önümüzdeki pazartesi tatil mi?", "Gelecek pazartesi bayram mı?", "Haftaya pazartesi tatil mi?"] } },
+    { "id": "u11.s.35", "en": "Saturday is not a weekday.", "native": { "uz": "Shanba ish kuni emas.", "ru": "Суббота — не будний день.", "tr": "Cumartesi hafta içi değil." }, "altNative": { "ru": ["Суббота — не рабочий день."], "tr": ["Cumartesi iş günü değil.", "Cumartesi hafta içi bir gün değil."] } },
+    { "id": "u11.s.36", "en": "I learn English every weekday.", "altEn": ["Every weekday I learn English.", "I learn English on weekdays."], "native": { "uz": "Men har ish kuni ingliz tilini o'rganaman.", "ru": "Я учу английский каждый будний день.", "tr": "Hafta içi her gün İngilizce öğreniyorum." }, "altNative": { "uz": ["Har ish kuni ingliz tilini o'rganaman.", "Men ish kunlari ingliz tilini o'rganaman.", "Men har ish kuni ingliz tilini o'rganyapman."], "ru": ["Каждый будний день я учу английский.", "Я учу английский по будням.", "По будням я учу английский."], "tr": ["Ben hafta içi her gün İngilizce öğreniyorum.", "Her hafta içi İngilizce öğreniyorum.", "Hafta içi her gün İngilizce öğrenirim."] } },
+    { "id": "u11.s.37", "en": "We have a meeting every Monday.", "altEn": ["Every Monday we have a meeting.", "We have a meeting on Mondays."], "native": { "uz": "Bizda har dushanba yig'ilish bor.", "ru": "У нас собрание каждый понедельник.", "tr": "Her pazartesi toplantımız var." }, "altNative": { "uz": ["Bizda har dushanba kuni yig'ilish bor.", "Har dushanba yig'ilishimiz bor.", "Har dushanba kuni yig'ilishimiz bor.", "Bizda har dushanba majlis bor."], "ru": ["Каждый понедельник у нас собрание.", "У нас встреча каждый понедельник.", "У нас совещание каждый понедельник.", "По понедельникам у нас собрание."], "tr": ["Her pazartesi bir toplantımız var.", "Bizim her pazartesi toplantımız var.", "Her pazartesi günü toplantımız var."] } },
+    { "id": "u11.s.38", "en": "The meeting is not on my calendar.", "altEn": ["The meeting is not in my calendar."], "native": { "uz": "Yig'ilish mening taqvimimda yo'q.", "ru": "Собрания нет в моём календаре.", "tr": "Toplantı takvimimde yok." }, "altNative": { "uz": ["Yig'ilish taqvimimda yo'q.", "Majlis mening taqvimimda yo'q.", "Yig'ilish mening kalendarimda yo'q."], "ru": ["В моём календаре нет собрания.", "Встречи нет в моём календаре.", "Совещания нет в моём календаре.", "Этого собрания нет в моём календаре."], "tr": ["Toplantı benim takvimimde yok.", "Toplantı takvimimde değil."] } },
+    { "id": "u11.s.39", "en": "My next appointment is on Thursday at four.", "altEn": ["My next appointment is on Thursday at four o'clock.", "My next appointment is at four on Thursday."], "native": { "uz": "Mening keyingi uchrashuvim payshanba kuni soat to'rtda.", "ru": "Моя следующая встреча в четверг в четыре.", "tr": "Bir sonraki randevum perşembe günü saat dörtte." }, "altNative": { "uz": ["Keyingi uchrashuvim payshanba kuni soat to'rtda.", "Mening keyingi uchrashuvim payshanba kuni to'rtda."], "ru": ["Моя следующая встреча в четверг в четыре часа.", "Следующая встреча у меня в четверг в четыре."], "tr": ["Sonraki randevum perşembe günü saat dörtte.", "Gelecek randevum perşembe günü saat dörtte.", "Benim bir sonraki randevum perşembe günü saat dörtte."] } },
+    { "id": "u11.s.40", "en": "See you next Friday at half past seven!", "altEn": ["See you next Friday at seven thirty!"], "native": { "uz": "Keyingi juma soat yetti yarimda ko'rishguncha!", "ru": "Увидимся в следующую пятницу в половине восьмого!", "tr": "Gelecek cuma saat yedi buçukta görüşürüz!" }, "altNative": { "uz": ["Keyingi juma kuni soat yetti yarimda ko'rishguncha!", "Kelasi juma soat yetti yarimda ko'rishguncha!", "Keyingi juma soat yetti yarimda ko'rishamiz!"], "ru": ["Увидимся в следующую пятницу в полвосьмого!", "Увидимся в следующую пятницу в семь тридцать!"], "tr": ["Önümüzdeki cuma saat yedi buçukta görüşürüz!", "Gelecek cuma yedi buçukta görüşürüz!", "Haftaya cuma saat yedi buçukta görüşürüz!"] } }
+  ],
+  "lessons": [
+    {
+      "id": "u11-l1",
+      "title": { "en": "What time is it?", "uz": "Soat necha?", "ru": "Который час?", "tr": "Saat kaç?" },
+      "words": ["u11.w.time", "u11.w.o-clock", "u11.w.clock", "u11.w.half", "u11.w.past", "u11.w.quarter"],
+      "sentences": ["u11.s.01", "u11.s.02", "u11.s.03", "u11.s.04", "u11.s.05", "u11.s.06", "u11.s.07", "u11.s.08"]
+    },
+    {
+      "id": "u11-l2",
+      "title": { "en": "Days of the week", "uz": "Hafta kunlari", "ru": "Дни недели", "tr": "Haftanın günleri" },
+      "words": ["u11.w.monday", "u11.w.tuesday", "u11.w.wednesday", "u11.w.thursday", "u11.w.friday", "u11.w.saturday", "u11.w.sunday"],
+      "sentences": ["u11.s.09", "u11.s.10", "u11.s.11", "u11.s.12", "u11.s.13", "u11.s.14", "u11.s.15", "u11.s.16"]
+    },
+    {
+      "id": "u11-l3",
+      "title": { "en": "On Monday, at nine", "uz": "Dushanba kuni, soat to'qqizda", "ru": "В понедельник, в девять", "tr": "Pazartesi günü, saat dokuzda" },
+      "words": ["u11.w.day", "u11.w.meeting", "u11.w.noon", "u11.w.midnight", "u11.w.afternoon", "u11.w.tonight"],
+      "sentences": ["u11.s.17", "u11.s.18", "u11.s.19", "u11.s.20", "u11.s.21", "u11.s.22", "u11.s.23", "u11.s.24"]
+    },
+    {
+      "id": "u11-l4",
+      "title": { "en": "When?", "uz": "Qachon?", "ru": "Когда?", "tr": "Ne zaman?" },
+      "words": ["u11.w.when", "u11.w.open", "u11.w.close", "u11.w.until", "u11.w.wait", "u11.w.appointment", "u11.w.hour"],
+      "sentences": ["u11.s.25", "u11.s.26", "u11.s.27", "u11.s.28", "u11.s.29", "u11.s.30", "u11.s.31", "u11.s.32"]
+    },
+    {
+      "id": "u11-l5",
+      "title": { "en": "My week", "uz": "Mening haftam", "ru": "Моя неделя", "tr": "Benim haftam" },
+      "words": ["u11.w.calendar", "u11.w.date", "u11.w.holiday", "u11.w.weekday", "u11.w.every", "u11.w.next"],
+      "sentences": ["u11.s.33", "u11.s.34", "u11.s.35", "u11.s.36", "u11.s.37", "u11.s.38", "u11.s.39", "u11.s.40"]
+    }
+  ]
+}

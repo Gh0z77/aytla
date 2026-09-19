@@ -79,7 +79,9 @@ export function ProfileScreen() {
           <View style={styles.accountTop}>
             <Ionicons name={account ? 'cloud-done' : 'cloud-offline-outline'} size={28} color={account ? colors.success : colors.textMuted} />
             <View style={styles.flex}>
-              <Txt style={styles.accountTitle}>{account ? t('account.signedInAs', { email: account.email }) : t('account.title')}</Txt>
+              <Txt style={styles.accountTitle} numberOfLines={1} ellipsizeMode="middle">
+                {account ? account.email : t('account.title')}
+              </Txt>
               <Txt variant="caption" color={colors.textSoft}>
                 {!account ? t('account.guest') : syncStatus === 'syncing' ? t('account.syncing') : syncStatus === 'offline' ? t('account.offline') : t('account.synced')}
               </Txt>
@@ -87,8 +89,8 @@ export function ProfileScreen() {
           </View>
           {account ? (
             <View style={styles.accountButtons}>
-              <Button small variant="secondary" label={t('account.syncNow')} onPress={() => void syncNow()} style={styles.flex} />
-              <Button small variant="ghost" label={t('account.logout')} onPress={() => void logout()} style={styles.flex} />
+              <Button small variant="secondary" label={t('account.syncNow')} onPress={() => void syncNow()} />
+              <Button small variant="ghost" label={t('account.logout')} onPress={() => void logout()} />
             </View>
           ) : (
             <Button small label={t('account.create')} onPress={() => router.push('/account')} testID="profile-account" />
@@ -224,7 +226,7 @@ const styles = StyleSheet.create({
   accountCard: { borderWidth: 2, borderColor: colors.border, borderRadius: radius.lg, padding: space.lg, gap: space.md, backgroundColor: colors.surface },
   accountTop: { flexDirection: 'row', alignItems: 'center', gap: space.md },
   accountTitle: { fontWeight: '700' },
-  accountButtons: { flexDirection: 'row', gap: space.sm },
+  accountButtons: { gap: space.xs },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: space.sm },
   chip: { borderWidth: 2, borderColor: colors.border, borderRadius: radius.md, paddingHorizontal: 14, paddingVertical: 10, backgroundColor: colors.white },
   chipOn: { borderColor: colors.primary, backgroundColor: colors.primaryTint },

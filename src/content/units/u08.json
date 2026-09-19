@@ -1,0 +1,143 @@
+{
+  "id": "u08",
+  "section": 2,
+  "order": 2,
+  "title": { "en": "Home", "uz": "Uy", "ru": "Дом", "tr": "Ev" },
+  "goal": {
+    "en": "Describe your home: the rooms, the furniture and where things are.",
+    "uz": "Uyingizni tasvirlang: xonalar, mebel va narsalar qayerda turgani.",
+    "ru": "Опишите свой дом: комнаты, мебель и где что находится.",
+    "tr": "Evini anlat: odalar, mobilyalar ve eşyaların nerede olduğu."
+  },
+  "guide": "lumi",
+  "color": "#10B981",
+  "tip": {
+    "title": { "en": "There is, there are", "uz": "There is, there are", "ru": "There is, there are", "tr": "There is, there are" },
+    "body": {
+      "en": "To say that something exists somewhere, start with \"There is\" for one thing and \"There are\" for two or more: There is a sofa in the living room. There are two bedrooms. For a question, put \"is\" or \"are\" first: Is there a balcony? Place words (in, on, under, next to, behind) go before the noun: under the bed.",
+      "uz": "Biror joyda nimadir borligini aytish uchun gap bitta narsa uchun \"There is\", ikki va undan ko'p narsa uchun \"There are\" bilan boshlanadi: There is a sofa in the living room. There are two bedrooms. O'zbek tilida \"bor\" gap oxirida keladi, ingliz tilida esa \"There is\" gap boshida turadi. Savolda \"is\" yoki \"are\" oldinga chiqadi: Is there a balcony? O'rin bildiruvchi so'zlar (in, on, under, next to, behind) otdan oldin keladi: under the bed — karavot tagida.",
+      "ru": "Чтобы сказать, что где-то что-то есть, начните с \"There is\" (один предмет) или \"There are\" (два и больше): There is a sofa in the living room. There are two bedrooms. По-русски мы начинаем с места («В гостиной есть диван»), а в английском сначала идёт \"There is\", а место стоит в конце. В вопросе \"is\" или \"are\" ставится первым: Is there a balcony? Предлоги места (in, on, under, next to, behind) стоят перед существительным, как в русском: under the bed — под кроватью.",
+      "tr": "Bir yerde bir şeyin var olduğunu söylemek için cümle tek bir şey için \"There is\", iki ya da daha fazla şey için \"There are\" ile başlar: There is a sofa in the living room. There are two bedrooms. Türkçede \"var\" cümlenin sonundadır, İngilizcede ise \"There is\" en başta gelir. Soruda \"is\" ya da \"are\" başa geçer: Is there a balcony? Yer bildiren kelimeler (in, on, under, next to, behind) isimden önce gelir: under the bed — yatağın altında."
+    },
+    "examples": [
+      { "en": "There is a sofa in the living room.", "native": { "uz": "Mehmonxonada divan bor.", "ru": "В гостиной есть диван.", "tr": "Oturma odasında bir kanepe var." } },
+      { "en": "There are two bedrooms.", "native": { "uz": "Ikkita yotoqxona bor.", "ru": "Есть две спальни.", "tr": "İki yatak odası var." } },
+      { "en": "The cat is under the bed.", "native": { "uz": "Mushuk karavot tagida.", "ru": "Кошка под кроватью.", "tr": "Kedi yatağın altında." } }
+    ]
+  },
+  "words": [
+    { "id": "u08.w.room", "en": "room", "pos": "noun", "emoji": "🚪", "native": { "uz": "xona", "ru": "комната", "tr": "oda" } },
+    { "id": "u08.w.kitchen", "en": "kitchen", "pos": "noun", "emoji": "🍳", "native": { "uz": "oshxona", "ru": "кухня", "tr": "mutfak" } },
+    { "id": "u08.w.bedroom", "en": "bedroom", "pos": "noun", "emoji": "🛌", "native": { "uz": "yotoqxona", "ru": "спальня", "tr": "yatak odası" } },
+    { "id": "u08.w.bathroom", "en": "bathroom", "pos": "noun", "emoji": "🛁", "native": { "uz": "hammom", "ru": "ванная", "tr": "banyo" }, "altNative": { "uz": ["vannaxona"], "ru": ["ванная комната"] } },
+    { "id": "u08.w.living-room", "en": "living room", "pos": "noun", "native": { "uz": "mehmonxona", "ru": "гостиная", "tr": "oturma odası" }, "altNative": { "uz": ["zal"], "tr": ["salon"] } },
+    { "id": "u08.w.garden", "en": "garden", "pos": "noun", "emoji": "🌳", "native": { "uz": "bog'", "ru": "сад", "tr": "bahçe" } },
+
+    { "id": "u08.w.fridge", "en": "fridge", "pos": "noun", "emoji": "🧊", "native": { "uz": "muzlatgich", "ru": "холодильник", "tr": "buzdolabı" }, "altNative": { "uz": ["sovutgich", "xolodilnik"] } },
+    { "id": "u08.w.cook", "en": "cook", "pos": "verb", "emoji": "👩‍🍳", "native": { "uz": "pishirmoq", "ru": "готовить", "tr": "pişirmek" }, "altNative": { "uz": ["ovqat pishirmoq", "ovqat tayyorlamoq"], "ru": ["готовить еду"], "tr": ["yemek yapmak", "yemek pişirmek"] } },
+    { "id": "u08.w.shelf", "en": "shelf", "pos": "noun", "emoji": "📚", "native": { "uz": "tokcha", "ru": "полка", "tr": "raf" }, "altNative": { "uz": ["javon", "polka"] } },
+    { "id": "u08.w.clean", "en": "clean", "pos": "adj", "emoji": "🧼", "native": { "uz": "toza", "ru": "чистый", "tr": "temiz" } },
+    { "id": "u08.w.sit", "en": "sit", "pos": "verb", "emoji": "🪑", "native": { "uz": "o'tirmoq", "ru": "сидеть", "tr": "oturmak" } },
+    { "id": "u08.w.floor", "en": "floor", "pos": "noun", "native": { "uz": "pol", "ru": "пол", "tr": "zemin" }, "altNative": { "tr": ["yer"] } },
+
+    { "id": "u08.w.bed", "en": "bed", "pos": "noun", "emoji": "🛏️", "native": { "uz": "karavot", "ru": "кровать", "tr": "yatak" }, "altNative": { "uz": ["krovat"] } },
+    { "id": "u08.w.sofa", "en": "sofa", "pos": "noun", "emoji": "🛋️", "native": { "uz": "divan", "ru": "диван", "tr": "kanepe" }, "altNative": { "tr": ["koltuk"] } },
+    { "id": "u08.w.lamp", "en": "lamp", "pos": "noun", "emoji": "💡", "native": { "uz": "lampa", "ru": "лампа", "tr": "lamba" }, "altNative": { "uz": ["chiroq"] } },
+    { "id": "u08.w.mirror", "en": "mirror", "pos": "noun", "emoji": "🪞", "native": { "uz": "ko'zgu", "ru": "зеркало", "tr": "ayna" }, "altNative": { "uz": ["oyna"] } },
+    { "id": "u08.w.wall", "en": "wall", "pos": "noun", "emoji": "🧱", "native": { "uz": "devor", "ru": "стена", "tr": "duvar" } },
+    { "id": "u08.w.carpet", "en": "carpet", "pos": "noun", "native": { "uz": "gilam", "ru": "ковёр", "tr": "halı" } },
+
+    { "id": "u08.w.cat", "en": "cat", "pos": "noun", "emoji": "🐱", "native": { "uz": "mushuk", "ru": "кошка", "tr": "kedi" }, "altNative": { "ru": ["кот"] } },
+    { "id": "u08.w.dog", "en": "dog", "pos": "noun", "emoji": "🐶", "native": { "uz": "it", "ru": "собака", "tr": "köpek" }, "altNative": { "uz": ["kuchuk"] } },
+    { "id": "u08.w.under", "en": "under", "pos": "prep", "native": { "uz": "tagida", "ru": "под", "tr": "altında" }, "altNative": { "uz": ["ostida"] } },
+    { "id": "u08.w.next-to", "en": "next to", "pos": "prep", "native": { "uz": "yonida", "ru": "рядом с", "tr": "yanında" }, "altNative": { "ru": ["возле", "около"] } },
+    { "id": "u08.w.behind", "en": "behind", "pos": "prep", "native": { "uz": "orqasida", "ru": "за", "tr": "arkasında" }, "altNative": { "uz": ["ortida"], "ru": ["позади"] } },
+    { "id": "u08.w.between", "en": "between", "pos": "prep", "native": { "uz": "orasida", "ru": "между", "tr": "arasında" }, "altNative": { "uz": ["o'rtasida"] } },
+    { "id": "u08.w.in-front-of", "en": "in front of", "pos": "prep", "native": { "uz": "oldida", "ru": "перед", "tr": "önünde" } },
+
+    { "id": "u08.w.apartment", "en": "apartment", "pos": "noun", "emoji": "🏢", "native": { "uz": "kvartira", "ru": "квартира", "tr": "daire" }, "altNative": { "uz": ["xonadon"], "tr": ["apartman dairesi"] } },
+    { "id": "u08.w.comfortable", "en": "comfortable", "pos": "adj", "emoji": "😌", "native": { "uz": "qulay", "ru": "удобный", "tr": "rahat" }, "altNative": { "ru": ["уютный", "комфортный"], "tr": ["konforlu"] } },
+    { "id": "u08.w.quiet", "en": "quiet", "pos": "adj", "emoji": "🤫", "native": { "uz": "tinch", "ru": "тихий", "tr": "sessiz" }, "altNative": { "uz": ["sokin"], "ru": ["спокойный"], "tr": ["sakin"] } },
+    { "id": "u08.w.neighbor", "en": "neighbor", "pos": "noun", "emoji": "🏘️", "native": { "uz": "qo'shni", "ru": "сосед", "tr": "komşu" }, "altNative": { "ru": ["соседка"] } },
+    { "id": "u08.w.balcony", "en": "balcony", "pos": "noun", "native": { "uz": "balkon", "ru": "балкон", "tr": "balkon" } },
+    { "id": "u08.w.stairs", "en": "stairs", "pos": "noun", "native": { "uz": "zinapoya", "ru": "лестница", "tr": "merdiven" }, "altNative": { "uz": ["zina"], "tr": ["merdivenler"] } }
+  ],
+  "sentences": [
+    { "id": "u08.s.01", "en": "This is my room.", "native": { "uz": "Bu mening xonam.", "ru": "Это моя комната.", "tr": "Bu benim odam." }, "altNative": { "uz": ["Bu xonam."], "tr": ["Bu odam."] } },
+    { "id": "u08.s.02", "en": "This is the kitchen.", "altEn": ["This is a kitchen."], "native": { "uz": "Bu oshxona.", "ru": "Это кухня.", "tr": "Bu mutfak." }, "altNative": { "tr": ["Burası mutfak."] } },
+    { "id": "u08.s.03", "en": "Where is the bathroom?", "native": { "uz": "Hammom qayerda?", "ru": "Где ванная?", "tr": "Banyo nerede?" }, "altNative": { "uz": ["Vannaxona qayerda?"], "ru": ["Где ванная комната?"] } },
+    { "id": "u08.s.04", "en": "The bedroom is small.", "native": { "uz": "Yotoqxona kichik.", "ru": "Спальня маленькая.", "tr": "Yatak odası küçük." }, "altNative": { "uz": ["Yotoqxona kichkina."] } },
+    { "id": "u08.s.05", "en": "The living room is big.", "native": { "uz": "Mehmonxona katta.", "ru": "Гостиная большая.", "tr": "Oturma odası büyük." }, "altNative": { "uz": ["Zal katta."], "tr": ["Salon büyük."] } },
+    { "id": "u08.s.06", "en": "We have a garden.", "native": { "uz": "Bizning bog'imiz bor.", "ru": "У нас есть сад.", "tr": "Bizim bir bahçemiz var." }, "altNative": { "uz": ["Bog'imiz bor.", "Bizda bog' bor."], "tr": ["Bir bahçemiz var.", "Bahçemiz var.", "Bizim bahçemiz var."] } },
+    { "id": "u08.s.07", "en": "Is this your bedroom?", "native": { "uz": "Bu sening yotoqxonangmi?", "ru": "Это твоя спальня?", "tr": "Bu senin yatak odan mı?" }, "altNative": { "uz": ["Bu yotoqxonangmi?"], "tr": ["Bu yatak odan mı?"] } },
+    { "id": "u08.s.08", "en": "My room is not big.", "native": { "uz": "Mening xonam katta emas.", "ru": "Моя комната небольшая.", "tr": "Benim odam büyük değil." }, "altNative": { "uz": ["Xonam katta emas."], "ru": ["Моя комната не большая."], "tr": ["Odam büyük değil."] } },
+
+    { "id": "u08.s.09", "en": "The milk is in the fridge.", "native": { "uz": "Sut muzlatgichda.", "ru": "Молоко в холодильнике.", "tr": "Süt buzdolabında." }, "altNative": { "uz": ["Sut sovutgichda."], "ru": ["Молоко стоит в холодильнике."] } },
+    { "id": "u08.s.10", "en": "I cook dinner in the kitchen.", "native": { "uz": "Men oshxonada kechki ovqat pishiraman.", "ru": "Я готовлю ужин на кухне.", "tr": "Mutfakta akşam yemeği pişiriyorum." }, "altNative": { "uz": ["Oshxonada kechki ovqat pishiraman.", "Men oshxonada kechki ovqat tayyorlayman.", "Men kechki ovqatni oshxonada pishiraman."], "ru": ["Я на кухне готовлю ужин."], "tr": ["Ben mutfakta akşam yemeği pişiriyorum.", "Mutfakta akşam yemeği yapıyorum.", "Ben mutfakta akşam yemeği yapıyorum.", "Akşam yemeğini mutfakta yapıyorum.", "Mutfakta akşam yemeği yaparım."] } },
+    { "id": "u08.s.11", "en": "The cups are on the shelf.", "native": { "uz": "Chashkalar tokchada.", "ru": "Чашки на полке.", "tr": "Fincanlar rafta." }, "altNative": { "uz": ["Piyolalar tokchada.", "Finjonlar tokchada.", "Chashkalar javonda.", "Chashkalar tokchada turibdi."], "ru": ["Чашки стоят на полке."], "tr": ["Fincanlar rafın üstünde."] } },
+    { "id": "u08.s.12", "en": "The kitchen is clean.", "native": { "uz": "Oshxona toza.", "ru": "Кухня чистая.", "tr": "Mutfak temiz." } },
+    { "id": "u08.s.13", "en": "Please sit here.", "native": { "uz": "Iltimos, shu yerga o'tir.", "ru": "Пожалуйста, садись сюда.", "tr": "Lütfen buraya otur." }, "altNative": { "uz": ["Iltimos, bu yerga o'tir.", "Shu yerga o'tir, iltimos.", "Iltimos, shu yerda o'tir."], "ru": ["Садись сюда, пожалуйста.", "Пожалуйста, сядь здесь.", "Сядь здесь, пожалуйста.", "Пожалуйста, садись здесь."], "tr": ["Buraya otur, lütfen.", "Lütfen burada otur.", "Lütfen şuraya otur."] } },
+    { "id": "u08.s.14", "en": "The floor is not clean.", "native": { "uz": "Pol toza emas.", "ru": "Пол не чистый.", "tr": "Zemin temiz değil." }, "altNative": { "ru": ["Пол нечистый."], "tr": ["Yer temiz değil.", "Yerler temiz değil."] } },
+    { "id": "u08.s.15", "en": "What is in the fridge?", "native": { "uz": "Muzlatgichda nima bor?", "ru": "Что в холодильнике?", "tr": "Buzdolabında ne var?" }, "altNative": { "uz": ["Sovutgichda nima bor?"], "ru": ["Что есть в холодильнике?", "Что лежит в холодильнике?"] } },
+    { "id": "u08.s.16", "en": "We sit on the floor.", "native": { "uz": "Biz polda o'tiramiz.", "ru": "Мы сидим на полу.", "tr": "Biz yerde oturuyoruz." }, "altNative": { "uz": ["Polda o'tiramiz.", "Biz yerda o'tiramiz."], "tr": ["Yerde oturuyoruz.", "Biz yerde otururuz.", "Yerde otururuz.", "Biz zeminde oturuyoruz."] } },
+
+    { "id": "u08.s.17", "en": "There is a bed in my room.", "native": { "uz": "Mening xonamda karavot bor.", "ru": "В моей комнате есть кровать.", "tr": "Odamda bir yatak var." }, "altNative": { "uz": ["Xonamda karavot bor.", "Mening xonamda bitta karavot bor.", "Xonamda bitta karavot bor."], "ru": ["В моей комнате стоит кровать.", "У меня в комнате есть кровать."], "tr": ["Benim odamda bir yatak var.", "Odamda yatak var."] } },
+    { "id": "u08.s.18", "en": "There is a sofa in the living room.", "native": { "uz": "Mehmonxonada divan bor.", "ru": "В гостиной есть диван.", "tr": "Oturma odasında bir kanepe var." }, "altNative": { "uz": ["Mehmonxonada bitta divan bor.", "Zalda divan bor."], "ru": ["В гостиной стоит диван."], "tr": ["Oturma odasında kanepe var.", "Salonda bir kanepe var.", "Oturma odasında bir koltuk var."] } },
+    { "id": "u08.s.19", "en": "There are two bedrooms here.", "native": { "uz": "Bu yerda ikkita yotoqxona bor.", "ru": "Здесь две спальни.", "tr": "Burada iki yatak odası var." }, "altNative": { "uz": ["Shu yerda ikkita yotoqxona bor.", "Bu yerda ikki yotoqxona bor."], "ru": ["Здесь есть две спальни.", "Тут две спальни."] } },
+    { "id": "u08.s.20", "en": "There is a mirror on the wall.", "native": { "uz": "Devorda ko'zgu bor.", "ru": "На стене висит зеркало.", "tr": "Duvarda bir ayna var." }, "altNative": { "uz": ["Devorda oyna bor.", "Devorda bitta ko'zgu bor."], "ru": ["На стене есть зеркало.", "На стене зеркало."], "tr": ["Duvarda ayna var."] } },
+    { "id": "u08.s.21", "en": "Is there a lamp in the bedroom?", "native": { "uz": "Yotoqxonada lampa bormi?", "ru": "В спальне есть лампа?", "tr": "Yatak odasında lamba var mı?" }, "altNative": { "uz": ["Yotoqxonada chiroq bormi?"], "ru": ["Есть ли в спальне лампа?", "Есть в спальне лампа?"], "tr": ["Yatak odasında bir lamba var mı?"] } },
+    { "id": "u08.s.22", "en": "There is a carpet on the floor.", "native": { "uz": "Polda gilam bor.", "ru": "На полу лежит ковёр.", "tr": "Yerde bir halı var." }, "altNative": { "uz": ["Polda bitta gilam bor."], "ru": ["На полу есть ковёр.", "На полу ковёр."], "tr": ["Yerde halı var.", "Zeminde bir halı var."] } },
+    { "id": "u08.s.23", "en": "There is no mirror in the bathroom.", "altEn": ["There is not a mirror in the bathroom."], "native": { "uz": "Hammomda ko'zgu yo'q.", "ru": "В ванной нет зеркала.", "tr": "Banyoda ayna yok." }, "altNative": { "uz": ["Hammomda oyna yo'q.", "Vannaxonada ko'zgu yo'q."], "ru": ["В ванной комнате нет зеркала."] } },
+    { "id": "u08.s.24", "en": "Are there two beds in the room?", "native": { "uz": "Xonada ikkita karavot bormi?", "ru": "В комнате две кровати?", "tr": "Odada iki yatak var mı?" }, "altNative": { "uz": ["Xonada ikki karavot bormi?"], "ru": ["В комнате есть две кровати?", "Есть ли в комнате две кровати?"] } },
+
+    { "id": "u08.s.25", "en": "Where is the cat?", "native": { "uz": "Mushuk qayerda?", "ru": "Где кошка?", "tr": "Kedi nerede?" }, "altNative": { "ru": ["Где кот?"] } },
+    { "id": "u08.s.26", "en": "The cat is under the bed.", "native": { "uz": "Mushuk karavot tagida.", "ru": "Кошка под кроватью.", "tr": "Kedi yatağın altında." }, "altNative": { "uz": ["Mushuk karavotning tagida.", "Mushuk karavot ostida.", "Mushuk karavotning ostida."], "ru": ["Кот под кроватью."] } },
+    { "id": "u08.s.27", "en": "The dog is behind the sofa.", "native": { "uz": "It divan orqasida.", "ru": "Собака за диваном.", "tr": "Köpek kanepenin arkasında." }, "altNative": { "uz": ["It divanning orqasida.", "Kuchuk divan orqasida.", "It divan ortida."], "ru": ["Собака позади дивана."], "tr": ["Köpek koltuğun arkasında."] } },
+    { "id": "u08.s.28", "en": "The lamp is next to the bed.", "native": { "uz": "Lampa karavot yonida.", "ru": "Лампа рядом с кроватью.", "tr": "Lamba yatağın yanında." }, "altNative": { "uz": ["Lampa karavotning yonida.", "Chiroq karavot yonida."], "ru": ["Лампа возле кровати.", "Лампа около кровати."] } },
+    { "id": "u08.s.29", "en": "The dog sits between Ali and Anna.", "altEn": ["The dog is sitting between Ali and Anna."], "native": { "uz": "It Ali bilan Annaning orasida o'tiradi.", "ru": "Собака сидит между Али и Анной.", "tr": "Köpek Ali ile Anna'nın arasında oturuyor." }, "altNative": { "uz": ["It Ali va Annaning orasida o'tiradi.", "It Ali bilan Anna orasida o'tiradi.", "It Ali va Anna orasida o'tiradi.", "Kuchuk Ali bilan Annaning orasida o'tiradi.", "It Ali bilan Annaning orasida o'tiribdi."], "tr": ["Köpek Ali ve Anna'nın arasında oturuyor.", "Köpek Ali ile Anna'nın arasında oturur.", "Köpek Ali ile Anna arasında oturuyor."] } },
+    { "id": "u08.s.30", "en": "The dog is in front of the fridge.", "native": { "uz": "It muzlatgich oldida.", "ru": "Собака перед холодильником.", "tr": "Köpek buzdolabının önünde." }, "altNative": { "uz": ["It muzlatgichning oldida.", "Kuchuk muzlatgich oldida.", "It sovutgich oldida."] } },
+    { "id": "u08.s.31", "en": "Is the dog in the garden?", "native": { "uz": "It bog'dami?", "ru": "Собака в саду?", "tr": "Köpek bahçede mi?" }, "altNative": { "uz": ["Kuchuk bog'dami?"] } },
+    { "id": "u08.s.32", "en": "The cat is not on the sofa.", "native": { "uz": "Mushuk divanda emas.", "ru": "Кошка не на диване.", "tr": "Kedi kanepede değil." }, "altNative": { "uz": ["Mushuk divan ustida emas.", "Mushuk divanning ustida emas."], "ru": ["Кот не на диване."], "tr": ["Kedi kanepenin üstünde değil.", "Kedi koltukta değil."] } },
+
+    { "id": "u08.s.33", "en": "I live in a small apartment.", "native": { "uz": "Men kichik kvartirada yashayman.", "ru": "Я живу в маленькой квартире.", "tr": "Ben küçük bir dairede yaşıyorum." }, "altNative": { "uz": ["Men kichkina kvartirada yashayman.", "Kichik kvartirada yashayman."], "ru": ["Я живу в небольшой квартире."], "tr": ["Küçük bir dairede yaşıyorum.", "Ben küçük bir dairede oturuyorum.", "Küçük bir dairede oturuyorum."] } },
+    { "id": "u08.s.34", "en": "Our apartment is quiet and comfortable.", "native": { "uz": "Bizning kvartiramiz tinch va qulay.", "ru": "Наша квартира тихая и удобная.", "tr": "Bizim dairemiz sessiz ve rahat." }, "altNative": { "uz": ["Kvartiramiz tinch va qulay.", "Bizning kvartiramiz sokin va qulay."], "ru": ["Наша квартира тихая и уютная.", "У нас тихая и удобная квартира."], "tr": ["Dairemiz sessiz ve rahat.", "Dairemiz sakin ve rahat.", "Bizim dairemiz sakin ve rahat."] } },
+    { "id": "u08.s.35", "en": "There is a balcony next to the kitchen.", "native": { "uz": "Oshxona yonida balkon bor.", "ru": "Рядом с кухней есть балкон.", "tr": "Mutfağın yanında bir balkon var." }, "altNative": { "uz": ["Oshxonaning yonida balkon bor.", "Oshxona yonida bitta balkon bor."], "ru": ["Рядом с кухней балкон.", "Возле кухни есть балкон."], "tr": ["Mutfağın yanında balkon var."] } },
+    { "id": "u08.s.36", "en": "Our neighbor has a big dog.", "altEn": ["Our neighbour has a big dog."], "native": { "uz": "Qo'shnimizning katta iti bor.", "ru": "У нашего соседа большая собака.", "tr": "Komşumuzun büyük bir köpeği var." }, "altNative": { "uz": ["Bizning qo'shnimizning katta iti bor.", "Qo'shnimizning katta kuchugi bor."], "ru": ["У нашего соседа есть большая собака.", "У нашей соседки большая собака.", "У нашей соседки есть большая собака."], "tr": ["Bizim komşumuzun büyük bir köpeği var.", "Komşumuzun büyük köpeği var."] } },
+    { "id": "u08.s.37", "en": "The stairs are between the two apartments.", "altEn": ["The stairs are between two apartments."], "native": { "uz": "Zinapoya ikki kvartira orasida.", "ru": "Лестница между двумя квартирами.", "tr": "Merdiven iki dairenin arasında." }, "altNative": { "uz": ["Zinapoya ikkita kvartira orasida.", "Zinapoya ikki kvartiraning orasida.", "Zina ikki kvartira orasida."], "ru": ["Лестница находится между двумя квартирами."], "tr": ["Merdivenler iki dairenin arasında.", "Merdiven iki daire arasında."] } },
+    { "id": "u08.s.38", "en": "Is your new sofa comfortable?", "native": { "uz": "Sening yangi divaning qulaymi?", "ru": "Твой новый диван удобный?", "tr": "Senin yeni kanepen rahat mı?" }, "altNative": { "uz": ["Yangi divaning qulaymi?"], "ru": ["Твой новый диван удобен?"], "tr": ["Yeni kanepen rahat mı?", "Yeni koltuğun rahat mı?"] } },
+    { "id": "u08.s.39", "en": "It is not very quiet here at night.", "native": { "uz": "Bu yerda kechasi unchalik tinch emas.", "ru": "Ночью здесь не очень тихо.", "tr": "Burada geceleri pek sessiz değil." }, "altNative": { "uz": ["Kechasi bu yerda unchalik tinch emas.", "Bu yerda kechasi juda tinch emas.", "Shu yerda kechasi unchalik tinch emas."], "ru": ["Здесь ночью не очень тихо.", "Ночью тут не очень тихо."], "tr": ["Geceleri burada pek sessiz değil.", "Burada geceleri çok sessiz değil.", "Burası geceleri pek sessiz değil.", "Burada gece pek sessiz değil."] } },
+    { "id": "u08.s.40", "en": "There are three rooms in our apartment.", "native": { "uz": "Bizning kvartiramizda uchta xona bor.", "ru": "В нашей квартире три комнаты.", "tr": "Dairemizde üç oda var." }, "altNative": { "uz": ["Kvartiramizda uchta xona bor.", "Bizning kvartiramizda uch xona bor."], "ru": ["В нашей квартире есть три комнаты."], "tr": ["Bizim dairemizde üç oda var."] } }
+  ],
+  "lessons": [
+    {
+      "id": "u08-l1",
+      "title": { "en": "My home", "uz": "Mening uyim", "ru": "Мой дом", "tr": "Benim evim" },
+      "words": ["u08.w.room", "u08.w.kitchen", "u08.w.bedroom", "u08.w.bathroom", "u08.w.living-room", "u08.w.garden"],
+      "sentences": ["u08.s.01", "u08.s.02", "u08.s.03", "u08.s.04", "u08.s.05", "u08.s.06", "u08.s.07", "u08.s.08"]
+    },
+    {
+      "id": "u08-l2",
+      "title": { "en": "In the kitchen", "uz": "Oshxonada", "ru": "На кухне", "tr": "Mutfakta" },
+      "words": ["u08.w.fridge", "u08.w.cook", "u08.w.shelf", "u08.w.clean", "u08.w.sit", "u08.w.floor"],
+      "sentences": ["u08.s.09", "u08.s.10", "u08.s.11", "u08.s.12", "u08.s.13", "u08.s.14", "u08.s.15", "u08.s.16"]
+    },
+    {
+      "id": "u08-l3",
+      "title": { "en": "There is, there are", "uz": "There is, there are", "ru": "There is, there are", "tr": "There is, there are" },
+      "words": ["u08.w.bed", "u08.w.sofa", "u08.w.lamp", "u08.w.mirror", "u08.w.wall", "u08.w.carpet"],
+      "sentences": ["u08.s.17", "u08.s.18", "u08.s.19", "u08.s.20", "u08.s.21", "u08.s.22", "u08.s.23", "u08.s.24"]
+    },
+    {
+      "id": "u08-l4",
+      "title": { "en": "Where is the cat?", "uz": "Mushuk qayerda?", "ru": "Где кошка?", "tr": "Kedi nerede?" },
+      "words": ["u08.w.cat", "u08.w.dog", "u08.w.under", "u08.w.next-to", "u08.w.behind", "u08.w.between", "u08.w.in-front-of"],
+      "sentences": ["u08.s.25", "u08.s.26", "u08.s.27", "u08.s.28", "u08.s.29", "u08.s.30", "u08.s.31", "u08.s.32"]
+    },
+    {
+      "id": "u08-l5",
+      "title": { "en": "A nice apartment", "uz": "Shinam kvartira", "ru": "Уютная квартира", "tr": "Güzel bir daire" },
+      "words": ["u08.w.apartment", "u08.w.comfortable", "u08.w.quiet", "u08.w.neighbor", "u08.w.balcony", "u08.w.stairs"],
+      "sentences": ["u08.s.33", "u08.s.34", "u08.s.35", "u08.s.36", "u08.s.37", "u08.s.38", "u08.s.39", "u08.s.40"]
+    }
+  ]
+}

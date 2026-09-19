@@ -3,6 +3,14 @@ import u01 from './units/u01.json'
 import u02 from './units/u02.json'
 import u03 from './units/u03.json'
 import u04 from './units/u04.json'
+import u05 from './units/u05.json'
+import u07 from './units/u07.json'
+import u08 from './units/u08.json'
+import u09 from './units/u09.json'
+import u11 from './units/u11.json'
+import u12 from './units/u12.json'
+import u13 from './units/u13.json'
+import u14 from './units/u14.json'
 
 /**
  * The English course. Units are plain JSON (words + sentences with uz / ru / tr
@@ -11,7 +19,7 @@ import u04 from './units/u04.json'
  * To add a unit: drop `uNN.json` into ./units, import it here and list its id
  * in a section. `npm run content:check` validates the whole course.
  */
-const UNITS = [u01, u02, u03, u04] as unknown as Unit[]
+const UNITS = [u01, u02, u03, u04, u05, u07, u08, u09, u11, u12, u13, u14] as unknown as Unit[]
 
 const SECTION_PLAN: Array<Omit<Section, 'unitIds'> & { unitIds: string[] }> = [
   {
@@ -44,7 +52,8 @@ export const COURSE: Course = {
   title: 'English',
   // sections only list units that exist, so a partially authored course is still valid
   sections: SECTION_PLAN.map((s) => ({ ...s, unitIds: s.unitIds.filter((id) => available.has(id)) })).filter((s) => s.unitIds.length > 0),
-  units: UNITS.slice().sort((a, b) => a.order - b.order),
+  // `order` restarts in every section, so the course order is (section, order)
+  units: UNITS.slice().sort((a, b) => a.section - b.section || a.order - b.order),
 }
 
 export function findUnit(unitId: string): Unit | undefined {

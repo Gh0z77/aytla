@@ -19,6 +19,7 @@ import { uz } from '../src/i18n/uz.ts'
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const out = path.resolve(process.argv[2] ?? path.join(root, 'walkthrough-shots'))
 const base = process.argv[3] ?? 'http://localhost:8081'
+const apiBase = process.argv[4] ?? 'http://localhost:8787'
 mkdirSync(out, { recursive: true })
 
 const unitsDir = path.join(root, 'src/content/units')
@@ -252,6 +253,39 @@ try {
   await page.goto(`${base}/lesson/practice`, { waitUntil: 'networkidle' })
   await page.waitForTimeout(900)
   await snap(page, 'practice-session')
+
+  // ── account, cloud sync, league, AI chat (only when the API server is running) ──
+  const apiUp = await fetch(`${apiBase}/health`).then((r) => r.ok).catch(() => false)
+  if (apiUp) {
+    console.log('account flow')
+    await page.goto(`${base}/account`, { waitUntil: 'networkidle' })
+    await page.locator('[data-testid="account-email"]').fill(`walkthrough+${Date.now()}@example.com`)
+    await page.locator('[data-testid="account-password"]').fill('correct horse battery')
+    await snap(page, 'account-form')
+    await page.locator('[data-testid="account-submit"]').click()
+    await page.getByText(uz['account.synced'], { exact: true }).waitFor({ timeout: 20000 })
+    await snap(page, 'profile-signed-in')
+
+    await page.goto(`${base}/league`, { waitUntil: 'networkidle' })
+    await page.getByText('20 XP', { exact: true }).waitFor({ timeout: 20000 })
+    await snap(page, 'league')
+
+    await page.goto(`${base}/coach`, { waitUntil: 'networkidle' })
+    await page.waitForTimeout(1200)
+    await snap(page, 'coach-list')
+    const firstScenario = page.locator('[data-testid="scenario-meet"]')
+    if ((await firstScenario.count()) > 0) {
+      await firstScenario.click()
+      await page.locator('[data-testid="coach-input"]').waitFor({ timeout: 15000 })
+      await page.waitForTimeout(8000) // the guide opens the conversation
+      await page.locator('[data-testid="coach-input"]').fill('Hello! My name is Ali. I am from Uzbekistan.')
+      await page.locator('[data-testid="coach-send"]').click()
+      await page.waitForTimeout(9000)
+      await snap(page, 'coach-chat')
+    }
+  } else {
+    console.log('API server not running: skipping the account flow (start it with: node server/src/index.ts)')
+  }
   await phone.close()
 } finally {
   await browser.close()

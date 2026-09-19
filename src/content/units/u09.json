@@ -1,0 +1,143 @@
+{
+  "id": "u09",
+  "section": 2,
+  "order": 3,
+  "title": { "en": "City and directions", "uz": "Shahar va yo'nalishlar", "ru": "Город и направления", "tr": "Şehir ve yol tarifi" },
+  "goal": {
+    "en": "Ask the way in a city and give simple directions.",
+    "uz": "Shaharda yo'l so'rang va yo'lni oddiy so'zlar bilan tushuntiring.",
+    "ru": "Спросите дорогу в городе и объясните, как пройти.",
+    "tr": "Şehirde yol sor ve basit bir yol tarifi ver."
+  },
+  "guide": "aero",
+  "color": "#F97316",
+  "tip": {
+    "title": { "en": "Go straight, turn left", "uz": "Go straight, turn left", "ru": "Go straight, turn left", "tr": "Go straight, turn left" },
+    "body": {
+      "en": "To give directions, English uses the plain verb with no ending and no \"you\": Go straight. Turn left. Cross the street. The same form works for one person or many, friendly or polite; add \"please\" to be polite. For \"don't\" put \"Do not\" first: Do not turn here. To say where something is, use \"on the left\", \"on the right\" or \"near\": The bank is on the left.",
+      "uz": "Yo'l ko'rsatishda ingliz tilida fe'lning o'zi ishlatiladi, qo'shimchasiz va \"you\" so'zisiz: Go straight. Turn left. Cross the street. O'zbekchadagi \"buril\" va \"buriling\" ingliz tilida bitta: Turn. Muloyim bo'lish uchun \"please\" qo'shing. Inkor uchun boshiga \"Do not\" qo'yiladi: Do not turn here. Joyni aytish uchun \"on the left\" (chapda), \"on the right\" (o'ngda), \"near\" (yaqinida) ishlatiladi: The bank is on the left.",
+      "ru": "Чтобы объяснить дорогу, в английском берут просто глагол, без окончаний и без \"you\": Go straight. Turn left. Cross the street. \"Поверни\" и \"поверните\" — это одно и то же слово: Turn. Для вежливости добавьте \"please\". Для запрета в начало ставится \"Do not\": Do not turn here. Где что находится: \"on the left\" (слева), \"on the right\" (справа), \"near\" (рядом с): The bank is on the left.",
+      "tr": "Yol tarif ederken İngilizcede fiilin yalın hali kullanılır; ek yoktur ve \"you\" denmez: Go straight. Turn left. Cross the street. Türkçedeki \"dön\" ve \"dönün\" İngilizcede tek biçimdir: Turn. Kibar olmak için \"please\" ekle. Olumsuz için başa \"Do not\" gelir: Do not turn here. Bir yerin nerede olduğunu söylemek için \"on the left\" (solda), \"on the right\" (sağda), \"near\" (yakınında) kullanılır: The bank is on the left."
+    },
+    "examples": [
+      { "en": "Go straight.", "native": { "uz": "To'g'riga yur.", "ru": "Иди прямо.", "tr": "Düz git." } },
+      { "en": "Turn left at the corner.", "native": { "uz": "Burchakda chapga buril.", "ru": "На углу поверни налево.", "tr": "Köşeden sola dön." } },
+      { "en": "The bank is on the right.", "native": { "uz": "Bank o'ng tomonda.", "ru": "Банк справа.", "tr": "Banka sağda." } }
+    ]
+  },
+  "words": [
+    { "id": "u09.w.bank", "en": "bank", "pos": "noun", "emoji": "🏦", "native": { "uz": "bank", "ru": "банк", "tr": "banka" } },
+    { "id": "u09.w.park", "en": "park", "pos": "noun", "emoji": "🌳", "native": { "uz": "park", "ru": "парк", "tr": "park" } },
+    { "id": "u09.w.hospital", "en": "hospital", "pos": "noun", "emoji": "🏥", "native": { "uz": "kasalxona", "ru": "больница", "tr": "hastane" }, "altNative": { "uz": ["shifoxona"] } },
+    { "id": "u09.w.shop", "en": "shop", "pos": "noun", "emoji": "🏪", "native": { "uz": "do'kon", "ru": "магазин", "tr": "dükkan" }, "altNative": { "uz": ["magazin"], "tr": ["mağaza", "dükkân"] } },
+    { "id": "u09.w.station", "en": "station", "pos": "noun", "emoji": "🚉", "native": { "uz": "vokzal", "ru": "вокзал", "tr": "istasyon" }, "altNative": { "uz": ["stansiya", "bekat"], "ru": ["станция"], "tr": ["gar"] } },
+    { "id": "u09.w.street", "en": "street", "pos": "noun", "emoji": "🛣️", "native": { "uz": "ko'cha", "ru": "улица", "tr": "sokak" }, "altNative": { "tr": ["cadde"] } },
+
+    { "id": "u09.w.left", "en": "left", "pos": "adv", "emoji": "⬅️", "native": { "uz": "chap", "ru": "налево", "tr": "sol" }, "altNative": { "uz": ["chapga", "chap tomon"], "ru": ["слева", "левый"], "tr": ["sola"] } },
+    { "id": "u09.w.right", "en": "right", "pos": "adv", "emoji": "➡️", "native": { "uz": "o'ng", "ru": "направо", "tr": "sağ" }, "altNative": { "uz": ["o'ngga", "o'ng tomon"], "ru": ["справа", "правый"], "tr": ["sağa"] } },
+    { "id": "u09.w.straight", "en": "straight", "pos": "adv", "emoji": "⬆️", "native": { "uz": "to'g'riga", "ru": "прямо", "tr": "düz" }, "altNative": { "uz": ["to'g'ri"], "tr": ["dümdüz", "doğru"] } },
+    { "id": "u09.w.turn", "en": "turn", "pos": "verb", "emoji": "↪️", "native": { "uz": "burilmoq", "ru": "поворачивать", "tr": "dönmek" }, "altNative": { "uz": ["qayrilmoq"], "ru": ["повернуть"] } },
+    { "id": "u09.w.corner", "en": "corner", "pos": "noun", "native": { "uz": "burchak", "ru": "угол", "tr": "köşe" }, "altNative": { "uz": ["muyulish"] } },
+    { "id": "u09.w.cross", "en": "cross", "pos": "verb", "emoji": "🚸", "native": { "uz": "kesib o'tmoq", "ru": "переходить", "tr": "karşıya geçmek" }, "altNative": { "uz": ["o'tmoq"], "ru": ["перейти"], "tr": ["geçmek"] } },
+
+    { "id": "u09.w.near", "en": "near", "pos": "prep", "native": { "uz": "yaqin", "ru": "рядом", "tr": "yakın" }, "altNative": { "uz": ["yaqinida", "yonida"], "ru": ["близко", "около", "недалеко"], "tr": ["yakınında"] } },
+    { "id": "u09.w.far", "en": "far", "pos": "adv", "emoji": "🔭", "native": { "uz": "uzoq", "ru": "далеко", "tr": "uzak" }, "altNative": { "uz": ["olis"], "ru": ["далёкий"], "tr": ["uzakta"] } },
+    { "id": "u09.w.minute", "en": "minute", "pos": "noun", "emoji": "⏱️", "native": { "uz": "daqiqa", "ru": "минута", "tr": "dakika" }, "altNative": { "uz": ["minut"] } },
+    { "id": "u09.w.museum", "en": "museum", "pos": "noun", "emoji": "🏛️", "native": { "uz": "muzey", "ru": "музей", "tr": "müze" } },
+    { "id": "u09.w.bridge", "en": "bridge", "pos": "noun", "emoji": "🌉", "native": { "uz": "ko'prik", "ru": "мост", "tr": "köprü" } },
+    { "id": "u09.w.square", "en": "square", "pos": "noun", "emoji": "⛲", "native": { "uz": "maydon", "ru": "площадь", "tr": "meydan" } },
+
+    { "id": "u09.w.excuse-me", "en": "excuse me", "pos": "phrase", "emoji": "🙋", "native": { "uz": "kechirasiz", "ru": "извините", "tr": "affedersiniz" }, "altNative": { "uz": ["uzr", "kechirasan"], "ru": ["простите", "извини"], "tr": ["pardon", "affedersin"] } },
+    { "id": "u09.w.map", "en": "map", "pos": "noun", "emoji": "🗺️", "native": { "uz": "xarita", "ru": "карта", "tr": "harita" } },
+    { "id": "u09.w.way", "en": "way", "pos": "noun", "native": { "uz": "yo'l", "ru": "дорога", "tr": "yol" }, "altNative": { "ru": ["путь"] } },
+    { "id": "u09.w.restaurant", "en": "restaurant", "pos": "noun", "emoji": "🍴", "native": { "uz": "restoran", "ru": "ресторан", "tr": "restoran" }, "altNative": { "tr": ["lokanta"] } },
+    { "id": "u09.w.supermarket", "en": "supermarket", "pos": "noun", "emoji": "🛒", "native": { "uz": "supermarket", "ru": "супермаркет", "tr": "süpermarket" }, "altNative": { "tr": ["market"] } },
+    { "id": "u09.w.building", "en": "building", "pos": "noun", "emoji": "🏢", "native": { "uz": "bino", "ru": "здание", "tr": "bina" }, "altNative": { "uz": ["imorat"] } },
+
+    { "id": "u09.w.lost", "en": "lost", "pos": "adj", "emoji": "😵", "native": { "uz": "adashgan", "ru": "заблудившийся", "tr": "kaybolmuş" }, "altNative": { "uz": ["adashib qolgan", "yo'qolgan"], "ru": ["потерявшийся", "потерянный"], "tr": ["kayıp"] } },
+    { "id": "u09.w.help", "en": "help", "pos": "verb", "emoji": "🆘", "native": { "uz": "yordam bermoq", "ru": "помогать", "tr": "yardım etmek" }, "altNative": { "ru": ["помочь"] } },
+    { "id": "u09.w.show", "en": "show", "pos": "verb", "emoji": "👉", "native": { "uz": "ko'rsatmoq", "ru": "показывать", "tr": "göstermek" }, "altNative": { "ru": ["показать"] } },
+    { "id": "u09.w.hotel", "en": "hotel", "pos": "noun", "emoji": "🏨", "native": { "uz": "mehmonxona", "ru": "гостиница", "tr": "otel" }, "altNative": { "uz": ["otel"], "ru": ["отель"] } },
+    { "id": "u09.w.center", "en": "center", "pos": "noun", "emoji": "🎯", "native": { "uz": "markaz", "ru": "центр", "tr": "merkez" } },
+    { "id": "u09.w.taxi", "en": "taxi", "pos": "noun", "emoji": "🚕", "native": { "uz": "taksi", "ru": "такси", "tr": "taksi" } },
+    { "id": "u09.w.stop", "en": "stop", "pos": "verb", "emoji": "🛑", "native": { "uz": "to'xtamoq", "ru": "останавливаться", "tr": "durmak" }, "altNative": { "ru": ["остановиться", "остановить"] } }
+  ],
+  "sentences": [
+    { "id": "u09.s.01", "en": "Where is the bank?", "native": { "uz": "Bank qayerda?", "ru": "Где банк?", "tr": "Banka nerede?" }, "altNative": { "uz": ["Bank qayerda joylashgan?"], "ru": ["Где находится банк?"] } },
+    { "id": "u09.s.02", "en": "This is a park.", "native": { "uz": "Bu park.", "ru": "Это парк.", "tr": "Bu bir park." }, "altNative": { "tr": ["Bu park."] } },
+    { "id": "u09.s.03", "en": "The park is big.", "native": { "uz": "Park katta.", "ru": "Парк большой.", "tr": "Park büyük." } },
+    { "id": "u09.s.04", "en": "Is this a hospital?", "native": { "uz": "Bu kasalxonami?", "ru": "Это больница?", "tr": "Bu bir hastane mi?" }, "altNative": { "uz": ["Bu shifoxonami?"], "tr": ["Bu hastane mi?"] } },
+    { "id": "u09.s.05", "en": "The shop is here.", "native": { "uz": "Do'kon shu yerda.", "ru": "Магазин здесь.", "tr": "Dükkan burada." }, "altNative": { "uz": ["Do'kon bu yerda."], "ru": ["Магазин тут."], "tr": ["Mağaza burada.", "Dükkân burada."] } },
+    { "id": "u09.s.06", "en": "Where is the station?", "native": { "uz": "Vokzal qayerda?", "ru": "Где вокзал?", "tr": "İstasyon nerede?" }, "altNative": { "uz": ["Stansiya qayerda?", "Bekat qayerda?"], "ru": ["Где станция?", "Где находится вокзал?"], "tr": ["Gar nerede?"] } },
+    { "id": "u09.s.07", "en": "The bank is not here.", "native": { "uz": "Bank shu yerda emas.", "ru": "Банк не здесь.", "tr": "Banka burada değil." }, "altNative": { "uz": ["Bank bu yerda emas."], "ru": ["Банк не тут."] } },
+    { "id": "u09.s.08", "en": "I live on this street.", "altEn": ["I live in this street."], "native": { "uz": "Men bu ko'chada yashayman.", "ru": "Я живу на этой улице.", "tr": "Ben bu sokakta yaşıyorum." }, "altNative": { "uz": ["Men shu ko'chada yashayman.", "Bu ko'chada yashayman.", "Shu ko'chada yashayman."], "ru": ["На этой улице я живу."], "tr": ["Bu sokakta yaşıyorum.", "Ben bu sokakta oturuyorum.", "Bu sokakta oturuyorum.", "Ben bu caddede yaşıyorum."] } },
+
+    { "id": "u09.s.09", "en": "Turn left.", "native": { "uz": "Chapga buril.", "ru": "Поверни налево.", "tr": "Sola dön." }, "altNative": { "uz": ["Chapga buriling.", "Chapga qayril."], "ru": ["Поверните налево.", "Поворачивай налево."], "tr": ["Sola dönün."] } },
+    { "id": "u09.s.10", "en": "Turn right at the corner.", "native": { "uz": "Burchakda o'ngga buril.", "ru": "На углу поверни направо.", "tr": "Köşeden sağa dön." }, "altNative": { "uz": ["Burchakdan o'ngga buril.", "Burchakda o'ngga buriling.", "Muyulishda o'ngga buril.", "Burchakda o'ngga qayril."], "ru": ["Поверни направо на углу.", "На углу поверните направо.", "Поверните направо на углу."], "tr": ["Köşede sağa dön.", "Köşeden sağa dönün.", "Köşede sağa dönün."] } },
+    { "id": "u09.s.11", "en": "Go straight.", "native": { "uz": "To'g'riga yur.", "ru": "Иди прямо.", "tr": "Düz git." }, "altNative": { "uz": ["To'g'riga bor.", "To'g'riga yuring.", "To'g'riga boring.", "To'g'ri yur."], "ru": ["Идите прямо."], "tr": ["Düz gidin.", "Dümdüz git.", "Doğru git."] } },
+    { "id": "u09.s.12", "en": "Cross the street.", "native": { "uz": "Ko'chani kesib o't.", "ru": "Перейди улицу.", "tr": "Sokağın karşısına geç." }, "altNative": { "uz": ["Ko'chadan o't.", "Ko'chani kesib o'ting.", "Ko'chadan o'ting."], "ru": ["Перейдите улицу.", "Перейди через улицу.", "Переходи улицу.", "Перейди дорогу."], "tr": ["Karşıya geç.", "Sokağı geç.", "Sokağın karşısına geçin.", "Caddenin karşısına geç.", "Karşıya geçin."] } },
+    { "id": "u09.s.13", "en": "The bank is on the left.", "native": { "uz": "Bank chap tomonda.", "ru": "Банк слева.", "tr": "Banka solda." }, "altNative": { "uz": ["Bank chapda."], "ru": ["Банк находится слева.", "Банк с левой стороны."], "tr": ["Banka sol tarafta."] } },
+    { "id": "u09.s.14", "en": "Is the park on the right?", "native": { "uz": "Park o'ng tomondami?", "ru": "Парк справа?", "tr": "Park sağda mı?" }, "altNative": { "uz": ["Park o'ngdami?"], "ru": ["Парк находится справа?", "Парк с правой стороны?"], "tr": ["Park sağ tarafta mı?"] } },
+    { "id": "u09.s.15", "en": "Go straight and turn left.", "native": { "uz": "To'g'riga yur va chapga buril.", "ru": "Иди прямо и поверни налево.", "tr": "Düz git ve sola dön." }, "altNative": { "uz": ["To'g'riga bor va chapga buril.", "To'g'riga yuring va chapga buriling.", "To'g'riga yurib, chapga buril.", "To'g'riga yur va chapga qayril."], "ru": ["Идите прямо и поверните налево.", "Иди прямо и поворачивай налево."], "tr": ["Düz gidin ve sola dönün.", "Dümdüz git ve sola dön."] } },
+    { "id": "u09.s.16", "en": "Do not turn right here.", "native": { "uz": "Shu yerda o'ngga burilma.", "ru": "Не поворачивай здесь направо.", "tr": "Burada sağa dönme." }, "altNative": { "uz": ["Bu yerda o'ngga burilma.", "Shu yerda o'ngga burilmang.", "Bu yerda o'ngga burilmang.", "Shu yerda o'ngga qayrilma."], "ru": ["Здесь не поворачивай направо.", "Не поворачивай направо здесь.", "Не поворачивайте здесь направо.", "Здесь не поворачивайте направо."], "tr": ["Burada sağa dönmeyin.", "Buradan sağa dönme."] } },
+
+    { "id": "u09.s.17", "en": "Is it far?", "native": { "uz": "Uzoqmi?", "ru": "Это далеко?", "tr": "Uzak mı?" }, "altNative": { "uz": ["U uzoqmi?", "Bu uzoqmi?", "Uzoqdami?"], "ru": ["Далеко?"], "tr": ["O uzak mı?", "Uzakta mı?"] } },
+    { "id": "u09.s.18", "en": "It is near the park.", "native": { "uz": "Park yaqinida.", "ru": "Это рядом с парком.", "tr": "Parkın yakınında." }, "altNative": { "uz": ["U park yaqinida.", "Parkka yaqin.", "U parkka yaqin.", "Parkning yonida.", "U parkning yonida."], "ru": ["Это около парка.", "Это недалеко от парка.", "Он рядом с парком.", "Она рядом с парком.", "Рядом с парком."], "tr": ["O parkın yakınında.", "Parka yakın.", "O parka yakın."] } },
+    { "id": "u09.s.19", "en": "How far is it?", "native": { "uz": "Qanchalik uzoq?", "ru": "Насколько это далеко?", "tr": "Ne kadar uzak?" }, "altNative": { "uz": ["U qanchalik uzoq?", "Qancha uzoq?", "U qancha uzoq?", "Qanchalik uzoqda?"], "ru": ["Как далеко это?", "Как это далеко?", "Как далеко это находится?"], "tr": ["Ne kadar uzakta?", "O ne kadar uzak?", "O ne kadar uzakta?"] } },
+    { "id": "u09.s.20", "en": "The museum is not far.", "native": { "uz": "Muzey uzoq emas.", "ru": "Музей недалеко.", "tr": "Müze uzak değil." }, "altNative": { "uz": ["Muzey uzoqda emas."], "ru": ["Музей не далеко.", "Музей находится недалеко."], "tr": ["Müze uzakta değil."] } },
+    { "id": "u09.s.21", "en": "It is five minutes from here.", "native": { "uz": "Shu yerdan besh daqiqa.", "ru": "Это в пяти минутах отсюда.", "tr": "Buradan beş dakika." }, "altNative": { "uz": ["U shu yerdan besh daqiqa.", "Bu yerdan besh daqiqa.", "Shu yerdan besh daqiqalik yo'l.", "Shu yerdan besh minut."], "ru": ["Отсюда пять минут.", "Это пять минут отсюда.", "В пяти минутах отсюда."], "tr": ["Buradan beş dakika uzaklıkta.", "Buraya beş dakika.", "O buradan beş dakika."] } },
+    { "id": "u09.s.22", "en": "The bridge is near the square.", "native": { "uz": "Ko'prik maydon yaqinida.", "ru": "Мост рядом с площадью.", "tr": "Köprü meydanın yakınında." }, "altNative": { "uz": ["Ko'prik maydonga yaqin.", "Ko'prik maydonning yonida.", "Ko'prik maydonning yaqinida."], "ru": ["Мост около площади.", "Мост недалеко от площади.", "Мост находится рядом с площадью."], "tr": ["Köprü meydana yakın."] } },
+    { "id": "u09.s.23", "en": "Is there a bank near here?", "native": { "uz": "Shu yerga yaqin bank bormi?", "ru": "Здесь рядом есть банк?", "tr": "Buraya yakın bir banka var mı?" }, "altNative": { "uz": ["Bu yerga yaqin bank bormi?", "Shu atrofda bank bormi?", "Yaqin atrofda bank bormi?", "Shu yer yaqinida bank bormi?"], "ru": ["Рядом есть банк?", "Здесь поблизости есть банк?", "Есть ли здесь рядом банк?", "Тут рядом есть банк?"], "tr": ["Buraya yakın banka var mı?", "Yakında bir banka var mı?", "Yakınlarda bir banka var mı?", "Buralarda bir banka var mı?"] } },
+    { "id": "u09.s.24", "en": "We live near the new bridge.", "native": { "uz": "Biz yangi ko'prik yaqinida yashaymiz.", "ru": "Мы живём рядом с новым мостом.", "tr": "Biz yeni köprünün yakınında yaşıyoruz." }, "altNative": { "uz": ["Yangi ko'prik yaqinida yashaymiz.", "Biz yangi ko'prikning yonida yashaymiz.", "Biz yangi ko'prikka yaqin yashaymiz."], "ru": ["Мы живём около нового моста.", "Мы живём недалеко от нового моста."], "tr": ["Yeni köprünün yakınında yaşıyoruz.", "Biz yeni köprünün yakınında oturuyoruz.", "Yeni köprünün yakınında oturuyoruz."] } },
+
+    { "id": "u09.s.25", "en": "Excuse me, where is the supermarket?", "native": { "uz": "Kechirasiz, supermarket qayerda?", "ru": "Извините, где супермаркет?", "tr": "Affedersiniz, süpermarket nerede?" }, "altNative": { "uz": ["Uzr, supermarket qayerda?"], "ru": ["Простите, где супермаркет?", "Извините, где находится супермаркет?", "Извини, где супермаркет?"], "tr": ["Pardon, süpermarket nerede?", "Affedersin, süpermarket nerede?", "Affedersiniz, market nerede?"] } },
+    { "id": "u09.s.26", "en": "Do you have a map?", "native": { "uz": "Senda xarita bormi?", "ru": "У тебя есть карта?", "tr": "Haritan var mı?" }, "altNative": { "uz": ["Xaritang bormi?", "Sening xaritang bormi?", "Sizda xarita bormi?"], "ru": ["У вас есть карта?", "Есть у тебя карта?"], "tr": ["Senin haritan var mı?", "Sende harita var mı?", "Bir haritan var mı?", "Haritanız var mı?"] } },
+    { "id": "u09.s.27", "en": "Is this the way to the station?", "native": { "uz": "Bu vokzalga boradigan yo'lmi?", "ru": "Это дорога к вокзалу?", "tr": "İstasyona giden yol bu mu?" }, "altNative": { "uz": ["Vokzalga boradigan yo'l shumi?", "Bu vokzalga olib boradigan yo'lmi?", "Bu vokzalga yo'lmi?", "Bu stansiyaga boradigan yo'lmi?", "Bu bekatga boradigan yo'lmi?"], "ru": ["Это дорога на вокзал?", "Это дорога до вокзала?", "Это путь к вокзалу?", "Это дорога к станции?"], "tr": ["Bu istasyona giden yol mu?", "İstasyonun yolu bu mu?", "Bu, istasyona giden yol mu?"] } },
+    { "id": "u09.s.28", "en": "The restaurant is in that building.", "native": { "uz": "Restoran o'sha binoda.", "ru": "Ресторан в том здании.", "tr": "Restoran şu binada." }, "altNative": { "uz": ["Restoran anavi binoda.", "Restoran u binoda."], "ru": ["Ресторан находится в том здании.", "Ресторан вон в том здании."], "tr": ["Restoran o binada.", "Lokanta şu binada."] } },
+    { "id": "u09.s.29", "en": "Excuse me, is the museum near here?", "native": { "uz": "Kechirasiz, muzey shu yerga yaqinmi?", "ru": "Извините, музей здесь рядом?", "tr": "Affedersiniz, müze buraya yakın mı?" }, "altNative": { "uz": ["Kechirasiz, muzey bu yerga yaqinmi?", "Kechirasiz, muzey shu atrofdami?", "Kechirasiz, muzey yaqinmi?", "Uzr, muzey shu yerga yaqinmi?"], "ru": ["Простите, музей здесь рядом?", "Извините, музей рядом?", "Извините, музей недалеко отсюда?", "Извините, музей близко отсюда?"], "tr": ["Pardon, müze buraya yakın mı?", "Affedersin, müze buraya yakın mı?", "Affedersiniz, müze yakında mı?", "Affedersiniz, müze buralarda mı?"] } },
+    { "id": "u09.s.30", "en": "That big building is a hospital.", "native": { "uz": "O'sha katta bino kasalxona.", "ru": "То большое здание — больница.", "tr": "Şu büyük bina bir hastane." }, "altNative": { "uz": ["Anavi katta bino kasalxona.", "U katta bino kasalxona.", "O'sha katta bino shifoxona."], "ru": ["Вон то большое здание — больница.", "То большое здание — это больница."], "tr": ["Şu büyük bina hastane.", "O büyük bina bir hastane.", "O büyük bina hastane."] } },
+    { "id": "u09.s.31", "en": "I see the restaurant on the map.", "native": { "uz": "Men xaritada restoranni ko'ryapman.", "ru": "Я вижу ресторан на карте.", "tr": "Haritada restoranı görüyorum." }, "altNative": { "uz": ["Xaritada restoranni ko'ryapman.", "Men restoranni xaritada ko'ryapman.", "Men xaritada restoranni ko'raman."], "ru": ["Я вижу на карте ресторан.", "На карте я вижу ресторан."], "tr": ["Ben haritada restoranı görüyorum.", "Restoranı haritada görüyorum.", "Haritada lokantayı görüyorum."] } },
+    { "id": "u09.s.32", "en": "Is there a good restaurant near here?", "native": { "uz": "Shu yerga yaqin yaxshi restoran bormi?", "ru": "Здесь рядом есть хороший ресторан?", "tr": "Buraya yakın iyi bir restoran var mı?" }, "altNative": { "uz": ["Bu yerga yaqin yaxshi restoran bormi?", "Shu atrofda yaxshi restoran bormi?", "Yaqin atrofda yaxshi restoran bormi?"], "ru": ["Рядом есть хороший ресторан?", "Здесь поблизости есть хороший ресторан?", "Есть ли здесь рядом хороший ресторан?", "Тут рядом есть хороший ресторан?"], "tr": ["Yakında iyi bir restoran var mı?", "Yakınlarda iyi bir restoran var mı?", "Buralarda iyi bir restoran var mı?", "Buraya yakın iyi bir lokanta var mı?"] } },
+
+    { "id": "u09.s.33", "en": "Excuse me, I am lost.", "native": { "uz": "Kechirasiz, men adashib qoldim.", "ru": "Извините, я заблудился.", "tr": "Affedersiniz, kayboldum." }, "altNative": { "uz": ["Kechirasiz, adashib qoldim.", "Kechirasiz, men adashdim.", "Uzr, men adashib qoldim.", "Kechirasiz, men yo'qolib qoldim."], "ru": ["Извините, я заблудилась.", "Простите, я заблудился.", "Простите, я заблудилась.", "Извините, я потерялся.", "Извините, я потерялась."], "tr": ["Pardon, kayboldum.", "Affedersiniz, ben kayboldum.", "Affedersin, kayboldum.", "Affedersiniz, yolumu kaybettim."] } },
+    { "id": "u09.s.34", "en": "Can you help me, please?", "native": { "uz": "Menga yordam bera olasanmi, iltimos?", "ru": "Ты можешь мне помочь, пожалуйста?", "tr": "Bana yardım edebilir misin, lütfen?" }, "altNative": { "uz": ["Iltimos, menga yordam bera olasanmi?", "Menga yordam bera olasizmi, iltimos?", "Iltimos, menga yordam bera olasizmi?", "Menga yordam berasanmi, iltimos?"], "ru": ["Можешь мне помочь, пожалуйста?", "Ты можешь помочь мне, пожалуйста?", "Пожалуйста, ты можешь мне помочь?", "Вы можете мне помочь, пожалуйста?", "Помоги мне, пожалуйста."], "tr": ["Lütfen bana yardım edebilir misin?", "Bana yardım eder misin, lütfen?", "Lütfen bana yardım eder misin?", "Bana yardım edebilir misiniz, lütfen?", "Lütfen bana yardım edebilir misiniz?"] } },
+    { "id": "u09.s.35", "en": "Can you show me the way?", "native": { "uz": "Menga yo'lni ko'rsata olasanmi?", "ru": "Ты можешь показать мне дорогу?", "tr": "Bana yolu gösterebilir misin?" }, "altNative": { "uz": ["Yo'lni ko'rsata olasanmi?", "Menga yo'lni ko'rsatib bera olasanmi?", "Menga yo'lni ko'rsata olasizmi?", "Menga yo'lni ko'rsatasanmi?"], "ru": ["Можешь показать мне дорогу?", "Ты можешь мне показать дорогу?", "Вы можете показать мне дорогу?", "Покажешь мне дорогу?", "Ты можешь показать мне путь?"], "tr": ["Yolu gösterebilir misin?", "Bana yolu gösterir misin?", "Bana yolu gösterebilir misiniz?", "Bana yolu tarif edebilir misin?"] } },
+    { "id": "u09.s.36", "en": "Where is my hotel on this map?", "native": { "uz": "Bu xaritada mening mehmonxonam qayerda?", "ru": "Где моя гостиница на этой карте?", "tr": "Otelim bu haritada nerede?" }, "altNative": { "uz": ["Bu xaritada mehmonxonam qayerda?", "Mening mehmonxonam bu xaritada qayerda?", "Mehmonxonam bu xaritada qayerda?", "Shu xaritada mening mehmonxonam qayerda?", "Bu xaritada mening otelim qayerda?"], "ru": ["Где на этой карте моя гостиница?", "Где мой отель на этой карте?", "Где на этой карте мой отель?"], "tr": ["Benim otelim bu haritada nerede?", "Bu haritada otelim nerede?", "Bu haritada benim otelim nerede?"] } },
+    { "id": "u09.s.37", "en": "The hotel is in the city center.", "altEn": ["The hotel is in the city centre."], "native": { "uz": "Mehmonxona shahar markazida.", "ru": "Гостиница в центре города.", "tr": "Otel şehir merkezinde." }, "altNative": { "uz": ["Otel shahar markazida.", "Mehmonxona shaharning markazida."], "ru": ["Отель в центре города.", "Гостиница находится в центре города.", "Отель находится в центре города."], "tr": ["Otel şehrin merkezinde."] } },
+    { "id": "u09.s.38", "en": "Stop near the hotel, please.", "altEn": ["Please stop near the hotel."], "native": { "uz": "Mehmonxona yaqinida to'xta, iltimos.", "ru": "Остановись рядом с гостиницей, пожалуйста.", "tr": "Otelin yakınında dur, lütfen." }, "altNative": { "uz": ["Iltimos, mehmonxona yaqinida to'xta.", "Mehmonxona yaqinida to'xtang, iltimos.", "Iltimos, mehmonxona yaqinida to'xtang.", "Mehmonxona yonida to'xta, iltimos.", "Otel yaqinida to'xta, iltimos."], "ru": ["Пожалуйста, остановись рядом с гостиницей.", "Остановитесь рядом с гостиницей, пожалуйста.", "Останови рядом с гостиницей, пожалуйста.", "Остановите рядом с гостиницей, пожалуйста.", "Остановись возле гостиницы, пожалуйста.", "Остановись около гостиницы, пожалуйста.", "Остановись рядом с отелем, пожалуйста."], "tr": ["Lütfen otelin yakınında dur.", "Otelin yakınında durun, lütfen.", "Lütfen otelin yakınında durun.", "Otelin yanında dur, lütfen."] } },
+    { "id": "u09.s.39", "en": "Does this taxi go to the center?", "altEn": ["Does this taxi go to the centre?"], "native": { "uz": "Bu taksi markazga boradimi?", "ru": "Это такси едет в центр?", "tr": "Bu taksi merkeze gidiyor mu?" }, "altNative": { "uz": ["Shu taksi markazga boradimi?"], "ru": ["Это такси идёт в центр?", "Это такси едет до центра?"], "tr": ["Bu taksi merkeze gider mi?"] } },
+    { "id": "u09.s.40", "en": "I am lost, but I have a map.", "native": { "uz": "Men adashib qoldim, lekin menda xarita bor.", "ru": "Я заблудился, но у меня есть карта.", "tr": "Kayboldum ama haritam var." }, "altNative": { "uz": ["Adashib qoldim, lekin menda xarita bor.", "Men adashib qoldim, lekin xaritam bor.", "Men adashib qoldim, lekin mening xaritam bor.", "Men adashdim, lekin menda xarita bor.", "Men adashib qoldim, ammo menda xarita bor."], "ru": ["Я заблудилась, но у меня есть карта.", "Я потерялся, но у меня есть карта.", "Я потерялась, но у меня есть карта."], "tr": ["Ben kayboldum ama haritam var.", "Kayboldum ama bir haritam var.", "Kayboldum ama bende harita var.", "Kayboldum ama benim haritam var.", "Kayboldum fakat haritam var."] } }
+  ],
+  "lessons": [
+    {
+      "id": "u09-l1",
+      "title": { "en": "Places in the city", "uz": "Shahardagi joylar", "ru": "Места в городе", "tr": "Şehirdeki yerler" },
+      "words": ["u09.w.bank", "u09.w.park", "u09.w.hospital", "u09.w.shop", "u09.w.station", "u09.w.street"],
+      "sentences": ["u09.s.01", "u09.s.02", "u09.s.03", "u09.s.04", "u09.s.05", "u09.s.06", "u09.s.07", "u09.s.08"]
+    },
+    {
+      "id": "u09-l2",
+      "title": { "en": "Left and right", "uz": "Chap va o'ng", "ru": "Налево и направо", "tr": "Sol ve sağ" },
+      "words": ["u09.w.left", "u09.w.right", "u09.w.straight", "u09.w.turn", "u09.w.corner", "u09.w.cross"],
+      "sentences": ["u09.s.09", "u09.s.10", "u09.s.11", "u09.s.12", "u09.s.13", "u09.s.14", "u09.s.15", "u09.s.16"]
+    },
+    {
+      "id": "u09-l3",
+      "title": { "en": "Near or far?", "uz": "Yaqinmi yoki uzoq?", "ru": "Близко или далеко?", "tr": "Yakın mı, uzak mı?" },
+      "words": ["u09.w.near", "u09.w.far", "u09.w.minute", "u09.w.museum", "u09.w.bridge", "u09.w.square"],
+      "sentences": ["u09.s.17", "u09.s.18", "u09.s.19", "u09.s.20", "u09.s.21", "u09.s.22", "u09.s.23", "u09.s.24"]
+    },
+    {
+      "id": "u09-l4",
+      "title": { "en": "Excuse me", "uz": "Kechirasiz", "ru": "Извините", "tr": "Affedersiniz" },
+      "words": ["u09.w.excuse-me", "u09.w.map", "u09.w.way", "u09.w.restaurant", "u09.w.supermarket", "u09.w.building"],
+      "sentences": ["u09.s.25", "u09.s.26", "u09.s.27", "u09.s.28", "u09.s.29", "u09.s.30", "u09.s.31", "u09.s.32"]
+    },
+    {
+      "id": "u09-l5",
+      "title": { "en": "I am lost", "uz": "Men adashib qoldim", "ru": "Я заблудился", "tr": "Kayboldum" },
+      "words": ["u09.w.lost", "u09.w.help", "u09.w.show", "u09.w.hotel", "u09.w.center", "u09.w.taxi", "u09.w.stop"],
+      "sentences": ["u09.s.33", "u09.s.34", "u09.s.35", "u09.s.36", "u09.s.37", "u09.s.38", "u09.s.39", "u09.s.40"]
+    }
+  ]
+}

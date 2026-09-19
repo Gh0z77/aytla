@@ -1,0 +1,142 @@
+{
+  "id": "u05",
+  "section": 1,
+  "order": 5,
+  "title": { "en": "Numbers and age", "uz": "Sonlar va yosh", "ru": "Числа и возраст", "tr": "Sayılar ve yaş" },
+  "goal": {
+    "en": "Count to twenty, say your age and ask questions with \"how many\".",
+    "uz": "Yigirmagacha sanang, yoshingizni ayting va \"how many\" bilan savol bering.",
+    "ru": "Посчитайте до двадцати, назовите свой возраст и задайте вопрос с \"how many\".",
+    "tr": "Yirmiye kadar say, yaşını söyle ve \"how many\" ile soru sor."
+  },
+  "guide": "pix",
+  "color": "#3B82F6",
+  "tip": {
+    "title": { "en": "One book, two books", "uz": "One book, two books", "ru": "One book, two books", "tr": "One book, two books" },
+    "body": {
+      "en": "After any number bigger than one, add -s to the noun: one book, two books, ten years. Uzbek and Turkish keep the noun singular after a number, but English does not. After \"How many\" the noun also takes -s: How many brothers do you have? For age, say \"am / is / are\" + number + \"years old\": I am twenty years old.",
+      "uz": "Birdan katta sondan keyin otga -s qo'shiladi: one book, two books, ten years. O'zbek tilida \"ikkita kitob\" deymiz, ingliz tilida esa \"two books\". \"How many\" dan keyin ham ot -s oladi: How many brothers do you have? Yosh \"am / is / are\" + son + \"years old\" bilan aytiladi: I am twenty years old.",
+      "ru": "После числа больше одного к существительному добавляется -s: one book, two books, ten years. После \"How many\" тоже нужно -s: How many brothers do you have? Возраст называют так: \"am / is / are\" + число + \"years old\". По-русски «мне двадцать лет», а по-английски I am twenty years old.",
+      "tr": "Birden büyük bir sayıdan sonra isme -s eklenir: one book, two books, ten years. Türkçede \"iki kitap\" deriz, İngilizcede ise \"two books\". \"How many\" sorusundan sonra da isim -s alır: How many brothers do you have? Yaş \"am / is / are\" + sayı + \"years old\" ile söylenir: I am twenty years old."
+    },
+    "examples": [
+      { "en": "I have two brothers.", "native": { "uz": "Mening ikkita akam bor.", "ru": "У меня два брата.", "tr": "İki erkek kardeşim var." } },
+      { "en": "How many books do you have?", "native": { "uz": "Senda nechta kitob bor?", "ru": "Сколько у тебя книг?", "tr": "Kaç kitabın var?" } },
+      { "en": "I am twenty years old.", "native": { "uz": "Men yigirma yoshdaman.", "ru": "Мне двадцать лет.", "tr": "Ben yirmi yaşındayım." } }
+    ]
+  },
+  "words": [
+    { "id": "u05.w.one", "en": "one", "pos": "num", "emoji": "1️⃣", "native": { "uz": "bir", "ru": "один", "tr": "bir" } },
+    { "id": "u05.w.two", "en": "two", "pos": "num", "emoji": "2️⃣", "native": { "uz": "ikki", "ru": "два", "tr": "iki" } },
+    { "id": "u05.w.three", "en": "three", "pos": "num", "emoji": "3️⃣", "native": { "uz": "uch", "ru": "три", "tr": "üç" } },
+    { "id": "u05.w.number", "en": "number", "pos": "noun", "emoji": "🔢", "native": { "uz": "raqam", "ru": "номер", "tr": "numara" }, "altNative": { "uz": ["son"], "ru": ["число", "цифра"], "tr": ["sayı"] } },
+    { "id": "u05.w.count", "en": "count", "pos": "verb", "emoji": "🧮", "native": { "uz": "sanamoq", "ru": "считать", "tr": "saymak" } },
+    { "id": "u05.w.book", "en": "book", "pos": "noun", "emoji": "📖", "native": { "uz": "kitob", "ru": "книга", "tr": "kitap" } },
+
+    { "id": "u05.w.four", "en": "four", "pos": "num", "emoji": "4️⃣", "native": { "uz": "to'rt", "ru": "четыре", "tr": "dört" } },
+    { "id": "u05.w.five", "en": "five", "pos": "num", "emoji": "5️⃣", "native": { "uz": "besh", "ru": "пять", "tr": "beş" } },
+    { "id": "u05.w.six", "en": "six", "pos": "num", "emoji": "6️⃣", "native": { "uz": "olti", "ru": "шесть", "tr": "altı" } },
+    { "id": "u05.w.seven", "en": "seven", "pos": "num", "emoji": "7️⃣", "native": { "uz": "yetti", "ru": "семь", "tr": "yedi" } },
+    { "id": "u05.w.eight", "en": "eight", "pos": "num", "emoji": "8️⃣", "native": { "uz": "sakkiz", "ru": "восемь", "tr": "sekiz" } },
+    { "id": "u05.w.nine", "en": "nine", "pos": "num", "emoji": "9️⃣", "native": { "uz": "to'qqiz", "ru": "девять", "tr": "dokuz" } },
+    { "id": "u05.w.ten", "en": "ten", "pos": "num", "emoji": "🔟", "native": { "uz": "o'n", "ru": "десять", "tr": "on" } },
+
+    { "id": "u05.w.age", "en": "age", "pos": "noun", "native": { "uz": "yosh", "ru": "возраст", "tr": "yaş" } },
+    { "id": "u05.w.year", "en": "year", "pos": "noun", "native": { "uz": "yil", "ru": "год", "tr": "yıl" }, "altNative": { "tr": ["sene"] } },
+    { "id": "u05.w.birthday", "en": "birthday", "pos": "noun", "emoji": "🎂", "native": { "uz": "tug'ilgan kun", "ru": "день рождения", "tr": "doğum günü" } },
+    { "id": "u05.w.month", "en": "month", "pos": "noun", "emoji": "📅", "native": { "uz": "oy", "ru": "месяц", "tr": "ay" } },
+    { "id": "u05.w.only", "en": "only", "pos": "adv", "native": { "uz": "faqat", "ru": "только", "tr": "sadece" }, "altNative": { "uz": ["atigi"], "ru": ["всего"], "tr": ["yalnızca"] } },
+
+    { "id": "u05.w.how-many", "en": "how many", "pos": "phrase", "native": { "uz": "nechta", "ru": "сколько", "tr": "kaç tane" }, "altNative": { "uz": ["necha"], "tr": ["kaç"] } },
+    { "id": "u05.w.many", "en": "many", "pos": "adj", "native": { "uz": "ko'p", "ru": "много", "tr": "çok" }, "altNative": { "tr": ["birçok"] } },
+    { "id": "u05.w.phone", "en": "phone", "pos": "noun", "emoji": "📱", "native": { "uz": "telefon", "ru": "телефон", "tr": "telefon" } },
+    { "id": "u05.w.more", "en": "more", "pos": "adj", "emoji": "➕", "native": { "uz": "ko'proq", "ru": "больше", "tr": "daha fazla" }, "altNative": { "uz": ["yana"], "ru": ["ещё"], "tr": ["daha çok", "daha"] } },
+    { "id": "u05.w.all", "en": "all", "pos": "other", "native": { "uz": "hamma", "ru": "все", "tr": "bütün" }, "altNative": { "uz": ["barcha"], "tr": ["tüm", "hepsi"] } },
+    { "id": "u05.w.first", "en": "first", "pos": "adj", "emoji": "🥇", "native": { "uz": "birinchi", "ru": "первый", "tr": "ilk" }, "altNative": { "tr": ["birinci"] } },
+
+    { "id": "u05.w.eleven", "en": "eleven", "pos": "num", "emoji": "🕚", "native": { "uz": "o'n bir", "ru": "одиннадцать", "tr": "on bir" } },
+    { "id": "u05.w.twelve", "en": "twelve", "pos": "num", "emoji": "🕛", "native": { "uz": "o'n ikki", "ru": "двенадцать", "tr": "on iki" } },
+    { "id": "u05.w.fifteen", "en": "fifteen", "pos": "num", "native": { "uz": "o'n besh", "ru": "пятнадцать", "tr": "on beş" } },
+    { "id": "u05.w.twenty", "en": "twenty", "pos": "num", "native": { "uz": "yigirma", "ru": "двадцать", "tr": "yirmi" } },
+    { "id": "u05.w.week", "en": "week", "pos": "noun", "emoji": "🗓️", "native": { "uz": "hafta", "ru": "неделя", "tr": "hafta" } },
+    { "id": "u05.w.last", "en": "last", "pos": "adj", "emoji": "🏁", "native": { "uz": "oxirgi", "ru": "последний", "tr": "son" }, "altNative": { "uz": ["so'nggi"] } }
+  ],
+  "sentences": [
+    { "id": "u05.s.01", "en": "One, two, three!", "native": { "uz": "Bir, ikki, uch!", "ru": "Один, два, три!", "tr": "Bir, iki, üç!" }, "altNative": { "ru": ["Раз, два, три!"] } },
+    { "id": "u05.s.02", "en": "I have one brother.", "native": { "uz": "Mening bitta akam bor.", "ru": "У меня один брат.", "tr": "Bir erkek kardeşim var." }, "altEnFor": { "tr": ["I have a brother."] }, "altNative": { "uz": ["Mening bitta ukam bor.", "Bitta akam bor.", "Bitta ukam bor.", "Mening bir akam bor."], "ru": ["У меня есть один брат."], "tr": ["Benim bir erkek kardeşim var.", "Bir tane erkek kardeşim var.", "Bir abim var."] } },
+    { "id": "u05.s.03", "en": "I have two sisters.", "native": { "uz": "Mening ikkita opam bor.", "ru": "У меня две сестры.", "tr": "İki kız kardeşim var." }, "altNative": { "uz": ["Mening ikkita singlim bor.", "Ikkita opam bor.", "Ikkita singlim bor.", "Mening ikki opam bor."], "ru": ["У меня есть две сестры."], "tr": ["Benim iki kız kardeşim var.", "İki ablam var."] } },
+    { "id": "u05.s.04", "en": "Count to three.", "native": { "uz": "Uchgacha sana.", "ru": "Посчитай до трёх.", "tr": "Üçe kadar say." }, "altNative": { "ru": ["Считай до трёх.", "Сосчитай до трёх."] } },
+    { "id": "u05.s.05", "en": "Is this your book?", "native": { "uz": "Bu sening kitobingmi?", "ru": "Это твоя книга?", "tr": "Bu senin kitabın mı?" }, "altNative": { "uz": ["Bu kitobingmi?"], "tr": ["Bu kitabın mı?"] } },
+    { "id": "u05.s.06", "en": "This is not my book.", "native": { "uz": "Bu mening kitobim emas.", "ru": "Это не моя книга.", "tr": "Bu benim kitabım değil." }, "altNative": { "uz": ["Bu kitobim emas."], "tr": ["Bu kitabım değil."] } },
+    { "id": "u05.s.07", "en": "What is your number?", "native": { "uz": "Sening raqaming qanday?", "ru": "Какой у тебя номер?", "tr": "Numaran kaç?" }, "altNative": { "uz": ["Raqaming qanday?", "Sening raqaming nechchi?", "Raqaming nechchi?", "Sening raqaming nima?"], "ru": ["Какой твой номер?"], "tr": ["Senin numaran kaç?", "Numaran ne?", "Senin numaran ne?"] } },
+    { "id": "u05.s.08", "en": "Two coffees, please.", "native": { "uz": "Ikkita qahva, iltimos.", "ru": "Два кофе, пожалуйста.", "tr": "İki kahve, lütfen." }, "altNative": { "uz": ["Iltimos, ikkita qahva.", "Ikki qahva, iltimos."], "ru": ["Пожалуйста, два кофе."], "tr": ["Lütfen, iki kahve."] } },
+
+    { "id": "u05.s.09", "en": "We have four children.", "native": { "uz": "Bizning to'rtta bolamiz bor.", "ru": "У нас четверо детей.", "tr": "Dört çocuğumuz var." }, "altNative": { "uz": ["Bizning to'rtta farzandimiz bor.", "To'rtta bolamiz bor.", "Bizning to'rt bolamiz bor."], "ru": ["У нас четыре ребёнка.", "У нас есть четверо детей."], "tr": ["Bizim dört çocuğumuz var."] } },
+    { "id": "u05.s.10", "en": "I have five books.", "native": { "uz": "Menda beshta kitob bor.", "ru": "У меня пять книг.", "tr": "Beş kitabım var." }, "altNative": { "uz": ["Mening beshta kitobim bor.", "Beshta kitobim bor.", "Menda besh kitob bor."], "ru": ["У меня есть пять книг."], "tr": ["Benim beş kitabım var."] } },
+    { "id": "u05.s.11", "en": "The teacher has six students.", "native": { "uz": "O'qituvchining oltita talabasi bor.", "ru": "У учителя шесть студентов.", "tr": "Öğretmenin altı öğrencisi var." }, "altNative": { "uz": ["O'qituvchining olti talabasi bor.", "O'qituvchida oltita talaba bor."], "ru": ["У учителя шесть учеников.", "У учительницы шесть студентов."] } },
+    { "id": "u05.s.12", "en": "Seven, eight, nine, ten!", "native": { "uz": "Yetti, sakkiz, to'qqiz, o'n!", "ru": "Семь, восемь, девять, десять!", "tr": "Yedi, sekiz, dokuz, on!" } },
+    { "id": "u05.s.13", "en": "Not seven, eight!", "altEn": ["Not seven, but eight!"], "native": { "uz": "Yetti emas, sakkiz!", "ru": "Не семь, а восемь!", "tr": "Yedi değil, sekiz!" }, "altNative": { "uz": ["Yettita emas, sakkizta!"], "ru": ["Не семь, восемь!"] } },
+    { "id": "u05.s.14", "en": "There are nine people here.", "altEn": ["Nine people are here."], "native": { "uz": "Shu yerda to'qqizta odam bor.", "ru": "Здесь девять человек.", "tr": "Burada dokuz kişi var." }, "altNative": { "uz": ["Bu yerda to'qqizta odam bor.", "Shu yerda to'qqiz kishi bor.", "Bu yerda to'qqiz kishi bor.", "Shu yerda to'qqiz odam bor."], "ru": ["Тут девять человек."], "tr": ["Burada dokuz insan var."] } },
+    { "id": "u05.s.15", "en": "Count to ten, please.", "native": { "uz": "O'ngacha sana, iltimos.", "ru": "Посчитай до десяти, пожалуйста.", "tr": "Ona kadar say, lütfen." }, "altNative": { "uz": ["Iltimos, o'ngacha sana."], "ru": ["Считай до десяти, пожалуйста.", "Сосчитай до десяти, пожалуйста.", "Пожалуйста, посчитай до десяти."], "tr": ["Lütfen ona kadar say."] } },
+    { "id": "u05.s.16", "en": "Do you have six eggs?", "native": { "uz": "Senda oltita tuxum bormi?", "ru": "У тебя есть шесть яиц?", "tr": "Altı yumurtan var mı?" }, "altNative": { "uz": ["Sening oltita tuxuming bormi?", "Oltita tuxuming bormi?", "Senda olti tuxum bormi?"], "tr": ["Senin altı yumurtan var mı?", "Sende altı yumurta var mı?"] } },
+
+    { "id": "u05.s.17", "en": "How old are you?", "native": { "uz": "Sen necha yoshdasan?", "ru": "Сколько тебе лет?", "tr": "Kaç yaşındasın?" }, "altNative": { "uz": ["Necha yoshdasan?", "Yoshing nechada?", "Sening yoshing nechada?"], "ru": ["Тебе сколько лет?"], "tr": ["Sen kaç yaşındasın?"] } },
+    { "id": "u05.s.18", "en": "I am ten years old.", "altEn": ["I am ten."], "native": { "uz": "Men o'n yoshdaman.", "ru": "Мне десять лет.", "tr": "Ben on yaşındayım." }, "altNative": { "uz": ["O'n yoshdaman.", "Mening yoshim o'nda."], "tr": ["On yaşındayım."] } },
+    { "id": "u05.s.19", "en": "How old is your daughter?", "native": { "uz": "Sening qizing necha yoshda?", "ru": "Сколько лет твоей дочери?", "tr": "Kızın kaç yaşında?" }, "altNative": { "uz": ["Qizing necha yoshda?", "Qizingning yoshi nechada?"], "ru": ["Сколько лет твоей дочке?", "Сколько твоей дочери лет?"], "tr": ["Senin kızın kaç yaşında?"] } },
+    { "id": "u05.s.20", "en": "My daughter is only one year old.", "altEn": ["My daughter is only a year old.", "My daughter is only one."], "native": { "uz": "Mening qizim faqat bir yoshda.", "ru": "Моей дочери всего один год.", "tr": "Kızım sadece bir yaşında." }, "altNative": { "uz": ["Qizim faqat bir yoshda.", "Mening qizim atigi bir yoshda.", "Mening qizim endigina bir yoshda."], "ru": ["Моей дочери только один год.", "Моей дочке всего один год.", "Моей дочери всего год.", "Моей дочке всего год."], "tr": ["Benim kızım sadece bir yaşında.", "Kızım daha bir yaşında."] } },
+    { "id": "u05.s.21", "en": "My baby is six months old.", "native": { "uz": "Mening chaqalog'im olti oylik.", "ru": "Моему малышу шесть месяцев.", "tr": "Bebeğim altı aylık." }, "altNative": { "uz": ["Chaqalog'im olti oylik.", "Mening bolam olti oylik."], "ru": ["Моему ребёнку шесть месяцев."], "tr": ["Benim bebeğim altı aylık."] } },
+    { "id": "u05.s.22", "en": "Today is my birthday.", "altEn": ["It is my birthday today.", "My birthday is today."], "native": { "uz": "Bugun mening tug'ilgan kunim.", "ru": "Сегодня мой день рождения.", "tr": "Bugün benim doğum günüm." }, "altNative": { "uz": ["Bugun tug'ilgan kunim."], "ru": ["У меня сегодня день рождения.", "Сегодня у меня день рождения."], "tr": ["Bugün doğum günüm."] } },
+    { "id": "u05.s.23", "en": "Happy birthday, Madina!", "native": { "uz": "Tug'ilgan kuning bilan, Madina!", "ru": "С днём рождения, Мадина!", "tr": "Doğum günün kutlu olsun, Madina!" }, "altNative": { "uz": ["Tug'ilgan kuning muborak, Madina!", "Madina, tug'ilgan kuning bilan!"], "ru": ["Мадина, с днём рождения!"], "tr": ["İyi ki doğdun, Madina!", "Mutlu yıllar, Madina!", "Madina, doğum günün kutlu olsun!"] } },
+    { "id": "u05.s.24", "en": "Age is only a number.", "native": { "uz": "Yosh — bu faqat raqam.", "ru": "Возраст — это только цифра.", "tr": "Yaş sadece bir sayı." }, "altNative": { "uz": ["Yosh faqat raqam.", "Yosh bu shunchaki raqam."], "ru": ["Возраст — это всего лишь цифра.", "Возраст — это просто число.", "Возраст — это только число.", "Возраст — только цифра."], "tr": ["Yaş sadece bir sayıdır.", "Yaş sadece bir rakam.", "Yaş sadece bir numara."] } },
+
+    { "id": "u05.s.25", "en": "How many brothers do you have?", "native": { "uz": "Sening nechta akang bor?", "ru": "Сколько у тебя братьев?", "tr": "Kaç erkek kardeşin var?" }, "altNative": { "uz": ["Nechta akang bor?", "Sening nechta ukang bor?", "Nechta ukang bor?", "Sening nechta aka-ukang bor?", "Nechta aka-ukang bor?"], "ru": ["У тебя сколько братьев?"], "tr": ["Senin kaç erkek kardeşin var?", "Kaç tane erkek kardeşin var?", "Kaç abin var?"] } },
+    { "id": "u05.s.26", "en": "I have four brothers and two sisters.", "native": { "uz": "Mening to'rtta akam va ikkita opam bor.", "ru": "У меня четыре брата и две сестры.", "tr": "Dört erkek kardeşim ve iki kız kardeşim var." }, "altNative": { "uz": ["Mening to'rtta ukam va ikkita singlim bor.", "Mening to'rtta akam va ikkita singlim bor.", "Mening to'rtta ukam va ikkita opam bor.", "To'rtta akam va ikkita opam bor."], "ru": ["У меня есть четыре брата и две сестры."], "tr": ["Benim dört erkek kardeşim ve iki kız kardeşim var.", "Dört abim ve iki ablam var."] } },
+    { "id": "u05.s.27", "en": "How many people live here?", "native": { "uz": "Shu yerda nechta odam yashaydi?", "ru": "Сколько людей здесь живёт?", "tr": "Burada kaç kişi yaşıyor?" }, "altNative": { "uz": ["Bu yerda nechta odam yashaydi?", "Shu yerda necha kishi yashaydi?", "Bu yerda necha kishi yashaydi?"], "ru": ["Сколько человек здесь живёт?", "Сколько людей живёт здесь?", "Сколько человек живёт здесь?", "Сколько людей тут живёт?"], "tr": ["Burada kaç insan yaşıyor?", "Burada kaç tane insan yaşıyor?"] } },
+    { "id": "u05.s.28", "en": "I do not have many books.", "native": { "uz": "Menda ko'p kitob yo'q.", "ru": "У меня не так много книг.", "tr": "Çok kitabım yok." }, "altNative": { "uz": ["Mening kitobim ko'p emas.", "Kitoblarim ko'p emas.", "Mening ko'p kitobim yo'q."], "ru": ["У меня немного книг.", "У меня не много книг.", "У меня мало книг."], "tr": ["Benim çok kitabım yok.", "Fazla kitabım yok.", "Pek kitabım yok."] } },
+    { "id": "u05.s.29", "en": "What is your phone number?", "native": { "uz": "Sening telefon raqaming qanday?", "ru": "Какой у тебя номер телефона?", "tr": "Telefon numaran kaç?" }, "altNative": { "uz": ["Telefon raqaming qanday?", "Sening telefon raqaming nechchi?", "Telefon raqaming nechchi?", "Sening telefon raqaming nima?"], "ru": ["Какой твой номер телефона?"], "tr": ["Senin telefon numaran kaç?", "Telefon numaran ne?", "Senin telefon numaran ne?"] } },
+    { "id": "u05.s.30", "en": "Do you want more tea?", "native": { "uz": "Yana choy xohlaysanmi?", "ru": "Хочешь ещё чая?", "tr": "Biraz daha çay ister misin?" }, "altNative": { "uz": ["Sen yana choy xohlaysanmi?", "Ko'proq choy xohlaysanmi?", "Yana choy ichasanmi?"], "ru": ["Ты хочешь ещё чая?", "Хочешь ещё чаю?", "Ты хочешь ещё чаю?", "Ты хочешь больше чая?"], "tr": ["Daha çay ister misin?", "Daha fazla çay ister misin?", "Daha çok çay ister misin?", "Sen biraz daha çay ister misin?"] } },
+    { "id": "u05.s.31", "en": "All my friends are here.", "altEn": ["All of my friends are here."], "native": { "uz": "Hamma do'stlarim shu yerda.", "ru": "Все мои друзья здесь.", "tr": "Bütün arkadaşlarım burada." }, "altNative": { "uz": ["Mening hamma do'stlarim shu yerda.", "Barcha do'stlarim shu yerda.", "Hamma do'stlarim bu yerda.", "Do'stlarimning hammasi shu yerda."], "ru": ["Все мои друзья тут.", "Здесь все мои друзья."], "tr": ["Tüm arkadaşlarım burada.", "Arkadaşlarımın hepsi burada.", "Benim bütün arkadaşlarım burada."] } },
+    { "id": "u05.s.32", "en": "This is my first English book.", "native": { "uz": "Bu mening birinchi inglizcha kitobim.", "ru": "Это моя первая английская книга.", "tr": "Bu benim ilk İngilizce kitabım." }, "altNative": { "uz": ["Bu mening birinchi ingliz tili kitobim.", "Bu birinchi inglizcha kitobim.", "Bu mening ingliz tilidagi birinchi kitobim."], "ru": ["Это моя первая книга на английском."], "tr": ["Bu ilk İngilizce kitabım.", "Bu benim birinci İngilizce kitabım."] } },
+
+    { "id": "u05.s.33", "en": "I am twenty years old.", "altEn": ["I am twenty."], "native": { "uz": "Men yigirma yoshdaman.", "ru": "Мне двадцать лет.", "tr": "Ben yirmi yaşındayım." }, "altNative": { "uz": ["Yigirma yoshdaman.", "Mening yoshim yigirmada."], "tr": ["Yirmi yaşındayım."] } },
+    { "id": "u05.s.34", "en": "My sister is fifteen years old.", "altEn": ["My sister is fifteen."], "native": { "uz": "Mening opam o'n besh yoshda.", "ru": "Моей сестре пятнадцать лет.", "tr": "Kız kardeşim on beş yaşında." }, "altNative": { "uz": ["Mening singlim o'n besh yoshda.", "Opam o'n besh yoshda.", "Singlim o'n besh yoshda."], "tr": ["Benim kız kardeşim on beş yaşında.", "Ablam on beş yaşında."] } },
+    { "id": "u05.s.35", "en": "I am not eleven, I am twelve!", "native": { "uz": "Men o'n bir emas, o'n ikki yoshdaman!", "ru": "Мне не одиннадцать, а двенадцать!", "tr": "Ben on bir değil, on iki yaşındayım!" }, "altNative": { "uz": ["O'n bir emas, o'n ikki yoshdaman!", "Men o'n birda emas, o'n ikkidaman!"], "ru": ["Мне не одиннадцать, мне двенадцать!", "Мне не одиннадцать лет, а двенадцать!"], "tr": ["On bir değil, on iki yaşındayım!", "Ben on bir yaşında değilim, on iki yaşındayım!"] } },
+    { "id": "u05.s.36", "en": "There are twelve months in a year.", "altEn": ["A year has twelve months."], "native": { "uz": "Bir yilda o'n ikki oy bor.", "ru": "В году двенадцать месяцев.", "tr": "Bir yılda on iki ay var." }, "altNative": { "uz": ["Yilda o'n ikki oy bor.", "Bir yilda o'n ikkita oy bor."], "ru": ["В одном году двенадцать месяцев."], "tr": ["Bir yılda on iki ay vardır.", "Yılda on iki ay var."] } },
+    { "id": "u05.s.37", "en": "Can you count to twenty?", "native": { "uz": "Yigirmagacha sanay olasanmi?", "ru": "Ты умеешь считать до двадцати?", "tr": "Yirmiye kadar sayabilir misin?" }, "altNative": { "uz": ["Sen yigirmagacha sanay olasanmi?", "Yigirmagacha sanashni bilasanmi?"], "ru": ["Умеешь считать до двадцати?", "Ты можешь считать до двадцати?", "Ты можешь посчитать до двадцати?", "Можешь посчитать до двадцати?"], "tr": ["Sen yirmiye kadar sayabilir misin?", "Yirmiye kadar saymayı biliyor musun?"] } },
+    { "id": "u05.s.38", "en": "Do you have my new phone number?", "native": { "uz": "Senda mening yangi telefon raqamim bormi?", "ru": "У тебя есть мой новый номер телефона?", "tr": "Sende yeni telefon numaram var mı?" }, "altNative": { "uz": ["Senda yangi telefon raqamim bormi?", "Mening yangi telefon raqamim senda bormi?"], "ru": ["У тебя есть мой новый номер?", "Мой новый номер телефона у тебя есть?"], "tr": ["Yeni telefon numaram sende var mı?", "Sende benim yeni telefon numaram var mı?"] } },
+    { "id": "u05.s.39", "en": "This is the last week of the month.", "altEn": ["It is the last week of the month."], "native": { "uz": "Bu oyning oxirgi haftasi.", "ru": "Это последняя неделя месяца.", "tr": "Bu ayın son haftası." }, "altNative": { "uz": ["Bu oyning so'nggi haftasi."], "tr": ["Bu, ayın son haftasıdır."] } },
+    { "id": "u05.s.40", "en": "Only eleven people are here today.", "altEn": ["There are only eleven people here today."], "native": { "uz": "Bugun shu yerda faqat o'n bitta odam bor.", "ru": "Сегодня здесь только одиннадцать человек.", "tr": "Bugün burada sadece on bir kişi var." }, "altNative": { "uz": ["Bugun bu yerda faqat o'n bitta odam bor.", "Bugun shu yerda faqat o'n bir kishi bor.", "Bugun bu yerda faqat o'n bir kishi bor."], "ru": ["Сегодня здесь всего одиннадцать человек.", "Здесь сегодня только одиннадцать человек.", "Сегодня тут только одиннадцать человек."], "tr": ["Bugün burada yalnızca on bir kişi var.", "Burada bugün sadece on bir kişi var."] } }
+  ],
+  "lessons": [
+    {
+      "id": "u05-l1",
+      "title": { "en": "One, two, three", "uz": "Bir, ikki, uch", "ru": "Один, два, три", "tr": "Bir, iki, üç" },
+      "words": ["u05.w.one", "u05.w.two", "u05.w.three", "u05.w.number", "u05.w.count", "u05.w.book"],
+      "sentences": ["u05.s.01", "u05.s.02", "u05.s.03", "u05.s.04", "u05.s.05", "u05.s.06", "u05.s.07", "u05.s.08"]
+    },
+    {
+      "id": "u05-l2",
+      "title": { "en": "Four to ten", "uz": "To'rtdan o'ngacha", "ru": "От четырёх до десяти", "tr": "Dörtten ona kadar" },
+      "words": ["u05.w.four", "u05.w.five", "u05.w.six", "u05.w.seven", "u05.w.eight", "u05.w.nine", "u05.w.ten"],
+      "sentences": ["u05.s.09", "u05.s.10", "u05.s.11", "u05.s.12", "u05.s.13", "u05.s.14", "u05.s.15", "u05.s.16"]
+    },
+    {
+      "id": "u05-l3",
+      "title": { "en": "How old are you?", "uz": "Necha yoshdasan?", "ru": "Сколько тебе лет?", "tr": "Kaç yaşındasın?" },
+      "words": ["u05.w.age", "u05.w.year", "u05.w.birthday", "u05.w.month", "u05.w.only"],
+      "sentences": ["u05.s.17", "u05.s.18", "u05.s.19", "u05.s.20", "u05.s.21", "u05.s.22", "u05.s.23", "u05.s.24"]
+    },
+    {
+      "id": "u05-l4",
+      "title": { "en": "How many?", "uz": "Nechta?", "ru": "Сколько?", "tr": "Kaç tane?" },
+      "words": ["u05.w.how-many", "u05.w.many", "u05.w.phone", "u05.w.more", "u05.w.all", "u05.w.first"],
+      "sentences": ["u05.s.25", "u05.s.26", "u05.s.27", "u05.s.28", "u05.s.29", "u05.s.30", "u05.s.31", "u05.s.32"]
+    },
+    {
+      "id": "u05-l5",
+      "title": { "en": "Eleven to twenty", "uz": "O'n birdan yigirmagacha", "ru": "От одиннадцати до двадцати", "tr": "On birden yirmiye kadar" },
+      "words": ["u05.w.eleven", "u05.w.twelve", "u05.w.fifteen", "u05.w.twenty", "u05.w.week", "u05.w.last"],
+      "sentences": ["u05.s.33", "u05.s.34", "u05.s.35", "u05.s.36", "u05.s.37", "u05.s.38", "u05.s.39", "u05.s.40"]
+    }
+  ]
+}
