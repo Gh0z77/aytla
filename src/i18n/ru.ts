@@ -193,6 +193,11 @@ export const ru: Record<StringKey, string> = {
   'landing.footer': 'Aytla · Скажи, услышь, заговори',
 
   'tabs.league': 'Лига',
+  'league.tier0': 'Птенец',
+  'league.tier1': 'Слёток',
+  'league.tier2': 'Певчая птица',
+  'league.tier3': 'Сокол',
+  'league.tier4': 'Орёл',
 
   'league.title': 'Недельная лига',
   'league.signedOut': 'Соревнуйтесь с другими учениками в недельной лиге. Для этого нужен аккаунт.',

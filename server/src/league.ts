@@ -7,7 +7,7 @@ import type { Db } from './db.ts'
  * a reasonably full cohort move down.
  */
 
-export const TIERS = ['Base Camp', 'Camp 1', 'Camp 2', 'Camp 3', 'Summit'] as const
+export const TIERS = ['Chick', 'Fledgling', 'Songbird', 'Falcon', 'Eagle'] as const
 export const COHORT_SIZE = 30
 export const PROMOTE_TOP = 7
 export const DEMOTE_BOTTOM = 5

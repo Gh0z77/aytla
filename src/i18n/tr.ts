@@ -193,6 +193,11 @@ export const tr: Record<StringKey, string> = {
   'landing.footer': 'Aytla · Söyle, duy, konuş',
 
   'tabs.league': 'Lig',
+  'league.tier0': 'Civciv',
+  'league.tier1': 'Yavru kuş',
+  'league.tier2': 'Ötücü kuş',
+  'league.tier3': 'Şahin',
+  'league.tier4': 'Kartal',
 
   'league.title': 'Haftalık lig',
   'league.signedOut': 'Haftalık ligde diğer öğrencilerle yarış. Bunun için bir hesap gerekli.',

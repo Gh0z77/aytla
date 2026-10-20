@@ -148,7 +148,7 @@ describe('leagues', () => {
     await putState(ali, stateOf(clock, 10))
     const view = (await (await app.request('/league', auth(ali))).json()) as { tier: number; tierName: string }
     expect(view.tier).toBe(1)
-    expect(view.tierName).toBe('Camp 1')
+    expect(view.tierName).toBe('Fledgling')
   })
 })
 

@@ -3,7 +3,7 @@ import { useFocusEffect, useRouter } from 'expo-router'
 import { useCallback, useState } from 'react'
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import { isCharacterId } from '../../core/characters'
-import { useT } from '../../i18n'
+import { useT, type StringKey } from '../../i18n'
 import { api, type LeagueResponse } from '../../lib/api'
 import { useAccount } from '../../state/account'
 import { colors, radius, space } from '../../theme/tokens'
@@ -82,7 +82,7 @@ export function LeagueBody() {
             <Txt variant="caption" color={colors.textMuted} style={styles.upper}>
               {t('league.title')}
             </Txt>
-            <Txt variant="title">{league?.tierName ?? '—'}</Txt>
+            <Txt variant="title">{league ? t(`league.tier${Math.min(4, Math.max(0, league.tier))}` as StringKey) : '—'}</Txt>
           </View>
           {loading ? <ActivityIndicator color={colors.primary} /> : null}
         </View>

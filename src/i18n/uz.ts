@@ -192,6 +192,11 @@ export const uz = {
   'landing.footer': 'Aytla · Ayting, eshiting, gapiring',
 
   'tabs.league': 'Liga',
+  'league.tier0': "Jo'ja",
+  'league.tier1': 'Polapon',
+  'league.tier2': 'Sayroqi',
+  'league.tier3': 'Lochin',
+  'league.tier4': 'Burgut',
 
   'league.title': 'Haftalik liga',
   'league.signedOut': "Haftalik ligada boshqa o'quvchilar bilan bellashing. Buning uchun akkaunt kerak.",
