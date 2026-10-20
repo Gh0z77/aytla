@@ -15,6 +15,8 @@ import { Button } from '../../ui/Button'
 import { Mascot } from '../../ui/Mascot'
 import { ProgressBar } from '../../ui/ProgressBar'
 import { Screen } from '../../ui/Screen'
+import { TabScreen, useDesktop } from '../shell/TabScreen'
+import { MissionCard } from './MissionCard'
 import { Txt } from '../../ui/Txt'
 import { TopBar } from './TopBar'
 
@@ -41,6 +43,7 @@ export function PathScreen() {
   const lang = useApp((s) => s.user.profile.baseLang)
   const haptics = useApp((s) => s.user.profile.hapticsOn)
   const guideId = useApp((s) => s.user.profile.guide)
+  const desktop = useDesktop()
   const openChest = useApp((s) => s.openChest)
 
   const goal = useApp((s) => s.user.profile.goal)
@@ -118,10 +121,13 @@ export function PathScreen() {
   let lastSectionId: string | null = null
 
   return (
-    <Screen background={colors.sky}>
+    <TabScreen background={colors.sky}>
       <TopBar />
       <ScrollView ref={scroll} contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
-        {/* the climb so far */}
+        {/* today's mission: what to do now (on desktop it also lives in the side panel) */}
+        {!desktop ? <MissionCard /> : null}
+
+        {/* the climb so far, in sentences the learner can say */}
         <View style={styles.climb}>
           <View style={styles.climbTop}>
             <Ionicons name="flag" size={18} color={colors.primary} />
@@ -141,12 +147,11 @@ export function PathScreen() {
                 </Txt>
               </Txt>
             </View>
-            <Mascot id={guideId} size={64} mood={climb.said > 0 ? 'talk' : 'happy'} />
+            <Txt variant="caption" color={colors.textMuted}>
+              {t('learn.climbed', { done: climb.done, total: climb.steps })}
+            </Txt>
           </View>
-          <ProgressBar value={climb.ratio} color={colors.lime} track={colors.surface} />
-          <Txt variant="caption" color={colors.textMuted}>
-            {t('learn.climbed', { done: climb.done, total: climb.steps })}
-          </Txt>
+          <ProgressBar value={climb.ratio} color={colors.lime} track={colors.surface} height={10} />
         </View>
 
         {path.map((pu, unitIndex) => {
@@ -226,7 +231,7 @@ export function PathScreen() {
           </Txt>
         </View>
       ) : null}
-    </Screen>
+    </TabScreen>
   )
 }
 

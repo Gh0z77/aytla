@@ -12,7 +12,7 @@ import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
 import { GUIDES, Mascot } from '../../ui/Mascot'
-import { Screen } from '../../ui/Screen'
+import { TabScreen } from '../shell/TabScreen'
 import { Txt } from '../../ui/Txt'
 import { errorText } from '../account/errors'
 
@@ -52,7 +52,7 @@ export function ProfileScreen() {
   }
 
   return (
-    <Screen scroll>
+    <TabScreen scroll>
       <View style={styles.body}>
         <View style={styles.header}>
           <View style={styles.avatar}>
@@ -260,7 +260,7 @@ export function ProfileScreen() {
           </View>
         </View>
       </Modal>
-    </Screen>
+    </TabScreen>
   )
 }
 

@@ -14,6 +14,7 @@ import {
   type BuyFailure,
   type ShopItem,
 } from '../core/progress'
+import { completeChallenge as completeChallengePure } from '../core/mission'
 import type { LessonResult, Profile, Rewards, UserState } from '../core/types'
 
 /**
@@ -36,6 +37,8 @@ interface AppStore {
   openChest: (chestId: string) => number
   markLessonsDone: (lessonIds: string[]) => void
   rememberCorrection: (better: string, note: string) => void
+  /** the sentence of the day was attempted; rewards are empty when it was already done today */
+  completeChallenge: (sentenceId: string, correct: boolean) => Rewards
   reset: () => void
 }
 
@@ -86,6 +89,12 @@ export const useApp = create<AppStore>()(
       },
 
       rememberCorrection: (better, note) => set({ user: addCoachNote(get().user, { better, note }, Date.now()) }),
+
+      completeChallenge: (sentenceId, correct) => {
+        const { state, rewards } = completeChallengePure(get().user, sentenceId, correct, Date.now())
+        set({ user: state })
+        return rewards
+      },
 
       reset: () => set({ user: createInitialState(Date.now()), lastRewards: null, lastLessonId: null }),
     }),

@@ -274,6 +274,8 @@ export interface DayStats {
   seconds: number
   /** sentences said aloud (or typed in a speaking round); missing in states saved before this existed */
   spoken?: number
+  /** the sentence of the day was said */
+  challenge?: boolean
 }
 
 export type QuestKind = 'xp' | 'lessons' | 'perfect' | 'combo' | 'practice'

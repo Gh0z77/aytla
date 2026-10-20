@@ -51,6 +51,7 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="account" options={{ presentation: 'modal' }} />
         <Stack.Screen name="shop" />
+        <Stack.Screen name="challenge" options={{ animation: 'slide_from_bottom' }} />
         <Stack.Screen name="unit/[id]" />
         <Stack.Screen name="coach/index" />
         <Stack.Screen name="coach/[id]" options={{ gestureEnabled: false }} />

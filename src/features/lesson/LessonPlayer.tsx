@@ -14,7 +14,7 @@ import { canListen, canSpeak, stopSpeaking } from '../../lib/speech'
 import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
-import { Mascot } from '../../ui/Mascot'
+import { AnimatedMascot, Mascot } from '../../ui/Mascot'
 import { ProgressBar } from '../../ui/ProgressBar'
 import { Screen } from '../../ui/Screen'
 import { Txt } from '../../ui/Txt'
@@ -159,7 +159,7 @@ export function LessonPlayer({ lessonId }: { lessonId: string }) {
         </ScrollView>
 
         {locked && result ? (
-          <Feedback result={result} onContinue={onContinue} />
+          <Feedback key={exercise?.id} result={result} guide={prepared.guide} onContinue={onContinue} />
         ) : exercise && exercise.kind !== 'match' ? (
           <View style={styles.footer}>
             <Button label={t('lesson.check')} variant="success" disabled={!isDraftReady(draft)} onPress={check} testID="check" />
@@ -211,15 +211,16 @@ function grade(exercise: Exercise, draft: Draft, baseLang: 'uz' | 'ru' | 'tr', l
   }
 }
 
-function Feedback({ result, onContinue }: { result: GradeResult; onContinue: () => void }) {
+function Feedback({ result, guide, onContinue }: { result: GradeResult; guide: CharacterId; onContinue: () => void }) {
   const t = useT()
   const good = result.correct
-  const tone = good ? { bg: colors.successSoft, text: colors.successText } : { bg: colors.dangerSoft, text: colors.dangerText }
+  const tone = good ? { bg: colors.limeSoft, text: colors.successText } : { bg: colors.dangerSoft, text: colors.dangerText }
   return (
     <View style={[styles.feedback, { backgroundColor: tone.bg }]}>
       <View style={styles.feedbackRow}>
-        <Ionicons name={good ? 'checkmark-circle' : 'close-circle'} size={30} color={tone.text} />
-        <Txt variant="heading" color={tone.text}>
+        {/* the guide reacts: a hop for a right answer, a shake and a sad face for a wrong one */}
+        <AnimatedMascot id={guide} size={56} react={good ? 'correct' : 'wrong'} idle={false} />
+        <Txt variant="heading" color={tone.text} style={styles.flex}>
           {good ? (result.typo ? t('lesson.typo') : t('lesson.correct')) : t('lesson.wrong')}
         </Txt>
       </View>

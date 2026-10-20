@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
 import { useT } from '../../i18n'
 import { colors, radius, space } from '../../theme/tokens'
-import { Screen } from '../../ui/Screen'
+import { TabScreen } from '../shell/TabScreen'
 import { Txt } from '../../ui/Txt'
 import { TopBar } from '../path/TopBar'
 import { LeagueBody } from './LeagueScreen'
@@ -15,7 +15,7 @@ export function ProgressScreen() {
   const t = useT()
   const [part, setPart] = useState<Part>('quests')
   return (
-    <Screen scroll>
+    <TabScreen scroll>
       <TopBar />
       <View style={styles.segments}>
         {(['quests', 'league'] as const).map((p) => (
@@ -27,7 +27,7 @@ export function ProgressScreen() {
         ))}
       </View>
       {part === 'quests' ? <QuestsBody /> : <LeagueBody />}
-    </Screen>
+    </TabScreen>
   )
 }
 

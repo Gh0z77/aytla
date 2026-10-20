@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons'
 import { Tabs } from 'expo-router'
 import { Platform, type ColorValue } from 'react-native'
+import { useDesktop } from '../../src/features/shell/TabScreen'
 import { useT } from '../../src/i18n'
 import { colors, layout } from '../../src/theme/tokens'
 
@@ -17,6 +18,8 @@ const icon =
  */
 export default function TabsLayout() {
   const t = useT()
+  // desktop web navigates from the rail inside TabScreen; the bottom bar would be a second copy
+  const desktop = useDesktop()
   return (
     <Tabs
       screenOptions={{
@@ -25,6 +28,7 @@ export default function TabsLayout() {
         tabBarInactiveTintColor: colors.textMuted,
         tabBarLabelStyle: { fontSize: 12, fontWeight: '800', fontFamily: 'Manrope_800ExtraBold' },
         tabBarStyle: {
+          display: desktop ? 'none' : 'flex',
           borderTopWidth: 2,
           borderTopColor: colors.border,
           backgroundColor: colors.bg,

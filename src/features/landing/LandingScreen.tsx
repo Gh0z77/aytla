@@ -1,12 +1,14 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
-import { Pressable, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native'
+import { useState, type ReactNode } from 'react'
+import { Pressable, ScrollView, StyleSheet, View, useWindowDimensions, type NativeScrollEvent, type NativeSyntheticEvent, type StyleProp, type ViewStyle } from 'react-native'
 import { BASE_LANGS } from '../../core/types'
 import { LANGUAGE_NAMES, useT, type StringKey } from '../../i18n'
 import { useApp } from '../../state/store'
 import { colors, layout, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
-import { GUIDES, Mascot } from '../../ui/Mascot'
+import { AnimatedMascot, GUIDES, Mascot } from '../../ui/Mascot'
+import { Float, Reveal } from '../../ui/Reveal'
 import { Txt } from '../../ui/Txt'
 import { LandingDemo } from './LandingDemo'
 
@@ -18,6 +20,18 @@ const FEATURES: Array<{ icon: keyof typeof Ionicons.glyphMap; color: string; tit
 ]
 
 const STEPS: StringKey[] = ['landing.how.1', 'landing.how.2', 'landing.how.3']
+
+/** Reveals its children once the page has scrolled far enough for them to be in view. */
+function OnScroll({ seen, delay = 0, style, children }: { seen: number; delay?: number; style?: StyleProp<ViewStyle>; children: ReactNode }) {
+  const [top, setTop] = useState<number | null>(null)
+  return (
+    <View style={style} onLayout={(e) => setTop((prev) => prev ?? e.nativeEvent.layout.y)}>
+      <Reveal when={top !== null && seen > top + 40} delay={delay} distance={24}>
+        {children}
+      </Reveal>
+    </View>
+  )
+}
 
 /** Public landing page (web). Native builds skip it and open the app directly. */
 export function LandingScreen() {
@@ -31,8 +45,13 @@ export function LandingScreen() {
 
   const start = () => router.push(onboarded ? '/learn' : '/welcome')
 
+  // sections reveal as they scroll into view: the bottom of the viewport in content coordinates
+  const { height } = useWindowDimensions()
+  const [seen, setSeen] = useState(height)
+  const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => setSeen(e.nativeEvent.contentOffset.y + height)
+
   return (
-    <ScrollView style={styles.page} contentContainerStyle={styles.pageContent}>
+    <ScrollView style={styles.page} contentContainerStyle={styles.pageContent} onScroll={onScroll} scrollEventThrottle={80}>
       {/* nav */}
       <View style={styles.nav}>
         <View style={[styles.container, styles.navInner]}>
@@ -71,9 +90,9 @@ export function LandingScreen() {
           </View>
           <View style={styles.heroBirds}>
             {GUIDES.slice(0, wide ? 6 : 3).map((g, i) => (
-              <View key={g.id} style={{ marginTop: i === 0 ? 0 : 26 + (i % 3) * 10 }}>
-                <Mascot id={g.id} size={i === 0 ? 128 : 76} mood={i === 0 ? 'talk' : i % 2 ? 'happy' : 'cheer'} />
-              </View>
+              <Float key={g.id} amplitude={5 + (i % 3) * 2} duration={1800 + i * 230} delay={i * 150} style={{ marginTop: i === 0 ? 0 : 26 + (i % 3) * 10 }}>
+                <AnimatedMascot id={g.id} size={i === 0 ? 128 : 76} mood={i === 0 ? 'talk' : i % 2 ? 'happy' : 'cheer'} />
+              </Float>
             ))}
           </View>
         </View>
@@ -110,8 +129,8 @@ export function LandingScreen() {
       {/* features */}
       <View style={styles.band}>
         <View style={[styles.container, styles.grid]}>
-          {FEATURES.map((f) => (
-            <View key={f.title} style={[styles.feature, { width: wide ? '48%' : '100%' }]}>
+          {FEATURES.map((f, i) => (
+            <OnScroll key={f.title} seen={seen} delay={i * 90} style={[styles.feature, { width: wide ? '48%' : '100%' }]}>
               <View style={[styles.featureIcon, { backgroundColor: f.color }]}>
                 <Ionicons name={f.icon} size={28} color={colors.white} />
               </View>
@@ -119,13 +138,13 @@ export function LandingScreen() {
                 <Txt variant="heading">{t(f.title)}</Txt>
                 <Txt color={colors.textSoft}>{t(f.body)}</Txt>
               </View>
-            </View>
+            </OnScroll>
           ))}
         </View>
       </View>
 
       {/* how it works */}
-      <View style={[styles.container, styles.section]}>
+      <OnScroll seen={seen} style={[styles.container, styles.section]}>
         <Txt variant="title" center>
           {t('landing.how.title')}
         </Txt>
@@ -143,11 +162,11 @@ export function LandingScreen() {
             </View>
           ))}
         </View>
-      </View>
+      </OnScroll>
 
       {/* guides */}
       <View style={styles.band}>
-        <View style={[styles.container, styles.section]}>
+        <OnScroll seen={seen} style={[styles.container, styles.section]}>
           <Txt variant="title" center>
             {t('landing.guides.title')}
           </Txt>
@@ -155,18 +174,20 @@ export function LandingScreen() {
             {t('landing.guides.body')}
           </Txt>
           <View style={styles.guides}>
-            {GUIDES.map((g) => (
+            {GUIDES.map((g, i) => (
               <View key={g.id} style={styles.guide}>
-                <Mascot id={g.id} size={wide ? 120 : 88} />
+                <Float amplitude={4} duration={2000 + i * 180} delay={i * 120}>
+                  <AnimatedMascot id={g.id} size={wide ? 120 : 88} mood={i % 3 === 0 ? 'talk' : i % 3 === 1 ? 'happy' : 'cheer'} />
+                </Float>
                 <Txt variant="label">{g.name}</Txt>
               </View>
             ))}
           </View>
-        </View>
+        </OnScroll>
       </View>
 
       {/* apps + final CTA */}
-      <View style={[styles.container, styles.section]}>
+      <OnScroll seen={seen} style={[styles.container, styles.section]}>
         <View style={styles.devices}>
           <Ionicons name="desktop-outline" size={40} color={colors.primary} />
           <Ionicons name="logo-android" size={40} color={colors.success} />
@@ -181,7 +202,7 @@ export function LandingScreen() {
         <View style={styles.cta}>
           <Button label={onboarded ? t('landing.have') : t('landing.cta')} onPress={start} />
         </View>
-      </View>
+      </OnScroll>
 
       <View style={styles.footer}>
         <Txt variant="caption" color={colors.textMuted} center>

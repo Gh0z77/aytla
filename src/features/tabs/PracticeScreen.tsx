@@ -8,7 +8,7 @@ import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
 import { Mascot } from '../../ui/Mascot'
-import { Screen } from '../../ui/Screen'
+import { TabScreen } from '../shell/TabScreen'
 import { Txt } from '../../ui/Txt'
 import { PRACTICE_ID } from '../lesson/LessonPlayer'
 import { TopBar } from '../path/TopBar'
@@ -25,7 +25,7 @@ export function PracticeScreen() {
   const seen = Object.keys(user.srs).length
 
   return (
-    <Screen scroll>
+    <TabScreen scroll>
       <TopBar />
       <View style={styles.body}>
         <Entry guide="lumi" tint={colors.primaryTint} border={colors.primarySoft} title={t('coach.title')} body={t('coach.body')} onPress={() => router.push('/coach')} testID="open-coach" />
@@ -57,7 +57,7 @@ export function PracticeScreen() {
           )}
         </View>
       </View>
-    </Screen>
+    </TabScreen>
   )
 }
 

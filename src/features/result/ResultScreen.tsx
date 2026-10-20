@@ -10,7 +10,8 @@ import { useAccount } from '../../state/account'
 import { useApp } from '../../state/store'
 import { NATIVE_DRIVER, colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
-import { Mascot } from '../../ui/Mascot'
+import { Confetti } from '../../ui/Confetti'
+import { AnimatedMascot } from '../../ui/Mascot'
 import { Screen } from '../../ui/Screen'
 import { Txt } from '../../ui/Txt'
 import { scenarioTitle } from '../coach/CoachListScreen'
@@ -53,8 +54,9 @@ export function ResultScreen() {
   return (
     <Screen edges={['top', 'left', 'right', 'bottom']}>
       <View style={styles.body}>
+        {rewards.perfect || rewards.xp >= 20 ? <Confetti /> : null}
         <Animated.View style={{ transform: [{ scale: pop }] }}>
-          <Mascot id={guide} size={190} />
+          <AnimatedMascot id={guide} size={190} react="celebrate" />
         </Animated.View>
         <Txt variant="title" color={colors.goldEdge} center>
           {rewards.perfect ? t('result.perfect') : t('result.title')}
