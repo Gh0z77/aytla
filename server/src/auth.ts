@@ -5,10 +5,16 @@ import type { Db } from './db.ts'
  * Accounts: scrypt password hashes and opaque bearer tokens.
  * Tokens are random, stored only as SHA-256 hashes (a leaked database cannot
  * be replayed), expire after 90 days and are revoked on logout.
+ *
+ * Telegram and Google (Clerk) accounts have no password: their hash column
+ * holds a marker (`telegram$`, `clerk$`) that never verifies, and `provider`
+ * is derived from it so the API can say how the learner signed up.
  */
 
 const SCRYPT_KEYLEN = 64
 const TOKEN_TTL_MS = 90 * 24 * 60 * 60 * 1000
+
+export type Provider = 'email' | 'telegram' | 'google'
 
 export interface User {
   id: number
@@ -16,7 +22,16 @@ export interface User {
   name: string
   guide: string
   tier: number
+  /** how the learner signed up; a password login never opens a Telegram or Google account */
+  provider: Provider
 }
+
+/** the provider column, derived from the hash scheme (`u` is the users alias) */
+const providerSql = (alias: string) => `CASE WHEN ${alias}.password_hash = 'telegram$' THEN 'telegram' WHEN ${alias}.password_hash = 'clerk$' THEN 'google' ELSE 'email' END AS provider`
+export const USER_COLUMNS = `u.id, u.email, u.name, u.guide, u.tier, ${providerSql('u')}`
+
+/** Telegram and Clerk accounts carry an internal key instead of an email; it is never shown */
+export const isPlaceholderEmail = (email: string): boolean => email.startsWith('tg:') || email.startsWith('clerk:')
 
 export function hashPassword(password: string): string {
   const salt = randomBytes(16)
@@ -34,35 +49,47 @@ export function verifyPassword(password: string, stored: string): boolean {
 
 const hashToken = (token: string) => createHash('sha256').update(token).digest('hex')
 
-export function issueToken(db: Db, userId: number, now: number): string {
+export async function issueToken(db: Db, userId: number, now: number): Promise<string> {
   const token = randomBytes(32).toString('base64url')
-  db.prepare('INSERT INTO sessions (token_hash, user_id, created_at, expires_at) VALUES (?, ?, ?, ?)').run(hashToken(token), userId, now, now + TOKEN_TTL_MS)
+  await db.run('INSERT INTO sessions (token_hash, user_id, created_at, expires_at) VALUES (?, ?, ?, ?)', hashToken(token), userId, now, now + TOKEN_TTL_MS)
   return token
 }
 
-export function revokeToken(db: Db, token: string): void {
-  db.prepare('DELETE FROM sessions WHERE token_hash = ?').run(hashToken(token))
+export async function revokeToken(db: Db, token: string): Promise<void> {
+  await db.run('DELETE FROM sessions WHERE token_hash = ?', hashToken(token))
 }
 
-export function userForToken(db: Db, token: string, now: number): User | null {
-  const row = db
-    .prepare(
-      `SELECT u.id, u.email, u.name, u.guide, u.tier
-         FROM sessions s JOIN users u ON u.id = s.user_id
-        WHERE s.token_hash = ? AND s.expires_at > ?`
-    )
-    .get(hashToken(token), now) as User | undefined
-  return row ?? null
+export async function userForToken(db: Db, token: string, now: number): Promise<User | null> {
+  const row = await db.get<User>(
+    `SELECT ${USER_COLUMNS}
+       FROM sessions s JOIN users u ON u.id = s.user_id
+      WHERE s.token_hash = ? AND s.expires_at > ?`,
+    hashToken(token),
+    now
+  )
+  return row ? { ...row, id: Number(row.id) } : null
 }
 
-export function findUserByEmail(db: Db, email: string): (User & { password_hash: string }) | null {
-  const row = db.prepare('SELECT id, email, name, guide, tier, password_hash FROM users WHERE email = ?').get(email) as (User & { password_hash: string }) | undefined
-  return row ?? null
+export async function findUserByEmail(db: Db, email: string): Promise<(User & { password_hash: string }) | null> {
+  const row = await db.get<User & { password_hash: string }>(`SELECT ${USER_COLUMNS}, u.password_hash FROM users u WHERE u.email = ?`, email)
+  return row ? { ...row, id: Number(row.id) } : null
 }
 
-export function createUser(db: Db, email: string, password: string, name: string, now: number): User {
-  const result = db.prepare('INSERT INTO users (email, password_hash, name, created_at) VALUES (?, ?, ?, ?)').run(email, hashPassword(password), name, now)
-  return { id: Number(result.lastInsertRowid), email, name, guide: 'everest', tier: 0 }
+export async function createUser(db: Db, email: string, password: string, name: string, now: number): Promise<User> {
+  const row = await db.get<{ id: number }>('INSERT INTO users (email, password_hash, name, created_at) VALUES (?, ?, ?, ?) RETURNING id', email, hashPassword(password), name, now)
+  return { id: Number(row?.id), email, name, guide: 'everest', tier: 0, provider: 'email' }
+}
+
+/** Google (and any other Clerk) sign-in: the account is keyed by the Clerk user id, never by the email the client reports. */
+export async function findOrCreateClerkUser(db: Db, clerkId: string, email: string, name: string, now: number): Promise<User> {
+  const existing = await db.get<User>(`SELECT ${USER_COLUMNS} FROM users u WHERE u.clerk_id = ?`, clerkId)
+  if (existing) return { ...existing, id: Number(existing.id) }
+  // the email is for display only; if another account already owns it, this one shows none (no silent account linking)
+  const taken = email ? await findUserByEmail(db, email) : null
+  const shown = email && !taken ? email : `clerk:${clerkId}`
+  const clean = cleanName(name)
+  const row = await db.get<{ id: number }>('INSERT INTO users (email, password_hash, name, clerk_id, created_at) VALUES (?, ?, ?, ?, ?) RETURNING id', shown, 'clerk$', clean, clerkId, now)
+  return { id: Number(row?.id), email: shown, name: clean, guide: 'everest', tier: 0, provider: 'google' }
 }
 
 // -- input rules --------------------------------------------------------------

@@ -22,13 +22,13 @@ export interface DueReminder {
 }
 
 const TEXT: Record<BotLang, (streak: number) => string> = {
-  uz: (n) => (n > 0 ? `🔥 ${n} kunlik seriyangiz bor. Bugun hali mashq qilmadingiz: 3 daqiqa yetadi.` : 'Bugun hali mashq qilmadingiz. 3 daqiqa ingliz tilida gapirib oling 🏔️'),
-  ru: (n) => (n > 0 ? `🔥 Ваша серия: ${n} дн. Сегодня вы ещё не занимались: хватит трёх минут.` : 'Сегодня вы ещё не занимались. Поговорите по-английски три минуты 🏔️'),
-  tr: (n) => (n > 0 ? `🔥 ${n} günlük serin var. Bugün henüz çalışmadın: 3 dakika yeter.` : 'Bugün henüz çalışmadın. 3 dakika İngilizce konuş 🏔️'),
+  uz: (n) => (n > 0 ? `🔥 ${n} kunlik seriyangiz bor. Bugun hali mashq qilmadingiz: 3 daqiqa yetadi.` : 'Bugun hali mashq qilmadingiz. 3 daqiqa ingliz tilida gapirib oling 🗣️'),
+  ru: (n) => (n > 0 ? `🔥 Ваша серия: ${n} дн. Сегодня вы ещё не занимались: хватит трёх минут.` : 'Сегодня вы ещё не занимались. Поговорите по-английски три минуты 🗣️'),
+  tr: (n) => (n > 0 ? `🔥 ${n} günlük serin var. Bugün henüz çalışmadın: 3 dakika yeter.` : 'Bugün henüz çalışmadın. 3 dakika İngilizce konuş 🗣️'),
 }
 
-export function dueReminders(db: Db, now: number): DueReminder[] {
-  const rows = db.prepare('SELECT u.id AS id, u.telegram_id AS telegram_id, s.state AS state FROM users u JOIN states s ON s.user_id = u.id WHERE u.telegram_id IS NOT NULL').all() as Array<{ id: number; telegram_id: number; state: string }>
+export async function dueReminders(db: Db, now: number): Promise<DueReminder[]> {
+  const rows = await db.all<{ id: number; telegram_id: string; state: string }>('SELECT u.id AS id, u.telegram_id AS telegram_id, s.state AS state FROM users u JOIN states s ON s.user_id = u.id WHERE u.telegram_id IS NOT NULL')
   const due: DueReminder[] = []
   for (const row of rows) {
     let state: Record<string, unknown>
@@ -49,10 +49,10 @@ export function dueReminders(db: Db, now: number): DueReminder[] {
     const days = (typeof state.days === 'object' && state.days !== null ? state.days : {}) as Record<string, { xp?: unknown } | undefined>
     const xpToday = days[day]?.xp
     if (typeof xpToday === 'number' && xpToday > 0) continue
-    if (db.prepare('SELECT 1 FROM telegram_reminders WHERE user_id = ? AND day = ?').get(row.id, day)) continue
+    if (await db.get('SELECT 1 AS one FROM telegram_reminders WHERE user_id = ? AND day = ?', row.id, day)) continue
 
     const streak = (typeof state.streak === 'object' && state.streak !== null ? (state.streak as { current?: unknown }).current : 0) as unknown
-    due.push({ userId: row.id, telegramId: row.telegram_id, lang: cleanBotLang(profile.baseLang), streak: typeof streak === 'number' && streak > 0 ? Math.floor(streak) : 0, day })
+    due.push({ userId: Number(row.id), telegramId: Number(row.telegram_id), lang: cleanBotLang(profile.baseLang), streak: typeof streak === 'number' && streak > 0 ? Math.floor(streak) : 0, day })
   }
   return due
 }
@@ -60,8 +60,8 @@ export function dueReminders(db: Db, now: number): DueReminder[] {
 /** Send what is due. A learner who blocked the bot is still marked, so nobody is retried all hour. */
 export async function sendDueReminders(db: Db, call: TelegramCall, now: number): Promise<number> {
   let sent = 0
-  for (const reminder of dueReminders(db, now)) {
-    db.prepare('INSERT OR IGNORE INTO telegram_reminders (user_id, day) VALUES (?, ?)').run(reminder.userId, reminder.day)
+  for (const reminder of await dueReminders(db, now)) {
+    await db.run('INSERT INTO telegram_reminders (user_id, day) VALUES (?, ?) ON CONFLICT (user_id, day) DO NOTHING', reminder.userId, reminder.day)
     try {
       await call('sendMessage', { chat_id: reminder.telegramId, text: TEXT[reminder.lang](reminder.streak) })
       sent += 1

@@ -1,9 +1,10 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import { AttemptLimiter, cleanName, createUser, findUserByEmail, hashPassword, issueToken, normalizeEmail, revokeToken, userForToken, validPassword, verifyPassword, type User } from './auth.ts'
+import { AttemptLimiter, cleanName, createUser, findOrCreateClerkUser, findUserByEmail, hashPassword, isPlaceholderEmail, issueToken, normalizeEmail, revokeToken, userForToken, validPassword, verifyPassword, type User } from './auth.ts'
+import type { ClerkVerifier } from './clerk.ts'
 import type { CoachProvider } from './coach.ts'
 import { COACH_DAILY_LIMIT, SCENARIOS, cleanCoachRequest } from './coach.ts'
-import { transaction, type Db } from './db.ts'
+import type { Db } from './db.ts'
 import { leagueView, recordWeeklyXp } from './league.ts'
 import { cleanBotLang, findOrCreateTelegramUser, pollLogin, startLogin } from './telegram.ts'
 import { weekId } from './time.ts'
@@ -20,6 +21,8 @@ export interface AppOptions {
   coach?: CoachProvider | null
   /** the running Telegram bot's @username (null until Telegram has confirmed the token); omit to turn Telegram sign-in off */
   telegramBot?: () => string | null
+  /** verifies Clerk session tokens (Google sign-in); omit to turn it off */
+  clerk?: ClerkVerifier | null
 }
 
 const MAX_STATE_BYTES = 512 * 1024
@@ -56,7 +59,9 @@ export function createApp(options: AppOptions): Hono<Env> {
   const { db } = options
   const now = options.now ?? Date.now
   const coach = options.coach ?? null
+  const clerk = options.clerk ?? null
   const loginLimiter = new AttemptLimiter(10, 15 * 60 * 1000)
+  const telegramLimiter = new AttemptLimiter(20, 15 * 60 * 1000)
   // a constant-cost hash to verify against when the email is unknown, so timing does not reveal which emails exist
   const decoyHash = hashPassword('decoy-password-for-constant-time')
 
@@ -80,8 +85,9 @@ export function createApp(options: AppOptions): Hono<Env> {
     }
   }
 
-  // Telegram accounts have no email: their internal "tg:<id>" key is not shown to anyone
-  const publicUser = (u: User) => ({ id: u.id, email: u.email.startsWith('tg:') ? '' : u.email, telegram: u.email.startsWith('tg:'), name: u.name, guide: u.guide, tier: u.tier })
+  // Telegram and Clerk accounts have no real email: their internal key is not shown to anyone
+  const publicUser = (u: User) => ({ id: Number(u.id), email: isPlaceholderEmail(u.email) ? '' : u.email, telegram: u.provider === 'telegram', google: u.provider === 'google', name: u.name, guide: u.guide, tier: u.tier })
+  const session = async (user: User, status: 200 | 201 = 200) => ({ token: await issueToken(db, user.id, now()), user: publicUser(user), status })
 
   // -- accounts ---------------------------------------------------------------
 
@@ -91,9 +97,10 @@ export function createApp(options: AppOptions): Hono<Env> {
     if (!email) return c.json({ error: 'invalid_email' }, 400)
     const password = body?.password
     if (!validPassword(password)) return c.json({ error: 'weak_password' }, 400)
-    if (findUserByEmail(db, email)) return c.json({ error: 'email_taken' }, 409)
-    const user = createUser(db, email, password, cleanName(body?.name), now())
-    return c.json({ token: issueToken(db, user.id, now()), user: publicUser(user) }, 201)
+    if (await findUserByEmail(db, email)) return c.json({ error: 'email_taken' }, 409)
+    const user = await createUser(db, email, password, cleanName(body?.name), now())
+    const { token } = await session(user)
+    return c.json({ token, user: publicUser(user) }, 201)
   })
 
   app.post('/auth/login', async (c) => {
@@ -102,18 +109,35 @@ export function createApp(options: AppOptions): Hono<Env> {
     const password = typeof body?.password === 'string' ? body.password : ''
     const key = email ?? 'invalid'
     if (!loginLimiter.allow(key, now())) return c.json({ error: 'too_many_attempts' }, 429)
-    const found = email ? findUserByEmail(db, email) : null
-    const ok = verifyPassword(password, found?.password_hash ?? decoyHash) && found !== null
+    const found = email ? await findUserByEmail(db, email) : null
+    const ok = verifyPassword(password, found?.password_hash ?? decoyHash) && found !== null && found.provider === 'email'
     if (!found || !ok) return c.json({ error: 'invalid_credentials' }, 401)
     loginLimiter.reset(key)
-    return c.json({ token: issueToken(db, found.id, now()), user: publicUser(found) })
+    const { token } = await session(found)
+    return c.json({ token, user: publicUser(found) })
+  })
+
+  app.get('/auth/providers', (c) => c.json({ telegram: Boolean(options.telegramBot?.()), google: clerk !== null }))
+
+  // -- sign in with Google through Clerk (see clerk.ts) ----------------------------
+
+  app.post('/auth/clerk', async (c) => {
+    if (!clerk) return c.json({ error: 'clerk_unavailable' }, 503)
+    const body = await readJson(c.req.raw)
+    if (typeof body?.token !== 'string' || !body.token) return c.json({ error: 'invalid_request' }, 400)
+    let identity
+    try {
+      identity = await clerk.verify(body.token)
+    } catch {
+      return c.json({ error: 'invalid_credentials' }, 401)
+    }
+    const email = normalizeEmail(body.email) ?? ''
+    const user = await findOrCreateClerkUser(db, identity.id, email, cleanName(body.name), now())
+    const { token } = await session(user)
+    return c.json({ token, user: publicUser(user) })
   })
 
   // -- sign in with Telegram (see telegram.ts) -------------------------------------
-
-  const telegramLimiter = new AttemptLimiter(20, 15 * 60 * 1000)
-
-  app.get('/auth/providers', (c) => c.json({ telegram: Boolean(options.telegramBot?.()) }))
 
   app.post('/auth/telegram/start', async (c) => {
     const bot = options.telegramBot?.()
@@ -121,18 +145,19 @@ export function createApp(options: AppOptions): Hono<Env> {
     const caller = c.req.header('x-forwarded-for')?.split(',')[0]?.trim() || 'direct'
     if (!telegramLimiter.allow(caller, now())) return c.json({ error: 'too_many_attempts' }, 429)
     const body = await readJson(c.req.raw)
-    const login = startLogin(db, cleanBotLang(body?.lang), now())
+    const login = await startLogin(db, cleanBotLang(body?.lang), now())
     return c.json({ code: login.code, secret: login.secret, url: `https://t.me/${bot}?start=${login.code}`, expiresAt: login.expiresAt }, 201)
   })
 
   app.post('/auth/telegram/poll', async (c) => {
     const body = await readJson(c.req.raw)
     if (typeof body?.code !== 'string' || typeof body.secret !== 'string') return c.json({ error: 'invalid_request' }, 400)
-    const outcome = pollLogin(db, body.code, body.secret, now())
+    const outcome = await pollLogin(db, body.code, body.secret, now())
     if (outcome.status === 'expired') return c.json({ error: 'telegram_expired' }, 410)
     if (outcome.status === 'pending') return c.json({ status: 'pending' })
-    const user = findOrCreateTelegramUser(db, outcome.telegramId, outcome.name, now())
-    return c.json({ status: 'confirmed', token: issueToken(db, user.id, now()), user: publicUser(user) })
+    const user = await findOrCreateTelegramUser(db, outcome.telegramId, outcome.name, now())
+    const { token } = await session(user)
+    return c.json({ status: 'confirmed', token, user: publicUser(user) })
   })
 
   // -- everything below needs a bearer token ------------------------------------
@@ -141,31 +166,31 @@ export function createApp(options: AppOptions): Hono<Env> {
   authed.use('*', async (c, next) => {
     const header = c.req.header('Authorization') ?? ''
     const token = header.startsWith('Bearer ') ? header.slice(7).trim() : ''
-    const user = token ? userForToken(db, token, now()) : null
+    const user = token ? await userForToken(db, token, now()) : null
     if (!user) return c.json({ error: 'unauthorized' }, 401)
     c.set('user', user)
     c.set('token', token)
     return next()
   })
 
-  authed.post('/auth/logout', (c) => {
-    revokeToken(db, c.get('token'))
+  authed.post('/auth/logout', async (c) => {
+    await revokeToken(db, c.get('token'))
     return c.json({ ok: true })
   })
 
   authed.get('/me', (c) => c.json({ user: publicUser(c.get('user')) }))
 
-  authed.delete('/me', (c) => {
+  authed.delete('/me', async (c) => {
     // deleting the account removes sessions, state and league history (ON DELETE CASCADE)
-    db.prepare('DELETE FROM users WHERE id = ?').run(c.get('user').id)
+    await db.run('DELETE FROM users WHERE id = ?', c.get('user').id)
     return c.json({ ok: true })
   })
 
   // -- cloud sync: last write wins on the learner's own `updatedAt` clock ---------
 
-  authed.get('/sync', (c) => {
-    const row = db.prepare('SELECT state, updated_at FROM states WHERE user_id = ?').get(c.get('user').id) as { state: string; updated_at: number } | undefined
-    return c.json({ state: row ? (JSON.parse(row.state) as unknown) : null, updatedAt: row?.updated_at ?? 0 })
+  authed.get('/sync', async (c) => {
+    const row = await db.get<{ state: string; updated_at: number }>('SELECT state, updated_at FROM states WHERE user_id = ?', c.get('user').id)
+    return c.json({ state: row ? (JSON.parse(row.state) as unknown) : null, updatedAt: row ? Number(row.updated_at) : 0 })
   })
 
   authed.put('/sync', async (c) => {
@@ -182,20 +207,16 @@ export function createApp(options: AppOptions): Hono<Env> {
     if (!summary) return c.json({ error: 'invalid_state' }, 400)
     const user = c.get('user')
 
-    const outcome = transaction(db, () => {
-      const stored = db.prepare('SELECT state, updated_at FROM states WHERE user_id = ?').get(user.id) as { state: string; updated_at: number } | undefined
-      if (stored && stored.updated_at > summary.updatedAt) {
+    const outcome = await db.transaction(async (tx) => {
+      const stored = await tx.get<{ state: string; updated_at: number }>('SELECT state, updated_at FROM states WHERE user_id = ?', user.id)
+      if (stored && Number(stored.updated_at) > summary.updatedAt) {
         // another device is ahead: the caller should adopt the stored state
-        return { adopted: 'server' as const, state: JSON.parse(stored.state) as unknown, updatedAt: stored.updated_at }
+        return { adopted: 'server' as const, state: JSON.parse(stored.state) as unknown, updatedAt: Number(stored.updated_at) }
       }
-      db.prepare('INSERT INTO states (user_id, state, updated_at) VALUES (?, ?, ?) ON CONFLICT(user_id) DO UPDATE SET state = excluded.state, updated_at = excluded.updated_at').run(
-        user.id,
-        JSON.stringify(state),
-        summary.updatedAt
-      )
-      db.prepare('UPDATE users SET name = ?, guide = ? WHERE id = ?').run(summary.name, summary.guide, user.id)
+      await tx.run('INSERT INTO states (user_id, state, updated_at) VALUES (?, ?, ?) ON CONFLICT(user_id) DO UPDATE SET state = excluded.state, updated_at = excluded.updated_at', user.id, JSON.stringify(state), summary.updatedAt)
+      await tx.run('UPDATE users SET name = ?, guide = ? WHERE id = ?', summary.name, summary.guide, user.id)
       const week = weekId(now())
-      if (summary.weekId === week) recordWeeklyXp(db, user.id, week, summary.weeklyXp)
+      if (summary.weekId === week) await recordWeeklyXp(tx, user.id, week, summary.weeklyXp)
       return { adopted: 'client' as const, state: null, updatedAt: summary.updatedAt }
     })
     return c.json(outcome)
@@ -203,7 +224,7 @@ export function createApp(options: AppOptions): Hono<Env> {
 
   // -- leagues ----------------------------------------------------------------
 
-  authed.get('/league', (c) => c.json(leagueView(db, c.get('user').id, weekId(now()))))
+  authed.get('/league', async (c) => c.json(await leagueView(db, c.get('user').id, weekId(now()))))
 
   // -- AI conversation practice --------------------------------------------------
 
@@ -216,9 +237,9 @@ export function createApp(options: AppOptions): Hono<Env> {
 
     const user = c.get('user')
     const day = new Date(now()).toISOString().slice(0, 10)
-    const used = db.prepare('SELECT count FROM coach_usage WHERE user_id = ? AND day = ?').get(user.id, day) as { count: number } | undefined
+    const used = await db.get<{ count: number }>('SELECT count FROM coach_usage WHERE user_id = ? AND day = ?', user.id, day)
     if ((used?.count ?? 0) >= COACH_DAILY_LIMIT) return c.json({ error: 'coach_limit_reached' }, 429)
-    db.prepare('INSERT INTO coach_usage (user_id, day, count) VALUES (?, ?, 1) ON CONFLICT(user_id, day) DO UPDATE SET count = count + 1').run(user.id, day)
+    await db.run('INSERT INTO coach_usage (user_id, day, count) VALUES (?, ?, 1) ON CONFLICT(user_id, day) DO UPDATE SET count = coach_usage.count + 1', user.id, day)
 
     try {
       const reply = await coach.reply(request)

@@ -1,13 +1,13 @@
 /**
- * Renders the Aytla app icons from code (no image tooling needed): Ayti the
- * bird on violet. Writes PNGs with Node's zlib only.
+ * Renders the Aytla app icons from code (no image tooling needed): Cho'qqi,
+ * the mountain guide, on cream. Writes PNGs with Node's zlib only.
  *
  *   node scripts/brand-icons.mjs
  *
  * Outputs (assets/images): icon.png 1024 (iOS, square, opaque),
- * android-icon-foreground.png 1024 (bird on transparent, inside the safe zone),
+ * android-icon-foreground.png 1024 (light mountain on transparent, inside the safe zone),
  * android-icon-background.png 1024 (solid violet), android-icon-monochrome.png
- * 1024 (white bird on transparent), splash-icon.png 512 (bird on transparent),
+ * 1024 (white mountain on transparent), splash-icon.png 512 (mountain on transparent),
  * favicon.png 64 (icon).
  */
 import { deflateSync } from 'node:zlib'
@@ -95,38 +95,59 @@ const ellipse = (cx, cy, rx, ry, color, rot = 0) => ({
 const diamond = (cx, cy, r, color) => ({ color, hit: (u, v) => Math.abs(u - cx) + Math.abs(v - cy) <= r })
 const roundedSquare = (r, color) => ({ color, hit: (u, v) => { const x = Math.max(Math.abs(u - 0.5) - (0.5 - r), 0), y = Math.max(Math.abs(v - 0.5) - (0.5 - r), 0); return x * x + y * y <= r * r } })
 
-/** Ayti, centred in a box from (ox, oy) with side `s` (fractions of the canvas). `mono` paints everything white. */
-function bird(ox, oy, s, mono = false) {
+const triangle = (ax, ay, bx, by, cx, cy, color) => ({
+  color,
+  hit: (u, v) => {
+    const d1 = (u - bx) * (ay - by) - (ax - bx) * (v - by)
+    const d2 = (u - cx) * (by - cy) - (bx - cx) * (v - cy)
+    const d3 = (u - ax) * (cy - ay) - (cx - ax) * (v - ay)
+    return !((d1 < 0 || d2 < 0 || d3 < 0) && (d1 > 0 || d2 > 0 || d3 > 0))
+  },
+})
+
+/**
+ * Cho'qqi, the mountain guide (src/ui/Mascot.tsx), centred in a box from
+ * (ox, oy) with side `s` (fractions of the canvas). `body` is the mountain
+ * colour; `mono` paints everything white.
+ */
+function mountain(ox, oy, s, body = VIOLET, mono = false) {
   const P = (f) => ox + f * s, Q = (f) => oy + f * s
   const col = (c) => (mono ? WHITE : c)
   const shapes = [
-    diamond(P(0.5), Q(0.12), 0.08 * s, col(SHADE)),
-    circle(P(0.5), Q(0.53), 0.39 * s, col(CREAM)),
-    ellipse(P(0.5), Q(0.68), 0.2 * s, 0.18 * s, col([0xe9, 0xe2, 0xf9])),
-    ellipse(P(0.19), Q(0.65), 0.11 * s, 0.17 * s, col(SHADE), -0.3),
+    triangle(P(0.5), Q(0.06), P(0.04), Q(0.94), P(0.96), Q(0.94), col(body)),
+    // snow cap with a soft, lumpy edge
+    triangle(P(0.5), Q(0.06), P(0.29), Q(0.42), P(0.71), Q(0.42), col(mono ? body : WHITE)),
+    circle(P(0.33), Q(0.41), 0.055 * s, col(mono ? body : WHITE)),
+    circle(P(0.44), Q(0.44), 0.06 * s, col(mono ? body : WHITE)),
+    circle(P(0.56), Q(0.44), 0.06 * s, col(mono ? body : WHITE)),
+    circle(P(0.67), Q(0.41), 0.055 * s, col(mono ? body : WHITE)),
   ]
   if (!mono) {
-    for (const ex of [0.365, 0.635]) {
-      shapes.push(circle(P(ex), Q(0.4), 0.095 * s, WHITE))
-      shapes.push(circle(P(ex + 0.01), Q(0.41), 0.048 * s, INK))
-      shapes.push(circle(P(ex + 0.03), Q(0.385), 0.015 * s, WHITE))
+    for (const ex of [0.37, 0.63]) {
+      shapes.push(circle(P(ex), Q(0.62), 0.085 * s, WHITE))
+      shapes.push(circle(P(ex + 0.012), Q(0.63), 0.044 * s, INK))
+      shapes.push(circle(P(ex + 0.032), Q(0.605), 0.014 * s, WHITE))
     }
-    shapes.push(ellipse(P(0.25), Q(0.53), 0.05 * s, 0.035 * s, [0xff, 0x8f, 0xa3]))
-    shapes.push(ellipse(P(0.75), Q(0.53), 0.05 * s, 0.035 * s, [0xff, 0x8f, 0xa3]))
+    shapes.push(ellipse(P(0.24), Q(0.74), 0.05 * s, 0.032 * s, [0xff, 0x8f, 0xa3]))
+    shapes.push(ellipse(P(0.76), Q(0.74), 0.05 * s, 0.032 * s, [0xff, 0x8f, 0xa3]))
+    // smile: a dark disc with the body colour laid back over its top half
+    shapes.push(circle(P(0.5), Q(0.76), 0.062 * s, INK))
+    shapes.push(circle(P(0.5), Q(0.725), 0.065 * s, body))
+    // a lime flag on the summit: "you can say it"
+    shapes.push(ellipse(P(0.5), Q(0.06), 0.012 * s, 0.07 * s, SHADE))
+    shapes.push(triangle(P(0.505), Q(-0.01), P(0.505), Q(0.07), P(0.64), Q(0.03), LIME))
   }
-  shapes.push(diamond(P(0.5), Q(0.54), 0.07 * s, col(LIME)))
-  shapes.push(ellipse(P(0.4), Q(0.925), 0.06 * s, 0.035 * s, col(GOLD)))
-  shapes.push(ellipse(P(0.6), Q(0.925), 0.06 * s, 0.035 * s, col(GOLD)))
   return shapes
 }
 
+const LIGHT = [0x8e, 0x7b, 0xea]
 const files = {
-  'icon.png': render(1024, [roundedSquare(0.0, VIOLET), ...bird(0.14, 0.12, 0.72)], VIOLET),
-  'android-icon-foreground.png': render(1024, bird(0.25, 0.23, 0.5), null),
+  'icon.png': render(1024, mountain(0.12, 0.12, 0.76), CREAM),
+  'android-icon-foreground.png': render(1024, mountain(0.25, 0.25, 0.5, LIGHT), null),
   'android-icon-background.png': render(64, [], VIOLET),
-  'android-icon-monochrome.png': render(1024, bird(0.25, 0.23, 0.5, true), null),
-  'splash-icon.png': render(512, bird(0.05, 0.03, 0.9), null),
-  'favicon.png': render(64, [roundedSquare(0.22, VIOLET), ...bird(0.14, 0.12, 0.72)], null),
+  'android-icon-monochrome.png': render(1024, mountain(0.25, 0.25, 0.5, WHITE, true), null),
+  'splash-icon.png': render(512, mountain(0.05, 0.05, 0.9, LIGHT), null), // the splash background is violet
+  'favicon.png': render(64, [roundedSquare(0.22, CREAM), ...mountain(0.1, 0.1, 0.8)], null),
 }
 for (const [name, buf] of Object.entries(files)) {
   writeFileSync(path.join(out, name), buf)

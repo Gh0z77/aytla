@@ -14,9 +14,9 @@ const fakeCoach: CoachProvider = {
   reply: async (req) => ({ text: `Hello from ${req.scenarioId}! How are you?`, translation: 'Salom! Qalaysan?', correction: '', better: '' }),
 }
 
-beforeEach(() => {
+beforeEach(async () => {
   clock = MONDAY_NOON
-  app = createApp({ db: openDb(':memory:'), now: () => clock, coach: fakeCoach })
+  app = createApp({ db: await openDb(':memory:'), now: () => clock, coach: fakeCoach })
 })
 
 const json = (body: unknown, token?: string): RequestInit => ({
@@ -177,7 +177,7 @@ describe('coach', () => {
   })
 
   it('reports itself unavailable without a provider', async () => {
-    app = createApp({ db: openDb(':memory:'), now: () => clock, coach: null })
+    app = createApp({ db: await openDb(':memory:'), now: () => clock, coach: null })
     const token = await register('ali@example.com')
     expect((await app.request('/coach/chat', json({ scenarioId: 'cafe', baseLang: 'uz', messages: [] }, token))).status).toBe(503)
     const health = (await (await app.request('/health')).json()) as { coach: boolean }

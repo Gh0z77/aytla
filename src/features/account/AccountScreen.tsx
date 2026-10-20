@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ActivityIndicator, Linking, Platform, Pressable, StyleSheet, TextInput, View } from 'react-native'
 import { useT } from '../../i18n'
 import { ApiError, api, type ProvidersResponse } from '../../lib/api'
+import { clerkEnabled } from '../../lib/clerk'
 import { useAccount } from '../../state/account'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
@@ -11,6 +12,7 @@ import { Mascot } from '../../ui/Mascot'
 import { Screen } from '../../ui/Screen'
 import { Txt } from '../../ui/Txt'
 import { errorText } from './errors'
+import { GoogleButton } from './GoogleButton'
 
 /** Create an account or log in. Guests keep everything they have done: their progress is uploaded on sign-up. */
 export function AccountScreen() {
@@ -27,15 +29,20 @@ export function AccountScreen() {
 
   const back = () => (router.canGoBack() ? router.back() : router.replace('/profile'))
 
-  // Telegram sign-in is offered only when the server runs a bot
+  // Telegram sign-in is offered only when the server runs a bot; Google only when both the app and the server know Clerk
   const loginWithTelegram = useAccount((s) => s.loginWithTelegram)
   const [telegram, setTelegram] = useState(false)
+  const [google, setGoogle] = useState(false)
   const [waiting, setWaiting] = useState(false)
   const cancel = useRef<AbortController | null>(null)
   useEffect(() => {
     let alive = true
     api<ProvidersResponse>('/auth/providers')
-      .then((p) => alive && setTelegram(p.telegram))
+      .then((p) => {
+        if (!alive) return
+        setTelegram(p.telegram)
+        setGoogle(p.google && clerkEnabled)
+      })
       .catch(() => undefined)
     return () => {
       alive = false
@@ -96,6 +103,8 @@ export function AccountScreen() {
           </Txt>
         </View>
 
+        {google ? <GoogleButton disabled={busy || waiting} onBusy={setBusy} onDone={back} onError={(code) => setError(errorText(t, new ApiError(code, 0)))} /> : null}
+
         {telegram ? (
           <>
             {waiting ? (
@@ -109,10 +118,12 @@ export function AccountScreen() {
             ) : (
               <Button label={t('account.telegram')} variant="secondary" icon={<Ionicons name="paper-plane" size={18} color={colors.primary} />} onPress={viaTelegram} disabled={busy} testID="account-telegram" />
             )}
-            <Txt variant="caption" color={colors.textMuted} center>
-              {t('account.or')}
-            </Txt>
           </>
+        ) : null}
+        {telegram || google ? (
+          <Txt variant="caption" color={colors.textMuted} center>
+            {t('account.or')}
+          </Txt>
         ) : null}
 
         <TextInput

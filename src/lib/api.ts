@@ -62,6 +62,8 @@ export async function api<T>(path: string, options: RequestOptions = {}): Promis
 
 export interface ProvidersResponse {
   telegram: boolean
+  /** sign in with Google (through Clerk) is configured on the server */
+  google: boolean
 }
 
 export interface TelegramStartResponse {
@@ -75,9 +77,10 @@ export type TelegramPollResponse = { status: 'pending' } | ({ status: 'confirmed
 
 export interface AccountUser {
   id: number
-  /** empty for accounts created through Telegram */
+  /** empty for accounts created through Telegram, or through Google when the email belongs to another account */
   email: string
   telegram?: boolean
+  google?: boolean
   name: string
   guide: string
   tier: number

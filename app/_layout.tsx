@@ -1,8 +1,11 @@
+import { ClerkProvider } from '@clerk/clerk-expo'
+import { tokenCache } from '@clerk/clerk-expo/token-cache'
 import { Manrope_500Medium, Manrope_600SemiBold, Manrope_700Bold, Manrope_800ExtraBold, useFonts } from '@expo-google-fonts/manrope'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { useEffect } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { AppState, Platform } from 'react-native'
+import { CLERK_PUBLISHABLE_KEY, clerkEnabled } from '../src/lib/clerk'
 import { startAutoSync, useAccount } from '../src/state/account'
 import { useApp } from '../src/state/store'
 import { colors, markFontsReady } from '../src/theme/tokens'
@@ -40,7 +43,7 @@ export default function RootLayout() {
   if (!fontsLoaded && !fontError) return null
 
   return (
-    <>
+    <Auth>
       <StatusBar style="dark" />
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bg } }}>
         <Stack.Screen name="index" />
@@ -50,6 +53,7 @@ export default function RootLayout() {
         <Stack.Screen name="terms" />
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="account" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="sso-callback" options={{ animation: 'none' }} />
         <Stack.Screen name="shop" />
         <Stack.Screen name="challenge" options={{ animation: 'slide_from_bottom' }} />
         <Stack.Screen name="unit/[id]" />
@@ -60,6 +64,16 @@ export default function RootLayout() {
         <Stack.Screen name="lesson/[id]" options={{ gestureEnabled: false, animation: 'slide_from_bottom' }} />
         <Stack.Screen name="result" options={{ gestureEnabled: false, animation: 'fade' }} />
       </Stack>
-    </>
+    </Auth>
+  )
+}
+
+/** Google sign-in needs Clerk mounted above the navigator; without a key the app runs exactly as before. */
+function Auth({ children }: { children: ReactNode }) {
+  if (!clerkEnabled) return <>{children}</>
+  return (
+    <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
+      {children}
+    </ClerkProvider>
   )
 }

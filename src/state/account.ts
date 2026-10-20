@@ -20,6 +20,8 @@ interface AccountStore {
   login: (email: string, password: string) => Promise<void>
   /** `openLink` opens the t.me link (the screen owns that, so a browser can open it from the tap itself) */
   loginWithTelegram: (openLink: (url: string) => Promise<void> | void, signal?: AbortSignal) => Promise<void>
+  /** exchanges a Clerk session token (after Google sign-in) for an app session */
+  loginWithGoogle: (clerkToken: string, email: string, name: string) => Promise<void>
   logout: () => Promise<void>
   /** permanently deletes the account on the server; throws ApiError when the server could not be reached */
   deleteAccount: () => Promise<void>
@@ -94,6 +96,11 @@ export const useAccount = create<AccountStore>()(
             }
           }
           throw new ApiError('telegram_expired', 410)
+        },
+
+        loginWithGoogle: async (clerkToken, email, name) => {
+          const fallback = useApp.getState().user.profile.name
+          await adoptSession(await api<AuthResponse>('/auth/clerk', { method: 'POST', body: { token: clerkToken, email, name: name || fallback } }))
         },
 
         logout: async () => {

@@ -1,5 +1,5 @@
 import { createHash, randomBytes, timingSafeEqual } from 'node:crypto'
-import type { User } from './auth.ts'
+import { USER_COLUMNS, type User } from './auth.ts'
 import type { Db } from './db.ts'
 
 /**
@@ -32,12 +32,12 @@ export interface PendingLogin {
   expiresAt: number
 }
 
-export function startLogin(db: Db, lang: BotLang, now: number): PendingLogin {
-  db.prepare('DELETE FROM telegram_logins WHERE expires_at <= ?').run(now)
+export async function startLogin(db: Db, lang: BotLang, now: number): Promise<PendingLogin> {
+  await db.run('DELETE FROM telegram_logins WHERE expires_at <= ?', now)
   const code = randomBytes(18).toString('base64url')
   const secret = randomBytes(24).toString('base64url')
   const expiresAt = now + LOGIN_TTL_MS
-  db.prepare('INSERT INTO telegram_logins (code, secret_hash, lang, created_at, expires_at) VALUES (?, ?, ?, ?, ?)').run(code, hash(secret), lang, now, expiresAt)
+  await db.run('INSERT INTO telegram_logins (code, secret_hash, lang, created_at, expires_at) VALUES (?, ?, ?, ?, ?)', code, hash(secret), lang, now, expiresAt)
   return { code, secret, expiresAt }
 }
 
@@ -46,36 +46,37 @@ interface LoginRow {
   secret_hash: string
   lang: string
   expires_at: number
-  telegram_id: number | null
+  /** Telegram ids are stored as text: they can exceed a 32-bit integer */
+  telegram_id: string | null
   telegram_name: string | null
   confirmed: number
 }
 
-const findLogin = (db: Db, code: string, now: number): LoginRow | null =>
-  (db.prepare('SELECT code, secret_hash, lang, expires_at, telegram_id, telegram_name, confirmed FROM telegram_logins WHERE code = ? AND expires_at > ?').get(code, now) as LoginRow | undefined) ?? null
+const findLogin = async (db: Db, code: string, now: number): Promise<LoginRow | null> =>
+  (await db.get<LoginRow>('SELECT code, secret_hash, lang, expires_at, telegram_id, telegram_name, confirmed FROM telegram_logins WHERE code = ? AND expires_at > ?', code, now)) ?? null
 
 export type PollOutcome = { status: 'pending' } | { status: 'expired' } | { status: 'confirmed'; telegramId: number; name: string }
 
 /** Called by the app. A confirmed login is consumed: it can be collected exactly once. */
-export function pollLogin(db: Db, code: string, secret: string, now: number): PollOutcome {
-  const row = findLogin(db, code, now)
+export async function pollLogin(db: Db, code: string, secret: string, now: number): Promise<PollOutcome> {
+  const row = await findLogin(db, code, now)
   if (!row) return { status: 'expired' }
   const expected = Buffer.from(row.secret_hash, 'hex')
   const actual = Buffer.from(hash(secret), 'hex')
   if (expected.length !== actual.length || !timingSafeEqual(expected, actual)) return { status: 'expired' }
   if (!row.confirmed || row.telegram_id === null) return { status: 'pending' }
-  db.prepare('DELETE FROM telegram_logins WHERE code = ?').run(code)
-  return { status: 'confirmed', telegramId: row.telegram_id, name: row.telegram_name ?? '' }
+  await db.run('DELETE FROM telegram_logins WHERE code = ?', code)
+  return { status: 'confirmed', telegramId: Number(row.telegram_id), name: row.telegram_name ?? '' }
 }
 
-export function findOrCreateTelegramUser(db: Db, telegramId: number, name: string, now: number): User {
-  const existing = db.prepare('SELECT id, email, name, guide, tier FROM users WHERE telegram_id = ?').get(telegramId) as User | undefined
-  if (existing) return existing
+export async function findOrCreateTelegramUser(db: Db, telegramId: number, name: string, now: number): Promise<User> {
+  const existing = await db.get<User>(`SELECT ${USER_COLUMNS} FROM users u WHERE u.telegram_id = ?`, String(telegramId))
+  if (existing) return { ...existing, id: Number(existing.id) }
   // no email and no password: "tg:<id>" can never match a normalised email, and the hash scheme never verifies
   const email = `tg:${telegramId}`
   const clean = name.trim().slice(0, 24)
-  const result = db.prepare('INSERT INTO users (email, password_hash, name, telegram_id, created_at) VALUES (?, ?, ?, ?, ?)').run(email, 'telegram$', clean, telegramId, now)
-  return { id: Number(result.lastInsertRowid), email, name: clean, guide: 'everest', tier: 0 }
+  const row = await db.get<{ id: number }>('INSERT INTO users (email, password_hash, name, telegram_id, created_at) VALUES (?, ?, ?, ?, ?) RETURNING id', email, 'telegram$', clean, String(telegramId), now)
+  return { id: Number(row?.id), email, name: clean, guide: 'everest', tier: 0, provider: 'telegram' }
 }
 
 // -- the bot ----------------------------------------------------------------------
@@ -127,7 +128,7 @@ export async function handleUpdate(db: Db, update: TgUpdate, call: TelegramCall,
   const message = update.message
   if (message?.text?.startsWith('/start') && message.from) {
     const code = message.text.split(/\s+/)[1] ?? ''
-    const row = code ? findLogin(db, code, now) : null
+    const row = code ? await findLogin(db, code, now) : null
     if (!code) {
       await call('sendMessage', { chat_id: message.chat.id, text: TEXT[guessLang(message.from)].hello })
       return
@@ -137,7 +138,7 @@ export async function handleUpdate(db: Db, update: TgUpdate, call: TelegramCall,
       return
     }
     // remember who opened the link; only that person's confirmation counts
-    db.prepare('UPDATE telegram_logins SET telegram_id = ?, telegram_name = ? WHERE code = ?').run(message.from.id, displayName(message.from), code)
+    await db.run('UPDATE telegram_logins SET telegram_id = ?, telegram_name = ? WHERE code = ?', String(message.from.id), displayName(message.from), code)
     const text = TEXT[cleanBotLang(row.lang)]
     await call('sendMessage', { chat_id: message.chat.id, text: text.ask, reply_markup: { inline_keyboard: [[{ text: text.yes, callback_data: `${CALLBACK_PREFIX}${code}` }]] } })
     return
@@ -146,9 +147,9 @@ export async function handleUpdate(db: Db, update: TgUpdate, call: TelegramCall,
   const query = update.callback_query
   if (query?.data?.startsWith(CALLBACK_PREFIX)) {
     const code = query.data.slice(CALLBACK_PREFIX.length)
-    const row = findLogin(db, code, now)
-    const mine = row !== null && row.telegram_id === query.from.id
-    if (mine) db.prepare('UPDATE telegram_logins SET confirmed = 1 WHERE code = ?').run(code)
+    const row = await findLogin(db, code, now)
+    const mine = row !== null && row.telegram_id === String(query.from.id)
+    if (mine) await db.run('UPDATE telegram_logins SET confirmed = 1 WHERE code = ?', code)
     const text = TEXT[row ? cleanBotLang(row.lang) : guessLang(query.from)]
     await call('answerCallbackQuery', { callback_query_id: query.id })
     if (query.message) await call('sendMessage', { chat_id: query.message.chat.id, text: mine ? text.done : text.stale })

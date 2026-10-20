@@ -41,7 +41,9 @@ The app finds the API at `EXPO_PUBLIC_API_URL` (default `http://localhost:8787`)
 | Variable | Meaning |
 | --- | --- |
 | `PORT` | default `8787` |
-| `DATABASE_FILE` | SQLite file, default `server/data/aytla.db` |
+| `DATABASE_URL` | a `postgresql://` URL (Supabase) for production; when set, SQLite is not used. The schema is created and migrated on start |
+| `DATABASE_FILE` | SQLite file for local runs, default `server/data/aytla.db` |
+| `CLERK_PUBLISHABLE_KEY` | turns on "sign in with Google" through Clerk (the same publishable key as the app) |
 | `CORS_ORIGINS` | comma-separated allow-list; default any origin (bearer tokens, no cookies) |
 | `ANTHROPIC_API_KEY` | turns on AI conversation practice; without credentials `/coach/chat` answers 503 |
 | `COACH_MODEL` | Claude model for the coach, default `claude-opus-5` |
@@ -49,7 +51,18 @@ The app finds the API at `EXPO_PUBLIC_API_URL` (default `http://localhost:8787`)
 | `GEMINI_MODEL` | Gemini model for the coach, default `gemini-2.5-flash` |
 | `TELEGRAM_BOT_TOKEN` | turns on "sign in with Telegram" and Telegram reminders; without it the button is hidden |
 
-`npm --prefix server start` loads `server/.env` if it exists (git-ignored): keep the secrets there.
+`npm --prefix server start` loads `server/.env` if it exists (git-ignored): keep the secrets there. `server/.env.example` and `.env.example` list every variable.
+
+### Database (Supabase)
+
+Locally the API uses a SQLite file and needs nothing. In production set `DATABASE_URL` to the project's **Session pooler** connection string (Supabase → Connect → Session pooler, port 5432: `postgresql://postgres.<ref>:<password>@aws-0-<region>.pooler.supabase.com:5432/postgres`). The direct host `db.<ref>.supabase.co` only has an IPv6 address, so it fails from most laptops and many hosts. Tables are created on first start and the same code runs on both databases (`server/src/db.ts`), so the API tests keep using an in-memory SQLite.
+
+### Sign in with Google (Clerk)
+
+1. Create an application at [clerk.com](https://clerk.com) with **Google** enabled as a social connection (Clerk's shared Google credentials are fine for development; add your own Google OAuth client for production).
+2. Copy the **publishable key** (`pk_test_…` / `pk_live_…`) into both `.env` as `EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY` (the app) and `server/.env` as `CLERK_PUBLISHABLE_KEY` (the API). No secret key is needed: the API verifies Clerk's session tokens against Clerk's public keys (`server/src/clerk.ts`) and then issues its own bearer token (`POST /auth/clerk`), so the rest of the API does not depend on Clerk.
+3. In the Clerk dashboard allow the redirect URLs: `aytla://sso-callback` for the phone apps and `https://<your web domain>/sso-callback` (plus `http://localhost:8081/sso-callback` for development).
+4. Without the key the Google button is hidden and nothing from Clerk is loaded.
 
 ### Telegram sign-in and reminders
 
