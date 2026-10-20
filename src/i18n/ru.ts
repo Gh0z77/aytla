@@ -158,7 +158,7 @@ export const ru: Record<StringKey, string> = {
   'profile.resetYes': 'Да, сбросить',
 
   'welcome.lang.title': 'На каком языке вы говорите?',
-  'welcome.hello': 'Привет! Я Айти. Будем говорить по-английски вместе.',
+  'welcome.hello': "Привет! Я Cho'qqi. Будем говорить по-английски вместе.",
   'welcome.name.title': 'Как вас называть?',
   'welcome.name.placeholder': 'Ваше имя',
   'welcome.goal.title': 'Выберите цель на день',
@@ -208,7 +208,7 @@ export const ru: Record<StringKey, string> = {
   'landing.how.1': 'Выберите свой язык и цель на день',
   'landing.how.2': 'Проходите один урок в день',
   'landing.how.3': 'Произносите вслух на каждом уроке — число фраз, которые вы умеете сказать, растёт',
-  'landing.guides.title': 'Знакомьтесь: Айти',
+  'landing.guides.title': 'Знакомьтесь: команда Aytla',
   'landing.guides.body': 'Птичка Aytla говорит с вами на каждом уроке. Выберите свой из шести цветов.',
   'landing.apps.title': 'Учитесь где угодно',
   'landing.apps.body': 'Один курс: в браузере, на Android и iOS.',
@@ -320,7 +320,7 @@ export const ru: Record<StringKey, string> = {
 
   'games.title': 'Игры',
   'games.run.title': 'Полёт',
-  'games.run.body': 'Летите с Айти: пролетайте через ворота с правильным переводом слова.',
+  'games.run.body': 'Летите с Uchqun: пролетайте через ворота с правильным переводом слова.',
   'games.run.play': 'Играть',
   'games.run.needWords': 'Сначала пройдите один урок.',
   'games.run.find': 'Найдите перевод',

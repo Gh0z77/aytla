@@ -92,17 +92,20 @@ function Aside() {
   const gems = useApp((s) => s.user.gems)
   const spoken = useApp((s) => s.user.days[dayKey(Date.now())]?.spoken ?? 0)
   return (
-    <ScrollView style={styles.aside} contentContainerStyle={styles.asideContent} showsVerticalScrollIndicator={false}>
-      <Txt variant="caption" color={colors.textMuted} style={styles.asideTitle}>
-        {t('shell.today')}
-      </Txt>
-      <MissionCard compact />
-      <View style={styles.stats}>
-        <Stat icon="flame" color={streak > 0 ? colors.flame : colors.textMuted} value={String(streak)} label={t('shell.streakDays', { n: streak })} />
-        <Stat icon="mic" color={colors.success} value={String(spoken)} label={t('top.spoken')} />
-        <Stat icon="diamond" color={colors.gem} value={String(gems)} label={t('result.gems')} />
-      </View>
-    </ScrollView>
+    // a ScrollView grows to fill a row on the web, so the fixed width lives on a wrapping View
+    <View style={styles.aside}>
+      <ScrollView contentContainerStyle={styles.asideContent} showsVerticalScrollIndicator={false}>
+        <Txt variant="caption" color={colors.textMuted} style={styles.asideTitle}>
+          {t('shell.today')}
+        </Txt>
+        <MissionCard compact />
+        <View style={styles.stats}>
+          <Stat icon="flame" color={streak > 0 ? colors.flame : colors.textMuted} value={String(streak)} label={t('shell.streakDays', { n: streak })} />
+          <Stat icon="mic" color={colors.success} value={String(spoken)} label={t('top.spoken')} />
+          <Stat icon="diamond" color={colors.gem} value={String(gems)} label={t('result.gems')} />
+        </View>
+      </ScrollView>
+    </View>
   )
 }
 
@@ -126,10 +129,10 @@ const styles = StyleSheet.create({
   brandText: { fontSize: 26, letterSpacing: -0.5 },
   navItem: { flexDirection: 'row', alignItems: 'center', gap: space.md, paddingHorizontal: space.md, paddingVertical: 12, borderRadius: radius.lg },
   navActive: { backgroundColor: colors.primaryTint },
-  center: { flex: 1, maxWidth: layout.column + 120, borderRightWidth: 2, borderColor: colors.border },
+  center: { flex: 1, maxWidth: layout.column + 160, borderRightWidth: 2, borderColor: colors.border },
   centerScroll: { flexGrow: 1 },
   column: { width: '100%' },
-  aside: { width: 332 },
+  aside: { width: 340, flexShrink: 0 },
   asideContent: { padding: space.lg, gap: space.md },
   asideTitle: { textTransform: 'uppercase', letterSpacing: 1 },
   stats: { flexDirection: 'row', gap: space.sm },

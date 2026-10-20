@@ -158,7 +158,7 @@ export const tr: Record<StringKey, string> = {
   'profile.resetYes': 'Evet, sıfırla',
 
   'welcome.lang.title': 'Hangi dili konuşuyorsun?',
-  'welcome.hello': 'Merhaba! Ben Ayti. Birlikte İngilizce konuşacağız.',
+  'welcome.hello': "Merhaba! Ben Cho'qqi. Birlikte İngilizce konuşacağız.",
   'welcome.name.title': 'Sana nasıl hitap edelim?',
   'welcome.name.placeholder': 'Adın',
   'welcome.goal.title': 'Günlük hedefini seç',
@@ -208,7 +208,7 @@ export const tr: Record<StringKey, string> = {
   'landing.how.1': 'Dilini ve günlük hedefini seç',
   'landing.how.2': 'Her gün bir ders yap',
   'landing.how.3': 'Her derste yüksek sesle söyle; söyleyebildiğin cümleler çoğalsın',
-  'landing.guides.title': "Ayti ile tanış",
+  'landing.guides.title': 'Aytla ekibiyle tanış',
   'landing.guides.body': 'Aytla kuşu her derste seninle konuşur. Altı renkten kendininkini seç.',
   'landing.apps.title': 'Her yerde öğren',
   'landing.apps.body': 'Tek kurs: tarayıcıda, Android ve iOS uygulamalarında.',
@@ -320,7 +320,7 @@ export const tr: Record<StringKey, string> = {
 
   'games.title': 'Oyunlar',
   'games.run.title': 'Uçuş',
-  'games.run.body': 'Ayti ile uç: kelimenin doğru çevirisinin olduğu kapıdan geç.',
+  'games.run.body': 'Uchqun ile uç: kelimenin doğru çevirisinin olduğu kapıdan geç.',
   'games.run.play': 'Oyna',
   'games.run.needWords': 'Oyun için önce bir ders bitir.',
   'games.run.find': 'Çevirisini bul',
