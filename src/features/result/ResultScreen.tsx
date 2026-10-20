@@ -2,15 +2,20 @@ import { Ionicons } from '@expo/vector-icons'
 import { Redirect, useRouter } from 'expo-router'
 import { useEffect, useRef } from 'react'
 import { Animated, Easing, StyleSheet, View } from 'react-native'
+import { UNIT_SCENARIO } from '../../core/goals'
 import type { AchievementId } from '../../core/progress'
 import type { Quest } from '../../core/types'
 import { useT, type StringKey, type Translate } from '../../i18n'
+import { useAccount } from '../../state/account'
 import { useApp } from '../../state/store'
 import { NATIVE_DRIVER, colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
 import { Mascot } from '../../ui/Mascot'
 import { Screen } from '../../ui/Screen'
 import { Txt } from '../../ui/Txt'
+import { scenarioTitle } from '../coach/CoachListScreen'
+
+const REVIEW_SUFFIX = '-review'
 
 export function questLabel(t: Translate, quest: Pick<Quest, 'kind' | 'target'>): string {
   return t(`quests.${quest.kind}` as StringKey, { n: quest.target })
@@ -25,6 +30,10 @@ export function ResultScreen() {
   const t = useT()
   const rewards = useApp((s) => s.lastRewards)
   const guide = useApp((s) => s.user.profile.guide)
+  const signedIn = useAccount((s) => s.token !== null)
+  const lastLessonId = useApp((s) => s.lastLessonId)
+  // a finished unit review leads straight into the scene that unit was preparing for
+  const scene = lastLessonId?.endsWith(REVIEW_SUFFIX) ? UNIT_SCENARIO[lastLessonId.slice(0, -REVIEW_SUFFIX.length)] : undefined
 
   const pop = useRef(new Animated.Value(0)).current
   useEffect(() => {
@@ -34,11 +43,12 @@ export function ResultScreen() {
   if (!rewards) return <Redirect href="/learn" />
 
   const lines: Array<{ icon: keyof typeof Ionicons.glyphMap; color: string; text: string }> = []
+  // what was SAID comes first: it is the result that matters most
+  if (rewards.spoken > 0) lines.push({ icon: 'mic', color: colors.success, text: t('result.spoken', { n: rewards.spoken }) })
   if (rewards.streakExtended) lines.push({ icon: 'flame', color: colors.flame, text: `${t('result.streakExtended')} ${t('result.streak', { n: rewards.newStreak })}` })
   else if (rewards.goalReachedToday) lines.push({ icon: 'flag', color: colors.primary, text: t('result.goal') })
   rewards.questsCompleted.forEach((q) => lines.push({ icon: 'ribbon', color: colors.purple, text: `${t('result.quest')}: ${questLabel(t, q)}` }))
   rewards.achievements.forEach((a) => lines.push({ icon: 'trophy', color: colors.goldEdge, text: `${t('result.achievement')}: ${achievementLabel(t, a.id)} · ${t('ach.level', { n: a.level })}` }))
-  if (rewards.heartsRestored > 0) lines.push({ icon: 'heart', color: colors.heart, text: t('result.heart') })
 
   return (
     <Screen edges={['top', 'left', 'right', 'bottom']}>
@@ -66,6 +76,15 @@ export function ResultScreen() {
         </View>
       </View>
       <View style={styles.footer}>
+        {signedIn ? (
+          <Button
+            label={scene ? t('result.roleplay', { scene: scenarioTitle(t, scene) }) : t('result.talk')}
+            variant="secondary"
+            icon={<Ionicons name="chatbubbles" size={18} color={colors.primary} />}
+            onPress={() => router.replace(scene ? `/coach/${scene}` : '/coach')}
+            testID="result-talk"
+          />
+        ) : null}
         {/* dismissTo pops back to the existing tabs instead of stacking a second copy of the path on top */}
         <Button label={t('common.continue')} onPress={() => router.dismissTo('/learn')} testID="result-continue" />
       </View>
@@ -98,5 +117,5 @@ const styles = StyleSheet.create({
   lines: { alignSelf: 'stretch', gap: space.sm },
   line: { flexDirection: 'row', alignItems: 'center', gap: space.sm, backgroundColor: colors.surface, borderRadius: radius.md, padding: space.md },
   lineText: { flex: 1, fontSize: 15, lineHeight: 21 },
-  footer: { padding: space.lg },
+  footer: { padding: space.lg, gap: space.sm },
 })

@@ -10,8 +10,18 @@ import { Screen } from '../../ui/Screen'
 import { Txt } from '../../ui/Txt'
 import { TopBar } from '../path/TopBar'
 import { achievementLabel, questLabel } from '../result/ResultScreen'
+import { WeeklyReportCard } from './WeeklyReportCard'
 
 export function QuestsScreen() {
+  return (
+    <Screen scroll>
+      <TopBar />
+      <QuestsBody />
+    </Screen>
+  )
+}
+
+export function QuestsBody() {
   const t = useT()
   const user = useApp((s) => s.user)
   const now = Date.now()
@@ -21,9 +31,7 @@ export function QuestsScreen() {
   const counters = achievementCounters(user)
 
   return (
-    <Screen scroll>
-      <TopBar />
-      <View style={styles.body}>
+    <View style={styles.body}>
         {/* streak */}
         <View style={[styles.card, styles.streakCard]}>
           <View style={styles.streakTop}>
@@ -54,6 +62,8 @@ export function QuestsScreen() {
             })}
           </View>
         </View>
+
+        <WeeklyReportCard />
 
         {/* daily quests */}
         <Txt variant="heading">{t('quests.title')}</Txt>
@@ -110,8 +120,7 @@ export function QuestsScreen() {
             </View>
           )
         })}
-      </View>
-    </Screen>
+    </View>
   )
 }
 

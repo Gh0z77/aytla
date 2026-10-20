@@ -1,7 +1,8 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { MAX_HEARTS, SHOP, type BuyFailure, type ShopItem } from '../../core/progress'
+import { useRouter } from 'expo-router'
+import { Pressable, StyleSheet, View } from 'react-native'
+import { SHOP, type BuyFailure, type ShopItem } from '../../core/progress'
 import { useT, type StringKey } from '../../i18n'
 import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
@@ -14,11 +15,11 @@ const FAILURE: Record<BuyFailure, StringKey> = { gems: 'shop.noGems', max: 'shop
 
 const ITEMS: Array<{ id: ShopItem; icon: keyof typeof Ionicons.glyphMap; color: string; title: StringKey; body: StringKey }> = [
   { id: 'streakFreeze', icon: 'snow', color: colors.gem, title: 'shop.freeze.title', body: 'shop.freeze.body' },
-  { id: 'heartRefill', icon: 'heart', color: colors.heart, title: 'shop.refill.title', body: 'shop.refill.body' },
   { id: 'xpBoost', icon: 'flash', color: colors.gold, title: 'shop.boost.title', body: 'shop.boost.body' },
 ]
 
 export function ShopScreen() {
+  const router = useRouter()
   const t = useT()
   const user = useApp((s) => s.user)
   const buy = useApp((s) => s.buy)
@@ -40,7 +41,6 @@ export function ShopScreen() {
   }
   const unavailable = (item: ShopItem): boolean => {
     if (item === 'streakFreeze') return user.streak.freezes >= SHOP.streakFreeze.max
-    if (item === 'heartRefill') return user.hearts.count >= MAX_HEARTS
     return false
   }
 
@@ -48,7 +48,12 @@ export function ShopScreen() {
     <Screen scroll>
       <TopBar />
       <View style={styles.body}>
-        <Txt variant="title">{t('shop.title')}</Txt>
+        <View style={styles.titleRow}>
+          <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace('/profile'))} hitSlop={12} accessibilityRole="button" accessibilityLabel={t('common.back')} style={styles.back}>
+            <Ionicons name="arrow-back" size={28} color={colors.textMuted} />
+          </Pressable>
+          <Txt variant="title">{t('shop.title')}</Txt>
+        </View>
         {ITEMS.map((item) => {
           const cost = SHOP[item.id].cost
           const info = note(item.id)
@@ -100,6 +105,8 @@ const styles = StyleSheet.create({
   bold: { fontWeight: '700' },
   small: { fontSize: 14, lineHeight: 20 },
   body: { padding: space.lg, gap: space.md },
+  titleRow: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
+  back: { width: 40, height: 40, justifyContent: 'center' },
   card: { borderWidth: 2, borderColor: colors.border, borderRadius: radius.lg, padding: space.lg, gap: space.md },
   top: { flexDirection: 'row', gap: space.md, alignItems: 'center' },
   icon: { width: 58, height: 58, borderRadius: radius.md, alignItems: 'center', justifyContent: 'center' },

@@ -1,6 +1,6 @@
 import { hashString, createRng, shuffle } from './rng'
-import { addDays, dayKey, diffDays, weekId } from './time'
-import type { BaseLang, CharacterId, DailyGoal, DayStats, LessonResult, Profile, Quest, QuestKind, Rewards, UserState } from './types'
+import { addDays, dayKey, diffDays, lastDays, weekId } from './time'
+import type { BaseLang, CharacterId, CoachNote, DailyGoal, DayStats, LessonResult, Profile, Quest, QuestKind, Rewards, UserState } from './types'
 
 /**
  * Learner progress and the game economy: XP, hearts, streak (with freezes),
@@ -256,6 +256,7 @@ export function applyLessonResult(input: UserState, result: LessonResult, now: n
     practice: day.practice + (result.sessionKind === 'practice' ? 1 : 0),
     maxCombo: Math.max(day.maxCombo, result.maxCombo),
     seconds: day.seconds + result.seconds,
+    spoken: (day.spoken ?? 0) + (result.spoken ?? 0),
   }
 
   // lesson record
@@ -343,6 +344,7 @@ export function applyLessonResult(input: UserState, result: LessonResult, now: n
       questsCompleted,
       achievements: unlocked,
       heartsRestored,
+      spoken: result.spoken ?? 0,
     },
   }
 }
@@ -372,6 +374,48 @@ export function buy(state: UserState, item: ShopItem, now: number): { state: Use
 export function openChest(state: UserState, chestId: string, now: number): { state: UserState; gems: number } {
   if (state.chests.includes(chestId)) return { state, gems: 0 }
   return { state: { ...state, chests: [...state.chests, chestId], gems: state.gems + CHEST_GEMS, updatedAt: now }, gems: CHEST_GEMS }
+}
+
+// ---------------------------------------------------------------------------
+// Mistake memory and the weekly report
+// ---------------------------------------------------------------------------
+
+export const MAX_COACH_NOTES = 20
+
+/** Remember a correction from the AI guide (newest first, duplicates collapsed). */
+export function addCoachNote(state: UserState, note: Pick<CoachNote, 'better' | 'note'>, now: number): UserState {
+  const better = note.better.trim()
+  if (!better) return state
+  const rest = (state.coachNotes ?? []).filter((n) => n.better.toLowerCase() !== better.toLowerCase())
+  return { ...state, coachNotes: [{ at: now, better, note: note.note.trim() }, ...rest].slice(0, MAX_COACH_NOTES), updatedAt: now }
+}
+
+export interface WeeklyReport {
+  days: string[]
+  xp: number
+  spoken: number
+  minutes: number
+  activeDays: number
+  /** items that were once missed and are now remembered (box 3+): real, visible progress */
+  fixed: string[]
+  /** items still being missed */
+  stillHard: string[]
+}
+
+export function weeklyReport(state: UserState, now: number): WeeklyReport {
+  const days = lastDays(now, 7)
+  const stats = days.map((d) => state.days[d])
+  const sum = (pick: (d: DayStats) => number) => stats.reduce((n, d) => n + (d ? pick(d) : 0), 0)
+  const missed = Object.entries(state.srs).filter(([, e]) => e.lapses > 0)
+  return {
+    days,
+    xp: sum((d) => d.xp),
+    spoken: sum((d) => d.spoken ?? 0),
+    minutes: Math.round(sum((d) => d.seconds) / 60),
+    activeDays: stats.filter((d) => d !== undefined && d.xp > 0).length,
+    fixed: missed.filter(([, e]) => e.box >= 3).map(([id]) => id),
+    stillHard: missed.filter(([, e]) => e.box < 3).map(([id]) => id),
+  }
 }
 
 // ---------------------------------------------------------------------------

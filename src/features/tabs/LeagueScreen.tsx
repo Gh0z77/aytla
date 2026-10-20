@@ -18,6 +18,15 @@ import { TopBar } from '../path/TopBar'
 const MIN_COHORT_FOR_DEMOTION = 12
 
 export function LeagueScreen() {
+  return (
+    <Screen scroll>
+      <TopBar />
+      <LeagueBody />
+    </Screen>
+  )
+}
+
+export function LeagueBody() {
   const router = useRouter()
   const t = useT()
   const token = useAccount((s) => s.token)
@@ -48,28 +57,23 @@ export function LeagueScreen() {
 
   if (!token) {
     return (
-      <Screen>
-        <TopBar />
-        <View style={styles.center}>
-          <Mascot id="rocky" size={150} />
-          <Txt variant="title" center>
-            {t('league.title')}
-          </Txt>
-          <Txt color={colors.textSoft} center>
-            {t('league.signedOut')}
-          </Txt>
-          <Button label={t('league.cta')} onPress={() => router.push('/account')} style={styles.cta} testID="league-signup" />
-        </View>
-      </Screen>
+      <View style={styles.center}>
+        <Mascot id="rocky" size={150} />
+        <Txt variant="title" center>
+          {t('league.title')}
+        </Txt>
+        <Txt color={colors.textSoft} center>
+          {t('league.signedOut')}
+        </Txt>
+        <Button label={t('league.cta')} onPress={() => router.push('/account')} style={styles.cta} testID="league-signup" />
+      </View>
     )
   }
 
   const demotionFrom = league && league.entries.length >= MIN_COHORT_FOR_DEMOTION ? league.entries.length - league.demoteBottom : Number.POSITIVE_INFINITY
 
   return (
-    <Screen scroll>
-      <TopBar />
-      <View style={styles.body}>
+    <View style={styles.body}>
         <View style={styles.header}>
           <View style={styles.badge}>
             <Ionicons name="trophy" size={34} color={colors.white} />
@@ -130,8 +134,7 @@ export function LeagueScreen() {
             ) : null}
           </>
         ) : null}
-      </View>
-    </Screen>
+    </View>
   )
 }
 
@@ -139,7 +142,7 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   bold: { fontWeight: '800' },
   upper: { textTransform: 'uppercase', letterSpacing: 1 },
-  center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: space.xl, gap: space.md },
+  center: { alignItems: 'center', justifyContent: 'center', padding: space.xl, paddingTop: 48, gap: space.md },
   cta: { marginTop: space.md },
   body: { padding: space.lg, gap: space.md },
   header: { flexDirection: 'row', alignItems: 'center', gap: space.md },

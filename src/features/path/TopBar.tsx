@@ -1,5 +1,7 @@
 import { Ionicons } from '@expo/vector-icons'
-import { StyleSheet, View } from 'react-native'
+import { useRouter } from 'expo-router'
+import { Pressable, StyleSheet, View } from 'react-native'
+import { dayKey } from '../../core/time'
 import { LANGUAGE_NAMES } from '../../i18n'
 import { useApp } from '../../state/store'
 import { colors, space } from '../../theme/tokens'
@@ -7,10 +9,12 @@ import { Txt } from '../../ui/Txt'
 
 /** Streak, gems and hearts: always visible at the top of the learning tabs. */
 export function TopBar() {
+  const router = useRouter()
   const lang = useApp((s) => s.user.profile.baseLang)
   const streak = useApp((s) => s.user.streak.current)
   const gems = useApp((s) => s.user.gems)
-  const hearts = useApp((s) => s.user.hearts.count)
+  // what the learner actually said today replaces hearts: progress you can hear, not lives you can lose
+  const spoken = useApp((s) => s.user.days[dayKey(Date.now())]?.spoken ?? 0)
   return (
     <View style={styles.bar}>
       <View style={styles.stat}>
@@ -19,8 +23,10 @@ export function TopBar() {
         <Txt style={styles.flag}>🇬🇧</Txt>
       </View>
       <Stat icon="flame" color={streak > 0 ? colors.flame : colors.textMuted} value={streak} label="streak" />
-      <Stat icon="diamond" color={colors.gem} value={gems} label="gems" />
-      <Stat icon="heart" color={colors.heart} value={hearts} label="hearts" />
+      <Pressable accessibilityRole="button" accessibilityLabel="shop" onPress={() => router.push('/shop')} hitSlop={8} testID="open-shop">
+        <Stat icon="diamond" color={colors.gem} value={gems} label="gems" />
+      </Pressable>
+      <Stat icon="mic" color={spoken > 0 ? colors.success : colors.textMuted} value={spoken} label="sentences spoken today" />
     </View>
   )
 }

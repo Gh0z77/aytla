@@ -1,0 +1,142 @@
+{
+  "id": "u22",
+  "section": 2,
+  "order": 0,
+  "title": { "en": "Small talk and plans", "uz": "Suhbat va rejalar", "ru": "Разговоры и планы", "tr": "Sohbet ve planlar" },
+  "goal": {
+    "en": "Chat with a friend, make a plan together, and accept or turn down an invitation politely.",
+    "uz": "Do'stingiz bilan suhbatlashing, birga reja tuzing, taklifni muloyim qabul qiling yoki rad eting.",
+    "ru": "Поболтайте с другом, договоритесь о планах, вежливо примите приглашение или откажитесь.",
+    "tr": "Bir arkadaşınla sohbet et, birlikte plan yap, bir daveti kibarca kabul et ya da geri çevir."
+  },
+  "guide": "lumi",
+  "color": "#16A34A",
+  "tip": {
+    "title": { "en": "Let's ...", "uz": "Let's ...", "ru": "Let's ...", "tr": "Let's ..." },
+    "body": {
+      "en": "To suggest doing something together, say \"Let's\" and the plain verb: Let's go. Let's meet at the cinema. To say yes: \"Sure!\" or \"Sounds good!\" To say no politely, start with \"Sorry\" and leave the door open: Sorry, I am busy. Maybe next time.",
+      "uz": "Birga biror ish qilishni taklif etish uchun \"Let's\" va fe'lning o'zi aytiladi: Let's go (Keling, boramiz). Let's meet at the cinema. Rozi bo'lish uchun: \"Sure!\" yoki \"Sounds good!\" Muloyim rad etish uchun \"Sorry\" bilan boshlang va eshikni ochiq qoldiring: Sorry, I am busy. Maybe next time.",
+      "ru": "Чтобы предложить сделать что-то вместе, скажите \"Let's\" и глагол: Let's go (Давай пойдём). Let's meet at the cinema. Согласиться: \"Sure!\" или \"Sounds good!\" Вежливо отказаться: начните с \"Sorry\" и оставьте дверь открытой: Sorry, I am busy. Maybe next time.",
+      "tr": "Birlikte bir şey yapmayı önermek için \"Let's\" ve fiilin yalın hali söylenir: Let's go (Hadi gidelim). Let's meet at the cinema. Kabul etmek için: \"Sure!\" ya da \"Sounds good!\" Kibarca reddetmek için \"Sorry\" ile başla ve kapıyı açık bırak: Sorry, I am busy. Maybe next time."
+    },
+    "examples": [
+      { "en": "Let's go to the cinema.", "native": { "uz": "Keling, kinoteatrga boramiz.", "ru": "Давай пойдём в кинотеатр.", "tr": "Hadi sinemaya gidelim." } },
+      { "en": "Sure, sounds good.", "native": { "uz": "Albatta, yaxshi fikr.", "ru": "Конечно, звучит хорошо.", "tr": "Tabii, kulağa hoş geliyor." } },
+      { "en": "Maybe next time.", "native": { "uz": "Balki keyingi safar.", "ru": "Может быть, в следующий раз.", "tr": "Belki bir dahaki sefere." } }
+    ]
+  },
+  "words": [
+    { "id": "u22.w.hows-it-going", "en": "how's it going", "pos": "phrase", "emoji": "🙌", "native": { "uz": "ishlar qalay", "ru": "как дела", "tr": "nasıl gidiyor" }, "altNative": { "uz": ["ishlar qanday"] } },
+    { "id": "u22.w.pretty-good", "en": "pretty good", "pos": "phrase", "emoji": "🙂", "native": { "uz": "ancha yaxshi", "ru": "довольно хорошо", "tr": "oldukça iyi" }, "altNative": { "ru": ["неплохо"], "tr": ["gayet iyi"] } },
+    { "id": "u22.w.busy", "en": "busy", "pos": "adj", "emoji": "🗓️", "native": { "uz": "band", "ru": "занятый", "tr": "meşgul" }, "altNative": { "ru": ["занят", "занята"] } },
+    { "id": "u22.w.tired", "en": "tired", "pos": "adj", "emoji": "😴", "native": { "uz": "charchagan", "ru": "уставший", "tr": "yorgun" }, "altNative": { "ru": ["усталый", "устал", "устала"] } },
+    { "id": "u22.w.news", "en": "news", "pos": "noun", "emoji": "📰", "native": { "uz": "yangilik", "ru": "новость", "tr": "haber" }, "altNative": { "ru": ["новости"] } },
+    { "id": "u22.w.great", "en": "great", "pos": "adj", "emoji": "🤩", "native": { "uz": "ajoyib", "ru": "отлично", "tr": "harika" }, "altNative": { "uz": ["zo'r"], "ru": ["отличный", "здорово"] } },
+
+    { "id": "u22.w.plan", "en": "plan", "pos": "noun", "emoji": "📋", "native": { "uz": "reja", "ru": "план", "tr": "plan" } },
+    { "id": "u22.w.free", "en": "free", "pos": "adj", "native": { "uz": "bo'sh", "ru": "свободный", "tr": "boş" }, "altNative": { "ru": ["свободен", "свободна"], "tr": ["müsait"] } },
+    { "id": "u22.w.tonight", "en": "tonight", "pos": "adv", "emoji": "🌙", "native": { "uz": "bugun kechqurun", "ru": "сегодня вечером", "tr": "bu akşam" } },
+    { "id": "u22.w.tomorrow", "en": "tomorrow", "pos": "adv", "emoji": "🌅", "native": { "uz": "ertaga", "ru": "завтра", "tr": "yarın" } },
+    { "id": "u22.w.meet", "en": "meet", "pos": "verb", "emoji": "🤝", "native": { "uz": "uchrashmoq", "ru": "встречаться", "tr": "buluşmak" }, "altNative": { "ru": ["встретиться"] } },
+    { "id": "u22.w.together", "en": "together", "pos": "adv", "emoji": "👫", "native": { "uz": "birga", "ru": "вместе", "tr": "birlikte" }, "altNative": { "uz": ["birgalikda"], "tr": ["beraber"] } },
+
+    { "id": "u22.w.lets", "en": "let's", "pos": "phrase", "native": { "uz": "keling", "ru": "давай", "tr": "hadi" }, "altNative": { "uz": ["kel"], "ru": ["давайте"], "tr": ["haydi"] } },
+    { "id": "u22.w.invite", "en": "invite", "pos": "verb", "emoji": "💌", "native": { "uz": "taklif qilmoq", "ru": "приглашать", "tr": "davet etmek" }, "altNative": { "ru": ["пригласить"] } },
+    { "id": "u22.w.party", "en": "party", "pos": "noun", "emoji": "🥳", "native": { "uz": "ziyofat", "ru": "вечеринка", "tr": "parti" }, "altNative": { "uz": ["bazm"] } },
+    { "id": "u22.w.cinema", "en": "cinema", "pos": "noun", "emoji": "🎬", "native": { "uz": "kinoteatr", "ru": "кинотеатр", "tr": "sinema" }, "altNative": { "uz": ["kino"], "ru": ["кино"] } },
+    { "id": "u22.w.come", "en": "come", "pos": "verb", "native": { "uz": "kelmoq", "ru": "приходить", "tr": "gelmek" }, "altNative": { "ru": ["прийти"] } },
+    { "id": "u22.w.join", "en": "join", "pos": "verb", "native": { "uz": "qo'shilmoq", "ru": "присоединяться", "tr": "katılmak" }, "altNative": { "ru": ["присоединиться"] } },
+
+    { "id": "u22.w.sure", "en": "sure", "pos": "phrase", "emoji": "👌", "native": { "uz": "albatta", "ru": "конечно", "tr": "tabii" }, "altNative": { "tr": ["elbette", "tabii ki"] } },
+    { "id": "u22.w.maybe", "en": "maybe", "pos": "adv", "native": { "uz": "balki", "ru": "может быть", "tr": "belki" }, "altNative": { "uz": ["ehtimol"], "ru": ["возможно"] } },
+    { "id": "u22.w.sounds-good", "en": "sounds good", "pos": "phrase", "native": { "uz": "yaxshi fikr", "ru": "звучит хорошо", "tr": "kulağa hoş geliyor" }, "altNative": { "ru": ["хорошая идея"], "tr": ["iyi fikir"] } },
+    { "id": "u22.w.sorry", "en": "sorry", "pos": "phrase", "emoji": "🙏", "native": { "uz": "kechirasiz", "ru": "извините", "tr": "üzgünüm" }, "altNative": { "uz": ["uzr"], "ru": ["простите", "извини"], "tr": ["kusura bakmayın"] } },
+    { "id": "u22.w.next-time", "en": "next time", "pos": "phrase", "native": { "uz": "keyingi safar", "ru": "в следующий раз", "tr": "bir dahaki sefere" }, "altNative": { "tr": ["gelecek sefer"] } },
+    { "id": "u22.w.late", "en": "late", "pos": "adj", "emoji": "⏰", "native": { "uz": "kech", "ru": "поздно", "tr": "geç" } },
+
+    { "id": "u22.w.see-you-later", "en": "see you later", "pos": "phrase", "emoji": "👋", "native": { "uz": "keyinroq ko'rishamiz", "ru": "увидимся позже", "tr": "sonra görüşürüz" } },
+    { "id": "u22.w.have-a-nice-day", "en": "have a nice day", "pos": "phrase", "emoji": "☀️", "native": { "uz": "kuningiz xayrli o'tsin", "ru": "хорошего дня", "tr": "iyi günler" } },
+    { "id": "u22.w.take-care", "en": "take care", "pos": "phrase", "emoji": "💙", "native": { "uz": "o'zingizni asrang", "ru": "берегите себя", "tr": "kendinize iyi bakın" }, "altNative": { "uz": ["o'zingni asra"], "ru": ["береги себя"], "tr": ["kendine iyi bak"] } },
+    { "id": "u22.w.say-hi", "en": "say hi", "pos": "phrase", "native": { "uz": "salom aytmoq", "ru": "передавать привет", "tr": "selam söylemek" }, "altNative": { "ru": ["передать привет"] } },
+    { "id": "u22.w.soon", "en": "soon", "pos": "adv", "native": { "uz": "tez orada", "ru": "скоро", "tr": "yakında" } },
+    { "id": "u22.w.fun", "en": "fun", "pos": "adj", "emoji": "🎈", "native": { "uz": "maroqli", "ru": "весело", "tr": "eğlenceli" }, "altNative": { "uz": ["qiziqarli"], "ru": ["весёлый"] } }
+  ],
+  "sentences": [
+    { "id": "u22.s.01", "en": "Hey, how's it going?", "native": { "uz": "Salom, ishlar qalay?", "ru": "Привет, как дела?", "tr": "Selam, nasıl gidiyor?" }, "altEn": ["Hey, how is it going?"] },
+    { "id": "u22.s.02", "en": "Pretty good, thanks.", "native": { "uz": "Ancha yaxshi, rahmat.", "ru": "Довольно хорошо, спасибо.", "tr": "Oldukça iyi, teşekkürler." } },
+    { "id": "u22.s.03", "en": "I am busy today.", "native": { "uz": "Men bugun bandman.", "ru": "Я сегодня занят.", "tr": "Bugün meşgulüm." }, "altNative": { "ru": ["Я сегодня занята.", "Сегодня я занят.", "Сегодня я занята."] } },
+    { "id": "u22.s.04", "en": "I am a little tired.", "native": { "uz": "Men biroz charchaganman.", "ru": "Я немного устал.", "tr": "Biraz yorgunum." }, "altNative": { "uz": ["Men biroz charchadim."], "ru": ["Я немного устала."] } },
+    { "id": "u22.s.05", "en": "What is the news?", "native": { "uz": "Qanday yangilik bor?", "ru": "Какие новости?", "tr": "Ne haber?" } },
+    { "id": "u22.s.06", "en": "I have great news.", "native": { "uz": "Menda ajoyib yangilik bor.", "ru": "У меня отличная новость.", "tr": "Harika bir haberim var." } },
+    { "id": "u22.s.07", "en": "That is great!", "native": { "uz": "Bu ajoyib!", "ru": "Это отлично!", "tr": "Bu harika!" } },
+    { "id": "u22.s.08", "en": "Are you busy now?", "native": { "uz": "Hozir bandmisiz?", "ru": "Вы сейчас заняты?", "tr": "Şu an meşgul müsünüz?" }, "altNative": { "uz": ["Hozir bandmisan?"], "ru": ["Ты сейчас занят?", "Ты сейчас занята?"], "tr": ["Şu an meşgul müsün?"] } },
+
+    { "id": "u22.s.09", "en": "What is your plan for tomorrow?", "native": { "uz": "Ertangi rejangiz qanday?", "ru": "Какой у вас план на завтра?", "tr": "Yarın için planınız nedir?" } },
+    { "id": "u22.s.10", "en": "Are you free tonight?", "native": { "uz": "Bugun kechqurun bo'shmisiz?", "ru": "Вы свободны сегодня вечером?", "tr": "Bu akşam boş musunuz?" }, "altNative": { "uz": ["Bugun kechqurun bo'shmisan?"], "ru": ["Ты свободен сегодня вечером?", "Ты свободна сегодня вечером?"], "tr": ["Bu akşam boş musun?", "Bu akşam müsait misiniz?"] } },
+    { "id": "u22.s.11", "en": "I am free tomorrow.", "native": { "uz": "Men ertaga bo'shman.", "ru": "Я свободен завтра.", "tr": "Yarın boşum." }, "altNative": { "ru": ["Я свободна завтра.", "Завтра я свободен.", "Завтра я свободна."], "tr": ["Yarın müsaitim."] } },
+    { "id": "u22.s.12", "en": "We can meet tomorrow.", "native": { "uz": "Biz ertaga uchrasha olamiz.", "ru": "Мы можем встретиться завтра.", "tr": "Yarın buluşabiliriz." } },
+    { "id": "u22.s.13", "en": "We eat together.", "native": { "uz": "Biz birga ovqatlanamiz.", "ru": "Мы едим вместе.", "tr": "Birlikte yemek yeriz." }, "altNative": { "tr": ["Birlikte yemek yiyoruz."] } },
+    { "id": "u22.s.14", "en": "I have a plan.", "native": { "uz": "Menda reja bor.", "ru": "У меня есть план.", "tr": "Bir planım var." } },
+    { "id": "u22.s.15", "en": "I have no plans tonight.", "native": { "uz": "Bugun kechqurun rejam yo'q.", "ru": "Сегодня вечером у меня нет планов.", "tr": "Bu akşam planım yok." } },
+    { "id": "u22.s.16", "en": "We work together.", "native": { "uz": "Biz birga ishlaymiz.", "ru": "Мы работаем вместе.", "tr": "Birlikte çalışıyoruz." } },
+
+    { "id": "u22.s.17", "en": "Let's go to the cinema.", "native": { "uz": "Keling, kinoteatrga boramiz.", "ru": "Давай пойдём в кинотеатр.", "tr": "Hadi sinemaya gidelim." }, "altNative": { "uz": ["Keling, kinoga boramiz."], "ru": ["Давайте пойдём в кинотеатр.", "Давай пойдём в кино."] } },
+    { "id": "u22.s.18", "en": "I want to invite you.", "native": { "uz": "Men sizni taklif qilmoqchiman.", "ru": "Я хочу вас пригласить.", "tr": "Sizi davet etmek istiyorum." }, "altNative": { "ru": ["Я хочу пригласить вас.", "Я хочу тебя пригласить."], "tr": ["Seni davet etmek istiyorum."] } },
+    { "id": "u22.s.19", "en": "There is a party tomorrow.", "native": { "uz": "Ertaga ziyofat bor.", "ru": "Завтра вечеринка.", "tr": "Yarın bir parti var." }, "altNative": { "ru": ["Завтра будет вечеринка."] } },
+    { "id": "u22.s.20", "en": "Can you come?", "native": { "uz": "Kela olasizmi?", "ru": "Вы можете прийти?", "tr": "Gelebilir misiniz?" }, "altNative": { "uz": ["Kela olasanmi?"], "ru": ["Ты можешь прийти?"], "tr": ["Gelebilir misin?"] } },
+    { "id": "u22.s.21", "en": "Please join us.", "native": { "uz": "Iltimos, bizga qo'shiling.", "ru": "Пожалуйста, присоединяйтесь к нам.", "tr": "Lütfen bize katılın." } },
+    { "id": "u22.s.22", "en": "Let's meet at the cinema.", "native": { "uz": "Keling, kinoteatrda uchrashamiz.", "ru": "Давай встретимся в кинотеатре.", "tr": "Hadi sinemada buluşalım." }, "altNative": { "ru": ["Давайте встретимся в кинотеатре."] } },
+    { "id": "u22.s.23", "en": "Come to my party!", "native": { "uz": "Mening ziyofatimga keling!", "ru": "Приходите на мою вечеринку!", "tr": "Partime gelin!" }, "altNative": { "uz": ["Ziyofatimga keling!"], "ru": ["Приходи на мою вечеринку!"], "tr": ["Partime gel!"] } },
+    { "id": "u22.s.24", "en": "Let's eat together.", "native": { "uz": "Keling, birga ovqatlanamiz.", "ru": "Давай поедим вместе.", "tr": "Hadi birlikte yemek yiyelim." }, "altNative": { "ru": ["Давайте поедим вместе."] } },
+
+    { "id": "u22.s.25", "en": "Sure, I can come.", "native": { "uz": "Albatta, kela olaman.", "ru": "Конечно, я могу прийти.", "tr": "Tabii, gelebilirim." } },
+    { "id": "u22.s.26", "en": "Maybe tomorrow.", "native": { "uz": "Balki ertaga.", "ru": "Может быть, завтра.", "tr": "Belki yarın." } },
+    { "id": "u22.s.27", "en": "Sounds good!", "native": { "uz": "Yaxshi fikr!", "ru": "Звучит хорошо!", "tr": "Kulağa hoş geliyor!" } },
+    { "id": "u22.s.28", "en": "Sorry, I am busy.", "native": { "uz": "Kechirasiz, men bandman.", "ru": "Извините, я занят.", "tr": "Üzgünüm, meşgulüm." }, "altNative": { "ru": ["Извините, я занята."] } },
+    { "id": "u22.s.29", "en": "Maybe next time.", "native": { "uz": "Balki keyingi safar.", "ru": "Может быть, в следующий раз.", "tr": "Belki bir dahaki sefere." } },
+    { "id": "u22.s.30", "en": "Sorry, I am late.", "native": { "uz": "Kechirasiz, kech qoldim.", "ru": "Извините, я опоздал.", "tr": "Üzgünüm, geç kaldım." }, "altNative": { "ru": ["Извините, я опоздала."] } },
+    { "id": "u22.s.31", "en": "It is late.", "native": { "uz": "Kech bo'ldi.", "ru": "Уже поздно.", "tr": "Geç oldu." }, "altNative": { "ru": ["Поздно."] } },
+    { "id": "u22.s.32", "en": "Sure, sounds good.", "native": { "uz": "Albatta, yaxshi fikr.", "ru": "Конечно, звучит хорошо.", "tr": "Tabii, kulağa hoş geliyor." } },
+
+    { "id": "u22.s.33", "en": "See you later!", "native": { "uz": "Keyinroq ko'rishamiz!", "ru": "Увидимся позже!", "tr": "Sonra görüşürüz!" } },
+    { "id": "u22.s.34", "en": "Have a nice day!", "native": { "uz": "Kuningiz xayrli o'tsin!", "ru": "Хорошего дня!", "tr": "İyi günler!" } },
+    { "id": "u22.s.35", "en": "Take care!", "native": { "uz": "O'zingizni asrang!", "ru": "Берегите себя!", "tr": "Kendinize iyi bakın!" }, "altNative": { "uz": ["O'zingni asra!"], "ru": ["Береги себя!"], "tr": ["Kendine iyi bak!"] } },
+    { "id": "u22.s.36", "en": "Say hi to your family.", "native": { "uz": "Oilangizga salom ayting.", "ru": "Передавайте привет вашей семье.", "tr": "Ailenize selam söyleyin." } },
+    { "id": "u22.s.37", "en": "See you soon!", "native": { "uz": "Tez orada ko'rishamiz!", "ru": "До скорой встречи!", "tr": "Yakında görüşürüz!" }, "altNative": { "ru": ["Скоро увидимся!"] } },
+    { "id": "u22.s.38", "en": "The party is fun.", "native": { "uz": "Ziyofat maroqli.", "ru": "Вечеринка весёлая.", "tr": "Parti eğlenceli." } },
+    { "id": "u22.s.39", "en": "Thanks, take care!", "native": { "uz": "Rahmat, o'zingizni asrang!", "ru": "Спасибо, берегите себя!", "tr": "Teşekkürler, kendinize iyi bakın!" } },
+    { "id": "u22.s.40", "en": "Have fun tonight!", "native": { "uz": "Bugun kechqurun maza qiling!", "ru": "Хорошо повеселитесь сегодня вечером!", "tr": "Bu akşam iyi eğlenceler!" } }
+  ],
+  "lessons": [
+    {
+      "id": "u22-l1",
+      "title": { "en": "How's it going?", "uz": "Ishlar qalay?", "ru": "Как дела?", "tr": "Nasıl gidiyor?" },
+      "words": ["u22.w.hows-it-going", "u22.w.pretty-good", "u22.w.busy", "u22.w.tired", "u22.w.news", "u22.w.great"],
+      "sentences": ["u22.s.01", "u22.s.02", "u22.s.03", "u22.s.04", "u22.s.05", "u22.s.06", "u22.s.07", "u22.s.08"]
+    },
+    {
+      "id": "u22-l2",
+      "title": { "en": "Are you free?", "uz": "Bo'shmisiz?", "ru": "Вы свободны?", "tr": "Boş musun?" },
+      "words": ["u22.w.plan", "u22.w.free", "u22.w.tonight", "u22.w.tomorrow", "u22.w.meet", "u22.w.together"],
+      "sentences": ["u22.s.09", "u22.s.10", "u22.s.11", "u22.s.12", "u22.s.13", "u22.s.14", "u22.s.15", "u22.s.16"]
+    },
+    {
+      "id": "u22-l3",
+      "title": { "en": "An invitation", "uz": "Taklif", "ru": "Приглашение", "tr": "Bir davet" },
+      "words": ["u22.w.lets", "u22.w.invite", "u22.w.party", "u22.w.cinema", "u22.w.come", "u22.w.join"],
+      "sentences": ["u22.s.17", "u22.s.18", "u22.s.19", "u22.s.20", "u22.s.21", "u22.s.22", "u22.s.23", "u22.s.24"]
+    },
+    {
+      "id": "u22-l4",
+      "title": { "en": "Yes, no, maybe", "uz": "Ha, yo'q, balki", "ru": "Да, нет, может быть", "tr": "Evet, hayır, belki" },
+      "words": ["u22.w.sure", "u22.w.maybe", "u22.w.sounds-good", "u22.w.sorry", "u22.w.next-time", "u22.w.late"],
+      "sentences": ["u22.s.25", "u22.s.26", "u22.s.27", "u22.s.28", "u22.s.29", "u22.s.30", "u22.s.31", "u22.s.32"]
+    },
+    {
+      "id": "u22-l5",
+      "title": { "en": "See you!", "uz": "Ko'rishguncha!", "ru": "До встречи!", "tr": "Görüşürüz!" },
+      "words": ["u22.w.see-you-later", "u22.w.have-a-nice-day", "u22.w.take-care", "u22.w.say-hi", "u22.w.soon", "u22.w.fun"],
+      "sentences": ["u22.s.33", "u22.s.34", "u22.s.35", "u22.s.36", "u22.s.37", "u22.s.38", "u22.s.39", "u22.s.40"]
+    }
+  ]
+}

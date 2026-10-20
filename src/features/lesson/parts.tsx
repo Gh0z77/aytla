@@ -3,18 +3,18 @@ import { useState, type ReactNode } from 'react'
 import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native'
 import type { CharacterId } from '../../core/types'
 import { speak } from '../../lib/speech'
-import { EDGE, colors, radius, space } from '../../theme/tokens'
+import { colors, radius, space } from '../../theme/tokens'
 import { Mascot } from '../../ui/Mascot'
 import { Txt } from '../../ui/Txt'
 
 export type TileState = 'idle' | 'selected' | 'correct' | 'wrong' | 'ghost'
 
-const TILE_COLORS: Record<TileState, { face: string; edge: string; border: string; text: string }> = {
-  idle: { face: colors.white, edge: colors.borderStrong, border: colors.border, text: colors.text },
-  selected: { face: colors.primaryTint, edge: colors.primary, border: colors.primary, text: colors.primaryEdge },
-  correct: { face: colors.successSoft, edge: colors.success, border: colors.success, text: colors.successText },
-  wrong: { face: colors.dangerSoft, edge: colors.danger, border: colors.danger, text: colors.dangerText },
-  ghost: { face: colors.border, edge: colors.border, border: colors.border, text: 'transparent' },
+const TILE_COLORS: Record<TileState, { face: string; border: string; text: string }> = {
+  idle: { face: colors.white, border: colors.border, text: colors.text },
+  selected: { face: colors.primaryTint, border: colors.primary, text: colors.primaryEdge },
+  correct: { face: colors.limeSoft, border: colors.limeEdge, text: colors.successText },
+  wrong: { face: colors.dangerSoft, border: colors.danger, text: colors.dangerText },
+  ghost: { face: colors.surface, border: colors.surface, text: 'transparent' },
 }
 
 interface TileProps {
@@ -44,13 +44,11 @@ export function Tile({ label, onPress, state = 'idle', disabled, style, children
       onPressOut={() => setPressed(false)}
       style={style}
     >
-      <View style={[styles.tileEdge, { backgroundColor: c.edge, paddingBottom: down ? 0 : EDGE - 1, marginTop: down ? EDGE - 1 : 0 }]}>
-        <View style={[styles.tileFace, big ? styles.tileFaceBig : null, { backgroundColor: c.face, borderColor: c.border }]}>
-          {children}
-          <Txt variant="body" color={c.text} center style={big ? styles.bigLabel : undefined}>
-            {label}
-          </Txt>
-        </View>
+      <View style={[styles.tileFace, big ? styles.tileFaceBig : null, { backgroundColor: c.face, borderColor: c.border, transform: [{ scale: down ? 0.96 : 1 }] }]}>
+        {children}
+        <Txt variant="body" color={c.text} center style={big ? styles.bigLabel : undefined}>
+          {label}
+        </Txt>
       </View>
     </Pressable>
   )
@@ -73,7 +71,7 @@ export function SpeakerButton({ text, slow, size = 44 }: { text: string; slow?: 
 export function PromptBubble({ guide, text, audio }: { guide: CharacterId; text: string; audio?: string }) {
   return (
     <View style={styles.promptRow}>
-      <Mascot id={guide} size={92} />
+      <Mascot id={guide} size={92} mood="talk" />
       <View style={styles.bubble}>
         {audio ? <SpeakerButton text={audio} size={36} /> : null}
         <Txt variant="body" style={styles.bubbleText}>
@@ -93,7 +91,6 @@ export function Instruction({ children }: { children: ReactNode }) {
 }
 
 const styles = StyleSheet.create({
-  tileEdge: { borderRadius: radius.md },
   tileFace: { minHeight: 46, paddingHorizontal: 14, paddingVertical: 8, borderRadius: radius.md, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
   tileFaceBig: { minHeight: 120, paddingVertical: 14, gap: 6 },
   bigLabel: { fontWeight: '700' },

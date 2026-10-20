@@ -6,7 +6,9 @@ import { isCharacterId } from '../../core/characters'
 import { useT, type StringKey } from '../../i18n'
 import { uz } from '../../i18n/uz'
 import { api, type CoachScenariosResponse } from '../../lib/api'
+import { GOAL_SCENARIOS } from '../../core/goals'
 import { useAccount } from '../../state/account'
+import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
 import { Mascot } from '../../ui/Mascot'
@@ -24,6 +26,7 @@ export function CoachListScreen() {
   const router = useRouter()
   const t = useT()
   const token = useAccount((s) => s.token)
+  const goal = useApp((s) => s.user.profile.goal)
   const [data, setData] = useState<CoachScenariosResponse | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -48,6 +51,12 @@ export function CoachListScreen() {
   )
 
   const back = () => (router.canGoBack() ? router.back() : router.replace('/practice'))
+
+  // the role-plays that serve the learner's goal come first
+  const rank = (id: string) => {
+    const i = GOAL_SCENARIOS[goal ?? 'everyday'].indexOf(id)
+    return i < 0 ? 99 : i
+  }
 
   return (
     <Screen scroll edges={['top', 'left', 'right', 'bottom']}>
@@ -84,7 +93,7 @@ export function CoachListScreen() {
         ) : null}
 
         {data?.available
-          ? data.scenarios.map((s) => (
+          ? [...data.scenarios].sort((a, b) => rank(a.id) - rank(b.id)).map((s) => (
               <Pressable
                 key={s.id}
                 accessibilityRole="button"

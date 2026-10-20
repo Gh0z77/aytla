@@ -1,0 +1,142 @@
+{
+  "id": "u19",
+  "section": 2,
+  "order": 0,
+  "title": { "en": "Border and help", "uz": "Chegara va yordam", "ru": "Граница и помощь", "tr": "Sınır ve yardım" },
+  "goal": {
+    "en": "Get through passport control and customs, and ask for help when something goes wrong.",
+    "uz": "Pasport nazorati va bojxonadan o'ting, biror muammo chiqsa yordam so'rang.",
+    "ru": "Пройдите паспортный контроль и таможню и попросите о помощи, если что-то пошло не так.",
+    "tr": "Pasaport kontrolünden ve gümrükten geç, bir sorun çıkarsa yardım iste."
+  },
+  "guide": "aero",
+  "color": "#0EA5E9",
+  "tip": {
+    "title": { "en": "Short answers at the border", "uz": "Chegarada qisqa javoblar", "ru": "Короткие ответы на границе", "tr": "Sınırda kısa cevaplar" },
+    "body": {
+      "en": "An officer asks short questions and expects short answers. \"How long is your stay?\" \"For one week.\" \"What is the purpose of your visit?\" \"Tourism.\" The word \"for\" goes before a length of time: for two days, for one month. To ask for something you need, say \"I need ...\": I need a SIM card. I need help.",
+      "uz": "Chegara xodimi qisqa savol beradi va qisqa javob kutadi. \"How long is your stay?\" \"For one week.\" \"What is the purpose of your visit?\" \"Tourism.\" Muddat oldidan \"for\" qo'yiladi: for two days (ikki kunga), for one month (bir oyga). Kerakli narsani so'rash uchun \"I need ...\" deng: I need a SIM card. I need help.",
+      "ru": "Сотрудник на границе задаёт короткие вопросы и ждёт коротких ответов. \"How long is your stay?\" \"For one week.\" \"What is the purpose of your visit?\" \"Tourism.\" Перед сроком ставится \"for\": for two days (на два дня), for one month (на месяц). Чтобы попросить нужное, скажите \"I need ...\": I need a SIM card. I need help.",
+      "tr": "Sınırdaki görevli kısa sorular sorar ve kısa cevaplar bekler. \"How long is your stay?\" \"For one week.\" \"What is the purpose of your visit?\" \"Tourism.\" Süreden önce \"for\" gelir: for two days (iki günlüğüne), for one month (bir aylığına). İhtiyacın olan şeyi istemek için \"I need ...\" de: I need a SIM card. I need help."
+    },
+    "examples": [
+      { "en": "For one week.", "native": { "uz": "Bir haftaga.", "ru": "На одну неделю.", "tr": "Bir haftalığına." } },
+      { "en": "I am here for tourism.", "native": { "uz": "Men bu yerga turizm uchun keldim.", "ru": "Я здесь с целью туризма.", "tr": "Turizm için buradayım." } },
+      { "en": "I need help, please.", "native": { "uz": "Menga yordam kerak, iltimos.", "ru": "Мне нужна помощь, пожалуйста.", "tr": "Yardıma ihtiyacım var, lütfen." } }
+    ]
+  },
+  "words": [
+    { "id": "u19.w.visa", "en": "visa", "pos": "noun", "emoji": "🛂", "native": { "uz": "viza", "ru": "виза", "tr": "vize" } },
+    { "id": "u19.w.border", "en": "border", "pos": "noun", "emoji": "🚧", "native": { "uz": "chegara", "ru": "граница", "tr": "sınır" } },
+    { "id": "u19.w.officer", "en": "officer", "pos": "noun", "emoji": "👮", "native": { "uz": "xodim", "ru": "сотрудник", "tr": "görevli" }, "altNative": { "uz": ["nazoratchi"], "ru": ["офицер"], "tr": ["memur"] } },
+    { "id": "u19.w.purpose", "en": "purpose", "pos": "noun", "native": { "uz": "maqsad", "ru": "цель", "tr": "amaç" } },
+    { "id": "u19.w.tourism", "en": "tourism", "pos": "noun", "emoji": "🏖️", "native": { "uz": "turizm", "ru": "туризм", "tr": "turizm" } },
+    { "id": "u19.w.business", "en": "business", "pos": "noun", "emoji": "💼", "native": { "uz": "biznes", "ru": "бизнес", "tr": "iş" }, "altNative": { "uz": ["ish"], "ru": ["дела"] } },
+
+    { "id": "u19.w.week", "en": "week", "pos": "noun", "emoji": "📅", "native": { "uz": "hafta", "ru": "неделя", "tr": "hafta" } },
+    { "id": "u19.w.month", "en": "month", "pos": "noun", "emoji": "🗓️", "native": { "uz": "oy", "ru": "месяц", "tr": "ay" } },
+    { "id": "u19.w.return-ticket", "en": "return ticket", "pos": "noun", "emoji": "🎫", "native": { "uz": "qaytish chiptasi", "ru": "обратный билет", "tr": "dönüş bileti" } },
+    { "id": "u19.w.address", "en": "address", "pos": "noun", "emoji": "📍", "native": { "uz": "manzil", "ru": "адрес", "tr": "adres" } },
+    { "id": "u19.w.invitation", "en": "invitation", "pos": "noun", "emoji": "✉️", "native": { "uz": "taklifnoma", "ru": "приглашение", "tr": "davetiye" } },
+    { "id": "u19.w.form", "en": "form", "pos": "noun", "emoji": "📝", "native": { "uz": "anketa", "ru": "анкета", "tr": "form" }, "altNative": { "uz": ["blanka"], "ru": ["бланк", "форма"] } },
+
+    { "id": "u19.w.customs", "en": "customs", "pos": "noun", "emoji": "🛃", "native": { "uz": "bojxona", "ru": "таможня", "tr": "gümrük" } },
+    { "id": "u19.w.declare", "en": "declare", "pos": "verb", "native": { "uz": "deklaratsiya qilmoq", "ru": "декларировать", "tr": "beyan etmek" } },
+    { "id": "u19.w.bag", "en": "bag", "pos": "noun", "emoji": "👜", "native": { "uz": "sumka", "ru": "сумка", "tr": "çanta" } },
+    { "id": "u19.w.cash", "en": "cash", "pos": "noun", "emoji": "💵", "native": { "uz": "naqd pul", "ru": "наличные", "tr": "nakit" } },
+    { "id": "u19.w.gift", "en": "gift", "pos": "noun", "emoji": "🎁", "native": { "uz": "sovg'a", "ru": "подарок", "tr": "hediye" } },
+    { "id": "u19.w.medicine", "en": "medicine", "pos": "noun", "emoji": "💊", "native": { "uz": "dori", "ru": "лекарство", "tr": "ilaç" } },
+
+    { "id": "u19.w.baggage-claim", "en": "baggage claim", "pos": "noun", "emoji": "🧳", "native": { "uz": "bagaj olish joyi", "ru": "выдача багажа", "tr": "bagaj teslim" } },
+    { "id": "u19.w.missing", "en": "missing", "pos": "adj", "native": { "uz": "yo'qolgan", "ru": "пропавший", "tr": "kayıp" } },
+    { "id": "u19.w.information-desk", "en": "information desk", "pos": "noun", "emoji": "ℹ️", "native": { "uz": "ma'lumot byurosi", "ru": "справочная", "tr": "danışma" } },
+    { "id": "u19.w.problem", "en": "problem", "pos": "noun", "emoji": "⚠️", "native": { "uz": "muammo", "ru": "проблема", "tr": "sorun" }, "altNative": { "tr": ["problem"] } },
+    { "id": "u19.w.phone-number", "en": "phone number", "pos": "noun", "emoji": "📞", "native": { "uz": "telefon raqami", "ru": "номер телефона", "tr": "telefon numarası" } },
+    { "id": "u19.w.find", "en": "find", "pos": "verb", "emoji": "🔎", "native": { "uz": "topmoq", "ru": "найти", "tr": "bulmak" }, "altNative": { "ru": ["находить"] } },
+
+    { "id": "u19.w.exchange", "en": "exchange", "pos": "verb", "emoji": "💱", "native": { "uz": "almashtirmoq", "ru": "обменять", "tr": "bozdurmak" }, "altNative": { "ru": ["обменивать", "менять"], "tr": ["değiştirmek"] } },
+    { "id": "u19.w.sim-card", "en": "SIM card", "pos": "noun", "emoji": "📱", "native": { "uz": "SIM karta", "ru": "сим-карта", "tr": "SIM kart" } },
+    { "id": "u19.w.charger", "en": "charger", "pos": "noun", "emoji": "🔌", "native": { "uz": "quvvatlagich", "ru": "зарядка", "tr": "şarj aleti" }, "altNative": { "uz": ["zaryadka"], "ru": ["зарядное устройство"] } },
+    { "id": "u19.w.wifi", "en": "Wi-Fi", "pos": "noun", "emoji": "📶", "native": { "uz": "Wi-Fi", "ru": "Wi-Fi", "tr": "Wi-Fi" } },
+    { "id": "u19.w.password", "en": "password", "pos": "noun", "emoji": "🔑", "native": { "uz": "parol", "ru": "пароль", "tr": "şifre" } },
+    { "id": "u19.w.emergency", "en": "emergency", "pos": "noun", "emoji": "🚨", "native": { "uz": "favqulodda holat", "ru": "экстренный случай", "tr": "acil durum" } }
+  ],
+  "sentences": [
+    { "id": "u19.s.01", "en": "Your passport, please.", "native": { "uz": "Pasportingiz, iltimos.", "ru": "Ваш паспорт, пожалуйста.", "tr": "Pasaportunuz, lütfen." } },
+    { "id": "u19.s.02", "en": "Here is my visa.", "native": { "uz": "Mana mening vizam.", "ru": "Вот моя виза.", "tr": "İşte vizem." }, "altNative": { "uz": ["Mana vizam."], "tr": ["İşte benim vizem."] } },
+    { "id": "u19.s.03", "en": "What is the purpose of your visit?", "native": { "uz": "Tashrifingizdan maqsad nima?", "ru": "Какова цель вашего визита?", "tr": "Ziyaretinizin amacı nedir?" } },
+    { "id": "u19.s.04", "en": "I am here for tourism.", "native": { "uz": "Men bu yerga turizm uchun keldim.", "ru": "Я здесь с целью туризма.", "tr": "Turizm için buradayım." } },
+    { "id": "u19.s.05", "en": "I am here on business.", "native": { "uz": "Men bu yerga biznes bo'yicha keldim.", "ru": "Я здесь по делам бизнеса.", "tr": "İş için buradayım." }, "altNative": { "uz": ["Men bu yerga ish bo'yicha keldim."], "ru": ["Я здесь по делам."] } },
+    { "id": "u19.s.06", "en": "The officer is at the border.", "native": { "uz": "Xodim chegarada.", "ru": "Сотрудник на границе.", "tr": "Görevli sınırda." } },
+    { "id": "u19.s.07", "en": "I have a tourist visa.", "native": { "uz": "Menda turistik viza bor.", "ru": "У меня туристическая виза.", "tr": "Turist vizem var." } },
+    { "id": "u19.s.08", "en": "Is this the border?", "native": { "uz": "Bu chegarami?", "ru": "Это граница?", "tr": "Burası sınır mı?" } },
+
+    { "id": "u19.s.09", "en": "How long is your stay?", "native": { "uz": "Qancha vaqt qolasiz?", "ru": "Как долго вы пробудете?", "tr": "Ne kadar kalacaksınız?" } },
+    { "id": "u19.s.10", "en": "For one week.", "native": { "uz": "Bir haftaga.", "ru": "На одну неделю.", "tr": "Bir haftalığına." } },
+    { "id": "u19.s.11", "en": "For two months.", "native": { "uz": "Ikki oyga.", "ru": "На два месяца.", "tr": "İki aylığına." } },
+    { "id": "u19.s.12", "en": "I have a return ticket.", "native": { "uz": "Menda qaytish chiptasi bor.", "ru": "У меня есть обратный билет.", "tr": "Dönüş biletim var." } },
+    { "id": "u19.s.13", "en": "What is your address here?", "native": { "uz": "Bu yerdagi manzilingiz qanday?", "ru": "Какой у вас здесь адрес?", "tr": "Buradaki adresiniz nedir?" } },
+    { "id": "u19.s.14", "en": "This is my invitation.", "native": { "uz": "Bu mening taklifnomam.", "ru": "Это моё приглашение.", "tr": "Bu benim davetiyem." } },
+    { "id": "u19.s.15", "en": "Please fill in this form.", "native": { "uz": "Iltimos, bu anketani to'ldiring.", "ru": "Пожалуйста, заполните эту анкету.", "tr": "Lütfen bu formu doldurun." } },
+    { "id": "u19.s.16", "en": "The address is on the form.", "native": { "uz": "Manzil anketada.", "ru": "Адрес в анкете.", "tr": "Adres formda." } },
+
+    { "id": "u19.s.17", "en": "Where is customs?", "native": { "uz": "Bojxona qayerda?", "ru": "Где таможня?", "tr": "Gümrük nerede?" } },
+    { "id": "u19.s.18", "en": "I have nothing to declare.", "native": { "uz": "Deklaratsiya qiladigan narsam yo'q.", "ru": "Мне нечего декларировать.", "tr": "Beyan edecek bir şeyim yok." } },
+    { "id": "u19.s.19", "en": "Please open your bag.", "native": { "uz": "Iltimos, sumkangizni oching.", "ru": "Пожалуйста, откройте сумку.", "tr": "Lütfen çantanızı açın." }, "altNative": { "ru": ["Пожалуйста, откройте вашу сумку."] } },
+    { "id": "u19.s.20", "en": "I have some cash.", "native": { "uz": "Menda biroz naqd pul bor.", "ru": "У меня есть немного наличных.", "tr": "Biraz nakitim var." } },
+    { "id": "u19.s.21", "en": "This is a gift for my friend.", "native": { "uz": "Bu do'stim uchun sovg'a.", "ru": "Это подарок для моего друга.", "tr": "Bu arkadaşım için bir hediye." }, "altNative": { "ru": ["Это подарок для моей подруги."] } },
+    { "id": "u19.s.22", "en": "This is my medicine.", "native": { "uz": "Bu mening dorim.", "ru": "Это моё лекарство.", "tr": "Bu benim ilacım." } },
+    { "id": "u19.s.23", "en": "Do you have cash?", "native": { "uz": "Sizda naqd pul bormi?", "ru": "У вас есть наличные?", "tr": "Nakitiniz var mı?" } },
+    { "id": "u19.s.24", "en": "The gift is in my bag.", "native": { "uz": "Sovg'a sumkamda.", "ru": "Подарок в моей сумке.", "tr": "Hediye çantamda." } },
+
+    { "id": "u19.s.25", "en": "Where is baggage claim?", "native": { "uz": "Bagaj olish joyi qayerda?", "ru": "Где выдача багажа?", "tr": "Bagaj teslim nerede?" } },
+    { "id": "u19.s.26", "en": "My bag is missing.", "native": { "uz": "Sumkam yo'qolgan.", "ru": "Моя сумка пропала.", "tr": "Çantam kayıp." } },
+    { "id": "u19.s.27", "en": "I have a problem.", "native": { "uz": "Menda muammo bor.", "ru": "У меня проблема.", "tr": "Bir sorunum var." } },
+    { "id": "u19.s.28", "en": "Where is the information desk?", "native": { "uz": "Ma'lumot byurosi qayerda?", "ru": "Где справочная?", "tr": "Danışma nerede?" } },
+    { "id": "u19.s.29", "en": "Here is my phone number.", "native": { "uz": "Mana mening telefon raqamim.", "ru": "Вот мой номер телефона.", "tr": "İşte telefon numaram." } },
+    { "id": "u19.s.30", "en": "Please find my bag.", "native": { "uz": "Iltimos, sumkamni toping.", "ru": "Пожалуйста, найдите мою сумку.", "tr": "Lütfen çantamı bulun." } },
+    { "id": "u19.s.31", "en": "What is your phone number?", "native": { "uz": "Telefon raqamingiz qanday?", "ru": "Какой у вас номер телефона?", "tr": "Telefon numaranız nedir?" } },
+    { "id": "u19.s.32", "en": "It is not a big problem.", "native": { "uz": "Bu katta muammo emas.", "ru": "Это не большая проблема.", "tr": "Bu büyük bir sorun değil." } },
+
+    { "id": "u19.s.33", "en": "Where can I exchange money?", "native": { "uz": "Pulni qayerda almashtirsam bo'ladi?", "ru": "Где можно обменять деньги?", "tr": "Nerede para bozdurabilirim?" } },
+    { "id": "u19.s.34", "en": "I need a SIM card.", "native": { "uz": "Menga SIM karta kerak.", "ru": "Мне нужна сим-карта.", "tr": "Bir SIM karta ihtiyacım var." } },
+    { "id": "u19.s.35", "en": "Do you have a charger?", "native": { "uz": "Sizda quvvatlagich bormi?", "ru": "У вас есть зарядка?", "tr": "Şarj aletiniz var mı?" } },
+    { "id": "u19.s.36", "en": "Is there Wi-Fi here?", "native": { "uz": "Bu yerda Wi-Fi bormi?", "ru": "Здесь есть Wi-Fi?", "tr": "Burada Wi-Fi var mı?" } },
+    { "id": "u19.s.37", "en": "What is the password?", "native": { "uz": "Parol qanday?", "ru": "Какой пароль?", "tr": "Şifre nedir?" } },
+    { "id": "u19.s.38", "en": "This is an emergency.", "native": { "uz": "Bu favqulodda holat.", "ru": "Это экстренный случай.", "tr": "Bu acil bir durum." } },
+    { "id": "u19.s.39", "en": "The Wi-Fi password is on the wall.", "native": { "uz": "Wi-Fi paroli devorda.", "ru": "Пароль от Wi-Fi на стене.", "tr": "Wi-Fi şifresi duvarda." } },
+    { "id": "u19.s.40", "en": "I need help, please.", "native": { "uz": "Menga yordam kerak, iltimos.", "ru": "Мне нужна помощь, пожалуйста.", "tr": "Yardıma ihtiyacım var, lütfen." } }
+  ],
+  "lessons": [
+    {
+      "id": "u19-l1",
+      "title": { "en": "Passport control", "uz": "Pasport nazorati", "ru": "Паспортный контроль", "tr": "Pasaport kontrolü" },
+      "words": ["u19.w.visa", "u19.w.border", "u19.w.officer", "u19.w.purpose", "u19.w.tourism", "u19.w.business"],
+      "sentences": ["u19.s.01", "u19.s.02", "u19.s.03", "u19.s.04", "u19.s.05", "u19.s.06", "u19.s.07", "u19.s.08"]
+    },
+    {
+      "id": "u19-l2",
+      "title": { "en": "How long is your stay?", "uz": "Qancha vaqt qolasiz?", "ru": "Как долго вы пробудете?", "tr": "Ne kadar kalacaksınız?" },
+      "words": ["u19.w.week", "u19.w.month", "u19.w.return-ticket", "u19.w.address", "u19.w.invitation", "u19.w.form"],
+      "sentences": ["u19.s.09", "u19.s.10", "u19.s.11", "u19.s.12", "u19.s.13", "u19.s.14", "u19.s.15", "u19.s.16"]
+    },
+    {
+      "id": "u19-l3",
+      "title": { "en": "Customs", "uz": "Bojxona", "ru": "Таможня", "tr": "Gümrük" },
+      "words": ["u19.w.customs", "u19.w.declare", "u19.w.bag", "u19.w.cash", "u19.w.gift", "u19.w.medicine"],
+      "sentences": ["u19.s.17", "u19.s.18", "u19.s.19", "u19.s.20", "u19.s.21", "u19.s.22", "u19.s.23", "u19.s.24"]
+    },
+    {
+      "id": "u19-l4",
+      "title": { "en": "My bag is missing", "uz": "Sumkam yo'qoldi", "ru": "Моя сумка пропала", "tr": "Çantam kayıp" },
+      "words": ["u19.w.baggage-claim", "u19.w.missing", "u19.w.information-desk", "u19.w.problem", "u19.w.phone-number", "u19.w.find"],
+      "sentences": ["u19.s.25", "u19.s.26", "u19.s.27", "u19.s.28", "u19.s.29", "u19.s.30", "u19.s.31", "u19.s.32"]
+    },
+    {
+      "id": "u19-l5",
+      "title": { "en": "Money and connection", "uz": "Pul va aloqa", "ru": "Деньги и связь", "tr": "Para ve bağlantı" },
+      "words": ["u19.w.exchange", "u19.w.sim-card", "u19.w.charger", "u19.w.wifi", "u19.w.password", "u19.w.emergency"],
+      "sentences": ["u19.s.33", "u19.s.34", "u19.s.35", "u19.s.36", "u19.s.37", "u19.s.38", "u19.s.39", "u19.s.40"]
+    }
+  ]
+}

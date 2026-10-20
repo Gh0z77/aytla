@@ -29,6 +29,7 @@ export function CoachChatScreen({ scenarioId }: { scenarioId: string }) {
   const baseLang = useApp((s) => s.user.profile.baseLang)
   const sound = useApp((s) => s.user.profile.soundOn)
   const completeSession = useApp((s) => s.completeSession)
+  const rememberCorrection = useApp((s) => s.rememberCorrection)
   const guide = SCENARIO_GUIDES[scenarioId] ?? 'everest'
 
   const [turns, setTurns] = useState<Turn[]>([])
@@ -47,7 +48,10 @@ export function CoachChatScreen({ scenarioId }: { scenarioId: string }) {
       setError(null)
       try {
         const messages = history.map((h) => (h.role === 'user' ? { role: 'user' as const, text: h.text } : { role: 'assistant' as const, text: h.reply.text }))
-        const res = await api<CoachChatResponse>('/coach/chat', { method: 'POST', token, body: { scenarioId, baseLang, messages }, timeoutMs: 40_000 })
+        // mistake memory: earlier corrections travel with the request, so the guide can bring those patterns back
+        const focus = (useApp.getState().user.coachNotes ?? []).slice(0, 5).map((n) => n.better)
+        const res = await api<CoachChatResponse>('/coach/chat', { method: 'POST', token, body: { scenarioId, baseLang, messages, focus }, timeoutMs: 40_000 })
+        if (res.reply.better) rememberCorrection(res.reply.better, res.reply.correction)
         setTurns([...history, { role: 'assistant', reply: res.reply }])
         setRemaining(res.remaining)
         if (sound) speak(res.reply.text)
@@ -57,7 +61,7 @@ export function CoachChatScreen({ scenarioId }: { scenarioId: string }) {
         setBusy(false)
       }
     },
-    [token, scenarioId, baseLang, sound, t]
+    [token, scenarioId, baseLang, sound, t, rememberCorrection]
   )
 
   // the guide opens the conversation
@@ -83,7 +87,7 @@ export function CoachChatScreen({ scenarioId }: { scenarioId: string }) {
   const leave = () => {
     stopSpeaking()
     if (learnerTurns >= TURNS_FOR_REWARD) {
-      completeSession({ sessionKind: 'practice', lessonId: null, items: [], total: learnerTurns, mistakes: 0, maxCombo: 0, seconds: Math.round((Date.now() - startedAt.current) / 1000) })
+      completeSession({ sessionKind: 'practice', lessonId: null, items: [], total: learnerTurns, mistakes: 0, maxCombo: 0, seconds: Math.round((Date.now() - startedAt.current) / 1000), spoken: learnerTurns })
       router.replace('/result')
       return
     }

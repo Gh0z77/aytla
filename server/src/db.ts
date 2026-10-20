@@ -51,12 +51,33 @@ CREATE TABLE IF NOT EXISTS coach_usage (
   count   INTEGER NOT NULL DEFAULT 0,
   PRIMARY KEY (user_id, day)
 );
+
+CREATE TABLE IF NOT EXISTS telegram_logins (
+  code          TEXT PRIMARY KEY,
+  secret_hash   TEXT NOT NULL,
+  lang          TEXT NOT NULL DEFAULT 'uz',
+  created_at    INTEGER NOT NULL,
+  expires_at    INTEGER NOT NULL,
+  telegram_id   INTEGER,
+  telegram_name TEXT,
+  confirmed     INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS telegram_reminders (
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  day     TEXT NOT NULL,
+  PRIMARY KEY (user_id, day)
+);
 `
 
 /** Open (and migrate) the database. Pass ':memory:' in tests. */
 export function openDb(file: string): Db {
   const db = new DatabaseSync(file)
   db.exec(SCHEMA)
+  // databases created before Telegram sign-in: SQLite cannot add a UNIQUE column, so add the column and index it
+  const columns = db.prepare('PRAGMA table_info(users)').all() as Array<{ name: string }>
+  if (!columns.some((c) => c.name === 'telegram_id')) db.exec('ALTER TABLE users ADD COLUMN telegram_id INTEGER')
+  db.exec('CREATE UNIQUE INDEX IF NOT EXISTS users_telegram ON users(telegram_id) WHERE telegram_id IS NOT NULL')
   return db
 }
 

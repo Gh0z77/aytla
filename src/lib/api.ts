@@ -1,5 +1,5 @@
 /**
- * Thin client for the EVEREST AI API (see /server).
+ * Thin client for the Aytla API (see /server).
  * The base URL is baked in at build time: set EXPO_PUBLIC_API_URL for
  * production builds; development talks to the local server.
  */
@@ -60,9 +60,24 @@ export async function api<T>(path: string, options: RequestOptions = {}): Promis
 
 // -- response shapes ------------------------------------------------------------
 
+export interface ProvidersResponse {
+  telegram: boolean
+}
+
+export interface TelegramStartResponse {
+  code: string
+  secret: string
+  url: string
+  expiresAt: number
+}
+
+export type TelegramPollResponse = { status: 'pending' } | ({ status: 'confirmed' } & AuthResponse)
+
 export interface AccountUser {
   id: number
+  /** empty for accounts created through Telegram */
   email: string
+  telegram?: boolean
   name: string
   guide: string
   tier: number

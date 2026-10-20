@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import u01 from '../../content/units/u01.json'
 import { buildLessonSession, buildPracticeSession, buildReviewSession, type SessionOptions } from '../exercises'
-import { gradeBank, gradeFill, gradeListen, gradeSelect, gradeSpeak, gradeType } from '../grading'
+import { gradeBank, gradeFill, gradeListen, gradeSay, gradeSelect, gradeSpeak, gradeType } from '../grading'
 import { normalize, tokenize } from '../text'
 import type { BaseLang, Course, Exercise, Unit } from '../types'
 
@@ -30,6 +30,14 @@ describe('buildLessonSession', () => {
     expect(exercises.slice(0, 4).every((e) => e.kind === 'select')).toBe(true)
     expect(exercises.some((e) => e.kind === 'match')).toBe(true)
     expect(exercises.some((e) => e.kind === 'bank')).toBe(true)
+  })
+
+  it('ends every lesson with a speaking finale', () => {
+    for (let lesson = 0; lesson < unit.lessons.length; lesson++) {
+      const { exercises } = buildLessonSession(unit, lesson, opts({ canListen: false, canSpeak: false }))
+      const tail = exercises.slice(-3)
+      expect(tail.every((e) => e.kind === 'say')).toBe(true)
+    }
   })
 
   it('gives every exercise a unique id', () => {
@@ -118,6 +126,14 @@ function assertSolvable(ex: Exercise, baseLang: BaseLang) {
       expect(gradeSpeak(ex, '').correct).toBe(false)
       break
     }
+    case 'say': {
+      const answer = ex.answers[0] as string
+      expect(gradeSay(ex, answer, false).correct).toBe(true)
+      expect(gradeSay(ex, answer, true).correct).toBe(true)
+      expect(gradeSay(ex, 'zzz', false).correct).toBe(false)
+      expect(gradeSay(ex, '', true).correct).toBe(false)
+      break
+    }
   }
 }
 
@@ -129,6 +145,18 @@ describe('grading details', () => {
       const contracted = (typed.answers[0] as string).replace(/I am/g, "I'm")
       expect(gradeType(typed, contracted).correct).toBe(true)
     }
+  })
+
+  it('reports the words a spoken answer missed, as they are written', () => {
+    const ex = { kind: 'say' as const, id: 'x', itemId: 'u01.s.01', prompt: 'p', audio: "I'm happy, thanks a lot!", answers: ["I'm happy, thanks a lot!"] }
+    const partial = gradeSay(ex, 'i am happy a lot', true)
+    expect(partial.correct).toBe(true)
+    expect(partial.missed).toEqual(['thanks'])
+    expect(gradeSay(ex, "I'm happy thanks a lot", true).missed).toEqual([])
+    const poor = gradeSay(ex, 'happy', true)
+    expect(poor.correct).toBe(false)
+    expect(poor.missed).toEqual(["I'm", 'thanks', 'a', 'lot!'])
+    expect(gradeSay(ex, "I'm happy, thanks a lot!", false).missed).toBeUndefined()
   })
 
   it('accepts alternative native translations in tile exercises', () => {

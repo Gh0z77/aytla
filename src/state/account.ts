@@ -1,8 +1,8 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import type { UserState } from '../core/types'
-import { ApiError, api, type AccountUser, type AuthResponse, type SyncGetResponse, type SyncPutResponse } from '../lib/api'
+import { secureStorage } from '../lib/secureStorage'
+import { ApiError, api, type AccountUser, type AuthResponse, type SyncGetResponse, type SyncPutResponse, type TelegramPollResponse, type TelegramStartResponse } from '../lib/api'
 import { useApp } from './store'
 
 /**
@@ -18,7 +18,11 @@ interface AccountStore {
   lastSyncAt: number
   register: (email: string, password: string) => Promise<void>
   login: (email: string, password: string) => Promise<void>
+  /** `openLink` opens the t.me link (the screen owns that, so a browser can open it from the tap itself) */
+  loginWithTelegram: (openLink: (url: string) => Promise<void> | void, signal?: AbortSignal) => Promise<void>
   logout: () => Promise<void>
+  /** permanently deletes the account on the server; throws ApiError when the server could not be reached */
+  deleteAccount: () => Promise<void>
   syncNow: () => Promise<void>
 }
 
@@ -31,6 +35,7 @@ function isUserState(value: unknown): value is UserState {
 const hasProgress = (s: UserState) => s.xp > 0 || Object.keys(s.lessons).length > 0
 
 let inFlight: Promise<void> | null = null
+const TELEGRAM_POLL_MS = 2000
 
 export const useAccount = create<AccountStore>()(
   persist(
@@ -67,10 +72,42 @@ export const useAccount = create<AccountStore>()(
           await adoptSession(await api<AuthResponse>('/auth/login', { method: 'POST', body: { email, password } }))
         },
 
+        loginWithTelegram: async (openLink, signal) => {
+          const lang = useApp.getState().user.profile.baseLang
+          const started = await api<TelegramStartResponse>('/auth/telegram/start', { method: 'POST', body: { lang } })
+          await openLink(started.url)
+          // the learner is now in Telegram; ask the server until they confirm, give up when the code expires
+          while (Date.now() < started.expiresAt) {
+            await new Promise((resolve) => setTimeout(resolve, TELEGRAM_POLL_MS))
+            if (signal?.aborted) throw new ApiError('cancelled', 0)
+            let polled: TelegramPollResponse
+            try {
+              polled = await api<TelegramPollResponse>('/auth/telegram/poll', { method: 'POST', body: { code: started.code, secret: started.secret } })
+            } catch (err) {
+              // a dropped connection while the app is in the background is not the end of the login
+              if (err instanceof ApiError && err.code === 'network') continue
+              throw err
+            }
+            if (polled.status === 'confirmed') {
+              await adoptSession(polled)
+              return
+            }
+          }
+          throw new ApiError('telegram_expired', 410)
+        },
+
         logout: async () => {
           const { token } = get()
           set({ token: null, account: null, status: 'idle' })
           if (token) await api('/auth/logout', { method: 'POST', token }).catch(() => undefined)
+        },
+
+        deleteAccount: async () => {
+          const { token } = get()
+          if (!token) return
+          // the server removes the account with its sessions, progress and league history; the device keeps its local progress
+          await api('/me', { method: 'DELETE', token })
+          set({ token: null, account: null, status: 'idle', lastSyncAt: 0 })
         },
 
         syncNow: () => {
@@ -99,8 +136,9 @@ export const useAccount = create<AccountStore>()(
       }
     },
     {
-      name: 'everest-account-v1',
-      storage: createJSONStorage(() => AsyncStorage),
+      name: 'aytla-account-v1',
+      // the token is a credential: Keychain / Keystore on phones (see lib/secureStorage)
+      storage: createJSONStorage(() => secureStorage),
       partialize: (s) => ({ token: s.token, account: s.account, lastSyncAt: s.lastSyncAt }),
     }
   )

@@ -1,0 +1,142 @@
+{
+  "id": "u20",
+  "section": 2,
+  "order": 0,
+  "title": { "en": "Job interview", "uz": "Ish suhbati", "ru": "Собеседование", "tr": "İş görüşmesi" },
+  "goal": {
+    "en": "Talk about your skills, agree on a schedule and accept a job offer.",
+    "uz": "Ko'nikmalaringiz haqida gapiring, ish jadvalini kelishing va ish taklifini qabul qiling.",
+    "ru": "Расскажите о своих навыках, договоритесь о графике и примите предложение о работе.",
+    "tr": "Becerilerinden bahset, çalışma düzeni konusunda anlaş ve iş teklifini kabul et."
+  },
+  "guide": "rocky",
+  "color": "#7C3AED",
+  "tip": {
+    "title": { "en": "I can ...", "uz": "I can ...", "ru": "I can ...", "tr": "I can ..." },
+    "body": {
+      "en": "To say what you are able to do, put \"can\" before the plain verb: I can drive. I can work in a team. \"Can\" never changes: I can, you can, we can. For a question, \"can\" goes first: Can you start on Monday? The short answers are \"Yes, I can.\" and \"No, I cannot.\"",
+      "uz": "Nima qila olishingizni aytish uchun fe'ldan oldin \"can\" qo'yiladi: I can drive (hayday olaman). I can work in a team (jamoada ishlay olaman). \"Can\" hech qachon o'zgarmaydi: I can, you can, we can. Savolda \"can\" boshiga chiqadi: Can you start on Monday? Qisqa javoblar: \"Yes, I can.\" va \"No, I cannot.\"",
+      "ru": "Чтобы сказать, что вы умеете или можете, перед глаголом ставится \"can\": I can drive (я умею водить). I can work in a team (я могу работать в команде). \"Can\" никогда не меняется: I can, you can, we can. В вопросе \"can\" выходит на первое место: Can you start on Monday? Краткие ответы: \"Yes, I can.\" и \"No, I cannot.\"",
+      "tr": "Ne yapabildiğini söylemek için fiilden önce \"can\" gelir: I can drive (araba sürebilirim). I can work in a team (takım içinde çalışabilirim). \"Can\" hiç değişmez: I can, you can, we can. Soruda \"can\" başa geçer: Can you start on Monday? Kısa cevaplar: \"Yes, I can.\" ve \"No, I cannot.\""
+    },
+    "examples": [
+      { "en": "I can drive a car.", "native": { "uz": "Men mashina hayday olaman.", "ru": "Я умею водить машину.", "tr": "Araba sürebilirim." } },
+      { "en": "Can you start on Monday?", "native": { "uz": "Dushanba kuni boshlay olasizmi?", "ru": "Вы можете начать в понедельник?", "tr": "Pazartesi günü başlayabilir misiniz?" } },
+      { "en": "Yes, I can.", "native": { "uz": "Ha, qila olaman.", "ru": "Да, могу.", "tr": "Evet, yapabilirim." } }
+    ]
+  },
+  "words": [
+    { "id": "u20.w.cv", "en": "CV", "pos": "noun", "emoji": "📄", "native": { "uz": "rezyume", "ru": "резюме", "tr": "özgeçmiş" }, "altNative": { "tr": ["CV"] } },
+    { "id": "u20.w.skill", "en": "skill", "pos": "noun", "emoji": "🛠️", "native": { "uz": "ko'nikma", "ru": "навык", "tr": "beceri" }, "altNative": { "uz": ["mahorat"], "ru": ["умение"], "tr": ["yetenek"] } },
+    { "id": "u20.w.strength", "en": "strength", "pos": "noun", "emoji": "💪", "native": { "uz": "kuchli tomon", "ru": "сильная сторона", "tr": "güçlü yön" } },
+    { "id": "u20.w.hard-working", "en": "hard-working", "pos": "adj", "native": { "uz": "mehnatkash", "ru": "трудолюбивый", "tr": "çalışkan" }, "altNative": { "ru": ["трудолюбивая"] } },
+    { "id": "u20.w.responsible", "en": "responsible", "pos": "adj", "native": { "uz": "mas'uliyatli", "ru": "ответственный", "tr": "sorumlu" }, "altNative": { "ru": ["ответственная"], "tr": ["sorumluluk sahibi"] } },
+    { "id": "u20.w.can", "en": "can", "pos": "verb", "native": { "uz": "qila olmoq", "ru": "мочь", "tr": "yapabilmek" }, "altNative": { "ru": ["уметь"] } },
+
+    { "id": "u20.w.position", "en": "position", "pos": "noun", "native": { "uz": "lavozim", "ru": "должность", "tr": "pozisyon" } },
+    { "id": "u20.w.previous", "en": "previous", "pos": "adj", "native": { "uz": "avvalgi", "ru": "предыдущий", "tr": "önceki" }, "altNative": { "uz": ["oldingi"], "ru": ["прошлый"] } },
+    { "id": "u20.w.sales", "en": "sales", "pos": "noun", "emoji": "🛍️", "native": { "uz": "savdo", "ru": "продажи", "tr": "satış" } },
+    { "id": "u20.w.language", "en": "language", "pos": "noun", "emoji": "🗣️", "native": { "uz": "til", "ru": "язык", "tr": "dil" } },
+    { "id": "u20.w.speak", "en": "speak", "pos": "verb", "emoji": "💬", "native": { "uz": "gapirmoq", "ru": "говорить", "tr": "konuşmak" } },
+    { "id": "u20.w.learn", "en": "learn", "pos": "verb", "emoji": "📚", "native": { "uz": "o'rganmoq", "ru": "изучать", "tr": "öğrenmek" }, "altNative": { "ru": ["учить", "учиться"] } },
+
+    { "id": "u20.w.full-time", "en": "full-time", "pos": "adj", "native": { "uz": "to'liq stavka", "ru": "полный рабочий день", "tr": "tam zamanlı" } },
+    { "id": "u20.w.part-time", "en": "part-time", "pos": "adj", "native": { "uz": "yarim stavka", "ru": "неполный рабочий день", "tr": "yarı zamanlı" } },
+    { "id": "u20.w.shift", "en": "shift", "pos": "noun", "emoji": "🕘", "native": { "uz": "smena", "ru": "смена", "tr": "vardiya" } },
+    { "id": "u20.w.start", "en": "start", "pos": "verb", "emoji": "▶️", "native": { "uz": "boshlamoq", "ru": "начинать", "tr": "başlamak" }, "altNative": { "ru": ["начать"] } },
+    { "id": "u20.w.ready", "en": "ready", "pos": "adj", "emoji": "✅", "native": { "uz": "tayyor", "ru": "готовый", "tr": "hazır" }, "altNative": { "ru": ["готов", "готова"] } },
+    { "id": "u20.w.weekend", "en": "weekend", "pos": "noun", "emoji": "🏝️", "native": { "uz": "dam olish kunlari", "ru": "выходные", "tr": "hafta sonu" } },
+
+    { "id": "u20.w.contract", "en": "contract", "pos": "noun", "emoji": "📃", "native": { "uz": "shartnoma", "ru": "договор", "tr": "sözleşme" }, "altNative": { "ru": ["контракт"], "tr": ["kontrat"] } },
+    { "id": "u20.w.pay", "en": "pay", "pos": "verb", "emoji": "💰", "native": { "uz": "to'lamoq", "ru": "платить", "tr": "ödemek" } },
+    { "id": "u20.w.training", "en": "training", "pos": "noun", "emoji": "🎓", "native": { "uz": "trening", "ru": "обучение", "tr": "eğitim" }, "altNative": { "uz": ["o'qitish"], "ru": ["тренинг"] } },
+    { "id": "u20.w.uniform", "en": "uniform", "pos": "noun", "emoji": "🦺", "native": { "uz": "forma", "ru": "форма", "tr": "üniforma" }, "altNative": { "ru": ["униформа"] } },
+    { "id": "u20.w.document", "en": "document", "pos": "noun", "emoji": "🗂️", "native": { "uz": "hujjat", "ru": "документ", "tr": "belge" } },
+    { "id": "u20.w.sign", "en": "sign", "pos": "verb", "emoji": "✍️", "native": { "uz": "imzolamoq", "ru": "подписывать", "tr": "imzalamak" }, "altNative": { "ru": ["подписать"] } },
+
+    { "id": "u20.w.hire", "en": "hire", "pos": "verb", "native": { "uz": "ishga olmoq", "ru": "нанимать", "tr": "işe almak" }, "altNative": { "ru": ["нанять"] } },
+    { "id": "u20.w.offer", "en": "offer", "pos": "noun", "emoji": "🤝", "native": { "uz": "taklif", "ru": "предложение", "tr": "teklif" } },
+    { "id": "u20.w.accept", "en": "accept", "pos": "verb", "native": { "uz": "qabul qilmoq", "ru": "принимать", "tr": "kabul etmek" }, "altNative": { "ru": ["принять"] } },
+    { "id": "u20.w.decision", "en": "decision", "pos": "noun", "native": { "uz": "qaror", "ru": "решение", "tr": "karar" } },
+    { "id": "u20.w.congratulations", "en": "congratulations", "pos": "phrase", "emoji": "🎉", "native": { "uz": "tabriklayman", "ru": "поздравляю", "tr": "tebrikler" }, "altNative": { "uz": ["tabriklaymiz"], "ru": ["поздравляем"] } },
+    { "id": "u20.w.welcome", "en": "welcome", "pos": "phrase", "emoji": "👋", "native": { "uz": "xush kelibsiz", "ru": "добро пожаловать", "tr": "hoş geldiniz" }, "altNative": { "tr": ["hoş geldin"] } }
+  ],
+  "sentences": [
+    { "id": "u20.s.01", "en": "Here is my CV.", "native": { "uz": "Mana mening rezyumem.", "ru": "Вот моё резюме.", "tr": "İşte özgeçmişim." }, "altNative": { "uz": ["Mana rezyumem."] } },
+    { "id": "u20.s.02", "en": "What are your skills?", "native": { "uz": "Ko'nikmalaringiz qanday?", "ru": "Какие у вас навыки?", "tr": "Becerileriniz neler?" } },
+    { "id": "u20.s.03", "en": "What is your strength?", "native": { "uz": "Kuchli tomoningiz nima?", "ru": "Какая у вас сильная сторона?", "tr": "Güçlü yönünüz nedir?" } },
+    { "id": "u20.s.04", "en": "I am hard-working.", "native": { "uz": "Men mehnatkashman.", "ru": "Я трудолюбивый.", "tr": "Çalışkanım." }, "altNative": { "ru": ["Я трудолюбивая."], "tr": ["Ben çalışkanım."] } },
+    { "id": "u20.s.05", "en": "I am responsible.", "native": { "uz": "Men mas'uliyatliman.", "ru": "Я ответственный.", "tr": "Sorumluyum." }, "altNative": { "ru": ["Я ответственная."], "tr": ["Ben sorumluyum."] } },
+    { "id": "u20.s.06", "en": "I can drive a car.", "native": { "uz": "Men mashina hayday olaman.", "ru": "Я умею водить машину.", "tr": "Araba sürebilirim." }, "altNative": { "ru": ["Я могу водить машину."] } },
+    { "id": "u20.s.07", "en": "I can work in a team.", "native": { "uz": "Men jamoada ishlay olaman.", "ru": "Я умею работать в команде.", "tr": "Takım içinde çalışabilirim." }, "altNative": { "ru": ["Я могу работать в команде."], "tr": ["Takımda çalışabilirim."] } },
+    { "id": "u20.s.08", "en": "My skills are good.", "native": { "uz": "Ko'nikmalarim yaxshi.", "ru": "Мои навыки хорошие.", "tr": "Becerilerim iyi." }, "altNative": { "ru": ["У меня хорошие навыки."] } },
+
+    { "id": "u20.s.09", "en": "Which position do you want?", "native": { "uz": "Qaysi lavozimni xohlaysiz?", "ru": "Какую должность вы хотите?", "tr": "Hangi pozisyonu istiyorsunuz?" } },
+    { "id": "u20.s.10", "en": "I want to work in sales.", "native": { "uz": "Men savdoda ishlashni xohlayman.", "ru": "Я хочу работать в продажах.", "tr": "Satışta çalışmak istiyorum." } },
+    { "id": "u20.s.11", "en": "I have two years of experience.", "native": { "uz": "Menda ikki yillik tajriba bor.", "ru": "У меня два года опыта.", "tr": "İki yıllık deneyimim var." } },
+    { "id": "u20.s.12", "en": "I speak three languages.", "native": { "uz": "Men uchta tilda gapiraman.", "ru": "Я говорю на трёх языках.", "tr": "Üç dil konuşuyorum." } },
+    { "id": "u20.s.13", "en": "I speak English and Russian.", "native": { "uz": "Men ingliz va rus tillarida gapiraman.", "ru": "Я говорю по-английски и по-русски.", "tr": "İngilizce ve Rusça konuşuyorum." } },
+    { "id": "u20.s.14", "en": "I learn fast.", "native": { "uz": "Men tez o'rganaman.", "ru": "Я быстро учусь.", "tr": "Hızlı öğrenirim." } },
+    { "id": "u20.s.15", "en": "I want to learn new skills.", "native": { "uz": "Men yangi ko'nikmalarni o'rganishni xohlayman.", "ru": "Я хочу получить новые навыки.", "tr": "Yeni beceriler öğrenmek istiyorum." } },
+    { "id": "u20.s.16", "en": "This is my previous company.", "native": { "uz": "Bu mening avvalgi kompaniyam.", "ru": "Это моя предыдущая компания.", "tr": "Bu benim önceki şirketim." } },
+
+    { "id": "u20.s.17", "en": "Is the job full-time?", "native": { "uz": "Ish to'liq stavkami?", "ru": "Это работа на полный рабочий день?", "tr": "İş tam zamanlı mı?" } },
+    { "id": "u20.s.18", "en": "I want a part-time job.", "native": { "uz": "Men yarim stavkali ish xohlayman.", "ru": "Я хочу работу на неполный рабочий день.", "tr": "Yarı zamanlı bir iş istiyorum." } },
+    { "id": "u20.s.19", "en": "I can work the night shift.", "native": { "uz": "Men tungi smenada ishlay olaman.", "ru": "Я могу работать в ночную смену.", "tr": "Gece vardiyasında çalışabilirim." } },
+    { "id": "u20.s.20", "en": "When can you start?", "native": { "uz": "Qachon boshlay olasiz?", "ru": "Когда вы можете начать?", "tr": "Ne zaman başlayabilirsiniz?" } },
+    { "id": "u20.s.21", "en": "I can start on Monday.", "native": { "uz": "Men dushanba kuni boshlay olaman.", "ru": "Я могу начать в понедельник.", "tr": "Pazartesi günü başlayabilirim." } },
+    { "id": "u20.s.22", "en": "I am ready to start.", "native": { "uz": "Men boshlashga tayyorman.", "ru": "Я готов начать.", "tr": "Başlamaya hazırım." }, "altNative": { "ru": ["Я готова начать."] } },
+    { "id": "u20.s.23", "en": "Can you work on the weekend?", "native": { "uz": "Dam olish kunlari ishlay olasizmi?", "ru": "Вы можете работать в выходные?", "tr": "Hafta sonu çalışabilir misiniz?" } },
+    { "id": "u20.s.24", "en": "Yes, I can.", "native": { "uz": "Ha, qila olaman.", "ru": "Да, могу.", "tr": "Evet, yapabilirim." }, "altNative": { "uz": ["Ha, olaman."], "ru": ["Да, я могу."] } },
+
+    { "id": "u20.s.25", "en": "Is there a contract?", "native": { "uz": "Shartnoma bormi?", "ru": "Есть ли договор?", "tr": "Sözleşme var mı?" }, "altNative": { "ru": ["Договор есть?"] } },
+    { "id": "u20.s.26", "en": "When do you pay?", "native": { "uz": "Qachon to'laysiz?", "ru": "Когда вы платите?", "tr": "Ne zaman ödüyorsunuz?" } },
+    { "id": "u20.s.27", "en": "Is there training?", "native": { "uz": "Trening bormi?", "ru": "Есть ли обучение?", "tr": "Eğitim var mı?" }, "altNative": { "ru": ["Обучение есть?"] } },
+    { "id": "u20.s.28", "en": "Do I need a uniform?", "native": { "uz": "Menga forma kerakmi?", "ru": "Мне нужна форма?", "tr": "Üniformaya ihtiyacım var mı?" } },
+    { "id": "u20.s.29", "en": "Which documents do you need?", "native": { "uz": "Sizga qaysi hujjatlar kerak?", "ru": "Какие документы вам нужны?", "tr": "Hangi belgelere ihtiyacınız var?" } },
+    { "id": "u20.s.30", "en": "Please sign the contract.", "native": { "uz": "Iltimos, shartnomani imzolang.", "ru": "Пожалуйста, подпишите договор.", "tr": "Lütfen sözleşmeyi imzalayın." } },
+    { "id": "u20.s.31", "en": "Here are my documents.", "native": { "uz": "Mana mening hujjatlarim.", "ru": "Вот мои документы.", "tr": "İşte belgelerim." }, "altNative": { "uz": ["Mana hujjatlarim."] } },
+    { "id": "u20.s.32", "en": "The training is two weeks.", "native": { "uz": "Trening ikki hafta.", "ru": "Обучение длится две недели.", "tr": "Eğitim iki hafta." }, "altNative": { "uz": ["Trening ikki hafta davom etadi."], "tr": ["Eğitim iki hafta sürüyor."] } },
+
+    { "id": "u20.s.33", "en": "We want to hire you.", "native": { "uz": "Biz sizni ishga olmoqchimiz.", "ru": "Мы хотим вас нанять.", "tr": "Sizi işe almak istiyoruz." }, "altNative": { "ru": ["Мы хотим нанять вас."] } },
+    { "id": "u20.s.34", "en": "We have an offer for you.", "native": { "uz": "Bizda siz uchun taklif bor.", "ru": "У нас есть для вас предложение.", "tr": "Size bir teklifimiz var." }, "altNative": { "ru": ["У нас есть предложение для вас."], "tr": ["Sizin için bir teklifimiz var."] } },
+    { "id": "u20.s.35", "en": "I accept the offer.", "native": { "uz": "Men taklifni qabul qilaman.", "ru": "Я принимаю предложение.", "tr": "Teklifi kabul ediyorum." } },
+    { "id": "u20.s.36", "en": "It is a good decision.", "native": { "uz": "Bu yaxshi qaror.", "ru": "Это хорошее решение.", "tr": "Bu iyi bir karar." } },
+    { "id": "u20.s.37", "en": "Congratulations, you have the job!", "native": { "uz": "Tabriklayman, ish sizniki!", "ru": "Поздравляю, работа ваша!", "tr": "Tebrikler, iş sizin!" } },
+    { "id": "u20.s.38", "en": "Welcome to the team!", "native": { "uz": "Jamoaga xush kelibsiz!", "ru": "Добро пожаловать в команду!", "tr": "Takıma hoş geldiniz!" } },
+    { "id": "u20.s.39", "en": "Thank you for the offer.", "native": { "uz": "Taklif uchun rahmat.", "ru": "Спасибо за предложение.", "tr": "Teklif için teşekkür ederim." }, "altNative": { "tr": ["Teklif için teşekkürler."] } },
+    { "id": "u20.s.40", "en": "What is your decision?", "native": { "uz": "Qaroringiz qanday?", "ru": "Какое ваше решение?", "tr": "Kararınız nedir?" } }
+  ],
+  "lessons": [
+    {
+      "id": "u20-l1",
+      "title": { "en": "About me", "uz": "O'zim haqimda", "ru": "О себе", "tr": "Kendim hakkında" },
+      "words": ["u20.w.cv", "u20.w.skill", "u20.w.strength", "u20.w.hard-working", "u20.w.responsible", "u20.w.can"],
+      "sentences": ["u20.s.01", "u20.s.02", "u20.s.03", "u20.s.04", "u20.s.05", "u20.s.06", "u20.s.07", "u20.s.08"]
+    },
+    {
+      "id": "u20-l2",
+      "title": { "en": "Experience and languages", "uz": "Tajriba va tillar", "ru": "Опыт и языки", "tr": "Deneyim ve diller" },
+      "words": ["u20.w.position", "u20.w.previous", "u20.w.sales", "u20.w.language", "u20.w.speak", "u20.w.learn"],
+      "sentences": ["u20.s.09", "u20.s.10", "u20.s.11", "u20.s.12", "u20.s.13", "u20.s.14", "u20.s.15", "u20.s.16"]
+    },
+    {
+      "id": "u20-l3",
+      "title": { "en": "The schedule", "uz": "Ish jadvali", "ru": "График работы", "tr": "Çalışma düzeni" },
+      "words": ["u20.w.full-time", "u20.w.part-time", "u20.w.shift", "u20.w.start", "u20.w.ready", "u20.w.weekend"],
+      "sentences": ["u20.s.17", "u20.s.18", "u20.s.19", "u20.s.20", "u20.s.21", "u20.s.22", "u20.s.23", "u20.s.24"]
+    },
+    {
+      "id": "u20-l4",
+      "title": { "en": "Your questions", "uz": "Sizning savollaringiz", "ru": "Ваши вопросы", "tr": "Senin soruların" },
+      "words": ["u20.w.contract", "u20.w.pay", "u20.w.training", "u20.w.uniform", "u20.w.document", "u20.w.sign"],
+      "sentences": ["u20.s.25", "u20.s.26", "u20.s.27", "u20.s.28", "u20.s.29", "u20.s.30", "u20.s.31", "u20.s.32"]
+    },
+    {
+      "id": "u20-l5",
+      "title": { "en": "The offer", "uz": "Taklif", "ru": "Предложение", "tr": "Teklif" },
+      "words": ["u20.w.hire", "u20.w.offer", "u20.w.accept", "u20.w.decision", "u20.w.congratulations", "u20.w.welcome"],
+      "sentences": ["u20.s.33", "u20.s.34", "u20.s.35", "u20.s.36", "u20.s.37", "u20.s.38", "u20.s.39", "u20.s.40"]
+    }
+  ]
+}

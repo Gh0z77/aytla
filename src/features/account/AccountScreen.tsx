@@ -1,8 +1,9 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
-import { useState } from 'react'
-import { Pressable, StyleSheet, TextInput, View } from 'react-native'
+import { useEffect, useRef, useState } from 'react'
+import { ActivityIndicator, Linking, Platform, Pressable, StyleSheet, TextInput, View } from 'react-native'
 import { useT } from '../../i18n'
+import { ApiError, api, type ProvidersResponse } from '../../lib/api'
 import { useAccount } from '../../state/account'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
@@ -25,6 +26,44 @@ export function AccountScreen() {
   const [error, setError] = useState<string | null>(null)
 
   const back = () => (router.canGoBack() ? router.back() : router.replace('/profile'))
+
+  // Telegram sign-in is offered only when the server runs a bot
+  const loginWithTelegram = useAccount((s) => s.loginWithTelegram)
+  const [telegram, setTelegram] = useState(false)
+  const [waiting, setWaiting] = useState(false)
+  const cancel = useRef<AbortController | null>(null)
+  useEffect(() => {
+    let alive = true
+    api<ProvidersResponse>('/auth/providers')
+      .then((p) => alive && setTelegram(p.telegram))
+      .catch(() => undefined)
+    return () => {
+      alive = false
+      cancel.current?.abort()
+    }
+  }, [])
+
+  const viaTelegram = async () => {
+    if (busy || waiting) return
+    setError(null)
+    setWaiting(true)
+    // a browser only lets a tap open a window, so open it now and point it at Telegram once the link is known
+    const popup = Platform.OS === 'web' && typeof window !== 'undefined' ? window.open('', '_blank') : null
+    const controller = new AbortController()
+    cancel.current = controller
+    try {
+      await loginWithTelegram((url) => {
+        if (popup) popup.location.href = url
+        else return Linking.openURL(url)
+      }, controller.signal)
+      back()
+    } catch (err) {
+      popup?.close()
+      if (!(err instanceof ApiError && err.code === 'cancelled')) setError(errorText(t, err))
+    } finally {
+      setWaiting(false)
+    }
+  }
 
   const submit = async () => {
     if (busy) return
@@ -56,6 +95,25 @@ export function AccountScreen() {
             {t('account.benefits')}
           </Txt>
         </View>
+
+        {telegram ? (
+          <>
+            {waiting ? (
+              <View style={styles.waiting}>
+                <ActivityIndicator color={colors.primary} />
+                <Txt color={colors.textSoft} style={styles.errorText}>
+                  {t('account.telegramWaiting')}
+                </Txt>
+                <Button label={t('common.cancel')} variant="ghost" small onPress={() => cancel.current?.abort()} />
+              </View>
+            ) : (
+              <Button label={t('account.telegram')} variant="secondary" icon={<Ionicons name="paper-plane" size={18} color={colors.primary} />} onPress={viaTelegram} disabled={busy} testID="account-telegram" />
+            )}
+            <Txt variant="caption" color={colors.textMuted} center>
+              {t('account.or')}
+            </Txt>
+          </>
+        ) : null}
 
         <TextInput
           value={email}
@@ -95,6 +153,21 @@ export function AccountScreen() {
         ) : null}
 
         <Button label={t(mode === 'create' ? 'account.create' : 'account.login')} onPress={submit} disabled={busy || email.trim().length === 0 || password.length === 0} testID="account-submit" />
+        <Txt variant="caption" color={colors.textMuted} center>
+          {t('account.agree')}
+        </Txt>
+        <View style={styles.legal}>
+          <Pressable accessibilityRole="link" onPress={() => router.push('/terms')} hitSlop={8}>
+            <Txt variant="caption" color={colors.primary} style={styles.link}>
+              {t('legal.terms')}
+            </Txt>
+          </Pressable>
+          <Pressable accessibilityRole="link" onPress={() => router.push('/privacy')} hitSlop={8}>
+            <Txt variant="caption" color={colors.primary} style={styles.link}>
+              {t('legal.privacy')}
+            </Txt>
+          </Pressable>
+        </View>
         <Button
           label={t(mode === 'create' ? 'account.switchToLogin' : 'account.switchToCreate')}
           variant="ghost"
@@ -115,4 +188,7 @@ const styles = StyleSheet.create({
   input: { borderWidth: 2, borderColor: colors.border, borderRadius: radius.lg, backgroundColor: colors.surface, padding: space.lg, fontSize: 17, color: colors.text },
   error: { flexDirection: 'row', alignItems: 'center', gap: space.sm, backgroundColor: colors.dangerSoft, borderRadius: radius.md, padding: space.md },
   errorText: { flex: 1, fontSize: 15, lineHeight: 21 },
+  legal: { flexDirection: 'row', justifyContent: 'center', gap: space.lg },
+  link: { textDecorationLine: 'underline' },
+  waiting: { flexDirection: 'row', alignItems: 'center', gap: space.sm, borderWidth: 2, borderColor: colors.primarySoft, backgroundColor: colors.primaryTint, borderRadius: radius.lg, padding: space.md },
 })

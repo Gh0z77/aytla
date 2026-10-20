@@ -86,10 +86,6 @@ const copyBrand = (from, to) => {
   mkdirSync(path.dirname(path.join(root, to)), { recursive: true })
   cpSync(src, path.join(root, to))
 }
-for (const id of ['everest', 'lumi', 'pix', 'nubi', 'rocky', 'aero']) copyBrand(`characters/${id}.png`, `assets/characters/${id}.png`)
-copyBrand('hero-scene.jpg', 'assets/images/hero-scene.jpg')
-copyBrand('logo-blue.png', 'assets/images/logo-blue.png')
-copyBrand('logo-white.png', 'assets/images/logo-white.png')
 
 // 5 ─ dependencies ────────────────────────────────────────────────────────────
 run('npm install')

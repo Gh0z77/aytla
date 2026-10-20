@@ -1,0 +1,144 @@
+{
+  "id": "u06",
+  "section": 1,
+  "order": 6,
+  "title": { "en": "Colors and things", "uz": "Ranglar va narsalar", "ru": "Цвета и вещи", "tr": "Renkler ve eşyalar" },
+  "goal": {
+    "en": "Describe your things: their color, new or old, and where they are.",
+    "uz": "Narsalaringizni tasvirlang: rangi, yangi yoki eskiligi va qayerda turgani.",
+    "ru": "Опишите свои вещи: какого они цвета, новые или старые и где лежат.",
+    "tr": "Eşyalarını anlat: renkleri, yeni mi eski mi oldukları ve nerede durdukları."
+  },
+  "guide": "aero",
+  "color": "#8B5CF6",
+  "tip": {
+    "title": { "en": "This, that, these, those", "uz": "This, that, these, those", "ru": "This, that, these, those", "tr": "This, that, these, those" },
+    "body": {
+      "en": "Use \"this\" for one thing near you and \"that\" for one thing far from you: This is my bag. That is my house. For more than one thing use \"these\" (near) and \"those\" (far) with \"are\" and a plural noun: These keys are new. Uzbek and Turkish keep \"bu\" before a plural noun, and Russian often says just \"это\", but English changes the word: this key, these keys.",
+      "uz": "Yaqindagi bitta narsa uchun \"this\", uzoqdagi bitta narsa uchun \"that\" ishlatiladi: This is my bag. That is my house. Narsalar ko'p bo'lsa, \"these\" (yaqinda) va \"those\" (uzoqda) keladi, ular bilan \"are\" va ko'plikdagi ot ishlatiladi: These keys are new. O'zbek tilida \"bu kalit\" ham, \"bu kalitlar\" ham \"bu\" bilan aytiladi, ingliz tilida esa so'z o'zgaradi: this key, these keys.",
+      "ru": "\"This\" — один предмет рядом, \"that\" — один предмет далеко: This is my bag. That is my house. Если предметов несколько, нужны \"these\" (рядом) и \"those\" (далеко), а с ними \"are\" и множественное число: These keys are new. По-русски мы часто говорим просто \"это\" (Это мои ключи), а в английском надо выбрать слово: These are my keys.",
+      "tr": "Yakındaki tek bir şey için \"this\", uzaktaki tek bir şey için \"that\" kullanılır: This is my bag. That is my house. Birden fazla şey için \"these\" (yakın) ve \"those\" (uzak) gelir; yanlarında \"are\" ve çoğul isim olur: These keys are new. Türkçede \"bu anahtar\" da \"bu anahtarlar\" da \"bu\" ile söylenir, İngilizcede ise kelime değişir: this key, these keys."
+    },
+    "examples": [
+      { "en": "This is my bag.", "native": { "uz": "Bu mening sumkam.", "ru": "Это моя сумка.", "tr": "Bu benim çantam." } },
+      { "en": "That car is new.", "native": { "uz": "Anavi mashina yangi.", "ru": "Та машина новая.", "tr": "Şu araba yeni." } },
+      { "en": "These are my keys.", "native": { "uz": "Bular mening kalitlarim.", "ru": "Это мои ключи.", "tr": "Bunlar benim anahtarlarım." } }
+    ]
+  },
+  "words": [
+    { "id": "u06.w.red", "en": "red", "pos": "adj", "emoji": "🔴", "native": { "uz": "qizil", "ru": "красный", "tr": "kırmızı" } },
+    { "id": "u06.w.blue", "en": "blue", "pos": "adj", "emoji": "🔵", "native": { "uz": "ko'k", "ru": "синий", "tr": "mavi" }, "altNative": { "uz": ["moviy"], "ru": ["голубой"] } },
+    { "id": "u06.w.green", "en": "green", "pos": "adj", "emoji": "🟢", "native": { "uz": "yashil", "ru": "зелёный", "tr": "yeşil" } },
+    { "id": "u06.w.yellow", "en": "yellow", "pos": "adj", "emoji": "🟡", "native": { "uz": "sariq", "ru": "жёлтый", "tr": "sarı" } },
+    { "id": "u06.w.white", "en": "white", "pos": "adj", "emoji": "⚪", "native": { "uz": "oq", "ru": "белый", "tr": "beyaz" }, "altNative": { "tr": ["ak"] } },
+    { "id": "u06.w.black", "en": "black", "pos": "adj", "emoji": "⚫", "native": { "uz": "qora", "ru": "чёрный", "tr": "siyah" }, "altNative": { "tr": ["kara"] } },
+    { "id": "u06.w.color", "en": "color", "pos": "noun", "emoji": "🎨", "native": { "uz": "rang", "ru": "цвет", "tr": "renk" } },
+
+    { "id": "u06.w.bag", "en": "bag", "pos": "noun", "emoji": "👜", "native": { "uz": "sumka", "ru": "сумка", "tr": "çanta" } },
+    { "id": "u06.w.pen", "en": "pen", "pos": "noun", "emoji": "🖊️", "native": { "uz": "ruchka", "ru": "ручка", "tr": "kalem" }, "altNative": { "tr": ["tükenmez kalem"] } },
+    { "id": "u06.w.key", "en": "key", "pos": "noun", "emoji": "🔑", "native": { "uz": "kalit", "ru": "ключ", "tr": "anahtar" } },
+    { "id": "u06.w.car", "en": "car", "pos": "noun", "emoji": "🚗", "native": { "uz": "mashina", "ru": "машина", "tr": "araba" }, "altNative": { "uz": ["avtomobil"], "ru": ["автомобиль"], "tr": ["otomobil"] } },
+    { "id": "u06.w.watch", "en": "watch", "pos": "noun", "emoji": "⌚", "native": { "uz": "qo'l soati", "ru": "часы", "tr": "kol saati" }, "altNative": { "uz": ["soat"], "ru": ["наручные часы"], "tr": ["saat"] } },
+    { "id": "u06.w.thing", "en": "thing", "pos": "noun", "native": { "uz": "narsa", "ru": "вещь", "tr": "şey" }, "altNative": { "ru": ["штука", "предмет"], "tr": ["eşya"] } },
+
+    { "id": "u06.w.that", "en": "that", "pos": "pron", "emoji": "👉", "native": { "uz": "anavi", "ru": "тот", "tr": "şu" }, "altNative": { "uz": ["u", "ana u", "o'sha"], "ru": ["та", "то"], "tr": ["o"] } },
+    { "id": "u06.w.these", "en": "these", "pos": "pron", "native": { "uz": "bular", "ru": "эти", "tr": "bunlar" } },
+    { "id": "u06.w.those", "en": "those", "pos": "pron", "native": { "uz": "anavilar", "ru": "те", "tr": "şunlar" }, "altNative": { "uz": ["ular", "ana ular", "o'shalar"], "tr": ["onlar"] } },
+    { "id": "u06.w.house", "en": "house", "pos": "noun", "emoji": "🏠", "native": { "uz": "uy", "ru": "дом", "tr": "ev" } },
+    { "id": "u06.w.door", "en": "door", "pos": "noun", "emoji": "🚪", "native": { "uz": "eshik", "ru": "дверь", "tr": "kapı" } },
+    { "id": "u06.w.window", "en": "window", "pos": "noun", "emoji": "🪟", "native": { "uz": "deraza", "ru": "окно", "tr": "pencere" } },
+
+    { "id": "u06.w.beautiful", "en": "beautiful", "pos": "adj", "emoji": "🌸", "native": { "uz": "chiroyli", "ru": "красивый", "tr": "güzel" }, "altNative": { "uz": ["go'zal"], "ru": ["прекрасный"] } },
+    { "id": "u06.w.clean", "en": "clean", "pos": "adj", "emoji": "🧼", "native": { "uz": "toza", "ru": "чистый", "tr": "temiz" } },
+    { "id": "u06.w.favorite", "en": "favorite", "pos": "adj", "emoji": "⭐", "native": { "uz": "sevimli", "ru": "любимый", "tr": "favori" }, "altNative": { "tr": ["en sevilen", "en sevdiğim"] } },
+    { "id": "u06.w.picture", "en": "picture", "pos": "noun", "emoji": "🖼️", "native": { "uz": "rasm", "ru": "картина", "tr": "resim" }, "altNative": { "uz": ["surat"], "ru": ["картинка", "рисунок"], "tr": ["tablo"] } },
+    { "id": "u06.w.table", "en": "table", "pos": "noun", "native": { "uz": "stol", "ru": "стол", "tr": "masa" } },
+    { "id": "u06.w.chair", "en": "chair", "pos": "noun", "emoji": "🪑", "native": { "uz": "stul", "ru": "стул", "tr": "sandalye" }, "altNative": { "uz": ["kursi"] } },
+
+    { "id": "u06.w.under", "en": "under", "pos": "prep", "emoji": "⬇️", "native": { "uz": "ostida", "ru": "под", "tr": "altında" }, "altNative": { "uz": ["tagida"] } },
+    { "id": "u06.w.find", "en": "find", "pos": "verb", "emoji": "🔍", "native": { "uz": "topmoq", "ru": "найти", "tr": "bulmak" }, "altNative": { "ru": ["находить"] } },
+    { "id": "u06.w.look", "en": "look", "pos": "verb", "emoji": "👀", "native": { "uz": "qaramoq", "ru": "смотреть", "tr": "bakmak" }, "altNative": { "ru": ["посмотреть"] } },
+    { "id": "u06.w.room", "en": "room", "pos": "noun", "emoji": "🛋️", "native": { "uz": "xona", "ru": "комната", "tr": "oda" } },
+    { "id": "u06.w.box", "en": "box", "pos": "noun", "emoji": "📦", "native": { "uz": "quti", "ru": "коробка", "tr": "kutu" } },
+    { "id": "u06.w.glasses", "en": "glasses", "pos": "noun", "emoji": "👓", "native": { "uz": "ko'zoynak", "ru": "очки", "tr": "gözlük" } },
+    { "id": "u06.w.wallet", "en": "wallet", "pos": "noun", "emoji": "👛", "native": { "uz": "hamyon", "ru": "кошелёк", "tr": "cüzdan" }, "altNative": { "ru": ["бумажник"] } }
+  ],
+  "sentences": [
+    { "id": "u06.s.01", "en": "It is red.", "native": { "uz": "U qizil.", "ru": "Оно красное.", "tr": "O kırmızı." }, "altNative": { "uz": ["Qizil."], "ru": ["Он красный.", "Она красная.", "Это красное."], "tr": ["Kırmızı."] } },
+    { "id": "u06.s.02", "en": "The apple is green.", "native": { "uz": "Olma yashil.", "ru": "Яблоко зелёное.", "tr": "Elma yeşil." } },
+    { "id": "u06.s.03", "en": "My phone is black.", "native": { "uz": "Mening telefonim qora.", "ru": "Мой телефон чёрный.", "tr": "Benim telefonum siyah." }, "altNative": { "uz": ["Telefonim qora."], "tr": ["Telefonum siyah."] } },
+    { "id": "u06.s.04", "en": "What color is it?", "altEn": ["What colour is it?"], "native": { "uz": "U qanday rangda?", "ru": "Какого оно цвета?", "tr": "O ne renk?" }, "altNative": { "uz": ["Uning rangi qanday?", "U qaysi rangda?", "Uning rangi qanaqa?", "Qanday rangda?", "Rangi qanday?"], "ru": ["Какого он цвета?", "Какого она цвета?", "Какого это цвета?", "Какой это цвет?", "Какого цвета?", "Оно какого цвета?"], "tr": ["Ne renk?", "Onun rengi ne?", "Rengi ne?"] } },
+    { "id": "u06.s.05", "en": "It is not blue.", "native": { "uz": "U ko'k emas.", "ru": "Оно не синее.", "tr": "O mavi değil." }, "altNative": { "uz": ["U moviy emas.", "Ko'k emas."], "ru": ["Он не синий.", "Она не синяя.", "Это не синее.", "Оно не голубое.", "Он не голубой.", "Она не голубая."], "tr": ["Mavi değil."] } },
+    { "id": "u06.s.06", "en": "The milk is white.", "altEn": ["Milk is white."], "native": { "uz": "Sut oq.", "ru": "Молоко белое.", "tr": "Süt beyaz." } },
+    { "id": "u06.s.07", "en": "Is your cup yellow?", "native": { "uz": "Sening chashkang sariqmi?", "ru": "Твоя чашка жёлтая?", "tr": "Senin fincanın sarı mı?" }, "altNative": { "uz": ["Chashkang sariqmi?", "Sening piyolang sariqmi?", "Piyolang sariqmi?", "Sening finjoning sariqmi?", "Finjoning sariqmi?"], "tr": ["Fincanın sarı mı?"] } },
+    { "id": "u06.s.08", "en": "I like red and blue.", "native": { "uz": "Men qizil va ko'kni yoqtiraman.", "ru": "Мне нравятся красный и синий.", "tr": "Ben kırmızıyı ve maviyi severim." }, "altNative": { "uz": ["Menga qizil va ko'k yoqadi.", "Men qizil va ko'k rangni yoqtiraman.", "Qizil va ko'kni yoqtiraman."], "ru": ["Я люблю красный и синий.", "Мне нравится красный и синий."], "tr": ["Kırmızıyı ve maviyi severim.", "Ben kırmızı ve maviyi severim.", "Kırmızı ve maviyi severim.", "Kırmızıyı ve maviyi seviyorum.", "Ben kırmızıyı ve maviyi seviyorum."] } },
+
+    { "id": "u06.s.09", "en": "This is my bag.", "native": { "uz": "Bu mening sumkam.", "ru": "Это моя сумка.", "tr": "Bu benim çantam." }, "altNative": { "uz": ["Bu sumkam."], "tr": ["Bu çantam."] } },
+    { "id": "u06.s.10", "en": "I have a red pen.", "native": { "uz": "Menda qizil ruchka bor.", "ru": "У меня есть красная ручка.", "tr": "Kırmızı bir kalemim var." }, "altNative": { "uz": ["Mening qizil ruchkam bor.", "Qizil ruchkam bor.", "Menda bitta qizil ruchka bor."], "ru": ["У меня красная ручка."], "tr": ["Benim kırmızı bir kalemim var.", "Kırmızı kalemim var.", "Benim kırmızı kalemim var.", "Bir kırmızı kalemim var."] } },
+    { "id": "u06.s.11", "en": "Is this your key?", "native": { "uz": "Bu sening kalitingmi?", "ru": "Это твой ключ?", "tr": "Bu senin anahtarın mı?" }, "altNative": { "uz": ["Bu kalitingmi?"], "tr": ["Bu anahtarın mı?"] } },
+    { "id": "u06.s.12", "en": "My car is white.", "native": { "uz": "Mening mashinam oq.", "ru": "Моя машина белая.", "tr": "Benim arabam beyaz." }, "altNative": { "uz": ["Mashinam oq."], "tr": ["Arabam beyaz."] } },
+    { "id": "u06.s.13", "en": "His watch is black.", "native": { "uz": "Uning qo'l soati qora.", "ru": "Его часы чёрные.", "tr": "Onun kol saati siyah." }, "altEnFor": { "uz": ["Her watch is black."], "tr": ["Her watch is black."] }, "altNative": { "uz": ["Uning soati qora."], "ru": ["Его наручные часы чёрные."], "tr": ["Onun saati siyah."] } },
+    { "id": "u06.s.14", "en": "What is this thing?", "native": { "uz": "Bu narsa nima?", "ru": "Что это за вещь?", "tr": "Bu şey ne?" }, "altNative": { "uz": ["Bu nima narsa?"], "ru": ["Что это за штука?", "Что это за предмет?", "Это что за вещь?"], "tr": ["Bu şey nedir?"] } },
+    { "id": "u06.s.15", "en": "I don't have a car.", "altEn": ["I have no car."], "native": { "uz": "Menda mashina yo'q.", "ru": "У меня нет машины.", "tr": "Arabam yok." }, "altNative": { "uz": ["Mening mashinam yo'q.", "Mashinam yo'q."], "ru": ["Машины у меня нет."], "tr": ["Benim arabam yok.", "Bir arabam yok.", "Benim bir arabam yok."] } },
+    { "id": "u06.s.16", "en": "My keys are in my bag.", "native": { "uz": "Mening kalitlarim sumkamda.", "ru": "Мои ключи в моей сумке.", "tr": "Anahtarlarım çantamda." }, "altNative": { "uz": ["Kalitlarim sumkamda.", "Mening kalitlarim mening sumkamda.", "Kalitlarim mening sumkamda."], "ru": ["Мои ключи в сумке.", "Мои ключи у меня в сумке.", "Ключи у меня в сумке.", "Ключи в моей сумке."], "tr": ["Benim anahtarlarım çantamda.", "Anahtarlarım benim çantamda.", "Benim anahtarlarım benim çantamda."] } },
+
+    { "id": "u06.s.17", "en": "That is my house.", "native": { "uz": "Anavi mening uyim.", "ru": "Это мой дом.", "tr": "Şu benim evim." }, "altEnFor": { "ru": ["This is my house."] }, "altNative": { "uz": ["U mening uyim.", "Ana u mening uyim.", "O'sha mening uyim.", "Anavi uyim."], "ru": ["То — мой дом."], "tr": ["O benim evim.", "Şu evim."] } },
+    { "id": "u06.s.18", "en": "These are my keys.", "native": { "uz": "Bular mening kalitlarim.", "ru": "Это мои ключи.", "tr": "Bunlar benim anahtarlarım." }, "altEnFor": { "ru": ["Those are my keys."] }, "altNative": { "uz": ["Bular kalitlarim.", "Bu mening kalitlarim."], "tr": ["Bunlar anahtarlarım."] } },
+    { "id": "u06.s.19", "en": "That door is green.", "native": { "uz": "Anavi eshik yashil.", "ru": "Та дверь зелёная.", "tr": "Şu kapı yeşil." }, "altNative": { "uz": ["U eshik yashil.", "Ana u eshik yashil.", "O'sha eshik yashil."], "tr": ["O kapı yeşil."] } },
+    { "id": "u06.s.20", "en": "Is that your car?", "native": { "uz": "Anavi sening mashinangmi?", "ru": "Это твоя машина?", "tr": "Şu senin araban mı?" }, "altEnFor": { "ru": ["Is this your car?"] }, "altNative": { "uz": ["U sening mashinangmi?", "Ana u sening mashinangmi?", "O'sha sening mashinangmi?", "Anavi mashinangmi?"], "tr": ["O senin araban mı?", "Şu araban mı?", "O araban mı?"] } },
+    { "id": "u06.s.21", "en": "These pens are not blue.", "native": { "uz": "Bu ruchkalar ko'k emas.", "ru": "Эти ручки не синие.", "tr": "Bu kalemler mavi değil." }, "altNative": { "uz": ["Bu ruchkalar moviy emas."], "ru": ["Эти ручки не голубые."] } },
+    { "id": "u06.s.22", "en": "Those houses are very big.", "native": { "uz": "Anavi uylar juda katta.", "ru": "Те дома очень большие.", "tr": "Şu evler çok büyük." }, "altNative": { "uz": ["U uylar juda katta.", "Ana u uylar juda katta.", "O'sha uylar juda katta."], "tr": ["O evler çok büyük."] } },
+    { "id": "u06.s.23", "en": "I like that blue door.", "native": { "uz": "Menga anavi ko'k eshik yoqadi.", "ru": "Мне нравится та синяя дверь.", "tr": "Şu mavi kapıyı beğeniyorum." }, "altNative": { "uz": ["Men anavi ko'k eshikni yoqtiraman.", "Menga u ko'k eshik yoqadi.", "Menga o'sha ko'k eshik yoqadi.", "Menga ana u ko'k eshik yoqadi.", "Anavi ko'k eshik menga yoqadi."], "ru": ["Мне нравится та голубая дверь.", "Та синяя дверь мне нравится."], "tr": ["Ben şu mavi kapıyı beğeniyorum.", "Şu mavi kapıyı seviyorum.", "O mavi kapıyı beğeniyorum.", "O mavi kapıyı seviyorum.", "Şu mavi kapıdan hoşlanıyorum."] } },
+    { "id": "u06.s.24", "en": "These windows are big, but those are small.", "native": { "uz": "Bu derazalar katta, lekin anavilar kichik.", "ru": "Эти окна большие, а те маленькие.", "tr": "Bu pencereler büyük ama şunlar küçük." }, "altEnFor": { "ru": ["These windows are big, and those are small."] }, "altNative": { "uz": ["Bu derazalar katta, ammo anavilar kichik.", "Bu derazalar katta, lekin ular kichik.", "Bu derazalar katta, anavilar esa kichik."], "ru": ["Эти окна большие, но те маленькие."], "tr": ["Bu pencereler büyük ama onlar küçük.", "Bu pencereler büyük fakat şunlar küçük."] } },
+
+    { "id": "u06.s.25", "en": "My new car is very beautiful.", "native": { "uz": "Mening yangi mashinam juda chiroyli.", "ru": "Моя новая машина очень красивая.", "tr": "Benim yeni arabam çok güzel." }, "altNative": { "uz": ["Yangi mashinam juda chiroyli."], "tr": ["Yeni arabam çok güzel."] } },
+    { "id": "u06.s.26", "en": "That chair is very old.", "native": { "uz": "Anavi stul juda eski.", "ru": "Тот стул очень старый.", "tr": "Şu sandalye çok eski." }, "altNative": { "uz": ["U stul juda eski.", "Ana u stul juda eski.", "O'sha stul juda eski."], "tr": ["O sandalye çok eski."] } },
+    { "id": "u06.s.27", "en": "This is a beautiful picture.", "native": { "uz": "Bu chiroyli rasm.", "ru": "Это красивая картина.", "tr": "Bu güzel bir resim." }, "altNative": { "uz": ["Bu chiroyli surat.", "Bu go'zal rasm."], "ru": ["Это красивая картинка.", "Это красивый рисунок."], "tr": ["Bu güzel bir tablo."] } },
+    { "id": "u06.s.28", "en": "Is your house new or old?", "native": { "uz": "Sening uying yangimi yoki eskimi?", "ru": "Твой дом новый или старый?", "tr": "Senin evin yeni mi, eski mi?" }, "altNative": { "uz": ["Uying yangimi yoki eskimi?", "Sening uying yangimi yoki eski?", "Uying yangimi yoki eski?"], "tr": ["Evin yeni mi, eski mi?", "Senin evin yeni mi yoksa eski mi?", "Evin yeni mi yoksa eski mi?"] } },
+    { "id": "u06.s.29", "en": "The table is not clean.", "native": { "uz": "Stol toza emas.", "ru": "Стол не чистый.", "tr": "Masa temiz değil." } },
+    { "id": "u06.s.30", "en": "Red is my favorite color.", "altEn": ["Red is my favourite colour.", "My favorite color is red.", "My favourite colour is red."], "native": { "uz": "Qizil mening sevimli rangim.", "ru": "Красный — мой любимый цвет.", "tr": "Kırmızı benim en sevdiğim renk." }, "altNative": { "uz": ["Mening sevimli rangim qizil.", "Qizil sevimli rangim.", "Sevimli rangim qizil."], "ru": ["Мой любимый цвет — красный."], "tr": ["Kırmızı en sevdiğim renk.", "En sevdiğim renk kırmızı.", "Benim en sevdiğim renk kırmızı.", "Kırmızı benim favori rengim.", "Favori rengim kırmızı."] } },
+    { "id": "u06.s.31", "en": "What is your favorite color?", "altEn": ["What is your favourite colour?"], "native": { "uz": "Sening sevimli ranging qaysi?", "ru": "Какой твой любимый цвет?", "tr": "En sevdiğin renk ne?" }, "altNative": { "uz": ["Sevimli ranging qaysi?", "Sening sevimli ranging nima?", "Sening sevimli ranging qanday?", "Sevimli ranging qanday?"], "ru": ["Какой у тебя любимый цвет?", "Твой любимый цвет какой?"], "tr": ["Senin en sevdiğin renk ne?", "En sevdiğin renk hangisi?", "Favori rengin ne?", "Senin favori rengin ne?"] } },
+    { "id": "u06.s.32", "en": "These chairs are old but clean.", "native": { "uz": "Bu stullar eski, lekin toza.", "ru": "Эти стулья старые, но чистые.", "tr": "Bu sandalyeler eski ama temiz." }, "altNative": { "uz": ["Bu stullar eski, ammo toza.", "Bu stullar eski, biroq toza."], "tr": ["Bu sandalyeler eski fakat temiz.", "Bu sandalyeler eski ancak temiz."] } },
+
+    { "id": "u06.s.33", "en": "Where is my wallet?", "native": { "uz": "Mening hamyonim qayerda?", "ru": "Где мой кошелёк?", "tr": "Cüzdanım nerede?" }, "altNative": { "uz": ["Hamyonim qayerda?", "Qayerda mening hamyonim?"], "ru": ["Где мой бумажник?", "Мой кошелёк где?"], "tr": ["Benim cüzdanım nerede?", "Nerede cüzdanım?"] } },
+    { "id": "u06.s.34", "en": "It is under the table.", "native": { "uz": "U stolning ostida.", "ru": "Оно под столом.", "tr": "O masanın altında." }, "altNative": { "uz": ["U stol ostida.", "U stolning tagida.", "U stol tagida.", "Stolning ostida."], "ru": ["Он под столом.", "Она под столом.", "Это под столом.", "Под столом."], "tr": ["Masanın altında."] } },
+    { "id": "u06.s.35", "en": "I can't find my glasses.", "native": { "uz": "Men ko'zoynagimni topa olmayapman.", "ru": "Я не могу найти свои очки.", "tr": "Gözlüğümü bulamıyorum." }, "altNative": { "uz": ["Ko'zoynagimni topa olmayapman.", "Men ko'zoynagimni topolmayapman.", "Ko'zoynagimni topolmayapman.", "Men ko'zoynagimni topa olmayman."], "ru": ["Я не могу найти мои очки.", "Я не могу найти очки.", "Не могу найти свои очки.", "Не могу найти очки."], "tr": ["Ben gözlüğümü bulamıyorum.", "Gözlüklerimi bulamıyorum.", "Ben gözlüklerimi bulamıyorum."] } },
+    { "id": "u06.s.36", "en": "Look, your keys are on the table.", "native": { "uz": "Qara, kalitlaring stolda.", "ru": "Смотри, твои ключи на столе.", "tr": "Bak, anahtarların masada." }, "altNative": { "uz": ["Qara, sening kalitlaring stolda.", "Qara, kalitlaring stolning ustida.", "Qara, sening kalitlaring stolning ustida.", "Qara, kalitlaring stol ustida."], "ru": ["Посмотри, твои ключи на столе.", "Смотри, твои ключи лежат на столе."], "tr": ["Bak, senin anahtarların masada.", "Bak, anahtarların masanın üstünde.", "Bak, anahtarların masanın üzerinde."] } },
+    { "id": "u06.s.37", "en": "Your phone is in that box.", "native": { "uz": "Sening telefoning anavi qutida.", "ru": "Твой телефон в той коробке.", "tr": "Senin telefonun şu kutuda." }, "altNative": { "uz": ["Telefoning anavi qutida.", "Sening telefoning o'sha qutida.", "Telefoning o'sha qutida.", "Sening telefoning u qutida.", "Telefoning u qutida.", "Telefoning anavi qutining ichida."], "tr": ["Telefonun şu kutuda.", "Senin telefonun o kutuda.", "Telefonun o kutuda.", "Telefonun şu kutunun içinde."] } },
+    { "id": "u06.s.38", "en": "Are my glasses in your room?", "native": { "uz": "Mening ko'zoynagim sening xonangdami?", "ru": "Мои очки в твоей комнате?", "tr": "Gözlüğüm senin odanda mı?" }, "altNative": { "uz": ["Ko'zoynagim sening xonangdami?", "Ko'zoynagim xonangdami?", "Mening ko'zoynagim xonangdami?"], "ru": ["Мои очки у тебя в комнате?"], "tr": ["Gözlüğüm odanda mı?", "Benim gözlüğüm senin odanda mı?", "Benim gözlüğüm odanda mı?", "Gözlüklerim senin odanda mı?", "Gözlüklerim odanda mı?"] } },
+    { "id": "u06.s.39", "en": "There is a beautiful picture in my room.", "altEn": ["In my room there is a beautiful picture."], "native": { "uz": "Mening xonamda chiroyli rasm bor.", "ru": "В моей комнате есть красивая картина.", "tr": "Odamda güzel bir resim var." }, "altNative": { "uz": ["Xonamda chiroyli rasm bor.", "Xonamda bitta chiroyli rasm bor.", "Mening xonamda chiroyli surat bor."], "ru": ["В моей комнате красивая картина.", "У меня в комнате есть красивая картина.", "У меня в комнате красивая картина.", "В моей комнате висит красивая картина."], "tr": ["Benim odamda güzel bir resim var.", "Odamda güzel bir tablo var."] } },
+    { "id": "u06.s.40", "en": "Look under the chair, please.", "altEn": ["Please look under the chair."], "native": { "uz": "Stulning ostiga qara, iltimos.", "ru": "Посмотри под стулом, пожалуйста.", "tr": "Sandalyenin altına bak, lütfen." }, "altNative": { "uz": ["Iltimos, stulning ostiga qara.", "Stul ostiga qara, iltimos.", "Iltimos, stul ostiga qara.", "Stulning tagiga qara, iltimos.", "Iltimos, stulning tagiga qara."], "ru": ["Пожалуйста, посмотри под стулом.", "Посмотри под стул, пожалуйста.", "Пожалуйста, посмотри под стул."], "tr": ["Lütfen sandalyenin altına bak."] } }
+  ],
+  "lessons": [
+    {
+      "id": "u06-l1",
+      "title": { "en": "Red and blue", "uz": "Qizil va ko'k", "ru": "Красный и синий", "tr": "Kırmızı ve mavi" },
+      "words": ["u06.w.red", "u06.w.blue", "u06.w.green", "u06.w.yellow", "u06.w.white", "u06.w.black", "u06.w.color"],
+      "sentences": ["u06.s.01", "u06.s.02", "u06.s.03", "u06.s.04", "u06.s.05", "u06.s.06", "u06.s.07", "u06.s.08"]
+    },
+    {
+      "id": "u06-l2",
+      "title": { "en": "My things", "uz": "Mening narsalarim", "ru": "Мои вещи", "tr": "Benim eşyalarım" },
+      "words": ["u06.w.bag", "u06.w.pen", "u06.w.key", "u06.w.car", "u06.w.watch", "u06.w.thing"],
+      "sentences": ["u06.s.09", "u06.s.10", "u06.s.11", "u06.s.12", "u06.s.13", "u06.s.14", "u06.s.15", "u06.s.16"]
+    },
+    {
+      "id": "u06-l3",
+      "title": { "en": "This and that", "uz": "This va that", "ru": "This и that", "tr": "This ve that" },
+      "words": ["u06.w.that", "u06.w.these", "u06.w.those", "u06.w.house", "u06.w.door", "u06.w.window"],
+      "sentences": ["u06.s.17", "u06.s.18", "u06.s.19", "u06.s.20", "u06.s.21", "u06.s.22", "u06.s.23", "u06.s.24"]
+    },
+    {
+      "id": "u06-l4",
+      "title": { "en": "New and old", "uz": "Yangi va eski", "ru": "Новое и старое", "tr": "Yeni ve eski" },
+      "words": ["u06.w.beautiful", "u06.w.clean", "u06.w.favorite", "u06.w.picture", "u06.w.table", "u06.w.chair"],
+      "sentences": ["u06.s.25", "u06.s.26", "u06.s.27", "u06.s.28", "u06.s.29", "u06.s.30", "u06.s.31", "u06.s.32"]
+    },
+    {
+      "id": "u06-l5",
+      "title": { "en": "Where is it?", "uz": "U qayerda?", "ru": "Где это?", "tr": "Nerede?" },
+      "words": ["u06.w.under", "u06.w.find", "u06.w.look", "u06.w.room", "u06.w.box", "u06.w.glasses", "u06.w.wallet"],
+      "sentences": ["u06.s.33", "u06.s.34", "u06.s.35", "u06.s.36", "u06.s.37", "u06.s.38", "u06.s.39", "u06.s.40"]
+    }
+  ]
+}

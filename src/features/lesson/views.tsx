@@ -8,6 +8,7 @@ import type {
   GradeResult,
   ListenExercise,
   MatchExercise,
+  SayExercise,
   SelectExercise,
   SpeakExercise,
   TypeExercise,
@@ -21,7 +22,7 @@ import { Instruction, PromptBubble, SpeakerButton, Tile, type TileState } from '
 import { WordBank } from './WordBank'
 
 /** What the learner has entered so far for the current exercise. */
-export type Draft = { kind: 'option'; value: string } | { kind: 'tiles'; value: number[] } | { kind: 'text'; value: string }
+export type Draft = { kind: 'option'; value: string } | { kind: 'tiles'; value: number[] } | { kind: 'text'; value: string; spoken?: boolean }
 
 export function isDraftReady(draft: Draft | null): boolean {
   if (!draft) return false
@@ -56,7 +57,7 @@ export function SelectView({ exercise, draft, setDraft, locked, result, sound, h
   return (
     <View>
       <Instruction>{t('lesson.select')}</Instruction>
-      <Txt variant="title" color={colors.primary} style={styles.selectPrompt}>
+      <Txt variant="title" color={colors.primary} style={styles.selectPrompt} testID="select-prompt">
         {exercise.prompt}
       </Txt>
       <View style={styles.grid}>
@@ -241,6 +242,58 @@ export function SpeakView({ exercise, draft, setDraft, locked, guide, onCannot }
   )
 }
 
+// ---------------------------------------------------------------------------
+
+/**
+ * The lesson finale: the learner says the sentence in English. The microphone
+ * is offered wherever speech recognition exists; typing always works, so the
+ * round never blocks a learner on a phone or browser without it.
+ */
+export function SayView({ exercise, draft, setDraft, locked, guide, canUseMic }: Common & { exercise: SayExercise; canUseMic: boolean }) {
+  const t = useT()
+  const [listening, setListening] = useState(false)
+  const stopRef = useRef<(() => void) | null>(null)
+  useEffect(() => () => stopRef.current?.(), [])
+  const text = draft?.kind === 'text' ? draft.value : ''
+  const spoken = draft?.kind === 'text' && draft.spoken === true
+
+  const start = () => {
+    if (listening || locked) return
+    setListening(true)
+    stopRef.current = listenOnce((transcript) => {
+      setListening(false)
+      stopRef.current = null
+      if (transcript.trim()) setDraft({ kind: 'text', value: transcript, spoken: true })
+    })
+  }
+
+  return (
+    <View>
+      <Instruction>{t('lesson.say')}</Instruction>
+      <PromptBubble guide={guide} text={exercise.prompt} />
+      {canUseMic ? (
+        <>
+          <Pressable accessibilityRole="button" accessibilityLabel={t('lesson.tapToSpeak')} onPress={start} disabled={locked} style={[styles.mic, listening ? styles.micLive : null]}>
+            <Ionicons name="mic" size={34} color={listening ? colors.white : colors.primary} />
+            <Txt variant="label" color={listening ? colors.white : colors.primary}>
+              {listening ? t('lesson.listening') : t('lesson.tapToSpeak')}
+            </Txt>
+          </Pressable>
+          {spoken ? (
+            <Txt variant="body" color={colors.textSoft} center style={styles.heard}>
+              {t('lesson.sayHeard')} “{text}”
+            </Txt>
+          ) : null}
+          <Txt variant="caption" color={colors.textMuted} center style={styles.orType}>
+            {t('lesson.sayOrType')}
+          </Txt>
+        </>
+      ) : null}
+      <AnswerInput value={spoken ? '' : text} onChange={(value) => setDraft({ kind: 'text', value })} locked={locked} placeholder={t('lesson.typeHere')} />
+    </View>
+  )
+}
+
 function SkipLink({ label, onPress }: { label: string; onPress: () => void }) {
   return (
     <Pressable accessibilityRole="button" onPress={onPress} style={styles.skip}>
@@ -398,6 +451,7 @@ const styles = StyleSheet.create({
   },
   micLive: { backgroundColor: colors.primary },
   heard: { marginTop: space.lg, fontStyle: 'italic' },
+  orType: { marginTop: space.lg, marginBottom: space.sm, textTransform: 'uppercase' },
   skip: { marginTop: space.xl, padding: space.sm },
   matchRow: { flexDirection: 'row', gap: space.md },
   matchCol: { flex: 1, gap: space.md },

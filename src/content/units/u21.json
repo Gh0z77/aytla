@@ -1,0 +1,142 @@
+{
+  "id": "u21",
+  "section": 2,
+  "order": 0,
+  "title": { "en": "Speaking exam", "uz": "Og'zaki imtihon", "ru": "Устный экзамен", "tr": "Konuşma sınavı" },
+  "goal": {
+    "en": "Answer an examiner: describe your hometown, give an opinion with a reason and an example.",
+    "uz": "Imtihon oluvchiga javob bering: ona shahringizni tasvirlang, fikringizni sabab va misol bilan ayting.",
+    "ru": "Отвечайте экзаменатору: опишите родной город, выскажите мнение с причиной и примером.",
+    "tr": "Sınav görevlisine cevap ver: memleketini tarif et, görüşünü bir sebep ve bir örnekle söyle."
+  },
+  "guide": "pix",
+  "color": "#DB2777",
+  "tip": {
+    "title": { "en": "I think ... because ...", "uz": "I think ... because ...", "ru": "I think ... because ...", "tr": "I think ... because ..." },
+    "body": {
+      "en": "A one-word answer earns little in a speaking exam. Build every answer in three steps. Opinion: I think the city is better. Reason: because it is quiet. Example: For example, I study in the park. If you did not catch the question, do not guess. Say: Can you repeat the question, please?",
+      "uz": "Og'zaki imtihonda bir so'zli javob kam ball keltiradi. Har bir javobni uch qadamda tuzing. Fikr: I think the city is better. Sabab: because it is quiet. Misol: For example, I study in the park. Savolni tushunmagan bo'lsangiz, taxmin qilmang. Ayting: Can you repeat the question, please?",
+      "ru": "Ответ из одного слова на устном экзамене приносит мало баллов. Стройте каждый ответ в три шага. Мнение: I think the city is better. Причина: because it is quiet. Пример: For example, I study in the park. Если вы не расслышали вопрос, не гадайте. Скажите: Can you repeat the question, please?",
+      "tr": "Konuşma sınavında tek kelimelik cevap az puan getirir. Her cevabı üç adımda kur. Görüş: I think the city is better. Sebep: because it is quiet. Örnek: For example, I study in the park. Soruyu anlamadıysan tahmin etme. Şunu söyle: Can you repeat the question, please?"
+    },
+    "examples": [
+      { "en": "I think it is a good idea.", "native": { "uz": "Menimcha, bu yaxshi g'oya.", "ru": "Я думаю, это хорошая идея.", "tr": "Bence bu iyi bir fikir." } },
+      { "en": "I like my city because it is quiet.", "native": { "uz": "Menga shahrim yoqadi, chunki u tinch.", "ru": "Мне нравится мой город, потому что он тихий.", "tr": "Şehrimi seviyorum çünkü sakin." } },
+      { "en": "For example, I read every day.", "native": { "uz": "Masalan, men har kuni o'qiyman.", "ru": "Например, я читаю каждый день.", "tr": "Örneğin, her gün okurum." } }
+    ]
+  },
+  "words": [
+    { "id": "u21.w.hometown", "en": "hometown", "pos": "noun", "emoji": "🏘️", "native": { "uz": "ona shahar", "ru": "родной город", "tr": "memleket" } },
+    { "id": "u21.w.describe", "en": "describe", "pos": "verb", "native": { "uz": "tasvirlamoq", "ru": "описывать", "tr": "tarif etmek" }, "altNative": { "ru": ["описать"], "tr": ["anlatmak"] } },
+    { "id": "u21.w.favorite", "en": "favorite", "pos": "adj", "emoji": "⭐", "native": { "uz": "sevimli", "ru": "любимый", "tr": "favori" }, "altNative": { "tr": ["en sevdiğim"] } },
+    { "id": "u21.w.subject", "en": "subject", "pos": "noun", "emoji": "📘", "native": { "uz": "fan", "ru": "предмет", "tr": "ders" } },
+    { "id": "u21.w.popular", "en": "popular", "pos": "adj", "native": { "uz": "mashhur", "ru": "популярный", "tr": "popüler" }, "altNative": { "uz": ["ommabop"] } },
+    { "id": "u21.w.quiet", "en": "quiet", "pos": "adj", "emoji": "🤫", "native": { "uz": "tinch", "ru": "тихий", "tr": "sakin" }, "altNative": { "uz": ["sokin"], "tr": ["sessiz"] } },
+
+    { "id": "u21.w.think", "en": "think", "pos": "verb", "emoji": "🤔", "native": { "uz": "o'ylamoq", "ru": "думать", "tr": "düşünmek" } },
+    { "id": "u21.w.because", "en": "because", "pos": "other", "native": { "uz": "chunki", "ru": "потому что", "tr": "çünkü" } },
+    { "id": "u21.w.opinion", "en": "opinion", "pos": "noun", "native": { "uz": "fikr", "ru": "мнение", "tr": "görüş" } },
+    { "id": "u21.w.agree", "en": "agree", "pos": "verb", "emoji": "👍", "native": { "uz": "qo'shilmoq", "ru": "соглашаться", "tr": "katılmak" }, "altNative": { "ru": ["согласиться"] } },
+    { "id": "u21.w.idea", "en": "idea", "pos": "noun", "emoji": "💡", "native": { "uz": "g'oya", "ru": "идея", "tr": "fikir" } },
+    { "id": "u21.w.reason", "en": "reason", "pos": "noun", "native": { "uz": "sabab", "ru": "причина", "tr": "sebep" }, "altNative": { "tr": ["neden"] } },
+
+    { "id": "u21.w.prefer", "en": "prefer", "pos": "verb", "native": { "uz": "afzal ko'rmoq", "ru": "предпочитать", "tr": "tercih etmek" } },
+    { "id": "u21.w.better", "en": "better", "pos": "adj", "native": { "uz": "yaxshiroq", "ru": "лучше", "tr": "daha iyi" } },
+    { "id": "u21.w.difficult", "en": "difficult", "pos": "adj", "emoji": "🧗", "native": { "uz": "qiyin", "ru": "трудный", "tr": "zor" }, "altNative": { "ru": ["сложный"] } },
+    { "id": "u21.w.easy", "en": "easy", "pos": "adj", "native": { "uz": "oson", "ru": "лёгкий", "tr": "kolay" }, "altNative": { "ru": ["простой"] } },
+    { "id": "u21.w.useful", "en": "useful", "pos": "adj", "native": { "uz": "foydali", "ru": "полезный", "tr": "faydalı" }, "altNative": { "tr": ["yararlı"] } },
+    { "id": "u21.w.boring", "en": "boring", "pos": "adj", "emoji": "🥱", "native": { "uz": "zerikarli", "ru": "скучный", "tr": "sıkıcı" } },
+
+    { "id": "u21.w.example", "en": "example", "pos": "noun", "native": { "uz": "misol", "ru": "пример", "tr": "örnek" } },
+    { "id": "u21.w.for-example", "en": "for example", "pos": "phrase", "native": { "uz": "masalan", "ru": "например", "tr": "örneğin" }, "altNative": { "tr": ["mesela"] } },
+    { "id": "u21.w.often", "en": "often", "pos": "adv", "native": { "uz": "tez-tez", "ru": "часто", "tr": "sık sık" } },
+    { "id": "u21.w.sometimes", "en": "sometimes", "pos": "adv", "native": { "uz": "ba'zan", "ru": "иногда", "tr": "bazen" } },
+    { "id": "u21.w.usually", "en": "usually", "pos": "adv", "native": { "uz": "odatda", "ru": "обычно", "tr": "genellikle" } },
+    { "id": "u21.w.never", "en": "never", "pos": "adv", "emoji": "🚫", "native": { "uz": "hech qachon", "ru": "никогда", "tr": "asla" }, "altNative": { "tr": ["hiçbir zaman"] } },
+
+    { "id": "u21.w.examiner", "en": "examiner", "pos": "noun", "emoji": "🧑‍🏫", "native": { "uz": "imtihon oluvchi", "ru": "экзаменатор", "tr": "sınav görevlisi" } },
+    { "id": "u21.w.repeat", "en": "repeat", "pos": "verb", "emoji": "🔁", "native": { "uz": "takrorlamoq", "ru": "повторять", "tr": "tekrarlamak" }, "altNative": { "ru": ["повторить"] } },
+    { "id": "u21.w.understand", "en": "understand", "pos": "verb", "native": { "uz": "tushunmoq", "ru": "понимать", "tr": "anlamak" }, "altNative": { "ru": ["понять"] } },
+    { "id": "u21.w.slowly", "en": "slowly", "pos": "adv", "emoji": "🐢", "native": { "uz": "sekin", "ru": "медленно", "tr": "yavaş" }, "altNative": { "uz": ["asta"], "tr": ["yavaşça"] } },
+    { "id": "u21.w.topic", "en": "topic", "pos": "noun", "native": { "uz": "mavzu", "ru": "тема", "tr": "konu" } },
+    { "id": "u21.w.score", "en": "score", "pos": "noun", "emoji": "💯", "native": { "uz": "ball", "ru": "балл", "tr": "puan" } }
+  ],
+  "sentences": [
+    { "id": "u21.s.01", "en": "Tell me about your hometown.", "native": { "uz": "Ona shahringiz haqida gapirib bering.", "ru": "Расскажите о вашем родном городе.", "tr": "Bana memleketinizden bahsedin." } },
+    { "id": "u21.s.02", "en": "My hometown is Samarkand.", "native": { "uz": "Mening ona shahrim Samarqand.", "ru": "Мой родной город — Самарканд.", "tr": "Memleketim Semerkant." }, "altNative": { "uz": ["Ona shahrim Samarqand."], "tr": ["Benim memleketim Semerkant."] } },
+    { "id": "u21.s.03", "en": "Can you describe your city?", "native": { "uz": "Shahringizni tasvirlay olasizmi?", "ru": "Можете описать ваш город?", "tr": "Şehrinizi tarif edebilir misiniz?" }, "altNative": { "ru": ["Вы можете описать ваш город?"] } },
+    { "id": "u21.s.04", "en": "My hometown is quiet.", "native": { "uz": "Ona shahrim tinch.", "ru": "Мой родной город тихий.", "tr": "Memleketim sakin." }, "altNative": { "uz": ["Mening ona shahrim tinch."] } },
+    { "id": "u21.s.05", "en": "What is your favorite subject?", "native": { "uz": "Sevimli faningiz qaysi?", "ru": "Какой ваш любимый предмет?", "tr": "Favori dersiniz hangisi?" }, "altNative": { "ru": ["Какой у вас любимый предмет?"] } },
+    { "id": "u21.s.06", "en": "My favorite subject is English.", "native": { "uz": "Mening sevimli fanim ingliz tili.", "ru": "Мой любимый предмет — английский.", "tr": "Favori dersim İngilizce." }, "altNative": { "uz": ["Sevimli fanim ingliz tili."] } },
+    { "id": "u21.s.07", "en": "This place is popular.", "native": { "uz": "Bu joy mashhur.", "ru": "Это место популярное.", "tr": "Bu yer popüler." } },
+    { "id": "u21.s.08", "en": "It is a quiet and popular park.", "native": { "uz": "Bu tinch va mashhur park.", "ru": "Это тихий и популярный парк.", "tr": "Bu sakin ve popüler bir park." } },
+
+    { "id": "u21.s.09", "en": "What do you think?", "native": { "uz": "Siz nima deb o'ylaysiz?", "ru": "Что вы думаете?", "tr": "Siz ne düşünüyorsunuz?" }, "altNative": { "uz": ["Nima deb o'ylaysiz?"], "tr": ["Ne düşünüyorsunuz?"] } },
+    { "id": "u21.s.10", "en": "I think it is a good idea.", "native": { "uz": "Menimcha, bu yaxshi g'oya.", "ru": "Я думаю, это хорошая идея.", "tr": "Bence bu iyi bir fikir." } },
+    { "id": "u21.s.11", "en": "In my opinion, books are important.", "native": { "uz": "Mening fikrimcha, kitoblar muhim.", "ru": "По моему мнению, книги важны.", "tr": "Benim görüşüme göre kitaplar önemli." } },
+    { "id": "u21.s.12", "en": "I agree with you.", "native": { "uz": "Men sizga qo'shilaman.", "ru": "Я согласен с вами.", "tr": "Size katılıyorum." }, "altNative": { "ru": ["Я согласна с вами."] } },
+    { "id": "u21.s.13", "en": "I do not agree.", "native": { "uz": "Men qo'shilmayman.", "ru": "Я не согласен.", "tr": "Katılmıyorum." }, "altNative": { "ru": ["Я не согласна."] } },
+    { "id": "u21.s.14", "en": "I like my city because it is quiet.", "native": { "uz": "Menga shahrim yoqadi, chunki u tinch.", "ru": "Мне нравится мой город, потому что он тихий.", "tr": "Şehrimi seviyorum çünkü sakin." } },
+    { "id": "u21.s.15", "en": "What is the reason?", "native": { "uz": "Sababi nima?", "ru": "В чём причина?", "tr": "Sebebi nedir?" } },
+    { "id": "u21.s.16", "en": "There are two reasons.", "native": { "uz": "Ikkita sabab bor.", "ru": "Есть две причины.", "tr": "İki sebep var." } },
+
+    { "id": "u21.s.17", "en": "I prefer tea.", "native": { "uz": "Men choyni afzal ko'raman.", "ru": "Я предпочитаю чай.", "tr": "Çayı tercih ederim." } },
+    { "id": "u21.s.18", "en": "I prefer books to films.", "native": { "uz": "Men filmlardan ko'ra kitoblarni afzal ko'raman.", "ru": "Я предпочитаю книги фильмам.", "tr": "Kitapları filmlere tercih ederim." } },
+    { "id": "u21.s.19", "en": "English is easy for me.", "native": { "uz": "Ingliz tili men uchun oson.", "ru": "Английский для меня лёгкий.", "tr": "İngilizce benim için kolay." } },
+    { "id": "u21.s.20", "en": "Math is difficult.", "native": { "uz": "Matematika qiyin.", "ru": "Математика трудная.", "tr": "Matematik zor." }, "altNative": { "ru": ["Математика сложная."] } },
+    { "id": "u21.s.21", "en": "This book is useful.", "native": { "uz": "Bu kitob foydali.", "ru": "Эта книга полезная.", "tr": "Bu kitap faydalı." } },
+    { "id": "u21.s.22", "en": "The film is boring.", "native": { "uz": "Film zerikarli.", "ru": "Фильм скучный.", "tr": "Film sıkıcı." } },
+    { "id": "u21.s.23", "en": "I think the city is better.", "native": { "uz": "Menimcha, shahar yaxshiroq.", "ru": "Я думаю, город лучше.", "tr": "Bence şehir daha iyi." } },
+    { "id": "u21.s.24", "en": "It is useful but difficult.", "native": { "uz": "Bu foydali, lekin qiyin.", "ru": "Это полезно, но трудно.", "tr": "Bu faydalı ama zor." } },
+
+    { "id": "u21.s.25", "en": "Can you give an example?", "native": { "uz": "Misol keltira olasizmi?", "ru": "Можете привести пример?", "tr": "Bir örnek verebilir misiniz?" } },
+    { "id": "u21.s.26", "en": "For example, I read every day.", "native": { "uz": "Masalan, men har kuni o'qiyman.", "ru": "Например, я читаю каждый день.", "tr": "Örneğin, her gün okurum." } },
+    { "id": "u21.s.27", "en": "I often read books.", "native": { "uz": "Men tez-tez kitob o'qiyman.", "ru": "Я часто читаю книги.", "tr": "Sık sık kitap okurum." } },
+    { "id": "u21.s.28", "en": "Sometimes I watch films.", "native": { "uz": "Ba'zan film ko'raman.", "ru": "Иногда я смотрю фильмы.", "tr": "Bazen film izlerim." }, "altEn": ["I sometimes watch films."] },
+    { "id": "u21.s.29", "en": "I usually study at home.", "native": { "uz": "Men odatda uyda dars qilaman.", "ru": "Обычно я занимаюсь дома.", "tr": "Genellikle evde ders çalışırım." } },
+    { "id": "u21.s.30", "en": "I never study at night.", "native": { "uz": "Men hech qachon kechasi dars qilmayman.", "ru": "Я никогда не занимаюсь ночью.", "tr": "Geceleri asla ders çalışmam." } },
+    { "id": "u21.s.31", "en": "This is a good example.", "native": { "uz": "Bu yaxshi misol.", "ru": "Это хороший пример.", "tr": "Bu iyi bir örnek." } },
+    { "id": "u21.s.32", "en": "I usually drink tea.", "native": { "uz": "Men odatda choy ichaman.", "ru": "Обычно я пью чай.", "tr": "Genellikle çay içerim." } },
+
+    { "id": "u21.s.33", "en": "The examiner is friendly.", "native": { "uz": "Imtihon oluvchi samimiy.", "ru": "Экзаменатор дружелюбный.", "tr": "Sınav görevlisi güler yüzlü." } },
+    { "id": "u21.s.34", "en": "Can you repeat the question, please?", "native": { "uz": "Savolni takrorlay olasizmi, iltimos?", "ru": "Можете повторить вопрос, пожалуйста?", "tr": "Soruyu tekrarlar mısınız, lütfen?" } },
+    { "id": "u21.s.35", "en": "I do not understand the question.", "native": { "uz": "Men savolni tushunmayapman.", "ru": "Я не понимаю вопрос.", "tr": "Soruyu anlamıyorum." } },
+    { "id": "u21.s.36", "en": "Please speak slowly.", "native": { "uz": "Iltimos, sekin gapiring.", "ru": "Пожалуйста, говорите медленно.", "tr": "Lütfen yavaş konuşun." } },
+    { "id": "u21.s.37", "en": "What is the topic?", "native": { "uz": "Mavzu nima?", "ru": "Какая тема?", "tr": "Konu nedir?" } },
+    { "id": "u21.s.38", "en": "The topic is my family.", "native": { "uz": "Mavzu mening oilam.", "ru": "Тема — моя семья.", "tr": "Konu benim ailem." } },
+    { "id": "u21.s.39", "en": "I want a good score.", "native": { "uz": "Men yaxshi ball xohlayman.", "ru": "Я хочу хороший балл.", "tr": "İyi bir puan istiyorum." } },
+    { "id": "u21.s.40", "en": "Now I understand.", "native": { "uz": "Endi tushunyapman.", "ru": "Теперь я понимаю.", "tr": "Şimdi anlıyorum." } }
+  ],
+  "lessons": [
+    {
+      "id": "u21-l1",
+      "title": { "en": "Your hometown", "uz": "Ona shahringiz", "ru": "Ваш родной город", "tr": "Memleketin" },
+      "words": ["u21.w.hometown", "u21.w.describe", "u21.w.favorite", "u21.w.subject", "u21.w.popular", "u21.w.quiet"],
+      "sentences": ["u21.s.01", "u21.s.02", "u21.s.03", "u21.s.04", "u21.s.05", "u21.s.06", "u21.s.07", "u21.s.08"]
+    },
+    {
+      "id": "u21-l2",
+      "title": { "en": "Your opinion", "uz": "Sizning fikringiz", "ru": "Ваше мнение", "tr": "Senin görüşün" },
+      "words": ["u21.w.think", "u21.w.because", "u21.w.opinion", "u21.w.agree", "u21.w.idea", "u21.w.reason"],
+      "sentences": ["u21.s.09", "u21.s.10", "u21.s.11", "u21.s.12", "u21.s.13", "u21.s.14", "u21.s.15", "u21.s.16"]
+    },
+    {
+      "id": "u21-l3",
+      "title": { "en": "Compare things", "uz": "Taqqoslash", "ru": "Сравнение", "tr": "Karşılaştırma" },
+      "words": ["u21.w.prefer", "u21.w.better", "u21.w.difficult", "u21.w.easy", "u21.w.useful", "u21.w.boring"],
+      "sentences": ["u21.s.17", "u21.s.18", "u21.s.19", "u21.s.20", "u21.s.21", "u21.s.22", "u21.s.23", "u21.s.24"]
+    },
+    {
+      "id": "u21-l4",
+      "title": { "en": "Give an example", "uz": "Misol keltiring", "ru": "Приведите пример", "tr": "Bir örnek ver" },
+      "words": ["u21.w.example", "u21.w.for-example", "u21.w.often", "u21.w.sometimes", "u21.w.usually", "u21.w.never"],
+      "sentences": ["u21.s.25", "u21.s.26", "u21.s.27", "u21.s.28", "u21.s.29", "u21.s.30", "u21.s.31", "u21.s.32"]
+    },
+    {
+      "id": "u21-l5",
+      "title": { "en": "In the exam room", "uz": "Imtihon xonasida", "ru": "В экзаменационной", "tr": "Sınav odasında" },
+      "words": ["u21.w.examiner", "u21.w.repeat", "u21.w.understand", "u21.w.slowly", "u21.w.topic", "u21.w.score"],
+      "sentences": ["u21.s.33", "u21.s.34", "u21.s.35", "u21.s.36", "u21.s.37", "u21.s.38", "u21.s.39", "u21.s.40"]
+    }
+  ]
+}

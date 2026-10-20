@@ -8,6 +8,7 @@ import type {
   FillExercise,
   ListenExercise,
   MatchExercise,
+  SayExercise,
   SelectExercise,
   Sentence,
   SpeakExercise,
@@ -50,6 +51,7 @@ const PLANS: readonly SentencePlan[][] = [
 const MAX_SELECTS_UP_FRONT = 4
 const MATCH_PAIRS = 5
 const BANK_DISTRACTORS = 4
+export const FINALE_SENTENCES = 3
 
 class UnitContext {
   readonly words = new Map<string, Word>()
@@ -256,6 +258,26 @@ class UnitContext {
     }
   }
 
+  say(sentence: Sentence): SayExercise {
+    return {
+      kind: 'say',
+      id: this.nextId('say'),
+      itemId: sentence.id,
+      prompt: sentence.native[this.lang],
+      answers: this.englishAnswers(sentence),
+      audio: sentence.en,
+    }
+  }
+
+  /** The speaking finale: up to `count` of the given sentences, longest first (they are the most worth saying). */
+  finale(sentences: readonly Sentence[], count: number): SayExercise[] {
+    return [...sentences]
+      .sort((a, b) => b.en.length - a.en.length)
+      .slice(0, count)
+      .reverse()
+      .map((s) => this.say(s))
+  }
+
   speak(sentence: Sentence): SpeakExercise {
     return { kind: 'speak', id: this.nextId('speak'), itemId: sentence.id, text: sentence.en, translation: sentence.native[this.lang] }
   }
@@ -331,6 +353,9 @@ export function buildLessonSession(unit: Unit, lessonIndex: number, opts: Sessio
     if (closing) exercises.push(closing)
   }
 
+  // every lesson ends with the learner saying what they have just learned
+  exercises.push(...ctx.finale(sentences, FINALE_SENTENCES))
+
   return { exercises, lexicon: ctx.lexicon() }
 }
 
@@ -345,6 +370,7 @@ export function buildReviewSession(unit: Unit, opts: SessionOptions): BuiltSessi
   sample(ctx.rng, unit.sentences, 10).forEach((s, i) => exercises.push(ctx.forSentence(s, plan[i % plan.length] as SentencePlan, new Set())))
   const closing = ctx.match(shuffle(ctx.rng, unit.words))
   if (closing) exercises.push(closing)
+  exercises.push(...ctx.finale(sample(ctx.rng, unit.sentences, FINALE_SENTENCES), FINALE_SENTENCES))
 
   return { exercises, lexicon: ctx.lexicon() }
 }
@@ -374,4 +400,22 @@ export function buildPracticeSession(course: Course, itemIds: readonly string[],
   }
 
   return { exercises: shuffle(rng, exercises).slice(0, limit), lexicon: [...lexicon] }
+}
+
+/**
+ * Placement: one check of a unit. A word to recognise, a sentence to build in
+ * English, and a second sentence kept as the tie-break (see core/placement.ts).
+ * Everything comes from the unit's later lessons, and nothing needs sound.
+ */
+export function buildPlacementCheck(unit: Unit, opts: SessionOptions): Exercise[] {
+  const ctx = new UnitContext(unit, { ...opts, canListen: false, canSpeak: false }, createRng(opts.seed), `placement-${unit.id}`)
+  const late = unit.lessons.slice(Math.floor(unit.lessons.length / 2))
+  const words = late.flatMap((l) => l.words).map((id) => ctx.words.get(id)).filter((w): w is Word => w !== undefined)
+  const sentences = late.flatMap((l) => l.sentences).map((id) => ctx.sentences.get(id)).filter((s): s is Sentence => s !== undefined)
+  const word = sample(ctx.rng, words.length > 0 ? words : unit.words, 1)[0]
+  const picked = sample(ctx.rng, sentences.length >= 2 ? sentences : unit.sentences, 2)
+  const out: Exercise[] = []
+  if (word) out.push(ctx.select(word))
+  picked.forEach((s) => out.push(ctx.bank(s, 'native-en')))
+  return out
 }

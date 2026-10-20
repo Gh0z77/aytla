@@ -112,5 +112,7 @@ export function toResult(state: SessionState, now: number): LessonResult {
     mistakes: state.mistakes,
     maxCombo: state.maxCombo,
     seconds: Math.max(1, Math.round((now - state.startedAt) / 1000)),
+    // skipped speaking rounds leave no first attempt behind, so they are not counted
+    spoken: state.exercises.filter((ex) => (ex.kind === 'say' || ex.kind === 'speak') && ex.itemId in state.firstAttempts).length,
   }
 }

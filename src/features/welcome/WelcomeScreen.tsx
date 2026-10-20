@@ -2,9 +2,8 @@ import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import { Pressable, StyleSheet, TextInput, View } from 'react-native'
-import { COURSE } from '../../content/course'
-import { lessonIdsBefore } from '../../core/path'
-import { BASE_LANGS, type CharacterId, type DailyGoal } from '../../core/types'
+import { GOAL_IDS } from '../../core/goals'
+import { BASE_LANGS, type CharacterId, type DailyGoal, type GoalId } from '../../core/types'
 import { LANGUAGE_NAMES, useT, type StringKey } from '../../i18n'
 import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
@@ -15,7 +14,7 @@ import { Screen } from '../../ui/Screen'
 import { Txt } from '../../ui/Txt'
 
 const GOALS: DailyGoal[] = [10, 20, 30, 50]
-const STEPS = 5
+const STEPS = 6
 
 /** First run: language → name → daily goal → level → guide. Everything can be changed later in Profile. */
 export function WelcomeScreen() {
@@ -23,19 +22,18 @@ export function WelcomeScreen() {
   const t = useT()
   const profile = useApp((s) => s.user.profile)
   const setProfile = useApp((s) => s.setProfile)
-  const markLessonsDone = useApp((s) => s.markLessonsDone)
 
   const [step, setStep] = useState(0)
   const [name, setName] = useState(profile.name)
   const [goal, setGoal] = useState<DailyGoal>(profile.dailyGoalXp)
   const [knowsSome, setKnowsSome] = useState(false)
   const [guide, setGuide] = useState<CharacterId>(profile.guide)
+  const [learningGoal, setLearningGoal] = useState<GoalId>(profile.goal ?? 'everyday')
 
   const finish = () => {
-    setProfile({ name: name.trim(), dailyGoalXp: goal, guide, onboarded: true })
-    const second = COURSE.units[1]
-    if (knowsSome && second) markLessonsDone(lessonIdsBefore(COURSE, second.id))
-    router.replace('/learn')
+    setProfile({ name: name.trim(), dailyGoalXp: goal, guide, goal: learningGoal, onboarded: true })
+    // whoever already knows some English takes the placement test instead of guessing a level
+    router.replace(knowsSome ? '/placement' : '/learn')
   }
 
   const next = () => (step === STEPS - 1 ? finish() : setStep(step + 1))
@@ -62,6 +60,15 @@ export function WelcomeScreen() {
 
         {step === 1 ? (
           <>
+            <Hello guide="aero" text={t('goal.title')} />
+            {GOAL_IDS.map((g) => (
+              <Option key={g} title={t(`goal.${g}` as StringKey)} sub={t(`goal.${g}Body` as StringKey)} active={learningGoal === g} onPress={() => setLearningGoal(g)} />
+            ))}
+          </>
+        ) : null}
+
+        {step === 2 ? (
+          <>
             <Hello guide="everest" text={t('welcome.hello')} />
             <Txt variant="heading">{t('welcome.name.title')}</Txt>
             <TextInput
@@ -77,7 +84,7 @@ export function WelcomeScreen() {
           </>
         ) : null}
 
-        {step === 2 ? (
+        {step === 3 ? (
           <>
             <Hello guide="lumi" text={t('welcome.goal.title')} />
             {GOALS.map((g) => (
@@ -86,7 +93,7 @@ export function WelcomeScreen() {
           </>
         ) : null}
 
-        {step === 3 ? (
+        {step === 4 ? (
           <>
             <Hello guide="pix" text={t('welcome.level.title')} />
             <Option title={t('welcome.level.new')} sub={t('welcome.level.newBody')} active={!knowsSome} onPress={() => setKnowsSome(false)} />
@@ -94,7 +101,7 @@ export function WelcomeScreen() {
           </>
         ) : null}
 
-        {step === 4 ? (
+        {step === 5 ? (
           <>
             <Hello guide={guide} text={t('welcome.guide.title')} />
             <View style={styles.guides}>

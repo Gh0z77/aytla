@@ -4,8 +4,8 @@ import { useRef, useState } from 'react'
 import { KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native'
 import { COURSE, findLesson } from '../../content/course'
 import { buildLessonSession, buildPracticeSession, buildReviewSession, type BuiltSession } from '../../core/exercises'
-import { gradeBank, gradeFill, gradeListen, gradeSelect, gradeSpeak, gradeType } from '../../core/grading'
-import { SHOP, practiceItems } from '../../core/progress'
+import { gradeBank, gradeFill, gradeListen, gradeSay, gradeSelect, gradeSpeak, gradeType } from '../../core/grading'
+import { practiceItems } from '../../core/progress'
 import { answer, currentExercise, dropKinds, isFinished, sessionProgress, skip, startSession, toResult, type SessionState } from '../../core/session'
 import type { CharacterId, Exercise, GradeResult, SessionKind } from '../../core/types'
 import { useT } from '../../i18n'
@@ -18,7 +18,7 @@ import { Mascot } from '../../ui/Mascot'
 import { ProgressBar } from '../../ui/ProgressBar'
 import { Screen } from '../../ui/Screen'
 import { Txt } from '../../ui/Txt'
-import { BankView, FillView, ListenView, MatchView, SelectView, SpeakView, TypeView, isDraftReady, type Draft } from './views'
+import { BankView, FillView, ListenView, MatchView, SayView, SelectView, SpeakView, TypeView, isDraftReady, type Draft } from './views'
 
 export const PRACTICE_ID = 'practice'
 
@@ -50,12 +50,9 @@ function prepare(lessonId: string): Prepared | null {
 export function LessonPlayer({ lessonId }: { lessonId: string }) {
   const router = useRouter()
   const t = useT()
-  const hearts = useApp((s) => s.user.hearts.count)
-  const gems = useApp((s) => s.user.gems)
   const profile = useApp((s) => s.user.profile)
-  const loseHeart = useApp((s) => s.loseHeart)
-  const buy = useApp((s) => s.buy)
   const completeSession = useApp((s) => s.completeSession)
+  const [micAvailable] = useState(() => canSpeak())
 
   const [prepared] = useState(() => prepare(lessonId))
   const [session, setSession] = useState<SessionState | null>(() => (prepared ? startSession(prepared.kind, prepared.lessonId, prepared.built.exercises, Date.now()) : null))
@@ -64,8 +61,6 @@ export function LessonPlayer({ lessonId }: { lessonId: string }) {
   const [result, setResult] = useState<GradeResult | null>(null)
   const [matchWrong, setMatchWrong] = useState<string[] | null>(null)
   const [quitOpen, setQuitOpen] = useState(false)
-  const costsHearts = prepared !== null && prepared.kind !== 'practice'
-  const [noHeartsOpen, setNoHeartsOpen] = useState(() => costsHearts && hearts <= 0)
   const done = useRef(false)
 
   const leave = () => {
@@ -102,13 +97,13 @@ export function LessonPlayer({ lessonId }: { lessonId: string }) {
     router.replace('/result')
   }
 
-  const advance = (next: SessionState, wasWrong: boolean) => {
+  // No hearts: a mistake costs nothing but a second try at the end of the lesson.
+  const advance = (next: SessionState) => {
     setDraft(null)
     setResult(null)
     setMatchWrong(null)
     setSession(next)
     if (isFinished(next)) finish(next)
-    else if (wasWrong && costsHearts && useApp.getState().user.hearts.count <= 0) setNoHeartsOpen(true)
   }
 
   const check = () => {
@@ -116,16 +111,15 @@ export function LessonPlayer({ lessonId }: { lessonId: string }) {
     const graded = grade(exercise, draft, profile.baseLang, lexicon)
     if (!graded) return
     resultFeedback(profile.hapticsOn, graded.correct)
-    if (!graded.correct && costsHearts) loseHeart()
     setResult(graded)
   }
 
   const onContinue = () => {
     if (!result) return
-    advance(answer(session, result.correct, matchWrong ?? undefined), !result.correct)
+    advance(answer(session, result.correct, matchWrong ?? undefined))
   }
 
-  const cannot = (kind: 'listen' | 'speak') => advance(skip(dropKinds(session, [kind])), false)
+  const cannot = (kind: 'listen' | 'speak') => advance(skip(dropKinds(session, [kind])))
 
   const common = { draft, setDraft, locked, result, guide: prepared.guide, sound: profile.soundOn, haptics: profile.hapticsOn }
 
@@ -136,14 +130,6 @@ export function LessonPlayer({ lessonId }: { lessonId: string }) {
           <Ionicons name="close" size={30} color={colors.textMuted} />
         </Pressable>
         <ProgressBar value={sessionProgress(session)} />
-        {costsHearts ? (
-          <View style={styles.hearts}>
-            <Ionicons name="heart" size={24} color={colors.heart} />
-            <Txt variant="label" color={colors.heart}>
-              {hearts}
-            </Txt>
-          </View>
-        ) : null}
       </View>
 
       <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -156,6 +142,7 @@ export function LessonPlayer({ lessonId }: { lessonId: string }) {
               {exercise.kind === 'listen' ? <ListenView exercise={exercise} {...common} onCannot={() => cannot('listen')} /> : null}
               {exercise.kind === 'type' ? <TypeView exercise={exercise} {...common} /> : null}
               {exercise.kind === 'speak' ? <SpeakView exercise={exercise} {...common} onCannot={() => cannot('speak')} /> : null}
+              {exercise.kind === 'say' ? <SayView exercise={exercise} {...common} canUseMic={micAvailable} /> : null}
               {exercise.kind === 'match' ? (
                 <MatchView
                   exercise={exercise}
@@ -198,35 +185,6 @@ export function LessonPlayer({ lessonId }: { lessonId: string }) {
         </View>
       </Modal>
 
-      <Modal visible={noHeartsOpen} transparent animationType="fade" onRequestClose={leave}>
-        <View style={styles.backdrop}>
-          <View style={styles.sheet}>
-            <Ionicons name="heart-dislike" size={64} color={colors.heart} />
-            <Txt variant="heading" center>
-              {t('hearts.outTitle')}
-            </Txt>
-            <Txt color={colors.textSoft} center>
-              {t('hearts.outBody')}
-            </Txt>
-            <Button
-              label={t('hearts.refill', { n: SHOP.heartRefill.cost })}
-              variant="gold"
-              disabled={gems < SHOP.heartRefill.cost}
-              onPress={() => {
-                if (buy('heartRefill').ok) setNoHeartsOpen(false)
-              }}
-            />
-            <Button
-              label={t('hearts.practice')}
-              onPress={() => {
-                stopSpeaking()
-                router.replace(`/lesson/${PRACTICE_ID}`)
-              }}
-            />
-            <Button label={t('hearts.end')} variant="ghost" onPress={leave} />
-          </View>
-        </View>
-      </Modal>
     </Screen>
   )
 }
@@ -246,6 +204,8 @@ function grade(exercise: Exercise, draft: Draft, baseLang: 'uz' | 'ru' | 'tr', l
       return draft.kind === 'text' ? gradeType(exercise, draft.value, lexicon) : null
     case 'speak':
       return draft.kind === 'text' ? gradeSpeak(exercise, draft.value) : null
+    case 'say':
+      return draft.kind === 'text' ? gradeSay(exercise, draft.value, draft.spoken === true, lexicon) : null
     case 'match':
       return null
   }
@@ -263,7 +223,22 @@ function Feedback({ result, onContinue }: { result: GradeResult; onContinue: () 
           {good ? (result.typo ? t('lesson.typo') : t('lesson.correct')) : t('lesson.wrong')}
         </Txt>
       </View>
-      {(!good || result.typo) && result.expected ? (
+      {result.missed && result.missed.length > 0 ? (
+        // a spoken answer: show the sentence with the words that were not heard marked, even when it passed
+        <>
+          <Txt color={tone.text} style={styles.expected}>
+            {result.expected.split(/\s+/).map((word, i) => (
+              <Txt key={i} color={tone.text} style={[styles.expected, result.missed?.includes(word) ? styles.missed : null]}>
+                {i > 0 ? ' ' : ''}
+                {word}
+              </Txt>
+            ))}
+          </Txt>
+          <Txt variant="caption" color={tone.text}>
+            {t('lesson.sayMissed')}
+          </Txt>
+        </>
+      ) : (!good || result.typo) && result.expected ? (
         <Txt color={tone.text} style={styles.expected}>
           {result.expected}
         </Txt>
@@ -282,6 +257,7 @@ const styles = StyleSheet.create({
   feedback: { paddingHorizontal: space.lg, paddingTop: space.lg, paddingBottom: space.lg, gap: space.sm },
   feedbackRow: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
   expected: { fontSize: 17, marginBottom: space.xs },
+  missed: { fontWeight: '800', textDecorationLine: 'underline' },
   backdrop: { flex: 1, backgroundColor: 'rgba(15,23,42,0.55)', alignItems: 'center', justifyContent: 'center', padding: space.xl },
   sheet: { width: '100%', maxWidth: 420, backgroundColor: colors.white, borderRadius: radius.xl, padding: space.xl, alignItems: 'center', gap: space.md },
   empty: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: space.md, padding: space.xl },

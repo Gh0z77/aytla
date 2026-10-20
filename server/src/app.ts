@@ -5,6 +5,7 @@ import type { CoachProvider } from './coach.ts'
 import { COACH_DAILY_LIMIT, SCENARIOS, cleanCoachRequest } from './coach.ts'
 import { transaction, type Db } from './db.ts'
 import { leagueView, recordWeeklyXp } from './league.ts'
+import { cleanBotLang, findOrCreateTelegramUser, pollLogin, startLogin } from './telegram.ts'
 import { weekId } from './time.ts'
 
 /**
@@ -17,6 +18,8 @@ export interface AppOptions {
   now?: () => number
   corsOrigins?: string[]
   coach?: CoachProvider | null
+  /** the running Telegram bot's @username (null until Telegram has confirmed the token); omit to turn Telegram sign-in off */
+  telegramBot?: () => string | null
 }
 
 const MAX_STATE_BYTES = 512 * 1024
@@ -77,7 +80,8 @@ export function createApp(options: AppOptions): Hono<Env> {
     }
   }
 
-  const publicUser = (u: User) => ({ id: u.id, email: u.email, name: u.name, guide: u.guide, tier: u.tier })
+  // Telegram accounts have no email: their internal "tg:<id>" key is not shown to anyone
+  const publicUser = (u: User) => ({ id: u.id, email: u.email.startsWith('tg:') ? '' : u.email, telegram: u.email.startsWith('tg:'), name: u.name, guide: u.guide, tier: u.tier })
 
   // -- accounts ---------------------------------------------------------------
 
@@ -103,6 +107,32 @@ export function createApp(options: AppOptions): Hono<Env> {
     if (!found || !ok) return c.json({ error: 'invalid_credentials' }, 401)
     loginLimiter.reset(key)
     return c.json({ token: issueToken(db, found.id, now()), user: publicUser(found) })
+  })
+
+  // -- sign in with Telegram (see telegram.ts) -------------------------------------
+
+  const telegramLimiter = new AttemptLimiter(20, 15 * 60 * 1000)
+
+  app.get('/auth/providers', (c) => c.json({ telegram: Boolean(options.telegramBot?.()) }))
+
+  app.post('/auth/telegram/start', async (c) => {
+    const bot = options.telegramBot?.()
+    if (!bot) return c.json({ error: 'telegram_unavailable' }, 503)
+    const caller = c.req.header('x-forwarded-for')?.split(',')[0]?.trim() || 'direct'
+    if (!telegramLimiter.allow(caller, now())) return c.json({ error: 'too_many_attempts' }, 429)
+    const body = await readJson(c.req.raw)
+    const login = startLogin(db, cleanBotLang(body?.lang), now())
+    return c.json({ code: login.code, secret: login.secret, url: `https://t.me/${bot}?start=${login.code}`, expiresAt: login.expiresAt }, 201)
+  })
+
+  app.post('/auth/telegram/poll', async (c) => {
+    const body = await readJson(c.req.raw)
+    if (typeof body?.code !== 'string' || typeof body.secret !== 'string') return c.json({ error: 'invalid_request' }, 400)
+    const outcome = pollLogin(db, body.code, body.secret, now())
+    if (outcome.status === 'expired') return c.json({ error: 'telegram_expired' }, 410)
+    if (outcome.status === 'pending') return c.json({ status: 'pending' })
+    const user = findOrCreateTelegramUser(db, outcome.telegramId, outcome.name, now())
+    return c.json({ status: 'confirmed', token: issueToken(db, user.id, now()), user: publicUser(user) })
   })
 
   // -- everything below needs a bearer token ------------------------------------

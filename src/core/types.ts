@@ -176,7 +176,21 @@ export interface SpeakExercise {
   translation: string
 }
 
-export type Exercise = SelectExercise | BankExercise | MatchExercise | FillExercise | ListenExercise | TypeExercise | SpeakExercise
+/**
+ * The lesson finale: the guide gives the meaning, the learner SAYS it in English
+ * (microphone where available, keyboard otherwise). This is what makes every
+ * lesson end in speaking rather than in tapping.
+ */
+export interface SayExercise {
+  kind: 'say'
+  id: string
+  itemId: string
+  prompt: string
+  answers: string[]
+  audio: string
+}
+
+export type Exercise = SelectExercise | BankExercise | MatchExercise | FillExercise | ListenExercise | TypeExercise | SpeakExercise | SayExercise
 
 export type ExerciseKind = Exercise['kind']
 
@@ -186,6 +200,8 @@ export interface GradeResult {
   typo?: boolean
   /** the canonical answer to show the learner */
   expected: string
+  /** spoken answers only: the words of `expected` that were not heard, as written there */
+  missed?: string[]
 }
 
 export type SessionKind = 'lesson' | 'review' | 'practice'
@@ -207,6 +223,24 @@ export interface Profile {
   createdAt: number
   /** local hour (0-23) of the daily practice reminder; null or missing = off */
   reminderHour?: number | null
+  /** who delivers the reminder: the phone's own notification, or the Telegram bot (browsers cannot notify) */
+  reminderVia?: 'device' | 'telegram'
+  /** minutes east of UTC on the learner's device, so the server knows when `reminderHour` is */
+  tzOffsetMin?: number
+  /** why the learner is learning; decides the order of the path and the suggested conversations */
+  goal?: GoalId
+  /** best Uchish (flight game) score */
+  bestRun?: number
+  bestFall?: number
+}
+
+export type GoalId = 'everyday' | 'travel' | 'work' | 'study'
+
+/** One correction the AI guide made, remembered so later practice can target it. */
+export interface CoachNote {
+  at: number
+  better: string
+  note: string
 }
 
 export interface HeartsState {
@@ -238,6 +272,8 @@ export interface DayStats {
   practice: number
   maxCombo: number
   seconds: number
+  /** sentences said aloud (or typed in a speaking round); missing in states saved before this existed */
+  spoken?: number
 }
 
 export type QuestKind = 'xp' | 'lessons' | 'perfect' | 'combo' | 'practice'
@@ -285,6 +321,8 @@ export interface UserState {
   league: LeagueState
   xpBoostUntil: number
   updatedAt: number
+  /** the most recent AI corrections, newest first (capped) */
+  coachNotes?: CoachNote[]
 }
 
 export interface LessonResult {
@@ -296,6 +334,8 @@ export interface LessonResult {
   mistakes: number
   maxCombo: number
   seconds: number
+  /** speaking-round sentences completed in this session */
+  spoken?: number
 }
 
 export interface Rewards {
@@ -309,4 +349,6 @@ export interface Rewards {
   questsCompleted: Quest[]
   achievements: Array<{ id: string; level: number }>
   heartsRestored: number
+  /** sentences the learner said in this session */
+  spoken: number
 }

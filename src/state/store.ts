@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import {
+  addCoachNote,
   applyLessonResult,
   buy as buyItem,
   createInitialState,
@@ -24,6 +25,8 @@ interface AppStore {
   user: UserState
   hydrated: boolean
   lastRewards: Rewards | null
+  /** the lesson or review the last rewards came from (null for practice and games) */
+  lastLessonId: string | null
   /** roll the day over and refill hearts; call on launch and when the app returns to the foreground */
   tick: () => void
   setProfile: (patch: Partial<Profile>) => void
@@ -32,6 +35,7 @@ interface AppStore {
   buy: (item: ShopItem) => { ok: true } | { ok: false; reason: BuyFailure }
   openChest: (chestId: string) => number
   markLessonsDone: (lessonIds: string[]) => void
+  rememberCorrection: (better: string, note: string) => void
   reset: () => void
 }
 
@@ -41,6 +45,7 @@ export const useApp = create<AppStore>()(
       user: createInitialState(Date.now()),
       hydrated: false,
       lastRewards: null,
+      lastLessonId: null,
 
       tick: () => {
         const now = Date.now()
@@ -51,7 +56,7 @@ export const useApp = create<AppStore>()(
 
       completeSession: (result) => {
         const { state, rewards } = applyLessonResult(get().user, result, Date.now())
-        set({ user: state, lastRewards: rewards })
+        set({ user: state, lastRewards: rewards, lastLessonId: result.lessonId })
         return rewards
       },
 
@@ -80,10 +85,12 @@ export const useApp = create<AppStore>()(
         set({ user: { ...user, lessons, updatedAt: now } })
       },
 
-      reset: () => set({ user: createInitialState(Date.now()), lastRewards: null }),
+      rememberCorrection: (better, note) => set({ user: addCoachNote(get().user, { better, note }, Date.now()) }),
+
+      reset: () => set({ user: createInitialState(Date.now()), lastRewards: null, lastLessonId: null }),
     }),
     {
-      name: 'everest-user-v1',
+      name: 'aytla-user-v1',
       storage: createJSONStorage(() => AsyncStorage),
       partialize: (s) => ({ user: s.user }),
       onRehydrateStorage: () => () => {
