@@ -24,7 +24,7 @@ const apiBase = process.argv[4] ?? 'http://localhost:8787'
 // scripts/walkthrough.config.json: { "units": ["u05", "u06"] } plays one lesson of each listed unit and nothing else;
 // { "units": [] } (or no file) runs the main walkthrough. A 5th argument `units=u05,u06` does the same.
 const configFile = path.join(root, 'scripts', 'walkthrough.config.json')
-const config = existsSync(configFile) ? JSON.parse(readFileSync(configFile, 'utf8')) : {}
+const config = existsSync(configFile) ? JSON.parse(readFileSync(configFile, 'utf8').replace(/^﻿/, '')) : {}
 const onlyUnits = (process.argv[5] ?? '').startsWith('units=') ? process.argv[5].slice('units='.length).split(',').filter(Boolean) : Array.isArray(config.units) ? config.units : []
 mkdirSync(out, { recursive: true })
 
@@ -206,7 +206,7 @@ try {
   const desktop = await browser.newContext({ viewport: { width: 1440, height: 900 } })
   const dpage = await desktop.newPage()
   watch(dpage, 'desktop')
-  await dpage.goto(base, { waitUntil: 'networkidle' })
+  await dpage.goto(base, { waitUntil: 'networkidle', timeout: 120000 })
   await dpage.locator('[data-testid="landing-start"]').waitFor({ timeout: 60000 })
   await dpage.waitForTimeout(800)
   await snap(dpage, 'landing-desktop-top')
