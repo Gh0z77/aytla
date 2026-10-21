@@ -1,5 +1,6 @@
 import { Composition } from 'remotion'
-import { CrewIntro, FEEDBACK, HERO, HeroLoop, Reactions, SQUARE, STORY, SentenceOfDay } from './compositions'
+import { CrewIntro, FEEDBACK, Reactions, SQUARE, STORY, SentenceOfDay } from './compositions'
+import { HERO, HeroLoop, type HeroSentence } from './hero'
 
 /**
  * Remotion entry: the videos for social media and the website hero.
@@ -10,10 +11,10 @@ import { CrewIntro, FEEDBACK, HERO, HeroLoop, Reactions, SQUARE, STORY, Sentence
  *
  * Every composition draws the same crew as the app (src/ui/mascot/draw.ts).
  */
-export const HERO_SENTENCES = [
-  { sentence: 'Hello! How are you?', translation: "Salom! Qalaysiz? — birinchi darsning birinchi gapi" },
-  { sentence: "I'd like a coffee, please.", translation: "Menga kofe bering, iltimos. — 2-bosqich" },
-  { sentence: 'Could you say that again?', translation: "Yana bir marta aytib bera olasizmi? — haqiqiy suhbat" },
+export const HERO_SENTENCES: HeroSentence[] = [
+  { sentence: 'Hello! How are you?', translation: 'Salom! Qalaysiz?', options: ["I'm good, thanks!", "I'm great!", 'Not bad, and you?'], answer: 0 },
+  { sentence: "I'd like a coffee, please.", translation: 'Menga kofe bering, iltimos.', options: ['Sure, small or large?', 'Here you are.', 'Anything else?'], answer: 0 },
+  { sentence: 'Could you say that again?', translation: 'Yana bir marta aytib bera olasizmi?', options: ['Of course!', 'Sorry, no.', 'Maybe later.'], answer: 0 },
 ]
 
 export const RemotionRoot = () => (

@@ -172,7 +172,13 @@ function extras(mood: Mood): Shape[] {
   return []
 }
 
-export function drawMascot(id: CharacterId, mood: Mood = 'happy', blink = false): Drawing {
+/**
+ * `prefix` makes the gradient ids unique per rendered instance: on a web page
+ * `url(#id)` finds the FIRST element with that id in the whole document, and
+ * a gradient inside a hidden (display: none) SVG paints nothing, so two
+ * mascots sharing ids can blank each other out.
+ */
+export function drawMascot(id: CharacterId, mood: Mood = 'happy', blink = false, prefix = ''): Drawing {
   const c = CREW_BY_ID[id] ?? CREW[0]!
   // gradient ids are global on a web page, so each character gets its own
   const body = `url(#${c.id}-body)`
@@ -266,5 +272,9 @@ export function drawMascot(id: CharacterId, mood: Mood = 'happy', blink = false)
     }
   }
   shapes.push(...extras(mood))
-  return { defs, shapes }
+  if (!prefix) return { defs, shapes }
+  return {
+    defs: defs.map((g) => ({ ...g, id: prefix + g.id })),
+    shapes: shapes.map((sh) => ('fill' in sh && sh.fill.startsWith('url(#') ? { ...sh, fill: `url(#${prefix}${sh.fill.slice(5)}` } : sh) as Shape),
+  }
 }

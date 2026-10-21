@@ -1,5 +1,5 @@
 import { Player } from '@remotion/player'
-import { HERO, HeroLoop } from '../../../remotion/compositions'
+import { HERO, HeroLoop } from '../../../remotion/hero'
 import { HERO_SENTENCES } from '../../../remotion/Root'
 
 /**

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { Animated, Easing, View, type StyleProp, type ViewStyle } from 'react-native'
 import Svg, { Circle, Defs, Ellipse, LinearGradient, Path, RadialGradient, Rect, Stop } from 'react-native-svg'
 import type { CharacterId } from '../core/types'
@@ -55,7 +55,9 @@ function ShapeView({ s }: { s: Shape }) {
 }
 
 export function Mascot({ id, size = 96, mood = 'happy', blink = false, style }: Props) {
-  const { defs, shapes } = drawMascot(id, mood, blink)
+  // ids must be unique per instance on the web (see drawMascot); useId gives ":r1:", not valid in url(#)
+  const prefix = useId().replace(/[^a-zA-Z0-9]/g, '') + '-'
+  const { defs, shapes } = drawMascot(id, mood, blink, prefix)
   const name = (CREW_BY_ID[id] ?? CREW[0]!).name
   return (
     <View style={[{ width: size, height: size }, style]} accessibilityLabel={name} accessibilityRole="image">

@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
-import { useState, type ReactNode } from 'react'
-import { Pressable, ScrollView, StyleSheet, View, useWindowDimensions, type NativeScrollEvent, type NativeSyntheticEvent, type StyleProp, type ViewStyle } from 'react-native'
+import { useRef, useState, type ReactNode } from 'react'
+import { Pressable, ScrollView, StyleSheet, View, useWindowDimensions, type LayoutChangeEvent, type NativeScrollEvent, type NativeSyntheticEvent, type StyleProp, type ViewStyle } from 'react-native'
 import { BASE_LANGS } from '../../core/types'
 import { LANGUAGE_NAMES, useT, type StringKey } from '../../i18n'
 import { useApp } from '../../state/store'
@@ -10,24 +10,31 @@ import { Button } from '../../ui/Button'
 import { AnimatedMascot, GUIDES, Mascot } from '../../ui/Mascot'
 import { Float, Reveal } from '../../ui/Reveal'
 import { Txt } from '../../ui/Txt'
+import { Badge, Orb, ProgressSection, Strip } from './extras'
 import { HeroStage } from './HeroStage'
 import { LandingDemo } from './LandingDemo'
 import { FaqSection, PricingSection, ScreensSection, WhySection } from './sections'
 
-const FEATURES: Array<{ icon: keyof typeof Ionicons.glyphMap; color: string; title: StringKey; body: StringKey }> = [
-  { icon: 'mic', color: colors.primary, title: 'landing.f1.title', body: 'landing.f1.body' },
-  { icon: 'flag', color: colors.success, title: 'landing.f2.title', body: 'landing.f2.body' },
-  { icon: 'repeat', color: colors.purple, title: 'landing.f3.title', body: 'landing.f3.body' },
-  { icon: 'game-controller', color: colors.flame, title: 'landing.f4.title', body: 'landing.f4.body' },
-]
-
+/**
+ * The website. Sticky navigation with section links, a hero that plays the
+ * product (the Remotion loop on the web), the real first exercise before any
+ * sign-up, then the arguments: screens, the daily rhythm, the comparison, the
+ * crew, the price and the questions.
+ */
 const STEPS: StringKey[] = ['landing.how.1', 'landing.how.2', 'landing.how.3']
+type Anchor = 'top' | 'how' | 'price' | 'faq'
 
 /** Reveals its children once the page has scrolled far enough for them to be in view. */
-function OnScroll({ seen, delay = 0, style, children }: { seen: number; delay?: number; style?: StyleProp<ViewStyle>; children: ReactNode }) {
+function OnScroll({ seen, delay = 0, style, onLayout, children }: { seen: number; delay?: number; style?: StyleProp<ViewStyle>; onLayout?: (e: LayoutChangeEvent) => void; children: ReactNode }) {
   const [top, setTop] = useState<number | null>(null)
   return (
-    <View style={style} onLayout={(e) => setTop((prev) => prev ?? e.nativeEvent.layout.y)}>
+    <View
+      style={style}
+      onLayout={(e) => {
+        setTop((prev) => prev ?? e.nativeEvent.layout.y)
+        onLayout?.(e)
+      }}
+    >
       <Reveal when={top !== null && seen > top + 40} delay={delay} distance={24}>
         {children}
       </Reveal>
@@ -35,64 +42,117 @@ function OnScroll({ seen, delay = 0, style, children }: { seen: number; delay?: 
   )
 }
 
-/** Public landing page (web). Native builds skip it and open the app directly. */
 export function LandingScreen() {
   const router = useRouter()
   const t = useT()
-  const { width } = useWindowDimensions()
+  const { width, height } = useWindowDimensions()
   const wide = width >= 900
   const lang = useApp((s) => s.user.profile.baseLang)
   const onboarded = useApp((s) => s.user.profile.onboarded)
   const setProfile = useApp((s) => s.setProfile)
 
   const start = () => router.push(onboarded ? '/learn' : '/welcome')
+  const startLabel = onboarded ? t('landing.have') : t('landing.cta')
+
+  // section links scroll the page; the targets report where they landed
+  const scroller = useRef<ScrollView>(null)
+  const anchors = useRef<Partial<Record<Anchor, number>>>({})
+  const mark = (key: Anchor) => (e: LayoutChangeEvent) => {
+    anchors.current[key] = e.nativeEvent.layout.y
+  }
+  const jump = (key: Anchor) => scroller.current?.scrollTo({ y: key === 'top' ? 0 : Math.max(0, (anchors.current[key] ?? 0) - 72), animated: true })
 
   // sections reveal as they scroll into view: the bottom of the viewport in content coordinates
-  const { height } = useWindowDimensions()
   const [seen, setSeen] = useState(height)
   const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => setSeen(e.nativeEvent.contentOffset.y + height)
 
+  const NAV: Array<{ key: Anchor; label: StringKey }> = [
+    { key: 'top', label: 'landing.nav.home' },
+    { key: 'how', label: 'landing.nav.how' },
+    { key: 'price', label: 'landing.nav.price' },
+    { key: 'faq', label: 'landing.nav.faq' },
+  ]
+
   return (
-    <ScrollView style={styles.page} contentContainerStyle={styles.pageContent} onScroll={onScroll} scrollEventThrottle={80}>
+    <ScrollView ref={scroller} style={styles.page} contentContainerStyle={styles.pageContent} onScroll={onScroll} scrollEventThrottle={80} stickyHeaderIndices={[0]}>
       {/* nav */}
       <View style={styles.nav}>
         <View style={[styles.container, styles.navInner]}>
-          <View style={styles.brand}>
-            <Mascot id="everest" size={40} mood="talk" />
+          <Pressable accessibilityRole="link" onPress={() => jump('top')} style={styles.brand}>
+            <Mascot id="everest" size={38} mood="talk" />
             <Txt variant="heading" color={colors.text} style={styles.brandText}>
               aytla
             </Txt>
-          </View>
-          <View style={styles.langs}>
-            {BASE_LANGS.map((l) => (
-              <Pressable key={l} accessibilityRole="button" accessibilityLabel={LANGUAGE_NAMES[l].name} onPress={() => setProfile({ baseLang: l })} style={[styles.lang, lang === l ? styles.langOn : null]}>
-                <Txt style={styles.flag}>{LANGUAGE_NAMES[l].flag}</Txt>
-                {wide ? (
-                  <Txt variant="caption" color={lang === l ? colors.primaryEdge : colors.textSoft}>
-                    {LANGUAGE_NAMES[l].name}
+          </Pressable>
+          {wide ? (
+            <View style={styles.links}>
+              {NAV.map((n) => (
+                <Pressable key={n.key} accessibilityRole="link" onPress={() => jump(n.key)} hitSlop={6} style={styles.link}>
+                  <Txt variant="label" color={colors.text}>
+                    {t(n.label)}
                   </Txt>
-                ) : null}
-              </Pressable>
-            ))}
+                </Pressable>
+              ))}
+            </View>
+          ) : null}
+          <View style={styles.navRight}>
+            <View style={styles.langs}>
+              {BASE_LANGS.map((l) => (
+                <Pressable key={l} accessibilityRole="button" accessibilityLabel={LANGUAGE_NAMES[l].name} onPress={() => setProfile({ baseLang: l })} style={[styles.lang, lang === l ? styles.langOn : null]}>
+                  <Txt variant="caption" color={lang === l ? colors.primaryEdge : colors.textSoft}>
+                    {l.toUpperCase()}
+                  </Txt>
+                  {wide ? (
+                    <Txt variant="caption" color={lang === l ? colors.primaryEdge : colors.textSoft}>
+                      {LANGUAGE_NAMES[l].name}
+                    </Txt>
+                  ) : null}
+                </Pressable>
+              ))}
+            </View>
+            {wide && !onboarded ? <Button label={t('landing.nav.login')} variant="secondary" small onPress={() => router.push('/account')} /> : null}
+            <Button label={t('landing.nav.start')} variant="success" small onPress={start} testID="landing-start" />
           </View>
         </View>
       </View>
 
       {/* hero */}
       <View style={[styles.container, styles.hero, wide ? styles.heroWide : null]}>
-        <View style={[styles.heroMedia, wide ? styles.heroMediaWide : null]}>
-          <HeroStage />
-        </View>
         <View style={[styles.heroText, wide ? styles.heroTextWide : null]}>
-          <Txt variant={wide ? 'hero' : 'title'} center={!wide}>
-            {t('landing.hero.title')}
+          <Badge icon="sparkles" label={t('landing.hero.badge')} style={wide ? null : styles.center} />
+          <Txt variant="hero" center={!wide} style={[styles.heroTitle, wide ? styles.heroTitleWide : null]}>
+            {t('landing.hero.t1')}
+            {'\n'}
+            <Txt variant="hero" color={colors.primary} style={[styles.heroTitle, wide ? styles.heroTitleWide : null]}>
+              {t('landing.hero.t2')}
+            </Txt>
+            {'\n'}
+            {t('landing.hero.t3')}
           </Txt>
           <Txt color={colors.textSoft} center={!wide} style={styles.heroSub}>
             {t('landing.hero.sub')}
           </Txt>
           <View style={[styles.cta, wide ? styles.ctaWide : null]}>
-            <Button label={onboarded ? t('landing.have') : t('landing.cta')} variant="success" onPress={start} testID="landing-start" />
+            <Button label={startLabel} variant="success" onPress={start} icon={<Ionicons name="arrow-forward" size={20} color={colors.text} />} />
+            <Pressable accessibilityRole="link" onPress={() => jump('how')} style={styles.howLink}>
+              <View style={styles.play}>
+                <Ionicons name="play" size={16} color={colors.primary} />
+              </View>
+              <Txt variant="label" color={colors.primary} style={styles.underline}>
+                {t('landing.hero.how')}
+              </Txt>
+            </Pressable>
           </View>
+        </View>
+        <View style={[styles.heroMedia, wide ? styles.heroMediaWide : null]}>
+          <HeroStage />
+        </View>
+      </View>
+
+      {/* three promises */}
+      <View style={styles.stripBand}>
+        <View style={styles.container}>
+          <Strip wide={wide} />
         </View>
       </View>
 
@@ -100,12 +160,22 @@ export function LandingScreen() {
       <View style={[styles.band, styles.demoBand]}>
         <View style={[styles.container, styles.section, wide ? styles.demoWide : null]}>
           <View style={[styles.demoText, wide ? styles.demoTextWide : null]}>
+            <Badge icon="mic" label={t('landing.demo.badge')} style={wide ? null : styles.center} />
             <Txt variant="title" center={!wide}>
               {t('landing.demo.title')}
             </Txt>
-            <Txt color={colors.textSoft} center={!wide} style={styles.heroSub}>
+            <Txt color={colors.textSoft} center={!wide} style={styles.lead}>
               {t('landing.demo.body')}
             </Txt>
+            {wide ? (
+              <View style={styles.demoArt}>
+                <Orb size={64} color="#D6F77A" dark="#9CCB2E" style={styles.orbA} />
+                <Orb size={40} color="#9C86FF" dark="#5B3FD9" style={styles.orbB} />
+                <Float amplitude={6} duration={2400}>
+                  <AnimatedMascot id="lumi" size={150} mood="talk" />
+                </Float>
+              </View>
+            ) : null}
           </View>
           <View style={[styles.demoCard, wide ? styles.demoCardWide : null]}>
             <LandingDemo onStart={start} />
@@ -113,33 +183,21 @@ export function LandingScreen() {
         </View>
       </View>
 
-      {/* features */}
-      <View style={styles.band}>
-        <View style={[styles.container, styles.grid]}>
-          {FEATURES.map((f, i) => (
-            <OnScroll key={f.title} seen={seen} delay={i * 90} style={{ width: wide ? '48%' : '100%' }}>
-              {/* the row lives inside the reveal wrapper, so it gets the column's full width and the text wraps */}
-              <View style={styles.feature}>
-                <View style={[styles.featureIcon, { backgroundColor: f.color }]}>
-                  <Ionicons name={f.icon} size={28} color={colors.white} />
-                </View>
-                <View style={styles.flex}>
-                  <Txt variant="heading">{t(f.title)}</Txt>
-                  <Txt color={colors.textSoft}>{t(f.body)}</Txt>
-                </View>
-              </View>
-            </OnScroll>
-          ))}
-        </View>
-      </View>
-
-      {/* real screens */}
+      {/* the daily rhythm */}
       <OnScroll seen={seen} style={styles.container}>
-        <ScreensSection wide={wide} />
+        <ProgressSection wide={wide} />
       </OnScroll>
 
+      {/* real screens */}
+      <View style={styles.band}>
+        <OnScroll seen={seen} style={styles.container}>
+          <ScreensSection wide={wide} />
+        </OnScroll>
+      </View>
+
       {/* how it works */}
-      <OnScroll seen={seen} style={[styles.container, styles.section]}>
+      <OnScroll seen={seen} style={[styles.container, styles.section]} onLayout={mark('how')}>
+        <Badge icon="footsteps" label={t('landing.nav.how')} />
         <Txt variant="title" center>
           {t('landing.how.title')}
         </Txt>
@@ -167,56 +225,56 @@ export function LandingScreen() {
       </View>
 
       {/* guides */}
+      <OnScroll seen={seen} style={[styles.container, styles.section]}>
+        <Txt variant="title" center>
+          {t('landing.guides.title')}
+        </Txt>
+        <Txt color={colors.textSoft} center style={styles.lead}>
+          {t('landing.guides.body')}
+        </Txt>
+        <View style={styles.guides}>
+          {GUIDES.map((g, i) => (
+            <View key={g.id} style={styles.guide}>
+              <Float amplitude={4} duration={2000 + i * 180} delay={i * 120}>
+                <AnimatedMascot id={g.id} size={wide ? 124 : 92} mood={i % 3 === 0 ? 'talk' : i % 3 === 1 ? 'happy' : 'cheer'} />
+              </Float>
+              <Txt variant="label">{g.name}</Txt>
+            </View>
+          ))}
+        </View>
+      </OnScroll>
+
+      {/* price */}
       <View style={styles.band}>
+        <OnScroll seen={seen} style={styles.container} onLayout={mark('price')}>
+          <PricingSection wide={wide} onStart={start} startLabel={startLabel} />
+        </OnScroll>
+      </View>
+
+      {/* questions */}
+      <OnScroll seen={seen} style={styles.container} onLayout={mark('faq')}>
+        <FaqSection />
+      </OnScroll>
+
+      {/* apps + final CTA */}
+      <View style={styles.finale}>
         <OnScroll seen={seen} style={[styles.container, styles.section]}>
-          <Txt variant="title" center>
-            {t('landing.guides.title')}
+          <View style={styles.devices}>
+            <Ionicons name="desktop-outline" size={36} color={colors.white} />
+            <Ionicons name="logo-android" size={36} color={colors.lime} />
+            <Ionicons name="logo-apple" size={36} color={colors.white} />
+          </View>
+          <Txt variant="title" center color={colors.white}>
+            {t('landing.apps.title')}
           </Txt>
-          <Txt color={colors.textSoft} center>
-            {t('landing.guides.body')}
+          <Txt color={colors.primarySoft} center>
+            {t('landing.apps.body')}
           </Txt>
-          <View style={styles.guides}>
-            {GUIDES.map((g, i) => (
-              <View key={g.id} style={styles.guide}>
-                <Float amplitude={4} duration={2000 + i * 180} delay={i * 120}>
-                  <AnimatedMascot id={g.id} size={wide ? 120 : 88} mood={i % 3 === 0 ? 'talk' : i % 3 === 1 ? 'happy' : 'cheer'} />
-                </Float>
-                <Txt variant="label">{g.name}</Txt>
-              </View>
-            ))}
+          <View style={styles.ctaCenter}>
+            <Button label={startLabel} variant="success" onPress={start} />
           </View>
         </OnScroll>
       </View>
-
-      {/* price */}
-      <OnScroll seen={seen} style={styles.container}>
-        <PricingSection wide={wide} onStart={start} startLabel={onboarded ? t('landing.have') : t('landing.cta')} />
-      </OnScroll>
-
-      {/* questions */}
-      <View style={styles.band}>
-        <OnScroll seen={seen} style={styles.container}>
-          <FaqSection />
-        </OnScroll>
-      </View>
-
-      {/* apps + final CTA */}
-      <OnScroll seen={seen} style={[styles.container, styles.section]}>
-        <View style={styles.devices}>
-          <Ionicons name="desktop-outline" size={40} color={colors.primary} />
-          <Ionicons name="logo-android" size={40} color={colors.success} />
-          <Ionicons name="logo-apple" size={40} color={colors.text} />
-        </View>
-        <Txt variant="title" center>
-          {t('landing.apps.title')}
-        </Txt>
-        <Txt color={colors.textSoft} center>
-          {t('landing.apps.body')}
-        </Txt>
-        <View style={styles.cta}>
-          <Button label={onboarded ? t('landing.have') : t('landing.cta')} onPress={start} />
-        </View>
-      </OnScroll>
 
       <View style={styles.footer}>
         <Txt variant="caption" color={colors.textMuted} center>
@@ -224,12 +282,12 @@ export function LandingScreen() {
         </Txt>
         <View style={styles.footerLinks}>
           <Pressable accessibilityRole="link" onPress={() => router.push('/privacy')} hitSlop={8}>
-            <Txt variant="caption" color={colors.textMuted} style={styles.footerLink}>
+            <Txt variant="caption" color={colors.textMuted} style={styles.underline}>
               {t('legal.privacy')}
             </Txt>
           </Pressable>
           <Pressable accessibilityRole="link" onPress={() => router.push('/terms')} hitSlop={8}>
-            <Txt variant="caption" color={colors.textMuted} style={styles.footerLink}>
+            <Txt variant="caption" color={colors.textMuted} style={styles.underline}>
               {t('legal.terms')}
             </Txt>
           </Pressable>
@@ -241,38 +299,47 @@ export function LandingScreen() {
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
+  center: { alignSelf: 'center' },
   page: { flex: 1, backgroundColor: colors.bg },
   pageContent: { flexGrow: 1 },
   container: { width: '100%', maxWidth: layout.wide, alignSelf: 'center', paddingHorizontal: space.lg },
-  nav: { borderBottomWidth: 2, borderColor: colors.border, backgroundColor: colors.bg },
-  navInner: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: space.md },
-  brand: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
+  nav: { backgroundColor: colors.bg, borderBottomWidth: 1.5, borderColor: colors.border },
+  navInner: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: space.sm, gap: space.md },
+  brand: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   brandText: { letterSpacing: -0.5, fontSize: 26 },
-  langs: { flexDirection: 'row', gap: 6 },
-  lang: { flexDirection: 'row', alignItems: 'center', gap: 6, borderWidth: 2, borderColor: colors.border, borderRadius: radius.pill, paddingHorizontal: 12, paddingVertical: 6 },
+  links: { flexDirection: 'row', gap: space.lg, alignItems: 'center' },
+  link: { paddingVertical: 6 },
+  navRight: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
+  langs: { flexDirection: 'row', gap: 4 },
+  lang: { flexDirection: 'row', alignItems: 'center', gap: 6, borderWidth: 1.5, borderColor: colors.border, borderRadius: radius.pill, paddingHorizontal: 10, paddingVertical: 6 },
   langOn: { borderColor: colors.primary, backgroundColor: colors.primaryTint },
-  flag: { fontSize: 18, lineHeight: 24 },
-  hero: { paddingVertical: space.xl, gap: space.xl, alignItems: 'center' },
-  heroWide: { flexDirection: 'row-reverse', paddingVertical: 64, gap: 48 },
-  // the image lives in a sized box: in a row, a bare `width: 100%` image would take the whole row
-  heroMedia: { alignSelf: 'stretch', aspectRatio: 4 / 3, borderRadius: radius.xl, overflow: 'hidden', backgroundColor: colors.primary },
-  heroMediaWide: { flex: 1.1, minWidth: 0, alignSelf: 'center' },
+  hero: { paddingTop: space.xl, paddingBottom: space.xl, gap: space.xl, alignItems: 'center' },
+  heroWide: { flexDirection: 'row', paddingVertical: 56, gap: 48 },
+  heroText: { alignSelf: 'stretch', gap: space.md, alignItems: 'center' },
+  heroTextWide: { flex: 1, minWidth: 0, alignSelf: 'center', alignItems: 'flex-start' },
+  heroTitle: { fontSize: 44, lineHeight: 50, letterSpacing: -1 },
+  heroTitleWide: { fontSize: 62, lineHeight: 66, letterSpacing: -1.5 },
+  heroSub: { fontSize: 20, lineHeight: 30, maxWidth: 520 },
+  lead: { fontSize: 18, lineHeight: 28, maxWidth: 640 },
+  cta: { alignItems: 'center', gap: space.md, marginTop: space.sm, alignSelf: 'stretch' },
+  ctaWide: { flexDirection: 'row', alignSelf: 'flex-start' },
+  howLink: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  play: { width: 40, height: 40, borderRadius: 20, backgroundColor: colors.primaryTint, borderWidth: 1.5, borderColor: colors.primarySoft, alignItems: 'center', justifyContent: 'center', paddingLeft: 3 },
+  underline: { textDecorationLine: 'underline' },
+  heroMedia: { alignSelf: 'stretch', aspectRatio: 4 / 3, borderRadius: 28, overflow: 'hidden', backgroundColor: colors.primary, shadowColor: colors.primary, shadowOpacity: 0.3, shadowRadius: 40, shadowOffset: { width: 0, height: 20 } },
+  heroMediaWide: { flex: 1.15, minWidth: 0, alignSelf: 'center' },
+  stripBand: { backgroundColor: colors.white, borderTopWidth: 1.5, borderBottomWidth: 1.5, borderColor: colors.border },
+  band: { backgroundColor: colors.surface, borderTopWidth: 1.5, borderBottomWidth: 1.5, borderColor: colors.border },
   demoBand: { backgroundColor: colors.sky },
   demoWide: { flexDirection: 'row', alignItems: 'center', gap: 48 },
-  demoText: { alignSelf: 'stretch', gap: space.md },
-  demoTextWide: { flex: 1, minWidth: 0 },
+  demoText: { alignSelf: 'stretch', gap: space.md, alignItems: 'center' },
+  demoTextWide: { flex: 1, minWidth: 0, alignItems: 'flex-start' },
+  demoArt: { marginTop: space.lg, height: 190, width: 260, justifyContent: 'flex-end' },
+  orbA: { position: 'absolute', right: 10, top: 0 },
+  orbB: { position: 'absolute', left: 150, bottom: 20 },
   demoCard: { alignSelf: 'stretch' },
   demoCardWide: { flex: 1.2, minWidth: 0 },
-  heroText: { alignSelf: 'stretch', gap: space.md },
-  heroTextWide: { flex: 1, minWidth: 0, alignSelf: 'center' },
-  heroSub: { fontSize: 18, lineHeight: 28 },
-  cta: { alignSelf: 'center', width: '100%', maxWidth: 360, marginTop: space.md },
-  ctaWide: { alignSelf: 'flex-start' },
-  band: { backgroundColor: colors.surface, borderTopWidth: 2, borderBottomWidth: 2, borderColor: colors.border },
-  grid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', paddingVertical: space.xl, rowGap: space.xl },
-  feature: { flexDirection: 'row', gap: space.md, alignItems: 'flex-start' },
-  featureIcon: { width: 56, height: 56, borderRadius: radius.lg, alignItems: 'center', justifyContent: 'center' },
-  section: { paddingVertical: 48, gap: space.md, alignItems: 'center' },
+  section: { paddingVertical: 56, gap: space.md, alignItems: 'center' },
   steps: { alignSelf: 'stretch', gap: space.lg, marginTop: space.lg },
   stepsWide: { flexDirection: 'row' },
   step: { alignItems: 'center', gap: space.sm },
@@ -280,8 +347,9 @@ const styles = StyleSheet.create({
   stepText: { fontSize: 17, lineHeight: 24, fontWeight: '600' },
   guides: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: space.lg, marginTop: space.lg },
   guide: { alignItems: 'center', gap: 4 },
+  finale: { backgroundColor: colors.primary },
   devices: { flexDirection: 'row', gap: space.xl, marginBottom: space.sm },
-  footer: { padding: space.xl, borderTopWidth: 2, borderColor: colors.border, gap: space.sm },
+  ctaCenter: { alignSelf: 'center', width: '100%', maxWidth: 360, marginTop: space.md },
+  footer: { padding: space.xl, gap: space.sm },
   footerLinks: { flexDirection: 'row', justifyContent: 'center', gap: space.lg },
-  footerLink: { textDecorationLine: 'underline' },
 })

@@ -1,38 +1,17 @@
-import { AbsoluteFill, Sequence, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion'
+import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion'
 import { Fonts } from './fonts'
 import { Backdrop, Bubble, Character, CrewLine, Sparks, Wordmark } from './scenes'
 import { V } from './theme'
 
 /**
- * The compositions. `HeroLoop` plays inside the website's hero through
- * @remotion/player; the others are rendered to MP4 for social media with
- * `npx remotion render <id> out/<file>.mp4` (see remotion/Root.tsx).
+ * The social-media compositions, rendered to MP4 with
+ * `npx remotion render <id> out/<file>.mp4` (see remotion/Root.tsx). The
+ * website hero lives in hero.tsx.
  */
 
 export type SentenceProps = {
   sentence: string
   translation: string
-}
-
-export const HERO = { width: 1200, height: 900, fps: 30, durationInFrames: 300 }
-
-/** 10 s loop for the landing hero: the guide says three sentences, the crew cheers each one */
-export function HeroLoop({ sentences }: { sentences: SentenceProps[] }) {
-  const frame = useCurrentFrame()
-  const per = Math.floor(HERO.durationInFrames / sentences.length)
-  const i = Math.min(sentences.length - 1, Math.floor(frame / per))
-  const local = frame - i * per
-  const current = sentences[i]!
-  const cheering = local > 62 && local < 88
-  return (
-    <Backdrop>
-      <Sequence from={i * per} durationInFrames={per} layout="none">
-        <Bubble text={current.sentence} sub={current.translation} startAt={0} x={520} y={250} width={600} />
-      </Sequence>
-      <CrewLine width={HERO.width} baseline={HERO.height - 60} enterAt={0} moods={{ everest: cheering ? 'cheer' : 'talk', lumi: cheering ? 'cheer' : 'happy', pix: cheering ? 'cheer' : 'happy', nubi: cheering ? 'cheer' : 'happy', rocky: cheering ? 'cheer' : 'happy', aero: 'cheer' }} />
-      {cheering ? <Sparks at={i * per + 62} x={HERO.width / 2} y={HERO.height - 260} /> : null}
-    </Backdrop>
-  )
 }
 
 export const STORY = { width: 1080, height: 1920, fps: 30, durationInFrames: 240 }

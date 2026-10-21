@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import { useId, type CSSProperties } from 'react'
 import { drawMascot, type CharacterId, type Mood } from '../src/ui/mascot/draw'
 
 /**
@@ -7,7 +7,8 @@ import { drawMascot, type CharacterId, type Mood } from '../src/ui/mascot/draw'
  * animated hero show exactly the characters learners meet in the lessons.
  */
 export function MascotSvg({ id, mood = 'happy', blink = false, size = 200, style }: { id: CharacterId; mood?: Mood; blink?: boolean; size?: number; style?: CSSProperties }) {
-  const { defs, shapes } = drawMascot(id, mood, blink)
+  const prefix = useId().replace(/[^a-zA-Z0-9]/g, '') + '-'
+  const { defs, shapes } = drawMascot(id, mood, blink, prefix)
   return (
     <svg width={size} height={size} viewBox="0 0 100 100" style={{ display: 'block', ...style }} aria-hidden>
       <defs>
