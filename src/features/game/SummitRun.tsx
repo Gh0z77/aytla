@@ -2,12 +2,12 @@ import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Platform, Pressable, StyleSheet, View, type LayoutChangeEvent } from 'react-native'
-import { COURSE } from '../../content/course'
 import { WORD_ID_MARKER } from '../../core/progress'
 import type { Word } from '../../core/types'
 import { useT } from '../../i18n'
 import { resultFeedback, tapFeedback } from '../../lib/haptics'
 import { speak, stopSpeaking } from '../../lib/speech'
+import { useCourse } from '../../state/course'
 import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
@@ -69,6 +69,7 @@ export function SummitRun() {
   const router = useRouter()
   const t = useT()
   const lang = useApp((s) => s.user.profile.baseLang)
+  const course = useCourse()
   const guide = useApp((s) => s.user.profile.guide)
   const sound = useApp((s) => s.user.profile.soundOn)
   const haptics = useApp((s) => s.user.profile.hapticsOn)
@@ -79,9 +80,9 @@ export function SummitRun() {
 
   // play with the words the learner has met; a brand-new learner gets the first lesson's words
   const pool = useMemo(() => {
-    const met = COURSE.units.flatMap((u) => u.words).filter((w) => w.id in srs && w.id.includes(WORD_ID_MARKER))
+    const met = course.units.flatMap((u) => u.words).filter((w) => w.id in srs && w.id.includes(WORD_ID_MARKER))
     if (met.length >= MIN_POOL) return met
-    return COURSE.units[0]?.words ?? []
+    return course.units[0]?.words ?? []
   }, [srs])
 
   const [phase, setPhase] = useState<Phase>('ready')

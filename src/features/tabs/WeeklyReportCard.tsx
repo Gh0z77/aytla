@@ -1,7 +1,8 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { COURSE } from '../../content/course'
+import { courseFor } from '../../content/course'
+import { TARGET_LANGS } from '../../core/types'
 import { weeklyReport } from '../../core/progress'
 import { useT } from '../../i18n'
 import { useApp } from '../../state/store'
@@ -15,7 +16,7 @@ const SHOWN = 4
 function useItemText(): (id: string) => string | undefined {
   return useMemo(() => {
     const map = new Map<string, string>()
-    COURSE.units.forEach((u) => {
+    TARGET_LANGS.flatMap((target) => courseFor(target).units).forEach((u) => {
       u.words.forEach((w) => map.set(w.id, w.en))
       u.sentences.forEach((s) => map.set(s.id, s.en))
     })

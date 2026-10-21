@@ -12,9 +12,13 @@ export interface CoachMessage {
   text: string
 }
 
+export type TargetLang = 'en' | 'ru' | 'tr' | 'uz'
+
 export interface CoachRequest {
   scenarioId: string
   baseLang: CoachLang
+  /** the language being learned; English when the app does not say */
+  target?: TargetLang
   messages: CoachMessage[]
   /** corrected sentences from earlier conversations: the learner's known weak spots, to be practised again */
   focus: string[]
@@ -64,6 +68,8 @@ export const MAX_FOCUS = 5
 export const MAX_FOCUS_CHARS = 160
 
 const LANGS = new Set<string>(['uz', 'ru', 'tr'])
+const TARGETS = new Set<string>(['en', 'ru', 'tr', 'uz'])
+const TARGET_NAMES: Record<TargetLang, string> = { en: 'English', ru: 'Russian', tr: 'Turkish', uz: 'Uzbek' }
 
 /** Validate and trim untrusted input. Returns null when the request is malformed. */
 export function cleanCoachRequest(body: Record<string, unknown> | null): CoachRequest | null {
@@ -72,6 +78,8 @@ export function cleanCoachRequest(body: Record<string, unknown> | null): CoachRe
   const baseLang = body.baseLang
   if (typeof scenarioId !== 'string' || !SCENARIOS.some((s) => s.id === scenarioId)) return null
   if (typeof baseLang !== 'string' || !LANGS.has(baseLang)) return null
+  const target = typeof body.target === 'string' && TARGETS.has(body.target) ? (body.target as TargetLang) : 'en'
+  if (target === baseLang) return null
   if (!Array.isArray(body.messages) || body.messages.length > MAX_TURNS) return null
 
   const messages: CoachMessage[] = []
@@ -94,7 +102,7 @@ export function cleanCoachRequest(body: Record<string, unknown> | null): CoachRe
         .filter(Boolean)
         .slice(0, MAX_FOCUS)
     : []
-  return { scenarioId, baseLang: baseLang as CoachLang, messages, focus }
+  return { scenarioId, baseLang: baseLang as CoachLang, target, messages, focus }
 }
 
 export const LANGUAGE_NAMES: Record<CoachLang, string> = { uz: 'Uzbek (Latin script)', ru: 'Russian', tr: 'Turkish' }
@@ -115,13 +123,14 @@ export function systemPrompt(request: CoachRequest): string {
   const scenario = SCENARIOS.find((s) => s.id === request.scenarioId) ?? SCENARIOS[0]
   if (!scenario) throw new Error('no scenarios configured')
   const language = LANGUAGE_NAMES[request.baseLang]
+  const target = TARGET_NAMES[request.target ?? 'en']
   return [
-    `You are ${GUIDE_PERSONAS[scenario.guide]}, the talking bird of Aytla, an English-learning app for people who want to SPEAK from day one.`,
-    `You are doing a friendly spoken-style role-play with a learner whose native language is ${language} and whose English level is ${scenario.level} (CEFR).`,
+    `You are ${GUIDE_PERSONAS[scenario.guide]}, a guide in Aytla, a language-learning app for people who want to SPEAK from day one.`,
+    `You are doing a friendly spoken-style role-play with a learner whose native language is ${language} and who is learning ${target} at level ${scenario.level} (CEFR).`,
     `Setting: ${scenario.setting}`,
     '',
-    `Your line ("text") is in English only, with vocabulary and grammar a ${scenario.level} learner knows: one or two short sentences, always ending with one simple question so the learner has something to answer. Stay in the role-play, warm and encouraging; never mock a mistake.`,
-    `Write "translation" and "correction" in ${language}. If the learner writes in ${language} or mixes languages, show them how to say it in English in "better".`,
+    `Your line ("text") is in ${target} only, with vocabulary and grammar a ${scenario.level} learner knows: one or two short sentences, always ending with one simple question so the learner has something to answer. Stay in the role-play, warm and encouraging; never mock a mistake.`,
+    `Write "translation" and "correction" in ${language}. If the learner writes in ${language} or mixes languages, show them how to say it in ${target} in "better".`,
     'Correct only what matters at this level: at most the one or two most important mistakes, and leave "correction" and "better" empty when the message was fine.',
     ...(request.focus.length > 0
       ? [
@@ -129,7 +138,7 @@ export function systemPrompt(request: CoachRequest): string {
           ...request.focus.map((sentence) => `- ${JSON.stringify(sentence)}`),
         ]
       : []),
-    'Everything must suit a general audience of all ages. If asked for anything outside English practice, steer back to the role-play.',
+    `Everything must suit a general audience of all ages. If asked for anything outside ${target} practice, steer back to the role-play.`,
     'Latency-sensitive: begin your answer immediately.',
   ].join('\n')
 }

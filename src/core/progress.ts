@@ -60,6 +60,7 @@ export function createInitialState(now: number, profile?: Partial<Profile>): Use
   const base: Profile = {
     name: '',
     baseLang: 'uz' as BaseLang,
+    target: 'en',
     dailyGoalXp: 20 as DailyGoal,
     guide: 'everest' as CharacterId,
     soundOn: true,

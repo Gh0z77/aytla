@@ -7,6 +7,7 @@ import { useApp } from '../../state/store'
 import { errorText } from '../account/errors'
 import { colors, radius, space } from '../../theme/tokens'
 import { Txt } from '../../ui/Txt'
+import { COURSE } from '../../content/course'
 import { Note } from './extras'
 
 /** The price (Free now, Pro soon) and the questions people ask before they start. */
@@ -14,6 +15,8 @@ import { Note } from './extras'
 export function PricingSection({ wide, onStart, startLabel }: { wide: boolean; onStart: () => void; startLabel: string }) {
   const t = useT()
   const free: StringKey[] = ['landing.pricing.free1', 'landing.pricing.free2', 'landing.pricing.free3', 'landing.pricing.free4']
+  // the real size of the course, so the page never drifts from the content
+  const size = { n: COURSE.units.length, m: COURSE.units.reduce((sum, u) => sum + u.sentences.length, 0) }
   const pro: StringKey[] = ['landing.pricing.pro1', 'landing.pricing.pro2', 'landing.pricing.pro3', 'landing.pricing.pro4']
   return (
     <View style={styles.section}>
@@ -42,7 +45,7 @@ export function PricingSection({ wide, onStart, startLabel }: { wide: boolean; o
             {free.map((k) => (
               <View key={k} style={styles.row}>
                 <Ionicons name="checkmark" size={18} color={colors.successText} />
-                <Txt style={styles.rowText}>{t(k)}</Txt>
+                <Txt style={styles.rowText}>{t(k, size)}</Txt>
               </View>
             ))}
           </View>

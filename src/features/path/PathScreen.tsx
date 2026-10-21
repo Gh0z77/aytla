@@ -2,13 +2,13 @@ import { Ionicons } from '@expo/vector-icons'
 import { Redirect, useRouter } from 'expo-router'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Animated, Easing, Pressable, ScrollView, StyleSheet, View } from 'react-native'
-import { COURSE } from '../../content/course'
 import { courseForGoal, goalPlan, isGoalUnit } from '../../core/goals'
 import { buildPath, currentNode, type PathNode, type PathUnit } from '../../core/path'
 import { CHEST_GEMS, XP_RULES } from '../../core/progress'
 import type { Section } from '../../core/types'
 import { useT, type StringKey } from '../../i18n'
 import { tapFeedback } from '../../lib/haptics'
+import { useCourse } from '../../state/course'
 import { useApp } from '../../state/store'
 import { NATIVE_DRIVER, colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
@@ -41,6 +41,7 @@ export function PathScreen() {
   const lessons = useApp((s) => s.user.lessons)
   const chests = useApp((s) => s.user.chests)
   const lang = useApp((s) => s.user.profile.baseLang)
+  const base = useCourse()
   const haptics = useApp((s) => s.user.profile.hapticsOn)
   const guideId = useApp((s) => s.user.profile.guide)
   const desktop = useDesktop()
@@ -49,10 +50,10 @@ export function PathScreen() {
   const goal = useApp((s) => s.user.profile.goal)
   const dailyGoalXp = useApp((s) => s.user.profile.dailyGoalXp)
   // the route is assembled for the learner's goal: their units come first from Camp 1 on
-  const course = useMemo(() => courseForGoal(COURSE, goal), [goal])
+  const course = useMemo(() => courseForGoal(base, goal), [base, goal])
   // units are painted from the brand cycle, not from the colour written in the content files
   const path = useMemo(() => buildPath(course, { lessons, chests }).map((pu, i) => ({ ...pu, unit: { ...pu.unit, color: UNIT_COLORS[i % UNIT_COLORS.length] as string } })), [course, lessons, chests])
-  const plan = useMemo(() => goalPlan(COURSE, { lessons, profile: { ...useApp.getState().user.profile, goal, dailyGoalXp } }), [goal, dailyGoalXp, lessons])
+  const plan = useMemo(() => goalPlan(base, { lessons, profile: { ...useApp.getState().user.profile, goal, dailyGoalXp } }), [base, goal, dailyGoalXp, lessons])
   const goalName = t(`goal.${goal ?? 'everyday'}` as StringKey)
   const current = useMemo(() => currentNode(path), [path])
   const [selected, setSelected] = useState<string | null>(null)

@@ -2,13 +2,13 @@ import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Pressable, StyleSheet, View, type LayoutChangeEvent } from 'react-native'
-import { COURSE } from '../../content/course'
 import { WORD_ID_MARKER } from '../../core/progress'
 import { normalize, tokenize } from '../../core/text'
 import type { Sentence } from '../../core/types'
 import { useT } from '../../i18n'
 import { resultFeedback, tapFeedback } from '../../lib/haptics'
 import { speak, stopSpeaking } from '../../lib/speech'
+import { useCourse } from '../../state/course'
 import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
@@ -86,6 +86,7 @@ export function Avalanche() {
   const router = useRouter()
   const t = useT()
   const lang = useApp((s) => s.user.profile.baseLang)
+  const course = useCourse()
   const guide = useApp((s) => s.user.profile.guide)
   const sound = useApp((s) => s.user.profile.soundOn)
   const haptics = useApp((s) => s.user.profile.hapticsOn)
@@ -100,9 +101,9 @@ export function Avalanche() {
       const n = tokenize(s.en, 'en').length
       return n >= MIN_TOKENS && n <= MAX_TOKENS
     }
-    const met = COURSE.units.flatMap((u) => u.sentences).filter((s) => s.id in srs && !s.id.includes(WORD_ID_MARKER) && fits(s))
+    const met = course.units.flatMap((u) => u.sentences).filter((s) => s.id in srs && !s.id.includes(WORD_ID_MARKER) && fits(s))
     if (met.length >= MIN_POOL) return met
-    return (COURSE.units[0]?.sentences ?? []).filter(fits)
+    return (course.units[0]?.sentences ?? []).filter(fits)
   }, [srs])
 
   const [phase, setPhase] = useState<Phase>('ready')

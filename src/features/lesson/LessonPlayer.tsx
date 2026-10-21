@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { useRef, useState } from 'react'
 import { KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native'
-import { COURSE, findLesson } from '../../content/course'
+import { courseFor, findLesson } from '../../content/course'
 import { buildLessonSession, buildPracticeSession, buildReviewSession, type BuiltSession } from '../../core/exercises'
 import { gradeBank, gradeFill, gradeListen, gradeSay, gradeSelect, gradeSpeak, gradeType } from '../../core/grading'
 import { practiceItems } from '../../core/progress'
@@ -33,12 +33,13 @@ function prepare(lessonId: string): Prepared | null {
   const { user } = useApp.getState()
   const opts = {
     baseLang: user.profile.baseLang,
+    target: user.profile.target ?? 'en',
     seed: Math.floor(Math.random() * 2147483647),
     canListen: user.profile.soundOn && canListen(),
     canSpeak: user.profile.soundOn && canSpeak(),
   }
   if (lessonId === PRACTICE_ID) {
-    const built = buildPracticeSession(COURSE, practiceItems(user, Date.now()), opts)
+    const built = buildPracticeSession(courseFor(opts.target), practiceItems(user, Date.now()), opts)
     return { kind: 'practice', lessonId: null, guide: user.profile.guide, built }
   }
   const found = findLesson(lessonId)

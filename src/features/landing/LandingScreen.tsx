@@ -1,9 +1,10 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { useRef, useState, type ReactNode } from 'react'
-import { Linking, Pressable, ScrollView, StyleSheet, View, useWindowDimensions, type LayoutChangeEvent, type NativeScrollEvent, type NativeSyntheticEvent, type StyleProp, type ViewStyle } from 'react-native'
-import { BASE_LANGS, type BaseLang } from '../../core/types'
-import { LANGUAGE_NAMES, useT, type StringKey } from '../../i18n'
+import { Linking, Modal, Pressable, ScrollView, StyleSheet, View, useWindowDimensions, type LayoutChangeEvent, type NativeScrollEvent, type NativeSyntheticEvent, type StyleProp, type ViewStyle } from 'react-native'
+import { BASE_LANGS, TARGET_LANGS, type BaseLang, type TargetLang } from '../../core/types'
+import { COURSE } from '../../content/course'
+import { LANGUAGE_NAMES, TARGET_NAMES, useT, type StringKey } from '../../i18n'
 import { useApp } from '../../state/store'
 import { colors, layout, radius, space } from '../../theme/tokens'
 import { BrandMark } from '../../ui/BrandMark'
@@ -59,21 +60,90 @@ function OnScroll({ seen, delay = 0, style, onLayout, children }: { seen: number
   )
 }
 
-function LangPills({ lang, onPick, names }: { lang: BaseLang; onPick: (l: BaseLang) => void; names: boolean }) {
+/** the interface language: a small dropdown (the menu is a modal, so it floats above the sticky bar) */
+function LangDropdown({ lang, onPick, names, up }: { lang: BaseLang; onPick: (l: BaseLang) => void; names: boolean; up?: boolean }) {
+  const [open, setOpen] = useState(false)
+  const button = useRef<View>(null)
+  const [at, setAt] = useState({ x: 0, y: 0, w: 0, h: 0 })
+  const show = () => {
+    button.current?.measureInWindow((x, y, w, h) => {
+      setAt({ x, y, w, h })
+      setOpen(true)
+    })
+  }
   return (
-    <View style={styles.langs}>
-      {BASE_LANGS.map((l) => (
-        <Pressable key={l} accessibilityRole="button" accessibilityLabel={LANGUAGE_NAMES[l].name} onPress={() => onPick(l)} style={[styles.lang, lang === l ? styles.langOn : null]}>
-          <Txt variant="caption" color={lang === l ? colors.primaryEdge : colors.textSoft}>
-            {l.toUpperCase()}
-          </Txt>
-          {names ? (
-            <Txt variant="caption" color={lang === l ? colors.primaryEdge : colors.textSoft}>
-              {LANGUAGE_NAMES[l].name}
-            </Txt>
-          ) : null}
-        </Pressable>
-      ))}
+    <>
+      <Pressable ref={button} accessibilityRole="button" accessibilityLabel={LANGUAGE_NAMES[lang].name} accessibilityState={{ expanded: open }} onPress={show} style={[styles.lang, styles.langOn]} testID="lang-menu">
+        <Txt style={styles.flag}>{LANGUAGE_NAMES[lang].flag}</Txt>
+        <Txt variant="caption" color={colors.primaryEdge}>
+          {names ? LANGUAGE_NAMES[lang].name : lang.toUpperCase()}
+        </Txt>
+        <Ionicons name={open ? 'chevron-up' : 'chevron-down'} size={14} color={colors.primaryEdge} />
+      </Pressable>
+      <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
+        <Pressable style={styles.backdrop} onPress={() => setOpen(false)} accessibilityLabel="close" />
+        <View style={[styles.menu, up ? { left: at.x, bottom: Math.max(8, (typeof window !== 'undefined' ? window.innerHeight : 800) - at.y + 6) } : { left: at.x, top: at.y + at.h + 6 }]}>
+          {BASE_LANGS.map((l) => (
+            <Pressable
+              key={l}
+              accessibilityRole="menuitem"
+              onPress={() => {
+                onPick(l)
+                setOpen(false)
+              }}
+              style={({ pressed }) => [styles.menuItem, lang === l ? styles.menuItemOn : null, pressed ? styles.menuItemOn : null]}
+              testID={`lang-${l}`}
+            >
+              <Txt style={styles.flag}>{LANGUAGE_NAMES[l].flag}</Txt>
+              <Txt variant="label" color={lang === l ? colors.primaryEdge : colors.text}>
+                {LANGUAGE_NAMES[l].name}
+              </Txt>
+              {lang === l ? <Ionicons name="checkmark" size={16} color={colors.primary} /> : null}
+            </Pressable>
+          ))}
+        </View>
+      </Modal>
+    </>
+  )
+}
+
+/** the courses: the same content in four target languages */
+function CoursesSection({ wide, lang, onPick }: { wide: boolean; lang: BaseLang; onPick: (target: TargetLang) => void }) {
+  const t = useT()
+  const target = useApp((s) => s.user.profile.target ?? 'en')
+  const units = COURSE.units.length
+  const sentences = COURSE.units.reduce((n, u) => n + u.sentences.length, 0)
+  return (
+    <View style={styles.section}>
+      <Txt variant="title" center style={styles.sectionTitle}>
+        {t('landing.langs.title')}
+      </Txt>
+      <Txt color={colors.textSoft} center style={styles.lead}>
+        {t('landing.langs.body')}
+      </Txt>
+      <View style={[styles.courses, wide ? styles.coursesWide : null]}>
+        {TARGET_LANGS.map((l) => {
+          const mine = l === lang
+          const on = !mine && l === target
+          return (
+            <Pressable key={l} accessibilityRole="button" disabled={mine} onPress={() => onPick(l)} style={[styles.course, wide ? styles.flex : null, on ? styles.courseOn : null, mine ? styles.courseOff : null]} testID={`course-${l}`}>
+              <Txt style={styles.courseFlag}>{TARGET_NAMES[l].flag}</Txt>
+              <Txt variant="heading">{TARGET_NAMES[l].name}</Txt>
+              <Txt variant="caption" color={colors.textSoft}>
+                {mine ? LANGUAGE_NAMES[lang].name : t('landing.langs.units', { n: units, m: sentences })}
+              </Txt>
+              {!mine ? (
+                <View style={[styles.coursePick, on ? styles.coursePickOn : null]}>
+                  <Txt variant="caption" color={on ? colors.text : colors.primaryEdge}>
+                    {t('landing.nav.start')}
+                  </Txt>
+                  <Ionicons name="arrow-forward" size={14} color={on ? colors.text : colors.primaryEdge} />
+                </View>
+              ) : null}
+            </Pressable>
+          )
+        })}
+      </View>
     </View>
   )
 }
@@ -86,7 +156,13 @@ export function LandingScreen() {
   const lang = useApp((s) => s.user.profile.baseLang)
   const onboarded = useApp((s) => s.user.profile.onboarded)
   const setProfile = useApp((s) => s.setProfile)
-  const pickLang = (l: BaseLang) => setProfile({ baseLang: l })
+  const target = useApp((s) => s.user.profile.target ?? 'en')
+  // the interface language can never be the course language: switching onto it moves the course to English
+  const pickLang = (l: BaseLang) => setProfile({ baseLang: l, ...(target === l ? { target: 'en' } : {}) })
+  const pickCourse = (l: TargetLang) => {
+    setProfile({ target: l })
+    start()
+  }
 
   const start = () => router.push(onboarded ? '/learn' : '/welcome')
   const startLabel = onboarded ? t('landing.have') : t('landing.cta')
@@ -131,7 +207,7 @@ export function LandingScreen() {
             </View>
           ) : null}
           <View style={styles.navRight}>
-            <LangPills lang={lang} onPick={pickLang} names={wide} />
+            <LangDropdown lang={lang} onPick={pickLang} names={wide} />
             {wide && !onboarded ? <Button label={t('landing.nav.login')} variant="secondary" small onPress={() => router.push('/account')} /> : null}
             <Button label={t('landing.nav.start')} variant="success" small onPress={start} testID="landing-start" />
           </View>
@@ -215,8 +291,8 @@ export function LandingScreen() {
       </View>
 
       {/* why */}
-      <View style={styles.band}>
-        <OnScroll seen={seen} style={[styles.container, styles.section]} onLayout={mark('how')}>
+      <View style={styles.band} onLayout={mark('how')}>
+        <OnScroll seen={seen} style={[styles.container, styles.section]}>
           <Txt variant="title" center style={styles.sectionTitle}>
             {t('landing.why.title')}
           </Txt>
@@ -226,6 +302,11 @@ export function LandingScreen() {
           <WhyCards wide={wide} />
         </OnScroll>
       </View>
+
+      {/* the courses */}
+      <OnScroll seen={seen} style={styles.container}>
+        <CoursesSection wide={wide} lang={lang} onPick={pickCourse} />
+      </OnScroll>
 
       {/* the crew */}
       <OnScroll seen={seen} style={[styles.container, styles.section]}>
@@ -242,8 +323,8 @@ export function LandingScreen() {
       </OnScroll>
 
       {/* price */}
-      <View style={styles.band}>
-        <OnScroll seen={seen} style={styles.container} onLayout={mark('price')}>
+      <View style={styles.band} onLayout={mark('price')}>
+        <OnScroll seen={seen} style={styles.container}>
           <PricingSection wide={wide} onStart={start} startLabel={startLabel} />
         </OnScroll>
       </View>
@@ -277,7 +358,7 @@ export function LandingScreen() {
             ))}
           </View>
           <View style={styles.footerRight}>
-            <LangPills lang={lang} onPick={pickLang} names={wide} />
+            <LangDropdown lang={lang} onPick={pickLang} names={wide} up />
             {SOCIAL.length > 0 ? (
             <View style={styles.social}>
               {SOCIAL.map((s) => (
@@ -326,9 +407,21 @@ const styles = StyleSheet.create({
   linkOn: { borderColor: colors.primary },
   linkText: { fontSize: 14 },
   navRight: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
-  langs: { flexDirection: 'row', gap: 4 },
   lang: { flexDirection: 'row', alignItems: 'center', gap: 6, borderWidth: 1.5, borderColor: colors.border, borderRadius: radius.pill, paddingHorizontal: 10, paddingVertical: 6 },
   langOn: { borderColor: colors.primary, backgroundColor: colors.primaryTint },
+  flag: { fontSize: 15, lineHeight: 18 },
+  backdrop: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 },
+  menu: { position: 'absolute', minWidth: 190, backgroundColor: colors.white, borderRadius: radius.lg, borderWidth: 1.5, borderColor: colors.border, padding: 6, shadowColor: colors.navy, shadowOpacity: 0.18, shadowRadius: 24, shadowOffset: { width: 0, height: 10 } },
+  menuItem: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 12, paddingVertical: 10, borderRadius: radius.md },
+  menuItemOn: { backgroundColor: colors.primaryTint },
+  courses: { alignSelf: 'stretch', gap: space.md, marginTop: space.lg },
+  coursesWide: { flexDirection: 'row' },
+  course: { backgroundColor: colors.white, borderRadius: radius.xl, borderWidth: 1.5, borderColor: colors.border, padding: space.lg, gap: 6, alignItems: 'flex-start' },
+  courseOn: { borderColor: colors.primary, backgroundColor: colors.primaryTint },
+  courseOff: { opacity: 0.55 },
+  courseFlag: { fontSize: 32, lineHeight: 40 },
+  coursePick: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: space.sm, backgroundColor: colors.primaryTint, borderRadius: radius.pill, paddingHorizontal: 12, paddingVertical: 6 },
+  coursePickOn: { backgroundColor: colors.lime },
   heroBand: { overflow: 'hidden' },
   blob: { position: 'absolute', borderRadius: 999, backgroundColor: colors.primaryTint },
   blobA: { width: 520, height: 520, left: -200, top: -120, opacity: 0.9 },

@@ -3,9 +3,9 @@ import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import { Modal, Platform, Pressable, StyleSheet, Switch, TextInput, View } from 'react-native'
 import { WORD_ID_MARKER } from '../../core/progress'
-import { BASE_LANGS, type DailyGoal } from '../../core/types'
+import { BASE_LANGS, type DailyGoal, TARGET_LANGS } from '../../core/types'
 import { GOAL_IDS } from '../../core/goals'
-import { LANGUAGE_NAMES, useT, type StringKey } from '../../i18n'
+import { LANGUAGE_NAMES, TARGET_NAMES, useT, type StringKey } from '../../i18n'
 import { REMINDER_HOURS, remindersSupported, setDailyReminder } from '../../lib/reminders'
 import { useAccount } from '../../state/account'
 import { useApp } from '../../state/store'
@@ -124,7 +124,16 @@ export function ProfileScreen() {
         </Txt>
         <View style={styles.chips}>
           {BASE_LANGS.map((lang) => (
-            <Chip key={lang} label={`${LANGUAGE_NAMES[lang].flag} ${LANGUAGE_NAMES[lang].name}`} active={user.profile.baseLang === lang} onPress={() => setProfile({ baseLang: lang })} />
+            <Chip key={lang} label={`${LANGUAGE_NAMES[lang].flag} ${LANGUAGE_NAMES[lang].name}`} active={user.profile.baseLang === lang} onPress={() => setProfile({ baseLang: lang, ...((user.profile.target ?? 'en') === lang ? { target: 'en' } : {}) })} />
+          ))}
+        </View>
+
+        <Txt variant="label" color={colors.textSoft}>
+          {t('profile.target')}
+        </Txt>
+        <View style={styles.chips}>
+          {TARGET_LANGS.filter((lang) => lang !== user.profile.baseLang).map((lang) => (
+            <Chip key={lang} label={`${TARGET_NAMES[lang].flag} ${TARGET_NAMES[lang].name}`} active={(user.profile.target ?? 'en') === lang} onPress={() => setProfile({ target: lang })} />
           ))}
         </View>
 

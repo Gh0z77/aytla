@@ -3,8 +3,8 @@ import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import { Pressable, StyleSheet, TextInput, View } from 'react-native'
 import { GOAL_IDS } from '../../core/goals'
-import { BASE_LANGS, type CharacterId, type DailyGoal, type GoalId } from '../../core/types'
-import { LANGUAGE_NAMES, useT, type StringKey } from '../../i18n'
+import { BASE_LANGS, type CharacterId, type DailyGoal, type GoalId, TARGET_LANGS } from '../../core/types'
+import { LANGUAGE_NAMES, TARGET_NAMES, useT, type StringKey } from '../../i18n'
 import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
@@ -14,7 +14,7 @@ import { Screen } from '../../ui/Screen'
 import { Txt } from '../../ui/Txt'
 
 const GOALS: DailyGoal[] = [10, 20, 30, 50]
-const STEPS = 6
+const STEPS = 7
 
 /** First run: language → name → daily goal → level → guide. Everything can be changed later in Profile. */
 export function WelcomeScreen() {
@@ -24,6 +24,8 @@ export function WelcomeScreen() {
   const setProfile = useApp((s) => s.setProfile)
 
   const [step, setStep] = useState(0)
+  // the target can never be the interface language; English is the fallback
+  const target = profile.target && profile.target !== profile.baseLang ? profile.target : 'en'
   const [name, setName] = useState(profile.name)
   const [goal, setGoal] = useState<DailyGoal>(profile.dailyGoalXp)
   const [knowsSome, setKnowsSome] = useState(false)
@@ -31,7 +33,7 @@ export function WelcomeScreen() {
   const [learningGoal, setLearningGoal] = useState<GoalId>(profile.goal ?? 'everyday')
 
   const finish = () => {
-    setProfile({ name: name.trim(), dailyGoalXp: goal, guide, goal: learningGoal, onboarded: true })
+    setProfile({ name: name.trim(), target, dailyGoalXp: goal, guide, goal: learningGoal, onboarded: true })
     // whoever already knows some English takes the placement test instead of guessing a level
     router.replace(knowsSome ? '/placement' : '/learn')
   }
@@ -60,6 +62,15 @@ export function WelcomeScreen() {
 
         {step === 1 ? (
           <>
+            <Hello guide="pix" text={t('welcome.target.title')} />
+            {TARGET_LANGS.filter((lang) => lang !== profile.baseLang).map((lang) => (
+              <Option key={lang} title={`${TARGET_NAMES[lang].flag}  ${TARGET_NAMES[lang].name}`} active={target === lang} onPress={() => setProfile({ target: lang })} />
+            ))}
+          </>
+        ) : null}
+
+        {step === 2 ? (
+          <>
             <Hello guide="aero" text={t('goal.title')} />
             {GOAL_IDS.map((g) => (
               <Option key={g} title={t(`goal.${g}` as StringKey)} sub={t(`goal.${g}Body` as StringKey)} active={learningGoal === g} onPress={() => setLearningGoal(g)} />
@@ -67,7 +78,7 @@ export function WelcomeScreen() {
           </>
         ) : null}
 
-        {step === 2 ? (
+        {step === 3 ? (
           <>
             <Hello guide="everest" text={t('welcome.hello')} />
             <Txt variant="heading">{t('welcome.name.title')}</Txt>
@@ -84,7 +95,7 @@ export function WelcomeScreen() {
           </>
         ) : null}
 
-        {step === 3 ? (
+        {step === 4 ? (
           <>
             <Hello guide="lumi" text={t('welcome.goal.title')} />
             {GOALS.map((g) => (
@@ -93,7 +104,7 @@ export function WelcomeScreen() {
           </>
         ) : null}
 
-        {step === 4 ? (
+        {step === 5 ? (
           <>
             <Hello guide="pix" text={t('welcome.level.title')} />
             <Option title={t('welcome.level.new')} sub={t('welcome.level.newBody')} active={!knowsSome} onPress={() => setKnowsSome(false)} />
@@ -101,7 +112,7 @@ export function WelcomeScreen() {
           </>
         ) : null}
 
-        {step === 5 ? (
+        {step === 6 ? (
           <>
             <Hello guide={guide} text={t('welcome.guide.title')} />
             <View style={styles.guides}>

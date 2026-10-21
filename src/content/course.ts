@@ -1,4 +1,4 @@
-import type { Course, Section, Unit } from '../core/types'
+import type { BaseLang, Course, Lesson, Section, Sentence, TargetLang, Unit, Word } from '../core/types'
 import u01 from './units/u01.json'
 import u02 from './units/u02.json'
 import u03 from './units/u03.json'
@@ -67,13 +67,69 @@ export const COURSE: Course = {
   units: UNITS.slice().sort((a, b) => a.section - b.section || a.order - b.order),
 }
 
+/**
+ * The same course with another language as the target. Every word and
+ * sentence is authored in all four languages, so a Russian course for Uzbek
+ * speakers is the English course with the Russian text in the target slot
+ * and English moved into the translations. Ids are prefixed ("ru-u01") so
+ * progress, mistakes and spaced repetition stay separate per course; the
+ * English course keeps its original ids. English grammar tips are dropped.
+ */
+const prefixed = (target: TargetLang, id: string) => (target === 'en' ? id : `${target}-${id}`)
+
+/** the course a prefixed id belongs to ("ru-u01-l1" → "ru"), English for unprefixed ids */
+export function targetOfId(id: string): TargetLang {
+  const m = /^(ru|tr|uz)-/.exec(id)
+  return (m?.[1] as TargetLang | undefined) ?? 'en'
+}
+
+function retarget<T extends { id: string; en: string; native: Record<BaseLang, string> }>(item: T, target: Exclude<TargetLang, 'en'>): T {
+  // the translations keep every other language; the target's own slot now holds the English
+  return { ...item, id: prefixed(target, item.id), en: item.native[target], native: { ...item.native, [target]: item.en } }
+}
+
+function retargetUnit(unit: Unit, target: Exclude<TargetLang, 'en'>): Unit {
+  const words: Word[] = unit.words.map((w) => {
+    const out = retarget(w, target)
+    const alt = w.altNative?.[target]
+    return { ...out, altNative: { ...w.altNative, [target]: undefined }, ...(alt ? {} : {}) } as Word
+  })
+  const sentences: Sentence[] = unit.sentences.map((s) => {
+    const out = retarget(s, target)
+    // accepted variants: the target language's own alternatives become the alternative answers
+    const altEn = s.altNative?.[target]
+    return { ...out, altEn: altEn && altEn.length > 0 ? altEn : undefined, altEnFor: undefined, altNative: { ...s.altNative, [target]: undefined } } as Sentence
+  })
+  const lessons: Lesson[] = unit.lessons.map((l) => ({ ...l, id: prefixed(target, l.id), words: l.words.map((id) => prefixed(target, id)), sentences: l.sentences.map((id) => prefixed(target, id)) }))
+  const { tip: _tip, ...rest } = unit
+  return { ...rest, id: prefixed(target, unit.id), words, sentences, lessons }
+}
+
+const COURSE_TITLES: Record<TargetLang, string> = { en: 'English', ru: 'Русский', tr: 'Türkçe', uz: "O'zbek" }
+const courses = new Map<TargetLang, Course>([['en', COURSE]])
+
+/** The course for a target language, built once and cached. */
+export function courseFor(target: TargetLang): Course {
+  const cached = courses.get(target)
+  if (cached) return cached
+  const t = target as Exclude<TargetLang, 'en'>
+  const built: Course = {
+    id: `${target}-a1`,
+    title: COURSE_TITLES[target],
+    sections: COURSE.sections.map((s) => ({ ...s, id: prefixed(target, s.id), unitIds: s.unitIds.map((id) => prefixed(target, id)) })),
+    units: COURSE.units.map((u) => retargetUnit(u, t)),
+  }
+  courses.set(target, built)
+  return built
+}
+
 export function findUnit(unitId: string): Unit | undefined {
-  return COURSE.units.find((u) => u.id === unitId)
+  return courseFor(targetOfId(unitId)).units.find((u) => u.id === unitId)
 }
 
 /** Resolve any lesson or review id to its unit and lesson index (null = review). */
 export function findLesson(lessonId: string): { unit: Unit; lessonIndex: number | null } | undefined {
-  for (const unit of COURSE.units) {
+  for (const unit of courseFor(targetOfId(lessonId)).units) {
     if (lessonId === `${unit.id}-review`) return { unit, lessonIndex: null }
     const lessonIndex = unit.lessons.findIndex((l) => l.id === lessonId)
     if (lessonIndex >= 0) return { unit, lessonIndex }

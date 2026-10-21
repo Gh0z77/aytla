@@ -27,6 +27,7 @@ export function CoachChatScreen({ scenarioId }: { scenarioId: string }) {
   const t = useT()
   const token = useAccount((s) => s.token)
   const baseLang = useApp((s) => s.user.profile.baseLang)
+  const target = useApp((s) => s.user.profile.target ?? 'en')
   const sound = useApp((s) => s.user.profile.soundOn)
   const completeSession = useApp((s) => s.completeSession)
   const rememberCorrection = useApp((s) => s.rememberCorrection)
@@ -50,7 +51,7 @@ export function CoachChatScreen({ scenarioId }: { scenarioId: string }) {
         const messages = history.map((h) => (h.role === 'user' ? { role: 'user' as const, text: h.text } : { role: 'assistant' as const, text: h.reply.text }))
         // mistake memory: earlier corrections travel with the request, so the guide can bring those patterns back
         const focus = (useApp.getState().user.coachNotes ?? []).slice(0, 5).map((n) => n.better)
-        const res = await api<CoachChatResponse>('/coach/chat', { method: 'POST', token, body: { scenarioId, baseLang, messages, focus }, timeoutMs: 40_000 })
+        const res = await api<CoachChatResponse>('/coach/chat', { method: 'POST', token, body: { scenarioId, baseLang, target, messages, focus }, timeoutMs: 40_000 })
         if (res.reply.better) rememberCorrection(res.reply.better, res.reply.correction)
         setTurns([...history, { role: 'assistant', reply: res.reply }])
         setRemaining(res.remaining)
@@ -61,7 +62,7 @@ export function CoachChatScreen({ scenarioId }: { scenarioId: string }) {
         setBusy(false)
       }
     },
-    [token, scenarioId, baseLang, sound, t, rememberCorrection]
+    [token, scenarioId, baseLang, target, sound, t, rememberCorrection]
   )
 
   // the guide opens the conversation

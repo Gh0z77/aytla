@@ -2,12 +2,12 @@ import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { useMemo, useState } from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
-import { COURSE } from '../../content/course'
 import { gradeSay } from '../../core/grading'
 import { challengeSentence } from '../../core/mission'
 import type { GradeResult, Rewards, SayExercise } from '../../core/types'
 import { useT } from '../../i18n'
 import { canSpeak } from '../../lib/speech'
+import { useCourse } from '../../state/course'
 import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
@@ -22,13 +22,14 @@ export function ChallengeScreen() {
   const router = useRouter()
   const t = useT()
   const user = useApp((s) => s.user)
+  const course = useCourse()
   const completeChallenge = useApp((s) => s.completeChallenge)
   const [micAvailable] = useState(() => canSpeak())
   const [draft, setDraft] = useState<Draft | null>(null)
   const [result, setResult] = useState<GradeResult | null>(null)
   const [rewards, setRewards] = useState<Rewards | null>(null)
 
-  const pick = useMemo(() => challengeSentence(COURSE, user, Date.now()), [user])
+  const pick = useMemo(() => challengeSentence(course, user, Date.now()), [course, user])
   const sentence = pick ? pick.unit.sentences.find((s) => s.id === pick.sentenceId) : undefined
   const exercise: SayExercise | null = sentence ? { kind: 'say', id: `challenge-${sentence.id}`, itemId: sentence.id, prompt: sentence.native[user.profile.baseLang], audio: sentence.en, answers: [sentence.en, ...(sentence.altEn ?? [])] } : null
   const doneToday = user.days[new Date().toISOString().slice(0, 10)]?.challenge === true

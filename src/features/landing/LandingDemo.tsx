@@ -1,12 +1,12 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useMemo, useState } from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
-import { COURSE } from '../../content/course'
 import { buildLessonSession } from '../../core/exercises'
 import { gradeBank, gradeSay } from '../../core/grading'
 import type { BankExercise, GradeResult, SayExercise } from '../../core/types'
 import { useT } from '../../i18n'
 import { canSpeak } from '../../lib/speech'
+import { useCourse, useTarget } from '../../state/course'
 import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
@@ -24,19 +24,21 @@ type Kind = 'say' | 'bank'
 export function LandingDemo({ onStart }: { onStart: () => void }) {
   const t = useT()
   const lang = useApp((s) => s.user.profile.baseLang)
+  const target = useTarget()
+  const course = useCourse()
   const [micAvailable] = useState(() => canSpeak())
 
   // the first lesson, in the visitor's language: a handful of "say" and "build the sentence" rounds
   const pool = useMemo(() => {
-    const unit = COURSE.units[0]
+    const unit = course.units[0]
     if (!unit) return { say: [] as SayExercise[], bank: [] as BankExercise[], lexicon: new Set<string>() }
-    const built = buildLessonSession(unit, 0, { baseLang: lang, seed: 7, canListen: false, canSpeak: false })
+    const built = buildLessonSession(unit, 0, { baseLang: lang, target, seed: 7, canListen: false, canSpeak: false })
     return {
       say: built.exercises.filter((e): e is SayExercise => e.kind === 'say'),
       bank: built.exercises.filter((e): e is BankExercise => e.kind === 'bank' && e.direction === 'native-en'),
       lexicon: new Set(built.lexicon),
     }
-  }, [lang])
+  }, [lang, target, course])
 
   const [kind, setKind] = useState<Kind>('say')
   const [index, setIndex] = useState(0)

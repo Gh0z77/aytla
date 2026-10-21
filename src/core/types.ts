@@ -11,6 +11,15 @@
 export type BaseLang = 'uz' | 'ru' | 'tr'
 export const BASE_LANGS: readonly BaseLang[] = ['uz', 'ru', 'tr']
 
+/**
+ * The language being learned. The course is authored once (English with
+ * uz / ru / tr translations); because every word and sentence exists in all
+ * four languages, any of them can be the target (content/course.ts builds the
+ * other courses from the same units).
+ */
+export type TargetLang = 'en' | 'ru' | 'tr' | 'uz'
+export const TARGET_LANGS: readonly TargetLang[] = ['en', 'ru', 'tr', 'uz']
+
 export type CharacterId = 'everest' | 'lumi' | 'pix' | 'nubi' | 'rocky' | 'aero'
 
 export type L10n = Record<BaseLang, string>
@@ -103,6 +112,8 @@ export interface SelectOption {
 
 /** "Which one is «olma»?" → pick the English word. */
 export interface SelectExercise {
+  /** the language of the target-side text and answers; missing = English */
+  lang?: TargetLang
   kind: 'select'
   id: string
   itemId: string
@@ -114,6 +125,8 @@ export interface SelectExercise {
 
 /** Build the translation from a bank of word tiles. */
 export interface BankExercise {
+  /** the language of the target-side text and answers; missing = English */
+  lang?: TargetLang
   kind: 'bank'
   id: string
   itemId: string
@@ -127,6 +140,8 @@ export interface BankExercise {
 
 /** Tap matching pairs. Graded pair by pair inside the UI; mistakes are reported on completion. */
 export interface MatchExercise {
+  /** the language of the target-side text and answers; missing = English */
+  lang?: TargetLang
   kind: 'match'
   id: string
   pairs: Array<{ id: string; en: string; native: string }>
@@ -134,6 +149,8 @@ export interface MatchExercise {
 
 /** Sentence with one blank. */
 export interface FillExercise {
+  /** the language of the target-side text and answers; missing = English */
+  lang?: TargetLang
   kind: 'fill'
   id: string
   itemId: string
@@ -147,6 +164,8 @@ export interface FillExercise {
 
 /** Hear English; rebuild it from tiles or type it. */
 export interface ListenExercise {
+  /** the language of the target-side text and answers; missing = English */
+  lang?: TargetLang
   kind: 'listen'
   id: string
   itemId: string
@@ -159,6 +178,8 @@ export interface ListenExercise {
 
 /** Type the English translation. */
 export interface TypeExercise {
+  /** the language of the target-side text and answers; missing = English */
+  lang?: TargetLang
   kind: 'type'
   id: string
   itemId: string
@@ -169,6 +190,8 @@ export interface TypeExercise {
 
 /** Say the English sentence aloud. */
 export interface SpeakExercise {
+  /** the language of the target-side text and answers; missing = English */
+  lang?: TargetLang
   kind: 'speak'
   id: string
   itemId: string
@@ -182,6 +205,8 @@ export interface SpeakExercise {
  * lesson end in speaking rather than in tapping.
  */
 export interface SayExercise {
+  /** the language of the target-side text and answers; missing = English */
+  lang?: TargetLang
   kind: 'say'
   id: string
   itemId: string
@@ -215,6 +240,8 @@ export type DailyGoal = 10 | 20 | 30 | 50
 export interface Profile {
   name: string
   baseLang: BaseLang
+  /** the language being learned; missing in states saved before other courses existed = English */
+  target?: TargetLang
   dailyGoalXp: DailyGoal
   guide: CharacterId
   soundOn: boolean

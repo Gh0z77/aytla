@@ -2,9 +2,9 @@ import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { useMemo } from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
-import { COURSE } from '../../content/course'
 import { comeback, todayMission, type MissionStep } from '../../core/mission'
 import { useT, type StringKey } from '../../i18n'
+import { useCourse } from '../../state/course'
 import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
@@ -22,9 +22,10 @@ export function MissionCard({ compact = false }: { compact?: boolean }) {
   const router = useRouter()
   const t = useT()
   const user = useApp((s) => s.user)
+  const course = useCourse()
   const lang = user.profile.baseLang
   const now = Date.now()
-  const mission = useMemo(() => todayMission(COURSE, user, now), [user, now])
+  const mission = useMemo(() => todayMission(course, user, now), [course, user, now])
   const back = useMemo(() => comeback(user, now), [user, now])
   const allDone = mission.steps.length > 0 && mission.done === mission.steps.length
   const hour = new Date(now).getHours()

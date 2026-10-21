@@ -1,5 +1,11 @@
 import { Platform } from 'react-native'
 import * as Speech from 'expo-speech'
+import type { TargetLang } from '../core/types'
+import { useApp } from '../state/store'
+
+const LOCALES: Record<TargetLang, string> = { en: 'en-US', ru: 'ru-RU', tr: 'tr-TR', uz: 'uz-UZ' }
+/** the BCP 47 tag of the language being learned */
+export const targetLocale = (): string => LOCALES[useApp.getState().user.profile.target ?? 'en']
 
 /**
  * Text-to-speech and (web only) speech recognition.
@@ -15,7 +21,7 @@ export function canListen(): boolean {
 export function speak(text: string, opts: { slow?: boolean } = {}): void {
   try {
     Speech.stop()
-    Speech.speak(text, { language: 'en-US', rate: opts.slow ? 0.6 : 0.95, pitch: 1 })
+    Speech.speak(text, { language: targetLocale(), rate: opts.slow ? 0.6 : 0.95, pitch: 1 })
   } catch {
     // no voice available: exercises stay usable through their text
   }
@@ -70,7 +76,7 @@ export function listenOnce(onDone: (transcript: string) => void): () => void {
     finished = true
     onDone(text)
   }
-  rec.lang = 'en-US'
+  rec.lang = targetLocale()
   rec.interimResults = false
   rec.maxAlternatives = 3
   rec.onresult = (e) => {

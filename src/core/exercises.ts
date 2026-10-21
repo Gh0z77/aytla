@@ -15,6 +15,7 @@ import type {
   TypeExercise,
   Unit,
   Word,
+  TargetLang,
 } from './types'
 
 /**
@@ -24,6 +25,8 @@ import type {
  */
 
 export interface SessionOptions {
+  /** the language being learned; default English */
+  target?: TargetLang
   baseLang: BaseLang
   seed: number
   /** text-to-speech available */
@@ -39,6 +42,9 @@ export interface BuiltSession {
 }
 
 export const reviewLessonId = (unit: Pick<Unit, 'id'>) => `${unit.id}-review`
+
+/** every exercise carries the language it is in, so grading needs no other context */
+const stamp = (exercises: Exercise[], opts: SessionOptions): Exercise[] => exercises.map((e) => ({ ...e, lang: opts.target ?? 'en' }))
 
 type SentencePlan = 'bank-en' | 'bank-native' | 'fill' | 'listen-bank' | 'listen-type' | 'type' | 'speak'
 
@@ -79,10 +85,14 @@ class UnitContext {
     return this.opts.baseLang
   }
 
+  get target(): TargetLang {
+    return this.opts.target ?? 'en'
+  }
+
   // -- word exercises --------------------------------------------------------
 
   select(word: Word): SelectExercise {
-    const others = this.unit.words.filter((w) => w.id !== word.id && normalize(w.en, 'en') !== normalize(word.en, 'en'))
+    const others = this.unit.words.filter((w) => w.id !== word.id && normalize(w.en, this.target) !== normalize(word.en, this.target))
     const preferred = word.emoji ? others.filter((w) => w.emoji) : others
     const pool = preferred.length >= 2 ? preferred : others
     const distractors = sample(this.rng, pool, 3)
@@ -103,7 +113,7 @@ class UnitContext {
     const seenNative = new Set<string>()
     const pairs: MatchExercise['pairs'] = []
     for (const w of words) {
-      const en = normalize(w.en, 'en')
+      const en = normalize(w.en, this.target)
       const native = normalize(w.native[this.lang], this.lang)
       if (seenEn.has(en) || seenNative.has(native)) continue
       seenEn.add(en)
@@ -118,7 +128,7 @@ class UnitContext {
   // -- sentence exercises ----------------------------------------------------
 
   private englishTiles(sentence: Sentence): string[] {
-    return tokenize(sentence.en, 'en', this.properNouns)
+    return tokenize(sentence.en, this.target, this.properNouns)
   }
 
   /** Every English answer accepted for this learner's language. */
@@ -143,7 +153,7 @@ class UnitContext {
     }
     for (const s of this.unit.sentences) {
       if (s.id === excludeSentenceId) continue
-      const tiles = side === 'en' ? tokenize(s.en, 'en', this.properNouns) : tokenize(s.native[this.lang], this.lang)
+      const tiles = side === 'en' ? tokenize(s.en, this.target, this.properNouns) : tokenize(s.native[this.lang], this.lang)
       tiles.forEach(push)
     }
     if (side === 'en') this.unit.words.forEach((w) => !w.en.includes(' ') && push(w.en))
@@ -185,7 +195,7 @@ class UnitContext {
     if (this.isAmbiguousFromNative(sentence)) return null
     const raw = sentence.en.split(/\s+/).filter(Boolean)
     const singles = this.unit.words.filter((w) => !w.en.includes(' '))
-    const byKey = new Map(singles.map((w) => [normalize(w.en, 'en'), w] as const))
+    const byKey = new Map(singles.map((w) => [normalize(w.en, this.target), w] as const))
     const hits: Array<{ index: number; word: Word }> = []
     raw.forEach((token, index) => {
       const word = byKey.get(normalize(token, 'en'))
@@ -210,7 +220,7 @@ class UnitContext {
 
     // a distractor that already appears in the sentence ("____, please." → "Please") is confusing, not challenging
     const inSentence = new Set(raw.map((t) => normalize(t, 'en')))
-    const anyOther = singles.filter((w) => w.id !== hit.word.id && !inSentence.has(normalize(w.en, 'en')))
+    const anyOther = singles.filter((w) => w.id !== hit.word.id && !inSentence.has(normalize(w.en, this.target)))
     const samePos = anyOther.filter((w) => w.pos !== undefined && w.pos === hit.word.pos)
     const pool = samePos.length >= 2 ? samePos : anyOther
     const distractors = sample(this.rng, pool, 2).map((w) => shape(w.en))
@@ -304,8 +314,8 @@ class UnitContext {
 
   lexicon(): string[] {
     const out = new Set<string>()
-    this.unit.words.forEach((w) => normalize(w.en, 'en').split(' ').forEach((p) => p && out.add(p)))
-    this.unit.sentences.forEach((s) => normalize(s.en, 'en').split(' ').forEach((p) => p && out.add(p)))
+    this.unit.words.forEach((w) => normalize(w.en, this.target).split(' ').forEach((p) => p && out.add(p)))
+    this.unit.sentences.forEach((s) => normalize(s.en, this.target).split(' ').forEach((p) => p && out.add(p)))
     return [...out]
   }
 }
@@ -356,7 +366,7 @@ export function buildLessonSession(unit: Unit, lessonIndex: number, opts: Sessio
   // every lesson ends with the learner saying what they have just learned
   exercises.push(...ctx.finale(sentences, FINALE_SENTENCES))
 
-  return { exercises, lexicon: ctx.lexicon() }
+  return { exercises: stamp(exercises, opts), lexicon: ctx.lexicon() }
 }
 
 /** Unit review (checkpoint): harder mix across the whole unit. */
@@ -372,7 +382,7 @@ export function buildReviewSession(unit: Unit, opts: SessionOptions): BuiltSessi
   if (closing) exercises.push(closing)
   exercises.push(...ctx.finale(sample(ctx.rng, unit.sentences, FINALE_SENTENCES), FINALE_SENTENCES))
 
-  return { exercises, lexicon: ctx.lexicon() }
+  return { exercises: stamp(exercises, opts), lexicon: ctx.lexicon() }
 }
 
 /** Practice: a short session built from specific word / sentence ids (spaced repetition, mistakes, heart refill). */
@@ -399,7 +409,7 @@ export function buildPracticeSession(course: Course, itemIds: readonly string[],
     sentences.forEach((s, i) => exercises.push(ctx.forSentence(s, plans[i % plans.length] as SentencePlan, new Set())))
   }
 
-  return { exercises: shuffle(rng, exercises).slice(0, limit), lexicon: [...lexicon] }
+  return { exercises: stamp(shuffle(rng, exercises).slice(0, limit), opts), lexicon: [...lexicon] }
 }
 
 /**

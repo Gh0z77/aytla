@@ -2,13 +2,14 @@ import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { useMemo, useState } from 'react'
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native'
-import { COURSE, findUnit } from '../../content/course'
+import { findUnit } from '../../content/course'
 import { buildPlacementCheck } from '../../core/exercises'
 import { courseForGoal } from '../../core/goals'
 import { gradeBank, gradeSelect } from '../../core/grading'
 import { checkVerdict, placementCheckpoints, placementFor, type Placement } from '../../core/placement'
 import type { Exercise } from '../../core/types'
 import { useT } from '../../i18n'
+import { useCourse } from '../../state/course'
 import { useApp } from '../../state/store'
 import { colors, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
@@ -34,9 +35,10 @@ export function PlacementScreen() {
   const router = useRouter()
   const t = useT()
   const profile = useApp((s) => s.user.profile)
+  const base = useCourse()
   const markLessonsDone = useApp((s) => s.markLessonsDone)
 
-  const course = useMemo(() => courseForGoal(COURSE, profile.goal), [profile.goal])
+  const course = useMemo(() => courseForGoal(base, profile.goal), [base, profile.goal])
   const checkpoints = useMemo(() => placementCheckpoints(course), [course])
   const [seed] = useState(() => Math.floor(Math.random() * 2147483647))
 
