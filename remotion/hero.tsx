@@ -30,13 +30,16 @@ export function HeroLoop({ sentences }: { sentences: HeroSentence[] }) {
   return (
     <Backdrop>
       <Fonts />
-      <Orb x={120} y={560} size={110} color="#D6F77A" dark="#9CCB2E" offset={0} />
-      <Orb x={620} y={520} size={64} color="#9C86FF" dark="#5B3FD9" offset={40} />
-      <Orb x={1000} y={620} size={88} color="#FFD36A" dark="#E59A00" offset={80} />
-      <Orb x={560} y={140} size={38} color="#C8F060" dark="#86B130" offset={120} />
-      {/* the stage */}
-      <div style={{ position: 'absolute', left: 170, top: 690, width: 540, height: 150, borderRadius: '50%', background: 'radial-gradient(closest-side, rgba(255,255,255,0.28), rgba(255,255,255,0.06) 70%, rgba(255,255,255,0) 100%)' }} />
-      <Character id="everest" mood={checked && local < CHECK_AT + 40 ? 'cheer' : 'talk'} enterAt={0} size={400} x={230} y={320} bob={5} />
+      <Orb x={640} y={470} size={64} color="#9C86FF" dark="#5B3FD9" offset={40} />
+      <Orb x={1020} y={600} size={84} color="#FFD36A" dark="#E59A00" offset={80} />
+      <Orb x={600} y={140} size={38} color="#C8F060" dark="#86B130" offset={120} />
+      {/* the stage, a stack of books and the sprout as the plant on the desk */}
+      <div style={{ position: 'absolute', left: 150, top: 690, width: 600, height: 150, borderRadius: '50%', background: 'radial-gradient(closest-side, rgba(255,255,255,0.28), rgba(255,255,255,0.06) 70%, rgba(255,255,255,0) 100%)' }} />
+      <div style={{ position: 'absolute', left: 560, top: 724, width: 170, height: 26, borderRadius: 8, background: '#C9BDF7', boxShadow: '0 14px 24px rgba(20,12,60,0.25)' }} />
+      <div style={{ position: 'absolute', left: 580, top: 700, width: 150, height: 26, borderRadius: 8, background: '#F4E7A8' }} />
+      <Orb x={690} y={660} size={70} color="#D6F77A" dark="#9CCB2E" offset={0} />
+      <Character id="lumi" mood="happy" enterAt={6} size={190} x={90} y={560} offset={50} bob={3} />
+      <Character id="pix" mood={checked && local < CHECK_AT + 40 ? 'cheer' : 'talk'} enterAt={0} size={400} x={270} y={330} bob={5} />
 
       <Sequence from={i * per} durationInFrames={per} layout="none">
         <Bubble text={current.sentence} sub={current.translation} startAt={0} x={70} y={70} width={520} />

@@ -1,5 +1,6 @@
 import { Composition } from 'remotion'
 import { CrewIntro, FEEDBACK, Reactions, SQUARE, STORY, SentenceOfDay } from './compositions'
+import { CREW_STAGE, CrewWave } from './crew'
 import { HERO, HeroLoop, type HeroSentence } from './hero'
 
 /**
@@ -20,6 +21,7 @@ export const HERO_SENTENCES: HeroSentence[] = [
 export const RemotionRoot = () => (
   <>
     <Composition id="HeroLoop" component={HeroLoop} {...HERO} defaultProps={{ sentences: HERO_SENTENCES }} />
+    <Composition id="CrewWave" component={CrewWave} {...CREW_STAGE} />
     <Composition id="CrewIntro" component={CrewIntro} {...STORY} defaultProps={{ title: 'Ingliz tilida birinchi kundan gapiring.', subtitle: "Har dars gapirish bilan tugaydi. Yo'l sizning maqsadingizga qarab quriladi. O'zbek tilida tushuntiriladi.", handle: '@aytla_app' }} />
     <Composition id="SentenceOfDay" component={SentenceOfDay} {...SQUARE} defaultProps={{ sentence: 'Hello! How are you?', translation: 'Salom! Qalaysiz?', label: 'Bugungi gap' }} />
     <Composition id="Reactions" component={Reactions} {...FEEDBACK} defaultProps={{ right: "Zo'r!", wrong: "Bo'ladi, yana bir bor" }} />

@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons'
-import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native'
+import { Image, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native'
 import Svg, { Circle, Defs, RadialGradient, Stop } from 'react-native-svg'
 import { useT, type StringKey } from '../../i18n'
 import { colors, radius, space } from '../../theme/tokens'
@@ -36,25 +36,57 @@ export function Orb({ size, color, dark, style }: { size: number; color: string;
   )
 }
 
+/** a "handwritten" note card, slightly tilted, with a little arrow */
+export function Note({ text, tilt = -4, arrow = 'left', style }: { text: string; tilt?: number; arrow?: 'left' | 'right' | 'none'; style?: StyleProp<ViewStyle> }) {
+  return (
+    <View style={[styles.noteWrap, style]} pointerEvents="none">
+      {arrow === 'left' ? <Ionicons name="return-down-back-outline" size={26} color={colors.primary} style={styles.noteArrow} /> : null}
+      <View style={[styles.note, { transform: [{ rotate: `${tilt}deg` }] }]}>
+        <Txt variant="label" color={colors.primaryEdge} style={styles.noteText}>
+          {text}
+        </Txt>
+      </View>
+      {arrow === 'right' ? <Ionicons name="return-down-forward-outline" size={26} color={colors.primary} style={styles.noteArrow} /> : null}
+    </View>
+  )
+}
+
+/** a phone body around a screenshot; the screenshots are 375×812 */
+export function PhoneFrame({ image, width }: { image: number; width: number }) {
+  const height = (width * 812) / 375
+  return (
+    <View style={[styles.phone, { width: width + 20, borderRadius: width * 0.14 }]}>
+      <View style={[styles.phoneScreen, { width, height, borderRadius: width * 0.11 }]}>
+        <Image source={image} style={{ width, height }} resizeMode="cover" accessibilityIgnoresInvertColors />
+      </View>
+    </View>
+  )
+}
+
 const STRIP: Array<{ icon: keyof typeof Ionicons.glyphMap; title: StringKey; body: StringKey }> = [
   { icon: 'time-outline', title: 'landing.strip.1t', body: 'landing.strip.1b' },
   { icon: 'mic-outline', title: 'landing.strip.2t', body: 'landing.strip.2b' },
   { icon: 'stats-chart-outline', title: 'landing.strip.3t', body: 'landing.strip.3b' },
+  { icon: 'compass-outline', title: 'landing.strip.4t', body: 'landing.strip.4b' },
 ]
 
-/** three short promises under the hero */
+/** four short promises under the hero */
 export function Strip({ wide }: { wide: boolean }) {
   const t = useT()
   return (
     <View style={[styles.strip, wide ? styles.stripWide : null]}>
       {STRIP.map((s, i) => (
-        <View key={s.title} style={[styles.stripItem, wide && i > 0 ? styles.stripDivider : null]}>
+        <View key={s.title} style={[styles.stripItem, wide ? styles.flex : null, wide && i > 0 ? styles.stripDivider : null]}>
           <View style={styles.stripIcon}>
-            <Ionicons name={s.icon} size={26} color={colors.primary} />
+            <Ionicons name={s.icon} size={24} color={colors.primary} />
           </View>
           <View style={styles.flex}>
-            <Txt variant="heading">{t(s.title)}</Txt>
-            <Txt color={colors.textSoft}>{t(s.body)}</Txt>
+            <Txt variant="label" style={styles.stripTitle}>
+              {t(s.title)}
+            </Txt>
+            <Txt variant="caption" color={colors.textSoft} style={styles.stripBody}>
+              {t(s.body)}
+            </Txt>
           </View>
         </View>
       ))}
@@ -62,52 +94,27 @@ export function Strip({ wide }: { wide: boolean }) {
   )
 }
 
-/** how a week looks: an illustration of the streak, not anyone's data */
-export function ProgressSection({ wide }: { wide: boolean }) {
+const WHY: Array<{ icon: keyof typeof Ionicons.glyphMap; title: StringKey; body: StringKey }> = [
+  { icon: 'chatbubble-ellipses', title: 'landing.why.c1t', body: 'landing.why.c1b' },
+  { icon: 'rocket', title: 'landing.why.c2t', body: 'landing.why.c2b' },
+  { icon: 'repeat', title: 'landing.why.c3t', body: 'landing.why.c3b' },
+  { icon: 'stats-chart', title: 'landing.why.c4t', body: 'landing.why.c4b' },
+]
+
+/** the four reasons, as cards */
+export function WhyCards({ wide }: { wide: boolean }) {
   const t = useT()
-  const days = [1, 2, 3, 4, 5, 6, 7]
   return (
-    <View style={[styles.progress, wide ? styles.progressWide : null]}>
-      <View style={[styles.progressText, wide ? styles.progressTextWide : null]}>
-        <Badge icon="sparkles" label={t('landing.progress.badge')} />
-        <Txt variant="title">{t('landing.progress.title')}</Txt>
-        <Txt color={colors.textSoft}>{t('landing.progress.body')}</Txt>
-      </View>
-      <View style={[styles.weekCard, wide ? styles.flex : null]}>
-        <View style={styles.weekHead}>
-          <Txt variant="heading">{t('landing.progress.week')}</Txt>
-          <View style={styles.streak}>
-            <Txt variant="label">{t('landing.progress.streak')} 🔥</Txt>
+    <View style={[styles.cards, wide ? styles.cardsWide : null]}>
+      {WHY.map((c) => (
+        <View key={c.title} style={[styles.card, wide ? styles.flex : null]}>
+          <View style={styles.cardIcon}>
+            <Ionicons name={c.icon} size={22} color={colors.white} />
           </View>
+          <Txt variant="heading">{t(c.title)}</Txt>
+          <Txt color={colors.textSoft}>{t(c.body)}</Txt>
         </View>
-        <View style={styles.track}>
-          {days.map((d, i) => {
-            const done = d < 3
-            const today = d === 3
-            return (
-              <View key={d} style={styles.dayWrap}>
-                {i > 0 ? <View style={[styles.dash, done || today ? styles.dashOn : null]} /> : null}
-                <View style={styles.day}>
-                  <View style={[styles.dot, done ? styles.dotDone : null, today ? styles.dotToday : null]}>
-                    {done ? <Ionicons name="checkmark" size={16} color={colors.white} /> : today ? <Ionicons name="star" size={14} color={colors.white} /> : null}
-                  </View>
-                  <Txt variant="caption" color={today ? colors.primary : colors.textMuted}>
-                    {t('landing.progress.day', { n: d })}
-                  </Txt>
-                </View>
-              </View>
-            )
-          })}
-        </View>
-        <View style={styles.hint}>
-          <View style={styles.hintIcon}>
-            <Ionicons name="ribbon" size={22} color={colors.primary} />
-          </View>
-          <Txt variant="caption" color={colors.textSoft} style={styles.flex}>
-            {t('landing.progress.hint')}
-          </Txt>
-        </View>
-      </View>
+      ))}
     </View>
   )
 }
@@ -116,26 +123,21 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   badge: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'flex-start', backgroundColor: colors.primaryTint, borderWidth: 1.5, borderColor: colors.primarySoft, borderRadius: radius.pill, paddingHorizontal: 12, paddingVertical: 6 },
   badgeText: { letterSpacing: 1.2 },
-  strip: { gap: space.lg, paddingVertical: space.xl },
+  noteWrap: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  noteArrow: { transform: [{ rotate: '-20deg' }] },
+  note: { backgroundColor: colors.white, borderRadius: radius.lg, paddingHorizontal: 16, paddingVertical: 12, shadowColor: colors.navy, shadowOpacity: 0.12, shadowRadius: 18, shadowOffset: { width: 0, height: 8 }, maxWidth: 220 },
+  noteText: { fontStyle: 'italic' },
+  phone: { backgroundColor: colors.navy, padding: 10, shadowColor: colors.navy, shadowOpacity: 0.25, shadowRadius: 30, shadowOffset: { width: 0, height: 18 } },
+  phoneScreen: { overflow: 'hidden', backgroundColor: colors.bg },
+  strip: { gap: space.lg, paddingVertical: space.lg },
   stripWide: { flexDirection: 'row', gap: 0 },
-  stripItem: { flex: 1, flexDirection: 'row', gap: space.md, alignItems: 'center', paddingHorizontal: space.lg },
+  stripItem: { flexDirection: 'row', gap: space.md, alignItems: 'center', paddingHorizontal: space.lg },
   stripDivider: { borderLeftWidth: 1.5, borderColor: colors.border },
-  stripIcon: { width: 56, height: 56, borderRadius: 28, backgroundColor: colors.primaryTint, alignItems: 'center', justifyContent: 'center' },
-  progress: { gap: space.lg, paddingVertical: 56 },
-  progressWide: { flexDirection: 'row', alignItems: 'center', gap: 48 },
-  progressText: { gap: space.md },
-  progressTextWide: { flex: 0.8, minWidth: 0 },
-  weekCard: { backgroundColor: colors.white, borderRadius: radius.xl, borderWidth: 1.5, borderColor: colors.border, padding: space.lg, gap: space.lg },
-  weekHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: space.sm, flexWrap: 'wrap' },
-  streak: { backgroundColor: colors.goldSoft, borderRadius: radius.pill, paddingHorizontal: 12, paddingVertical: 6 },
-  track: { flexDirection: 'row', alignItems: 'flex-start' },
-  dayWrap: { flex: 1, flexDirection: 'row', alignItems: 'center' },
-  dash: { flex: 1, height: 2, borderRadius: 1, backgroundColor: colors.border, marginBottom: 20 },
-  dashOn: { backgroundColor: colors.success },
-  day: { alignItems: 'center', gap: 6 },
-  dot: { width: 34, height: 34, borderRadius: 17, borderWidth: 2, borderColor: colors.border, backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' },
-  dotDone: { backgroundColor: colors.success, borderColor: colors.success },
-  dotToday: { backgroundColor: colors.primary, borderColor: colors.primary, shadowColor: colors.primary, shadowOpacity: 0.35, shadowRadius: 12, shadowOffset: { width: 0, height: 6 } },
-  hint: { flexDirection: 'row', alignItems: 'center', gap: space.sm, backgroundColor: colors.primaryTint, borderRadius: radius.lg, padding: space.md },
-  hintIcon: { width: 40, height: 40, borderRadius: 12, backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' },
+  stripIcon: { width: 48, height: 48, borderRadius: 24, backgroundColor: colors.primaryTint, alignItems: 'center', justifyContent: 'center' },
+  stripTitle: { fontSize: 16 },
+  stripBody: { fontSize: 13, lineHeight: 18 },
+  cards: { alignSelf: 'stretch', gap: space.md, marginTop: space.lg },
+  cardsWide: { flexDirection: 'row' },
+  card: { backgroundColor: colors.white, borderRadius: radius.xl, borderWidth: 1.5, borderColor: colors.border, padding: space.lg, gap: space.sm },
+  cardIcon: { width: 44, height: 44, borderRadius: 14, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', marginBottom: 4 },
 })
