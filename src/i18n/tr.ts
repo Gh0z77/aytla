@@ -350,6 +350,8 @@ export const tr: Record<StringKey, string> = {
   'result.roleplay': 'Şimdi canlı dene: "{scene}"',
 
   'lesson.say': 'Bunu {lang} söyle',
+  'lesson.recognising': 'Dinleniyor...',
+  'lesson.tapToStop': 'Durdur ve kontrol et',
   'lesson.sayHint': 'Mikrofona dokun ve yüksek sesle söyle',
   'lesson.sayOrType': 'ya da yaz',
   'lesson.sayHeard': 'Duyulan:',
@@ -399,6 +401,7 @@ export const tr: Record<StringKey, string> = {
   'report.coachNotes': 'AI koç notları',
 
   'result.spoken': '{n} cümleyi {lang} söyledin',
+  'result.keepProgress': 'İlerlemeyi kaydet: hesap aç',
   'result.talk': 'Rehberle sohbete devam et',
 
   'reminder.title': 'Günlük hatırlatma',

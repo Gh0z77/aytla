@@ -1,11 +1,12 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
 import { gradeSay } from '../../core/grading'
 import { challengeSentence } from '../../core/mission'
 import type { GradeResult, Rewards, SayExercise } from '../../core/types'
 import { useT } from '../../i18n'
+import { loadCapabilities } from '../../lib/capabilities'
 import { canSpeak } from '../../lib/speech'
 import { useCourse } from '../../state/course'
 import { useApp } from '../../state/store'
@@ -24,7 +25,15 @@ export function ChallengeScreen() {
   const user = useApp((s) => s.user)
   const course = useCourse()
   const completeChallenge = useApp((s) => s.completeChallenge)
-  const [micAvailable] = useState(() => canSpeak())
+  const [micAvailable, setMicAvailable] = useState(() => canSpeak())
+  // the server's recogniser is known only once /health has answered
+  useEffect(() => {
+    let alive = true
+    void loadCapabilities().then(() => alive && setMicAvailable(canSpeak()))
+    return () => {
+      alive = false
+    }
+  }, [])
   const [draft, setDraft] = useState<Draft | null>(null)
   const [result, setResult] = useState<GradeResult | null>(null)
   const [rewards, setRewards] = useState<Rewards | null>(null)

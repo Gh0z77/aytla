@@ -9,7 +9,7 @@ import { OPENING_TURN, REPLY_FIELDS, cleanReply, systemPrompt, type CoachProvide
  * answer in free text that would then have to be parsed.
  */
 
-const DEFAULT_MODEL = 'gemini-2.5-flash'
+const DEFAULT_MODEL = 'gemini-3.8-flash'
 const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models'
 const TIMEOUT_MS = 30_000
 

@@ -5,6 +5,7 @@ import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useEffect, type ReactNode } from 'react'
 import { AppState, Platform } from 'react-native'
+import { loadCapabilities } from '../src/lib/capabilities'
 import { CLERK_PUBLISHABLE_KEY, clerkEnabled } from '../src/lib/clerk'
 import { startAutoSync, useAccount } from '../src/state/account'
 import { useApp } from '../src/state/store'
@@ -22,6 +23,7 @@ export default function RootLayout() {
   if (fontsLoaded) markFontsReady()
 
   useEffect(() => {
+    void loadCapabilities()
     const stopAutoSync = startAutoSync()
     const sub = AppState.addEventListener('change', (state) => {
       if (state !== 'active') return

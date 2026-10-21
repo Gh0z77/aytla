@@ -87,6 +87,10 @@ export function ResultScreen() {
             testID="result-talk"
           />
         ) : null}
+        {!signedIn ? (
+          // the first result is the moment an account makes sense: the progress is now worth keeping
+          <Button label={t('result.keepProgress')} variant="secondary" icon={<Ionicons name="cloud-upload-outline" size={18} color={colors.primary} />} onPress={() => router.push('/account')} testID="result-account" />
+        ) : null}
         {/* dismissTo pops back to the existing tabs instead of stacking a second copy of the path on top */}
         <Button label={t('common.continue')} onPress={() => router.dismissTo('/learn')} testID="result-continue" />
       </View>

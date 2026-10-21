@@ -8,6 +8,7 @@ import { createGeminiCoachFromEnv } from './coach-gemini.ts'
 import { openDb } from './db.ts'
 import { sendDueReminders } from './reminders.ts'
 import { startTelegramBot } from './telegram.ts'
+import { createGeminiTranscriberFromEnv } from './transcribe.ts'
 
 /**
  * Entry point.  Environment:
@@ -20,8 +21,9 @@ import { startTelegramBot } from './telegram.ts'
  *                      (COACH_ENABLED=1 also enables it when the SDK finds credentials another way,
  *                      e.g. an `ant auth login` profile)
  *   COACH_MODEL        Claude model for the coach; default claude-opus-5
- *   GEMINI_API_KEY     used for AI conversation practice when there are no Anthropic credentials
- *   GEMINI_MODEL       Gemini model for the coach; default gemini-2.5-flash
+ *   GEMINI_API_KEY     used for AI conversation practice when there are no Anthropic credentials, and for
+ *                      server-side speech recognition (POST /speech/transcribe)
+ *   GEMINI_MODEL       Gemini model for the coach and speech; default gemini-3.8-flash
  *   (`npm start` loads server/.env if it exists: put secrets there, never in git)
  *   TELEGRAM_BOT_TOKEN enables "sign in with Telegram" (token from @BotFather). Run ONE process per token:
  *                      the bot uses long polling, and Telegram delivers each update to a single poller.
@@ -51,6 +53,8 @@ const app = createApp({
     .filter(Boolean),
   // Claude when Anthropic credentials are set, otherwise Gemini when a Gemini key is set, otherwise no AI practice
   coach: createCoachFromEnv() ?? createGeminiCoachFromEnv(),
+  // speech recognition for browsers and phones without their own (Gemini listens)
+  transcriber: createGeminiTranscriberFromEnv(),
 })
 
 serve({ fetch: app.fetch, port }, (info) => {

@@ -86,6 +86,22 @@ describe('accounts', () => {
   })
 })
 
+describe('speech recognition', () => {
+  it('transcribes small audio in the given language and refuses the rest', async () => {
+    const heard: Array<{ bytes: number; mime: string; lang: string }> = []
+    const speech = createApp({ db: await openDb(':memory:'), now: () => clock, transcriber: { transcribe: async (audio, mime, lang) => (heard.push({ bytes: audio.length, mime, lang }), 'salom') } })
+    const wav = Buffer.alloc(2000, 1).toString('base64')
+    const ok = await speech.request('/speech/transcribe', json({ audio: wav, mime: 'audio/wav', lang: 'uz' }))
+    expect(ok.status).toBe(200)
+    expect(await ok.json()).toEqual({ text: 'salom' })
+    expect(heard).toEqual([{ bytes: 2000, mime: 'audio/wav', lang: 'uz' }])
+    expect((await speech.request('/speech/transcribe', json({ audio: wav, mime: 'text/plain' }))).status).toBe(400)
+    expect((await speech.request('/speech/transcribe', json({ audio: Buffer.alloc(1_600_000).toString('base64'), mime: 'audio/wav' }))).status).toBe(413)
+    expect((await app.request('/speech/transcribe', json({ audio: wav, mime: 'audio/wav' }))).status).toBe(503)
+    expect(((await (await speech.request('/health')).json()) as { speech: boolean }).speech).toBe(true)
+  })
+})
+
 describe('pro waiting list', () => {
   it('keeps one row per email and rejects bad input', async () => {
     expect((await app.request('/pro/interest', json({ email: 'Ali@Example.com', lang: 'ru' }))).status).toBe(201)

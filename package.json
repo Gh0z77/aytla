@@ -12,6 +12,7 @@
     "@remotion/cli": "^4.0.537",
     "@remotion/player": "^4.0.537",
     "expo": "~57.0.24",
+    "expo-audio": "~57.0.5",
     "expo-auth-session": "^58.0.13",
     "expo-constants": "~57.0.19",
     "expo-crypto": "^58.0.7",

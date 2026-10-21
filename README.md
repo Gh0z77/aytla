@@ -49,7 +49,7 @@ The app finds the API at `EXPO_PUBLIC_API_URL` (default `http://localhost:8787`)
 | `ANTHROPIC_API_KEY` | turns on AI conversation practice; without credentials `/coach/chat` answers 503 |
 | `COACH_MODEL` | Claude model for the coach, default `claude-opus-5` |
 | `GEMINI_API_KEY` | AI conversation practice through Gemini, used when there are no Anthropic credentials |
-| `GEMINI_MODEL` | Gemini model for the coach, default `gemini-2.5-flash` |
+| `GEMINI_MODEL` | Gemini model for the coach, default `gemini-3.8-flash` |
 | `TELEGRAM_BOT_TOKEN` | turns on "sign in with Telegram" and Telegram reminders; without it the button is hidden |
 
 The website's "Pro" card collects emails into the `pro_interest` table (`POST /pro/interest`, one row per email) so the people who asked can be told when Pro ships; nothing is sold yet. Footer social links appear only when `EXPO_PUBLIC_SOCIAL_TELEGRAM` / `_INSTAGRAM` / `_YOUTUBE` are set in the app's `.env`, so the page never points at an account that does not exist.

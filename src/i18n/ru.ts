@@ -350,6 +350,8 @@ export const ru: Record<StringKey, string> = {
   'result.roleplay': 'Теперь попробуйте вживую: «{scene}»',
 
   'lesson.say': 'Скажите это {lang}',
+  'lesson.recognising': 'Распознаём...',
+  'lesson.tapToStop': 'Стоп и проверить',
   'lesson.sayHint': 'Нажмите на микрофон и произнесите вслух',
   'lesson.sayOrType': 'или напишите',
   'lesson.sayHeard': 'Услышано:',
@@ -399,6 +401,7 @@ export const ru: Record<StringKey, string> = {
   'report.coachNotes': 'Заметки AI-коуча',
 
   'result.spoken': 'Вы сказали {lang} фраз: {n}',
+  'result.keepProgress': 'Сохранить прогресс: создать аккаунт',
   'result.talk': 'Продолжить разговор с проводником',
 
   'reminder.title': 'Ежедневное напоминание',

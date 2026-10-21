@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native'
 import { useT } from '../../i18n'
 import { api, type CoachChatResponse, type CoachReply } from '../../lib/api'
-import { speak, stopSpeaking } from '../../lib/speech'
+import { canSpeak, listenOnce, speak, stopSpeaking, usesServerSpeech } from '../../lib/speech'
 import { useAccount } from '../../state/account'
 import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
@@ -73,6 +73,30 @@ export function CoachChatScreen({ scenarioId }: { scenarioId: string }) {
     void ask([])
     return () => stopSpeaking()
   }, [ask])
+
+  // speak instead of typing: what the recogniser heard goes straight into the conversation
+  const [listening, setListening] = useState(false)
+  const stopListening = useRef<(() => void) | null>(null)
+  useEffect(() => () => stopListening.current?.(), [])
+  const mic = canSpeak()
+  const talk = () => {
+    if (busy) return
+    if (listening) {
+      if (usesServerSpeech()) stopListening.current?.()
+      return
+    }
+    setListening(true)
+    stopListening.current = listenOnce((transcript) => {
+      setListening(false)
+      stopListening.current = null
+      const text = transcript.trim()
+      if (!text) return
+      setDraft('')
+      const history: Turn[] = [...turns, { role: 'user', text }]
+      setTurns(history)
+      void ask(history)
+    })
+  }
 
   const send = () => {
     const text = draft.trim()
@@ -198,6 +222,11 @@ export function CoachChatScreen({ scenarioId }: { scenarioId: string }) {
             accessibilityLabel={t('coach.placeholder')}
             testID="coach-input"
           />
+          {mic ? (
+            <Pressable accessibilityRole="button" accessibilityLabel={t('lesson.tapToSpeak')} onPress={talk} disabled={busy} style={[styles.send, styles.mic, listening ? styles.micLive : null]} testID="coach-mic">
+              <Ionicons name={listening && usesServerSpeech() ? 'stop' : 'mic'} size={22} color={listening ? colors.white : colors.primary} />
+            </Pressable>
+          ) : null}
           <Pressable accessibilityRole="button" accessibilityLabel={t('coach.send')} onPress={send} disabled={busy || draft.trim().length === 0} style={[styles.send, busy || draft.trim().length === 0 ? styles.sendOff : null]} testID="coach-send">
             <Ionicons name="send" size={22} color={colors.white} />
           </Pressable>
@@ -231,5 +260,7 @@ const styles = StyleSheet.create({
   input: { flex: 1, maxHeight: 120, minHeight: 48, borderWidth: 2, borderColor: colors.border, borderRadius: radius.lg, backgroundColor: colors.surface, paddingHorizontal: space.md, paddingVertical: 12, fontSize: 17, color: colors.text },
   send: { width: 48, height: 48, borderRadius: 24, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center' },
   sendOff: { backgroundColor: colors.lockedText },
+  mic: { backgroundColor: colors.primaryTint, borderWidth: 2, borderColor: colors.primarySoft },
+  micLive: { backgroundColor: colors.primary, borderColor: colors.primary },
   finish: { paddingHorizontal: space.md, paddingBottom: space.md },
 })

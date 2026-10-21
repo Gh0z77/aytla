@@ -7,6 +7,7 @@ import { COACH_DAILY_LIMIT, SCENARIOS, cleanCoachRequest } from './coach.ts'
 import type { Db } from './db.ts'
 import { leagueView, recordWeeklyXp } from './league.ts'
 import { cleanBotLang, findOrCreateTelegramUser, pollLogin, startLogin } from './telegram.ts'
+import { AUDIO_TYPES, MAX_AUDIO_BYTES, SPEECH_LANGS, type SpeechLang, type Transcriber } from './transcribe.ts'
 import { weekId } from './time.ts'
 
 /**
@@ -23,6 +24,8 @@ export interface AppOptions {
   telegramBot?: () => string | null
   /** verifies Clerk session tokens (Google sign-in); omit to turn it off */
   clerk?: ClerkVerifier | null
+  /** server-side speech recognition; omit when the device has to use its own */
+  transcriber?: Transcriber | null
 }
 
 const MAX_STATE_BYTES = 512 * 1024
@@ -60,9 +63,11 @@ export function createApp(options: AppOptions): Hono<Env> {
   const now = options.now ?? Date.now
   const coach = options.coach ?? null
   const clerk = options.clerk ?? null
+  const transcriber = options.transcriber ?? null
   const loginLimiter = new AttemptLimiter(10, 15 * 60 * 1000)
   const telegramLimiter = new AttemptLimiter(20, 15 * 60 * 1000)
   const interestLimiter = new AttemptLimiter(10, 60 * 60 * 1000)
+  const speechLimiter = new AttemptLimiter(120, 60 * 60 * 1000)
   // a constant-cost hash to verify against when the email is unknown, so timing does not reveal which emails exist
   const decoyHash = hashPassword('decoy-password-for-constant-time')
 
@@ -75,7 +80,7 @@ export function createApp(options: AppOptions): Hono<Env> {
   })
   app.notFound((c) => c.json({ error: 'not_found' }, 404))
 
-  app.get('/health', (c) => c.json({ ok: true, coach: coach !== null }))
+  app.get('/health', (c) => c.json({ ok: true, coach: coach !== null, speech: transcriber !== null }))
 
   const readJson = async (req: Request): Promise<Record<string, unknown> | null> => {
     try {
@@ -119,6 +124,33 @@ export function createApp(options: AppOptions): Hono<Env> {
   })
 
   app.get('/auth/providers', (c) => c.json({ telegram: Boolean(options.telegramBot?.()), google: clerk !== null }))
+
+  // -- speech recognition for devices without their own ------------------------------
+
+  app.post('/speech/transcribe', async (c) => {
+    if (!transcriber) return c.json({ error: 'speech_unavailable' }, 503)
+    const caller = c.req.header('x-forwarded-for')?.split(',')[0]?.trim() || 'direct'
+    if (!speechLimiter.allow(caller, now())) return c.json({ error: 'too_many_attempts' }, 429)
+    const raw = await c.req.text()
+    if (raw.length > MAX_AUDIO_BYTES * 1.4) return c.json({ error: 'audio_too_large' }, 413)
+    let body: Record<string, unknown> | null = null
+    try {
+      body = JSON.parse(raw) as Record<string, unknown>
+    } catch {
+      return c.json({ error: 'invalid_json' }, 400)
+    }
+    const mime = typeof body?.mime === 'string' ? body.mime.split(';')[0]!.trim().toLowerCase() : ''
+    const lang = typeof body?.lang === 'string' && SPEECH_LANGS.has(body.lang) ? (body.lang as SpeechLang) : 'en'
+    if (!AUDIO_TYPES.has(mime) || typeof body?.audio !== 'string' || body.audio.length === 0) return c.json({ error: 'invalid_request' }, 400)
+    const audio = Buffer.from(body.audio, 'base64')
+    if (audio.length === 0 || audio.length > MAX_AUDIO_BYTES) return c.json({ error: 'audio_too_large' }, 413)
+    try {
+      return c.json({ text: await transcriber.transcribe(audio, mime, lang) })
+    } catch (err) {
+      console.error('transcription failed', err instanceof Error ? err.message : err)
+      return c.json({ error: 'speech_failed' }, 502)
+    }
+  })
 
   // -- the Pro waiting list: an email, nothing else, told once when Pro ships ---------
 

@@ -349,6 +349,8 @@ export const uz = {
   'result.roleplay': 'Endi jonli sinab ko\'ring: "{scene}"',
 
   'lesson.say': 'Buni {lang} tilida ayting',
+  'lesson.recognising': 'Tinglanmoqda...',
+  'lesson.tapToStop': "To'xtatish va tekshirish",
   'lesson.sayHint': 'Mikrofonni bosing va ovoz chiqarib ayting',
   'lesson.sayOrType': 'yoki yozing',
   'lesson.sayHeard': 'Eshitildi:',
@@ -398,6 +400,7 @@ export const uz = {
   'report.coachNotes': 'AI murabbiy eslatmalari',
 
   'result.spoken': '{n} ta gapni {lang}cha aytdingiz',
+  'result.keepProgress': 'Natijani saqlash: akkaunt ochish',
   'result.talk': 'Maskot bilan suhbatda davom etish',
 
   'reminder.title': 'Kunlik eslatma',

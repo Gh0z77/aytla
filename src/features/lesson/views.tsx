@@ -15,7 +15,7 @@ import type {
 } from '../../core/types'
 import { useT } from '../../i18n'
 import { resultFeedback, tapFeedback } from '../../lib/haptics'
-import { listenOnce, speak } from '../../lib/speech'
+import { listenOnce, speak, usesServerSpeech } from '../../lib/speech'
 import { colors, radius, space } from '../../theme/tokens'
 import { Txt } from '../../ui/Txt'
 import { Instruction, PromptBubble, SpeakerButton, Tile, type TileState } from './parts'
@@ -257,11 +257,22 @@ export function SayView({ exercise, draft, setDraft, locked, guide, canUseMic }:
   const text = draft?.kind === 'text' ? draft.value : ''
   const spoken = draft?.kind === 'text' && draft.spoken === true
 
+  const [thinking, setThinking] = useState(false)
+  const server = usesServerSpeech()
   const start = () => {
-    if (listening || locked) return
+    if (locked) return
+    if (listening) {
+      // server recognition: the second tap ends the recording and sends it
+      if (server && stopRef.current) {
+        setThinking(true)
+        stopRef.current()
+      }
+      return
+    }
     setListening(true)
     stopRef.current = listenOnce((transcript) => {
       setListening(false)
+      setThinking(false)
       stopRef.current = null
       if (transcript.trim()) setDraft({ kind: 'text', value: transcript, spoken: true })
     })
@@ -273,10 +284,10 @@ export function SayView({ exercise, draft, setDraft, locked, guide, canUseMic }:
       <PromptBubble guide={guide} text={exercise.prompt} />
       {canUseMic ? (
         <>
-          <Pressable accessibilityRole="button" accessibilityLabel={t('lesson.tapToSpeak')} onPress={start} disabled={locked} style={[styles.mic, listening ? styles.micLive : null]}>
-            <Ionicons name="mic" size={34} color={listening ? colors.white : colors.primary} />
+          <Pressable accessibilityRole="button" accessibilityLabel={t('lesson.tapToSpeak')} onPress={start} disabled={locked || thinking} style={[styles.mic, listening ? styles.micLive : null]}>
+            <Ionicons name={listening && server && !thinking ? 'stop' : 'mic'} size={34} color={listening ? colors.white : colors.primary} />
             <Txt variant="label" color={listening ? colors.white : colors.primary}>
-              {listening ? t('lesson.listening') : t('lesson.tapToSpeak')}
+              {thinking ? t('lesson.recognising') : listening ? (server ? t('lesson.tapToStop') : t('lesson.listening')) : t('lesson.tapToSpeak')}
             </Txt>
           </Pressable>
           {spoken ? (

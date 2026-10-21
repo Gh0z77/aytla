@@ -1,10 +1,11 @@
 import { Ionicons } from '@expo/vector-icons'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
 import { buildLessonSession } from '../../core/exercises'
 import { gradeBank, gradeSay } from '../../core/grading'
 import type { BankExercise, GradeResult, SayExercise } from '../../core/types'
 import { useT } from '../../i18n'
+import { loadCapabilities } from '../../lib/capabilities'
 import { canSpeak } from '../../lib/speech'
 import { useCourse, useTarget } from '../../state/course'
 import { useApp } from '../../state/store'
@@ -26,7 +27,15 @@ export function LandingDemo({ onStart }: { onStart: () => void }) {
   const lang = useApp((s) => s.user.profile.baseLang)
   const target = useTarget()
   const course = useCourse()
-  const [micAvailable] = useState(() => canSpeak())
+  const [micAvailable, setMicAvailable] = useState(() => canSpeak())
+  // the server's recogniser is known only once /health has answered
+  useEffect(() => {
+    let alive = true
+    void loadCapabilities().then(() => alive && setMicAvailable(canSpeak()))
+    return () => {
+      alive = false
+    }
+  }, [])
 
   // the first lesson, in the visitor's language: a handful of "say" and "build the sentence" rounds
   const pool = useMemo(() => {
