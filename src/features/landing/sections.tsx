@@ -1,7 +1,10 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useState } from 'react'
-import { Pressable, StyleSheet, View } from 'react-native'
+import { ActivityIndicator, Pressable, StyleSheet, TextInput, View } from 'react-native'
 import { useT, type StringKey } from '../../i18n'
+import { ApiError, api } from '../../lib/api'
+import { useApp } from '../../state/store'
+import { errorText } from '../account/errors'
 import { colors, radius, space } from '../../theme/tokens'
 import { Txt } from '../../ui/Txt'
 import { Note } from './extras'
@@ -70,11 +73,7 @@ export function PricingSection({ wide, onStart, startLabel }: { wide: boolean; o
               </View>
             ))}
           </View>
-          <View style={[styles.planButton, styles.planButtonPro]}>
-            <Txt variant="label" color={colors.white}>
-              {t('landing.pricing.proSub')}
-            </Txt>
-          </View>
+          <ProInterest />
         </View>
         {wide ? (
           <View style={styles.proSide}>
@@ -83,6 +82,52 @@ export function PricingSection({ wide, onStart, startLabel }: { wide: boolean; o
           </View>
         ) : null}
       </View>
+    </View>
+  )
+}
+
+/** "tell me when Pro ships": one email into the waiting list on the server */
+function ProInterest() {
+  const t = useT()
+  const lang = useApp((st) => st.user.profile.baseLang)
+  const [email, setEmail] = useState('')
+  const [state, setState] = useState<'idle' | 'busy' | 'done'>('idle')
+  const [error, setError] = useState<string | null>(null)
+  const submit = async () => {
+    if (state !== 'idle' || email.trim().length === 0) return
+    setState('busy')
+    setError(null)
+    try {
+      await api('/pro/interest', { method: 'POST', body: { email: email.trim(), lang } })
+      setState('done')
+    } catch (err) {
+      setError(errorText(t, err instanceof ApiError ? err : null))
+      setState('idle')
+    }
+  }
+  if (state === 'done') {
+    return (
+      <View style={styles.proDone}>
+        <Ionicons name="checkmark-circle" size={20} color={colors.lime} />
+        <Txt color={colors.white} style={styles.flex}>
+          {t('landing.pricing.proDone')}
+        </Txt>
+      </View>
+    )
+  }
+  return (
+    <View style={styles.proForm}>
+      <View style={styles.proRow}>
+        <TextInput value={email} onChangeText={setEmail} placeholder={t('landing.pricing.proEmail')} placeholderTextColor="#9A93B8" autoCapitalize="none" autoCorrect={false} keyboardType="email-address" inputMode="email" style={styles.proInput} accessibilityLabel={t('landing.pricing.proEmail')} onSubmitEditing={submit} testID="pro-email" />
+        <Pressable accessibilityRole="button" onPress={submit} disabled={state === 'busy'} style={[styles.planButton, styles.planButtonPro, state === 'busy' ? styles.dim : null]} testID="pro-submit">
+          {state === 'busy' ? <ActivityIndicator color={colors.white} /> : <Txt variant="label" color={colors.white}>{t('landing.pricing.proCta')}</Txt>}
+        </Pressable>
+      </View>
+      {error ? (
+        <Txt variant="caption" color="#FFB4A8">
+          {error}
+        </Txt>
+      ) : null}
     </View>
   )
 }
@@ -163,7 +208,12 @@ const styles = StyleSheet.create({
   planList: { gap: space.sm, marginVertical: space.sm },
   planButton: { alignSelf: 'flex-end', borderRadius: radius.pill, paddingHorizontal: 24, paddingVertical: 12 },
   planButtonFree: { backgroundColor: colors.lime },
-  planButtonPro: { backgroundColor: colors.primary },
+  planButtonPro: { backgroundColor: colors.primary, alignSelf: 'auto' },
+  dim: { opacity: 0.6 },
+  proForm: { gap: 6 },
+  proRow: { flexDirection: 'row', gap: space.sm, alignItems: 'center' },
+  proInput: { flex: 1, minWidth: 0, backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.2)', borderRadius: radius.pill, paddingHorizontal: 16, paddingVertical: 11, color: colors.white, fontSize: 15 },
+  proDone: { flexDirection: 'row', alignItems: 'center', gap: space.sm, backgroundColor: 'rgba(255,255,255,0.08)', borderRadius: radius.lg, padding: space.md },
   proSide: { width: 180, alignItems: 'center', justifyContent: 'center', gap: space.md },
   faqSection: { paddingVertical: 56, gap: space.lg, width: '100%' },
   faqHead: { flexDirection: 'row', alignItems: 'center', gap: space.md },

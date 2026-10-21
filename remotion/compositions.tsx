@@ -44,9 +44,9 @@ export function CrewIntro({ title, subtitle, handle }: { title: string; subtitle
 export const SQUARE = { width: 1080, height: 1080, fps: 30, durationInFrames: 210 }
 
 /** 7 s square post: the sentence of the day, said by the guide, with its translation */
-export type SentenceOfDayProps = SentenceProps & { label: string }
+export type SentenceOfDayProps = SentenceProps & { label: string; site: string }
 
-export function SentenceOfDay({ sentence, translation, label }: SentenceOfDayProps) {
+export function SentenceOfDay({ sentence, translation, label, site }: SentenceOfDayProps) {
   const frame = useCurrentFrame()
   const { fps } = useVideoConfig()
   const labelIn = spring({ frame, fps, config: { damping: 14 } })
@@ -59,7 +59,7 @@ export function SentenceOfDay({ sentence, translation, label }: SentenceOfDayPro
       <Bubble text={sentence} sub={translation} startAt={20} x={360} y={300} width={640} scale={1.1} />
       <Character id="everest" mood={frame > done ? 'cheer' : 'talk'} enterAt={4} size={420} x={-10} y={SQUARE.height - 470} />
       <Sparks at={done} x={240} y={SQUARE.height - 320} />
-      <div style={{ position: 'absolute', left: 0, right: 0, bottom: 56, textAlign: 'center', fontFamily: V.fontBody, fontSize: 28, color: V.inkSoft, opacity: interpolate(frame, [done, done + 15], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }) }}>aytla.app</div>
+      <div style={{ position: 'absolute', left: 0, right: 0, bottom: 56, textAlign: 'center', fontFamily: V.fontBody, fontSize: 28, color: V.inkSoft, opacity: interpolate(frame, [done, done + 15], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }) }}>{site}</div>
     </AbsoluteFill>
   )
 }

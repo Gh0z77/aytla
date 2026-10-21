@@ -86,6 +86,14 @@ describe('accounts', () => {
   })
 })
 
+describe('pro waiting list', () => {
+  it('keeps one row per email and rejects bad input', async () => {
+    expect((await app.request('/pro/interest', json({ email: 'Ali@Example.com', lang: 'ru' }))).status).toBe(201)
+    expect((await app.request('/pro/interest', json({ email: 'ali@example.com' }))).status).toBe(201)
+    expect((await app.request('/pro/interest', json({ email: 'nope' }))).status).toBe(400)
+  })
+})
+
 describe('sync', () => {
   it('stores the newest state and hands back a newer one from another device', async () => {
     const token = await register('ali@example.com')

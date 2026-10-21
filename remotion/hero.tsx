@@ -20,7 +20,7 @@ export const HERO = { width: 1200, height: 900, fps: 30, durationInFrames: 300 }
 
 const CHECK_AT = 72
 
-export function HeroLoop({ sentences }: { sentences: HeroSentence[] }) {
+export function HeroLoop({ sentences, lessonLabel = 'Bugungi dars' }: { sentences: HeroSentence[]; lessonLabel?: string }) {
   const frame = useCurrentFrame()
   const per = Math.floor(HERO.durationInFrames / sentences.length)
   const i = Math.min(sentences.length - 1, Math.floor(frame / per))
@@ -47,7 +47,7 @@ export function HeroLoop({ sentences }: { sentences: HeroSentence[] }) {
       </Sequence>
 
       <Waveform x={70} y={735} active={local < CHECK_AT} />
-      <LessonCard x={880} y={720} index={i} total={sentences.length} checked={checked} />
+      <LessonCard x={880} y={720} index={i} total={sentences.length} checked={checked} label={lessonLabel} />
       {checked && local < CHECK_AT + 30 ? <Sparks at={i * per + CHECK_AT} x={1000} y={300} count={12} radius={150} /> : null}
     </Backdrop>
   )
@@ -109,12 +109,12 @@ function Waveform({ x, y, active }: { x: number; y: number; active: boolean }) {
 }
 
 /** "today's lesson 1/3" */
-function LessonCard({ x, y, index, total, checked }: { x: number; y: number; index: number; total: number; checked: boolean }) {
+function LessonCard({ x, y, index, total, checked, label }: { x: number; y: number; index: number; total: number; checked: boolean; label: string }) {
   const frame = useCurrentFrame()
   const fade = interpolate(frame, [0, 15], [0, 1], { extrapolateRight: 'clamp' })
   return (
     <div style={{ position: 'absolute', left: x, top: y, width: 250, padding: '18px 22px', borderRadius: 22, background: V.white, boxShadow: '0 18px 36px rgba(20,12,60,0.22)', opacity: fade, fontFamily: V.fontBody }}>
-      <div style={{ fontSize: 20, color: V.inkSoft }}>Bugungi dars</div>
+      <div style={{ fontSize: 20, color: V.inkSoft }}>{label}</div>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 6 }}>
         <div style={{ fontFamily: V.font, fontSize: 30, color: V.ink }}>
           {index + 1}/{total}

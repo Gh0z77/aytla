@@ -62,6 +62,7 @@ export function createApp(options: AppOptions): Hono<Env> {
   const clerk = options.clerk ?? null
   const loginLimiter = new AttemptLimiter(10, 15 * 60 * 1000)
   const telegramLimiter = new AttemptLimiter(20, 15 * 60 * 1000)
+  const interestLimiter = new AttemptLimiter(10, 60 * 60 * 1000)
   // a constant-cost hash to verify against when the email is unknown, so timing does not reveal which emails exist
   const decoyHash = hashPassword('decoy-password-for-constant-time')
 
@@ -118,6 +119,18 @@ export function createApp(options: AppOptions): Hono<Env> {
   })
 
   app.get('/auth/providers', (c) => c.json({ telegram: Boolean(options.telegramBot?.()), google: clerk !== null }))
+
+  // -- the Pro waiting list: an email, nothing else, told once when Pro ships ---------
+
+  app.post('/pro/interest', async (c) => {
+    const caller = c.req.header('x-forwarded-for')?.split(',')[0]?.trim() || 'direct'
+    if (!interestLimiter.allow(caller, now())) return c.json({ error: 'too_many_attempts' }, 429)
+    const body = await readJson(c.req.raw)
+    const email = normalizeEmail(body?.email)
+    if (!email) return c.json({ error: 'invalid_email' }, 400)
+    await db.run('INSERT INTO pro_interest (email, lang, created_at) VALUES (?, ?, ?) ON CONFLICT (email) DO NOTHING', email, cleanBotLang(body?.lang), now())
+    return c.json({ ok: true }, 201)
+  })
 
   // -- sign in with Google through Clerk (see clerk.ts) ----------------------------
 

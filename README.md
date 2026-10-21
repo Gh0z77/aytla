@@ -51,6 +51,8 @@ The app finds the API at `EXPO_PUBLIC_API_URL` (default `http://localhost:8787`)
 | `GEMINI_MODEL` | Gemini model for the coach, default `gemini-2.5-flash` |
 | `TELEGRAM_BOT_TOKEN` | turns on "sign in with Telegram" and Telegram reminders; without it the button is hidden |
 
+The website's "Pro" card collects emails into the `pro_interest` table (`POST /pro/interest`, one row per email) so the people who asked can be told when Pro ships; nothing is sold yet. Footer social links appear only when `EXPO_PUBLIC_SOCIAL_TELEGRAM` / `_INSTAGRAM` / `_YOUTUBE` are set in the app's `.env`, so the page never points at an account that does not exist.
+
 `npm --prefix server start` loads `server/.env` if it exists (git-ignored): keep the secrets there. `server/.env.example` and `.env.example` list every variable.
 
 ### Database (Supabase)

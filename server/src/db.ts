@@ -83,6 +83,12 @@ CREATE TABLE IF NOT EXISTS telegram_reminders (
   day     TEXT NOT NULL,
   PRIMARY KEY (user_id, day)
 );
+
+CREATE TABLE IF NOT EXISTS pro_interest (
+  email      TEXT PRIMARY KEY,
+  lang       TEXT NOT NULL DEFAULT 'uz',
+  created_at BIGINT NOT NULL
+);
 `
 
 // -- SQLite --------------------------------------------------------------------

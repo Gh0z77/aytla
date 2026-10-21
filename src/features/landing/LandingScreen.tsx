@@ -30,11 +30,15 @@ const NAV: Array<{ key: Anchor; label: StringKey }> = [
   { key: 'price', label: 'landing.nav.price' },
   { key: 'faq', label: 'landing.nav.faq' },
 ]
-const SOCIAL: Array<{ icon: keyof typeof Ionicons.glyphMap; url: string; label: string }> = [
-  { icon: 'paper-plane', url: 'https://t.me/aytla_app', label: 'Telegram' },
-  { icon: 'logo-instagram', url: 'https://instagram.com/aytla_app', label: 'Instagram' },
-  { icon: 'logo-youtube', url: 'https://youtube.com/@aytla_app', label: 'YouTube' },
-]
+// social links come from the environment, so nothing points at an account that does not exist yet
+type Social = { icon: keyof typeof Ionicons.glyphMap; url: string; label: string }
+const SOCIAL: Social[] = (
+  [
+    { icon: 'paper-plane', url: process.env.EXPO_PUBLIC_SOCIAL_TELEGRAM ?? '', label: 'Telegram' },
+    { icon: 'logo-instagram', url: process.env.EXPO_PUBLIC_SOCIAL_INSTAGRAM ?? '', label: 'Instagram' },
+    { icon: 'logo-youtube', url: process.env.EXPO_PUBLIC_SOCIAL_YOUTUBE ?? '', label: 'YouTube' },
+  ] satisfies Social[]
+).filter((s) => s.url.startsWith('https://'))
 const PHONE_SHOT = require('../../../assets/images/shots/learn.jpg') as number
 
 /** Reveals its children once the page has scrolled far enough for them to be in view. */
@@ -274,6 +278,7 @@ export function LandingScreen() {
           </View>
           <View style={styles.footerRight}>
             <LangPills lang={lang} onPick={pickLang} names={wide} />
+            {SOCIAL.length > 0 ? (
             <View style={styles.social}>
               {SOCIAL.map((s) => (
                 <Pressable key={s.icon} accessibilityRole="link" accessibilityLabel={s.label} onPress={() => void Linking.openURL(s.url)} style={styles.socialItem}>
@@ -281,6 +286,7 @@ export function LandingScreen() {
                 </Pressable>
               ))}
             </View>
+            ) : null}
           </View>
         </View>
         <View style={[styles.container, styles.footerBottom]}>
