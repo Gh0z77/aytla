@@ -48,3 +48,6 @@ walkthrough-shots/
 # API server: local database and secrets
 server/data/
 server/.env
+
+# Remotion renders
+out/

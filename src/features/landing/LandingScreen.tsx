@@ -10,7 +10,9 @@ import { Button } from '../../ui/Button'
 import { AnimatedMascot, GUIDES, Mascot } from '../../ui/Mascot'
 import { Float, Reveal } from '../../ui/Reveal'
 import { Txt } from '../../ui/Txt'
+import { HeroStage } from './HeroStage'
 import { LandingDemo } from './LandingDemo'
+import { FaqSection, PricingSection, ScreensSection, WhySection } from './sections'
 
 const FEATURES: Array<{ icon: keyof typeof Ionicons.glyphMap; color: string; title: StringKey; body: StringKey }> = [
   { icon: 'mic', color: colors.primary, title: 'landing.f1.title', body: 'landing.f1.body' },
@@ -79,22 +81,7 @@ export function LandingScreen() {
       {/* hero */}
       <View style={[styles.container, styles.hero, wide ? styles.heroWide : null]}>
         <View style={[styles.heroMedia, wide ? styles.heroMediaWide : null]}>
-          {/* the stage: Ayti says the first sentence of the course, the five other colours listen */}
-          <View style={styles.heroBubble}>
-            <Txt variant="heading" color={colors.text}>
-              Hello! How are you?
-            </Txt>
-            <Txt variant="caption" color={colors.textSoft}>
-              {t('landing.hero.bubble')}
-            </Txt>
-          </View>
-          <View style={styles.heroBirds}>
-            {GUIDES.slice(0, wide ? 6 : 3).map((g, i) => (
-              <Float key={g.id} amplitude={5 + (i % 3) * 2} duration={1800 + i * 230} delay={i * 150} style={{ marginTop: i === 0 ? 0 : 26 + (i % 3) * 10 }}>
-                <AnimatedMascot id={g.id} size={i === 0 ? 128 : 76} mood={i === 0 ? 'talk' : i % 2 ? 'happy' : 'cheer'} />
-              </Float>
-            ))}
-          </View>
+          <HeroStage />
         </View>
         <View style={[styles.heroText, wide ? styles.heroTextWide : null]}>
           <Txt variant={wide ? 'hero' : 'title'} center={!wide}>
@@ -130,18 +117,26 @@ export function LandingScreen() {
       <View style={styles.band}>
         <View style={[styles.container, styles.grid]}>
           {FEATURES.map((f, i) => (
-            <OnScroll key={f.title} seen={seen} delay={i * 90} style={[styles.feature, { width: wide ? '48%' : '100%' }]}>
-              <View style={[styles.featureIcon, { backgroundColor: f.color }]}>
-                <Ionicons name={f.icon} size={28} color={colors.white} />
-              </View>
-              <View style={styles.flex}>
-                <Txt variant="heading">{t(f.title)}</Txt>
-                <Txt color={colors.textSoft}>{t(f.body)}</Txt>
+            <OnScroll key={f.title} seen={seen} delay={i * 90} style={{ width: wide ? '48%' : '100%' }}>
+              {/* the row lives inside the reveal wrapper, so it gets the column's full width and the text wraps */}
+              <View style={styles.feature}>
+                <View style={[styles.featureIcon, { backgroundColor: f.color }]}>
+                  <Ionicons name={f.icon} size={28} color={colors.white} />
+                </View>
+                <View style={styles.flex}>
+                  <Txt variant="heading">{t(f.title)}</Txt>
+                  <Txt color={colors.textSoft}>{t(f.body)}</Txt>
+                </View>
               </View>
             </OnScroll>
           ))}
         </View>
       </View>
+
+      {/* real screens */}
+      <OnScroll seen={seen} style={styles.container}>
+        <ScreensSection wide={wide} />
+      </OnScroll>
 
       {/* how it works */}
       <OnScroll seen={seen} style={[styles.container, styles.section]}>
@@ -164,6 +159,13 @@ export function LandingScreen() {
         </View>
       </OnScroll>
 
+      {/* why not the others */}
+      <View style={styles.band}>
+        <OnScroll seen={seen} style={styles.container}>
+          <WhySection wide={wide} />
+        </OnScroll>
+      </View>
+
       {/* guides */}
       <View style={styles.band}>
         <OnScroll seen={seen} style={[styles.container, styles.section]}>
@@ -183,6 +185,18 @@ export function LandingScreen() {
               </View>
             ))}
           </View>
+        </OnScroll>
+      </View>
+
+      {/* price */}
+      <OnScroll seen={seen} style={styles.container}>
+        <PricingSection wide={wide} onStart={start} startLabel={onboarded ? t('landing.have') : t('landing.cta')} />
+      </OnScroll>
+
+      {/* questions */}
+      <View style={styles.band}>
+        <OnScroll seen={seen} style={styles.container}>
+          <FaqSection />
         </OnScroll>
       </View>
 
@@ -241,11 +255,8 @@ const styles = StyleSheet.create({
   hero: { paddingVertical: space.xl, gap: space.xl, alignItems: 'center' },
   heroWide: { flexDirection: 'row-reverse', paddingVertical: 64, gap: 48 },
   // the image lives in a sized box: in a row, a bare `width: 100%` image would take the whole row
-  heroMedia: { alignSelf: 'stretch', minHeight: 300, borderRadius: radius.xl, overflow: 'hidden', backgroundColor: colors.primary, padding: space.lg, justifyContent: 'space-between', gap: space.lg },
-  heroBubble: { alignSelf: 'flex-start', backgroundColor: colors.white, borderRadius: radius.lg, borderBottomLeftRadius: 6, paddingHorizontal: space.lg, paddingVertical: space.md, gap: 2, maxWidth: '85%' },
-  heroBirds: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap' },
-  // 16:9 like the artwork, so no guide is cropped out of the frame
-  heroMediaWide: { flex: 1.1, minWidth: 0, height: undefined, aspectRatio: 4 / 3, alignSelf: 'center', padding: space.xl },
+  heroMedia: { alignSelf: 'stretch', aspectRatio: 4 / 3, borderRadius: radius.xl, overflow: 'hidden', backgroundColor: colors.primary },
+  heroMediaWide: { flex: 1.1, minWidth: 0, alignSelf: 'center' },
   demoBand: { backgroundColor: colors.sky },
   demoWide: { flexDirection: 'row', alignItems: 'center', gap: 48 },
   demoText: { alignSelf: 'stretch', gap: space.md },

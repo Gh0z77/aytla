@@ -84,7 +84,7 @@ Nothing is deployed yet. The pieces are ready; each needs an account that only t
 
 Before a store release:
 
-- replace the default Expo icons and splash in `assets/images/` by running `node scripts/brand-icons.mjs` after any change to the icon shapes (they are code-rendered: Ayti on violet);
+- replace the default Expo icons and splash in `assets/images/` by running `node scripts/brand-icons.mjs` after any change to the icon shapes (they are code-rendered: Cho'qqi, the mountain guide, on cream);
 - review `src/features/legal/LegalScreen.tsx` (privacy policy and terms, shown at `/privacy` and `/terms`): it describes what the code does but is not legal advice; add the publisher's legal name and a contact address in `LEGAL_CONTACT`. Both stores ask for the privacy policy URL: it is `https://<your web domain>/privacy`;
 - in-app account deletion (required by both stores) is in Profile → "Delete account" and calls `DELETE /me`;
 - `public/index.html` holds the page title and the description used by search engines and link previews; add an `og:image` once the site has a domain.
@@ -103,13 +103,29 @@ src/core/            the product rules, pure TypeScript, fully unit-tested
   path.ts              the learning path (lessons, chests, unit reviews)
   validate.ts          content validator
 src/content/units/   the course: one JSON file per unit (words + sentences in en / uz / ru / tr)
-src/features/        screens
+src/features/        screens (landing/HeroStage.web.tsx plays the Remotion hero on the web)
 src/i18n/            interface strings (uz is the source of truth for keys)
 src/state/           store.ts: learner state, offline-first · account.ts: sign-in and auto-sync
 src/lib/             api client, speech, haptics, local reminders
+src/ui/mascot/       draw.ts: the crew as vector drawings (one source for the app and the videos)
+remotion/            the videos: HeroLoop (website hero), CrewIntro (story), SentenceOfDay, Reactions
 server/              Hono + node:sqlite API: accounts, last-write-wins sync, league cohorts, AI coach
-scripts/             setup.mjs (first-time scaffold) · walkthrough.mjs (end-to-end check)
+scripts/             setup.mjs (first-time scaffold) · walkthrough.mjs (end-to-end check) · brand-icons.mjs (icons)
 ```
+
+### The crew and the videos
+
+The six characters are drawn in code (`src/ui/mascot/draw.ts`: gradients and shapes in a 100×100 box) and rendered twice: with react-native-svg in the app (`src/ui/Mascot.tsx`, where `AnimatedMascot` adds breathing, blinking and the reactions to right and wrong answers) and as plain SVG in Remotion (`remotion/MascotSvg.tsx`). Open `/crew` in the web app to see every character in every mood.
+
+The videos for social media live in `remotion/`:
+
+| Command | What it does |
+| --- | --- |
+| `npm run video:studio` | opens the Remotion studio to preview and tweak the compositions |
+| `npm run video:render` | renders `out/intro.mp4` (9:16 story), `out/sentence.mp4` and `out/reactions.mp4` (1:1 posts) |
+| `npx remotion render SentenceOfDay out/x.mp4 --props='{"sentence":"...","translation":"...","label":"..."}'` | a sentence-of-the-day post with your own text |
+
+Rendering uses an installed Chrome or Edge (`remotion.config.ts`), so no browser download is needed. The website hero plays the `HeroLoop` composition live through `@remotion/player`.
 
 ### Adding a unit
 
