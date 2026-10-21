@@ -51,3 +51,6 @@ server/.env
 
 # Remotion renders
 out/
+
+# app keys pulled by the Clerk CLI (EXPO_PUBLIC_* are public, but the file may also hold a secret key)
+.env
