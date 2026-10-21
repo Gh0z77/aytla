@@ -81,6 +81,11 @@ export interface AccountUser {
   email: string
   telegram?: boolean
   google?: boolean
+  /** Pro is active now; proUntil is when it ends (ms) */
+  pro?: boolean
+  proUntil?: number | null
+  /** the friend / invite code */
+  code?: string | null
   name: string
   guide: string
   tier: number

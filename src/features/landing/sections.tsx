@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { useState } from 'react'
 import { ActivityIndicator, Pressable, StyleSheet, TextInput, View } from 'react-native'
 import { useT, type StringKey } from '../../i18n'
+import { track } from '../../lib/analytics'
 import { ApiError, api } from '../../lib/api'
 import { useApp } from '../../state/store'
 import { errorText } from '../account/errors'
@@ -102,6 +103,7 @@ function ProInterest() {
     setError(null)
     try {
       await api('/pro/interest', { method: 'POST', body: { email: email.trim(), lang } })
+      track('pro_interest')
       setState('done')
     } catch (err) {
       setError(errorText(t, err instanceof ApiError ? err : null))

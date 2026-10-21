@@ -1,7 +1,13 @@
-import { Player } from '@remotion/player'
-import { CREW_STAGE, CrewWave } from '../../../remotion/crew'
+import { Suspense, lazy } from 'react'
+import { CrewStage as Still } from './CrewStage'
 
-/** The crew section on the web: the Remotion composition, looping, transparent over the page. */
+const Player = lazy(() => import('./CrewPlayer.web'))
+
+/** The crew section on the web: the Remotion composition, the static row until it has loaded. */
 export function CrewStage() {
-  return <Player component={CrewWave} durationInFrames={CREW_STAGE.durationInFrames} compositionWidth={CREW_STAGE.width} compositionHeight={CREW_STAGE.height} fps={CREW_STAGE.fps} autoPlay loop controls={false} style={{ width: '100%', aspectRatio: `${CREW_STAGE.width} / ${CREW_STAGE.height}` }} />
+  return (
+    <Suspense fallback={<Still />}>
+      <Player />
+    </Suspense>
+  )
 }

@@ -1,6 +1,8 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import { AttemptLimiter, cleanName, createUser, findOrCreateClerkUser, findUserByEmail, hashPassword, isPlaceholderEmail, issueToken, normalizeEmail, revokeToken, userForToken, validPassword, verifyPassword, type User } from './auth.ts'
+import { AttemptLimiter, applyReferral, cleanName, createUser, ensureRefCode, findOrCreateClerkUser, findUserByEmail, grantPro, hashPassword, isPlaceholderEmail, isPro, issueToken, normalizeEmail, revokeToken, userForToken, validPassword, verifyPassword, type User } from './auth.ts'
+import { addFriend, listFriends, removeFriend } from './friends.ts'
+import { adminStats, cleanError, cleanEvents, storeError, storeEvents } from './telemetry.ts'
 import type { ClerkVerifier } from './clerk.ts'
 import type { CoachProvider } from './coach.ts'
 import { COACH_DAILY_LIMIT, SCENARIOS, cleanCoachRequest } from './coach.ts'
@@ -26,6 +28,8 @@ export interface AppOptions {
   clerk?: ClerkVerifier | null
   /** server-side speech recognition; omit when the device has to use its own */
   transcriber?: Transcriber | null
+  /** bearer token for the founder's /admin routes; omit to disable them */
+  adminToken?: string | null
 }
 
 const MAX_STATE_BYTES = 512 * 1024
@@ -64,10 +68,20 @@ export function createApp(options: AppOptions): Hono<Env> {
   const coach = options.coach ?? null
   const clerk = options.clerk ?? null
   const transcriber = options.transcriber ?? null
+  const adminToken = options.adminToken?.trim() || null
   const loginLimiter = new AttemptLimiter(10, 15 * 60 * 1000)
   const telegramLimiter = new AttemptLimiter(20, 15 * 60 * 1000)
   const interestLimiter = new AttemptLimiter(10, 60 * 60 * 1000)
   const speechLimiter = new AttemptLimiter(120, 60 * 60 * 1000)
+  const eventLimiter = new AttemptLimiter(120, 60 * 60 * 1000)
+  const errorLimiter = new AttemptLimiter(30, 60 * 60 * 1000)
+  const callerOf = (c: { req: { header: (name: string) => string | undefined } }) => c.req.header('x-forwarded-for')?.split(',')[0]?.trim() || 'direct'
+  /** the signed-in learner when a bearer token is present, else null (for routes that work either way) */
+  const optionalUser = async (c: { req: { header: (name: string) => string | undefined } }): Promise<User | null> => {
+    const header = c.req.header('Authorization') ?? ''
+    const token = header.startsWith('Bearer ') ? header.slice(7).trim() : ''
+    return token ? userForToken(db, token, now()) : null
+  }
   // a constant-cost hash to verify against when the email is unknown, so timing does not reveal which emails exist
   const decoyHash = hashPassword('decoy-password-for-constant-time')
 
@@ -92,7 +106,7 @@ export function createApp(options: AppOptions): Hono<Env> {
   }
 
   // Telegram and Clerk accounts have no real email: their internal key is not shown to anyone
-  const publicUser = (u: User) => ({ id: Number(u.id), email: isPlaceholderEmail(u.email) ? '' : u.email, telegram: u.provider === 'telegram', google: u.provider === 'google', name: u.name, guide: u.guide, tier: u.tier })
+  const publicUser = (u: User) => ({ id: Number(u.id), email: isPlaceholderEmail(u.email) ? '' : u.email, telegram: u.provider === 'telegram', google: u.provider === 'google', name: u.name, guide: u.guide, tier: u.tier, pro: isPro(u, now()), proUntil: u.pro_until === null ? null : Number(u.pro_until), code: u.ref_code })
   const session = async (user: User, status: 200 | 201 = 200) => ({ token: await issueToken(db, user.id, now()), user: publicUser(user), status })
 
   // -- accounts ---------------------------------------------------------------
@@ -104,7 +118,8 @@ export function createApp(options: AppOptions): Hono<Env> {
     const password = body?.password
     if (!validPassword(password)) return c.json({ error: 'weak_password' }, 400)
     if (await findUserByEmail(db, email)) return c.json({ error: 'email_taken' }, 409)
-    const user = await createUser(db, email, password, cleanName(body?.name), now())
+    let user = await createUser(db, email, password, cleanName(body?.name), now())
+    if (await applyReferral(db, user, body?.ref as string | undefined, now())) user = (await userForToken(db, await issueToken(db, user.id, now()), now())) ?? user
     const { token } = await session(user)
     return c.json({ token, user: publicUser(user) }, 201)
   })
@@ -152,6 +167,47 @@ export function createApp(options: AppOptions): Hono<Env> {
     }
   })
 
+  // -- analytics and crash reports (anonymous unless signed in) ----------------------------
+
+  app.post('/events', async (c) => {
+    if (!eventLimiter.allow(callerOf(c), now())) return c.json({ error: 'too_many_attempts' }, 429)
+    const batch = cleanEvents(await readJson(c.req.raw))
+    if (!batch) return c.json({ error: 'invalid_request' }, 400)
+    const user = await optionalUser(c)
+    await storeEvents(db, batch.anon, user ? user.id : null, batch.events, now())
+    return c.json({ ok: true }, 202)
+  })
+
+  app.post('/errors', async (c) => {
+    if (!errorLimiter.allow(callerOf(c), now())) return c.json({ error: 'too_many_attempts' }, 429)
+    const error = cleanError(await readJson(c.req.raw))
+    if (!error) return c.json({ error: 'invalid_request' }, 400)
+    const user = await optionalUser(c)
+    await storeError(db, error, user ? user.id : null, now())
+    return c.json({ ok: true }, 202)
+  })
+
+  // -- the founder's routes: numbers, and Pro by hand until payments exist ----------------------
+
+  const admin = new Hono<Env>()
+  admin.use('*', async (c, next) => {
+    const header = c.req.header('Authorization') ?? ''
+    if (!adminToken || header !== `Bearer ${adminToken}`) return c.json({ error: 'unauthorized' }, 401)
+    return next()
+  })
+  admin.get('/stats', async (c) => c.json(await adminStats(db, now())))
+  admin.post('/pro', async (c) => {
+    const body = await readJson(c.req.raw)
+    const email = normalizeEmail(body?.email)
+    const days = typeof body?.days === 'number' && Number.isFinite(body.days) ? Math.max(-3650, Math.min(3650, Math.floor(body.days))) : 30
+    if (!email) return c.json({ error: 'invalid_email' }, 400)
+    const user = await findUserByEmail(db, email)
+    if (!user) return c.json({ error: 'not_found' }, 404)
+    const until = await grantPro(db, user.id, days, now())
+    return c.json({ ok: true, email, proUntil: until })
+  })
+  app.route('/admin', admin)
+
   // -- the Pro waiting list: an email, nothing else, told once when Pro ships ---------
 
   app.post('/pro/interest', async (c) => {
@@ -177,7 +233,9 @@ export function createApp(options: AppOptions): Hono<Env> {
       return c.json({ error: 'invalid_credentials' }, 401)
     }
     const email = normalizeEmail(body.email) ?? ''
-    const user = await findOrCreateClerkUser(db, identity.id, email, cleanName(body.name), now())
+    const before = await db.get<{ id: number }>('SELECT id FROM users WHERE clerk_id = ?', identity.id)
+    let user = await findOrCreateClerkUser(db, identity.id, email, cleanName(body.name), now())
+    if (!before && (await applyReferral(db, user, body.ref as string | undefined, now()))) user = (await userForToken(db, await issueToken(db, user.id, now()), now())) ?? user
     const { token } = await session(user)
     return c.json({ token, user: publicUser(user) })
   })
@@ -200,7 +258,9 @@ export function createApp(options: AppOptions): Hono<Env> {
     const outcome = await pollLogin(db, body.code, body.secret, now())
     if (outcome.status === 'expired') return c.json({ error: 'telegram_expired' }, 410)
     if (outcome.status === 'pending') return c.json({ status: 'pending' })
-    const user = await findOrCreateTelegramUser(db, outcome.telegramId, outcome.name, now())
+    const before = await db.get<{ id: number }>('SELECT id FROM users WHERE telegram_id = ?', String(outcome.telegramId))
+    let user = await findOrCreateTelegramUser(db, outcome.telegramId, outcome.name, now())
+    if (!before && (await applyReferral(db, user, body.ref as string | undefined, now()))) user = (await userForToken(db, await issueToken(db, user.id, now()), now())) ?? user
     const { token } = await session(user)
     return c.json({ status: 'confirmed', token, user: publicUser(user) })
   })
@@ -223,7 +283,30 @@ export function createApp(options: AppOptions): Hono<Env> {
     return c.json({ ok: true })
   })
 
-  authed.get('/me', (c) => c.json({ user: publicUser(c.get('user')) }))
+  authed.get('/me', async (c) => c.json({ user: publicUser(await ensureRefCode(db, c.get('user'))) }))
+
+  // -- friends: by code, never by email ----------------------------------------------------
+
+  authed.get('/friends', async (c) => {
+    const me = await ensureRefCode(db, c.get('user'))
+    return c.json({ code: me.ref_code, friends: await listFriends(db, me.id, weekId(now())) })
+  })
+
+  authed.post('/friends', async (c) => {
+    const body = await readJson(c.req.raw)
+    if (typeof body?.code !== 'string' || body.code.trim().length < 4) return c.json({ error: 'invalid_request' }, 400)
+    const outcome = await addFriend(db, c.get('user').id, body.code, now())
+    if (outcome === 'unknown') return c.json({ error: 'friend_unknown' }, 404)
+    if (outcome === 'self') return c.json({ error: 'friend_self' }, 400)
+    return c.json({ status: outcome, friends: await listFriends(db, c.get('user').id, weekId(now())) }, outcome === 'added' ? 201 : 200)
+  })
+
+  authed.delete('/friends/:id', async (c) => {
+    const id = Number(c.req.param('id'))
+    if (!Number.isInteger(id)) return c.json({ error: 'invalid_request' }, 400)
+    await removeFriend(db, c.get('user').id, id)
+    return c.json({ ok: true })
+  })
 
   authed.delete('/me', async (c) => {
     // deleting the account removes sessions, state and league history (ON DELETE CASCADE)
@@ -283,12 +366,13 @@ export function createApp(options: AppOptions): Hono<Env> {
     const user = c.get('user')
     const day = new Date(now()).toISOString().slice(0, 10)
     const used = await db.get<{ count: number }>('SELECT count FROM coach_usage WHERE user_id = ? AND day = ?', user.id, day)
-    if ((used?.count ?? 0) >= COACH_DAILY_LIMIT) return c.json({ error: 'coach_limit_reached' }, 429)
+    const limit = isPro(user, now()) ? COACH_DAILY_LIMIT * 3 : COACH_DAILY_LIMIT
+    if ((used?.count ?? 0) >= limit) return c.json({ error: 'coach_limit_reached' }, 429)
     await db.run('INSERT INTO coach_usage (user_id, day, count) VALUES (?, ?, 1) ON CONFLICT(user_id, day) DO UPDATE SET count = coach_usage.count + 1', user.id, day)
 
     try {
       const reply = await coach.reply(request)
-      return c.json({ reply, remaining: COACH_DAILY_LIMIT - (used?.count ?? 0) - 1 })
+      return c.json({ reply, remaining: limit - (used?.count ?? 0) - 1 })
     } catch (err) {
       console.error('coach provider failed', err)
       return c.json({ error: 'coach_failed' }, 502)

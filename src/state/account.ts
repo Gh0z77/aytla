@@ -2,6 +2,8 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import type { UserState } from '../core/types'
 import { secureStorage } from '../lib/secureStorage'
+import { track } from '../lib/analytics'
+import { clearReferral, pendingReferral } from '../lib/referral'
 import { ApiError, api, type AccountUser, type AuthResponse, type SyncGetResponse, type SyncPutResponse, type TelegramPollResponse, type TelegramStartResponse } from '../lib/api'
 import { useApp } from './store'
 
@@ -56,6 +58,8 @@ export const useAccount = create<AccountStore>()(
 
       const adoptSession = async ({ token, user }: AuthResponse) => {
         set({ token, account: user })
+        void clearReferral()
+        track('signed_in', { pro: user.pro === true })
         await reconcile(token)
       }
 
@@ -67,7 +71,7 @@ export const useAccount = create<AccountStore>()(
 
         register: async (email, password) => {
           const name = useApp.getState().user.profile.name
-          await adoptSession(await api<AuthResponse>('/auth/register', { method: 'POST', body: { email, password, name } }))
+          await adoptSession(await api<AuthResponse>('/auth/register', { method: 'POST', body: { email, password, name, ref: await pendingReferral() } }))
         },
 
         login: async (email, password) => {
@@ -84,7 +88,7 @@ export const useAccount = create<AccountStore>()(
             if (signal?.aborted) throw new ApiError('cancelled', 0)
             let polled: TelegramPollResponse
             try {
-              polled = await api<TelegramPollResponse>('/auth/telegram/poll', { method: 'POST', body: { code: started.code, secret: started.secret } })
+              polled = await api<TelegramPollResponse>('/auth/telegram/poll', { method: 'POST', body: { code: started.code, secret: started.secret, ref: await pendingReferral() } })
             } catch (err) {
               // a dropped connection while the app is in the background is not the end of the login
               if (err instanceof ApiError && err.code === 'network') continue
@@ -100,7 +104,7 @@ export const useAccount = create<AccountStore>()(
 
         loginWithGoogle: async (clerkToken, email, name) => {
           const fallback = useApp.getState().user.profile.name
-          await adoptSession(await api<AuthResponse>('/auth/clerk', { method: 'POST', body: { token: clerkToken, email, name: name || fallback } }))
+          await adoptSession(await api<AuthResponse>('/auth/clerk', { method: 'POST', body: { token: clerkToken, email, name: name || fallback, ref: await pendingReferral() } }))
         },
 
         logout: async () => {

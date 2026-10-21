@@ -8,6 +8,7 @@ import { createGeminiCoachFromEnv } from './coach-gemini.ts'
 import { openDb } from './db.ts'
 import { sendDueReminders } from './reminders.ts'
 import { startTelegramBot } from './telegram.ts'
+import { startDailyChannel } from './channel.ts'
 import { createGeminiTranscriberFromEnv } from './transcribe.ts'
 
 /**
@@ -27,6 +28,10 @@ import { createGeminiTranscriberFromEnv } from './transcribe.ts'
  *   (`npm start` loads server/.env if it exists: put secrets there, never in git)
  *   TELEGRAM_BOT_TOKEN enables "sign in with Telegram" (token from @BotFather). Run ONE process per token:
  *                      the bot uses long polling, and Telegram delivers each update to a single poller.
+ *   TELEGRAM_CHANNEL   a channel the bot administers (e.g. @aytla_daily): the sentence of the day is posted
+ *                      there every morning at 09:00 Tashkent time
+ *   SITE_URL           the website, used in those posts (default https://aytla.app)
+ *   ADMIN_TOKEN        bearer token for GET /admin/stats and POST /admin/pro; unset = routes off
  */
 const port = Number(process.env.PORT ?? 8787)
 const databaseUrl = process.env.DATABASE_URL?.trim()
@@ -42,6 +47,8 @@ const telegramToken = process.env.TELEGRAM_BOT_TOKEN?.trim()
 const bot = telegramToken ? startTelegramBot(db, telegramToken) : null
 // reminders are due by the hour; checking every five minutes keeps them near the top of it
 if (bot) setInterval(() => void sendDueReminders(db, bot.call, Date.now()).catch((err) => console.error('reminders failed', err)), 5 * 60 * 1000).unref()
+const channel = process.env.TELEGRAM_CHANNEL?.trim()
+if (bot && channel) startDailyChannel(bot.call, channel, process.env.SITE_URL?.trim() || 'https://aytla.app')
 
 const app = createApp({
   db,
@@ -55,6 +62,7 @@ const app = createApp({
   coach: createCoachFromEnv() ?? createGeminiCoachFromEnv(),
   // speech recognition for browsers and phones without their own (Gemini listens)
   transcriber: createGeminiTranscriberFromEnv(),
+  adminToken: process.env.ADMIN_TOKEN,
 })
 
 serve({ fetch: app.fetch, port }, (info) => {

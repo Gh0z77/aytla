@@ -5,6 +5,7 @@ import { Linking, Modal, Pressable, ScrollView, StyleSheet, View, useWindowDimen
 import { BASE_LANGS, TARGET_LANGS, type BaseLang, type TargetLang } from '../../core/types'
 import { COURSE } from '../../content/course'
 import { LANGUAGE_NAMES, TARGET_NAMES, useT, type StringKey } from '../../i18n'
+import { track } from '../../lib/analytics'
 import { useApp } from '../../state/store'
 import { colors, layout, radius, space } from '../../theme/tokens'
 import { BrandMark } from '../../ui/BrandMark'
@@ -160,11 +161,15 @@ export function LandingScreen() {
   // the interface language can never be the course language: switching onto it moves the course to English
   const pickLang = (l: BaseLang) => setProfile({ baseLang: l, ...(target === l ? { target: 'en' } : {}) })
   const pickCourse = (l: TargetLang) => {
+    track('course_pick', { target: l })
     setProfile({ target: l })
     start()
   }
 
-  const start = () => router.push(onboarded ? '/learn' : '/welcome')
+  const start = () => {
+    track('landing_start', { onboarded })
+    router.push(onboarded ? '/learn' : '/welcome')
+  }
   const startLabel = onboarded ? t('landing.have') : t('landing.cta')
 
   // section links scroll the page; the targets report where they landed, and the link of the section in view is underlined

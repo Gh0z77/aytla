@@ -1,5 +1,5 @@
 import { createHash, randomBytes, timingSafeEqual } from 'node:crypto'
-import { USER_COLUMNS, type User } from './auth.ts'
+import { USER_COLUMNS, newRefCode, type User } from './auth.ts'
 import type { Db } from './db.ts'
 
 /**
@@ -75,8 +75,9 @@ export async function findOrCreateTelegramUser(db: Db, telegramId: number, name:
   // no email and no password: "tg:<id>" can never match a normalised email, and the hash scheme never verifies
   const email = `tg:${telegramId}`
   const clean = name.trim().slice(0, 24)
-  const row = await db.get<{ id: number }>('INSERT INTO users (email, password_hash, name, telegram_id, created_at) VALUES (?, ?, ?, ?, ?) RETURNING id', email, 'telegram$', clean, String(telegramId), now)
-  return { id: Number(row?.id), email, name: clean, guide: 'everest', tier: 0, provider: 'telegram' }
+  const code = newRefCode()
+  const row = await db.get<{ id: number }>('INSERT INTO users (email, password_hash, name, telegram_id, created_at, ref_code) VALUES (?, ?, ?, ?, ?, ?) RETURNING id', email, 'telegram$', clean, String(telegramId), now, code)
+  return { id: Number(row?.id), email, name: clean, guide: 'everest', tier: 0, provider: 'telegram', pro_until: null, ref_code: code }
 }
 
 // -- the bot ----------------------------------------------------------------------

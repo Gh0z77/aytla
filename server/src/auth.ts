@@ -24,11 +24,63 @@ export interface User {
   tier: number
   /** how the learner signed up; a password login never opens a Telegram or Google account */
   provider: Provider
+  /** Pro until this time (ms), null = never had it */
+  pro_until: number | null
+  /** the friend / invite code, assigned on first use */
+  ref_code: string | null
 }
 
 /** the provider column, derived from the hash scheme (`u` is the users alias) */
 const providerSql = (alias: string) => `CASE WHEN ${alias}.password_hash = 'telegram$' THEN 'telegram' WHEN ${alias}.password_hash = 'clerk$' THEN 'google' ELSE 'email' END AS provider`
-export const USER_COLUMNS = `u.id, u.email, u.name, u.guide, u.tier, ${providerSql('u')}`
+export const USER_COLUMNS = `u.id, u.email, u.name, u.guide, u.tier, u.pro_until, u.ref_code, ${providerSql('u')}`
+
+/** eight characters without look-alikes: the friend and invite code */
+export function newRefCode(): string {
+  const alphabet = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'
+  const bytes = randomBytes(8)
+  return [...bytes].map((b) => alphabet[b % alphabet.length]).join('')
+}
+
+export const isPro = (u: Pick<User, 'pro_until'>, now: number): boolean => u.pro_until !== null && Number(u.pro_until) > now
+
+/** older accounts have no code yet: give them one the first time it is needed */
+export async function ensureRefCode(db: Db, user: User): Promise<User> {
+  if (user.ref_code) return user
+  for (let i = 0; i < 5; i++) {
+    const code = newRefCode()
+    const taken = await db.get('SELECT 1 AS one FROM users WHERE ref_code = ?', code)
+    if (taken) continue
+    await db.run('UPDATE users SET ref_code = ? WHERE id = ?', code, user.id)
+    return { ...user, ref_code: code }
+  }
+  return user
+}
+
+export const PRO_DAY_MS = 24 * 60 * 60 * 1000
+
+/** extend Pro by `days` from now, or from the current end when it is still running */
+export async function grantPro(db: Db, userId: number, days: number, now: number): Promise<number> {
+  const row = await db.get<{ pro_until: number | null }>('SELECT pro_until FROM users WHERE id = ?', userId)
+  const from = Math.max(now, Number(row?.pro_until ?? 0))
+  const until = from + days * PRO_DAY_MS
+  await db.run('UPDATE users SET pro_until = ? WHERE id = ?', until, userId)
+  return until
+}
+
+export const REFERRAL_DAYS = 7
+export const REFERRAL_CAP = 10
+
+/** a new account arrived through someone's invite: both get a week of Pro (the inviter for the first ten invites) */
+export async function applyReferral(db: Db, newUser: User, code: string | null | undefined, now: number): Promise<boolean> {
+  if (!code || typeof code !== 'string') return false
+  const inviter = await db.get<{ id: number }>('SELECT id FROM users WHERE ref_code = ?', code.trim().toUpperCase())
+  if (!inviter || Number(inviter.id) === newUser.id) return false
+  await db.run('UPDATE users SET referred_by = ? WHERE id = ? AND referred_by IS NULL', inviter.id, newUser.id)
+  const count = await db.get<{ n: number }>('SELECT COUNT(*) AS n FROM users WHERE referred_by = ?', inviter.id)
+  await grantPro(db, newUser.id, REFERRAL_DAYS, now)
+  if (Number(count?.n ?? 0) <= REFERRAL_CAP) await grantPro(db, Number(inviter.id), REFERRAL_DAYS, now)
+  return true
+}
 
 /** Telegram and Clerk accounts carry an internal key instead of an email; it is never shown */
 export const isPlaceholderEmail = (email: string): boolean => email.startsWith('tg:') || email.startsWith('clerk:')
@@ -76,8 +128,9 @@ export async function findUserByEmail(db: Db, email: string): Promise<(User & { 
 }
 
 export async function createUser(db: Db, email: string, password: string, name: string, now: number): Promise<User> {
-  const row = await db.get<{ id: number }>('INSERT INTO users (email, password_hash, name, created_at) VALUES (?, ?, ?, ?) RETURNING id', email, hashPassword(password), name, now)
-  return { id: Number(row?.id), email, name, guide: 'everest', tier: 0, provider: 'email' }
+  const code = newRefCode()
+  const row = await db.get<{ id: number }>('INSERT INTO users (email, password_hash, name, created_at, ref_code) VALUES (?, ?, ?, ?, ?) RETURNING id', email, hashPassword(password), name, now, code)
+  return { id: Number(row?.id), email, name, guide: 'everest', tier: 0, provider: 'email', pro_until: null, ref_code: code }
 }
 
 /** Google (and any other Clerk) sign-in: the account is keyed by the Clerk user id, never by the email the client reports. */
@@ -88,8 +141,9 @@ export async function findOrCreateClerkUser(db: Db, clerkId: string, email: stri
   const taken = email ? await findUserByEmail(db, email) : null
   const shown = email && !taken ? email : `clerk:${clerkId}`
   const clean = cleanName(name)
-  const row = await db.get<{ id: number }>('INSERT INTO users (email, password_hash, name, clerk_id, created_at) VALUES (?, ?, ?, ?, ?) RETURNING id', shown, 'clerk$', clean, clerkId, now)
-  return { id: Number(row?.id), email: shown, name: clean, guide: 'everest', tier: 0, provider: 'google' }
+  const code = newRefCode()
+  const row = await db.get<{ id: number }>('INSERT INTO users (email, password_hash, name, clerk_id, created_at, ref_code) VALUES (?, ?, ?, ?, ?, ?) RETURNING id', shown, 'clerk$', clean, clerkId, now, code)
+  return { id: Number(row?.id), email: shown, name: clean, guide: 'everest', tier: 0, provider: 'google', pro_until: null, ref_code: code }
 }
 
 // -- input rules --------------------------------------------------------------

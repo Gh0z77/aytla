@@ -1,12 +1,14 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { useState } from 'react'
-import { Modal, Platform, Pressable, StyleSheet, Switch, TextInput, View } from 'react-native'
+import { Modal, Platform, Pressable, StyleSheet, Switch, TextInput, View, Share } from 'react-native'
 import { WORD_ID_MARKER } from '../../core/progress'
 import { BASE_LANGS, type DailyGoal, TARGET_LANGS } from '../../core/types'
 import { GOAL_IDS } from '../../core/goals'
 import { LANGUAGE_NAMES, TARGET_NAMES, useT, type StringKey } from '../../i18n'
 import { REMINDER_HOURS, remindersSupported, setDailyReminder } from '../../lib/reminders'
+import { track } from '../../lib/analytics'
+import { inviteLink } from '../../lib/referral'
 import { useAccount } from '../../state/account'
 import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
@@ -114,6 +116,29 @@ export function ProfileScreen() {
           </View>
           <Ionicons name="chevron-forward" size={22} color={colors.textMuted} />
         </Pressable>
+
+        <View style={styles.shopRow} testID="profile-pro">
+          <Ionicons name="star" size={24} color={account?.pro ? colors.gold : colors.textMuted} />
+          <View style={styles.flex}>
+            <Txt style={styles.accountTitle}>Pro</Txt>
+            <Txt variant="caption" color={colors.textSoft}>
+              {account?.pro && account.proUntil ? t('profile.proUntil', { date: new Date(account.proUntil).toLocaleDateString() }) : t('profile.proOff')}
+            </Txt>
+          </View>
+        </View>
+
+        {account?.code ? (
+          <View style={styles.shopRow} testID="profile-invite">
+            <Ionicons name="gift" size={24} color={colors.primary} />
+            <View style={styles.flex}>
+              <Txt style={styles.accountTitle}>{t('friends.invite')}</Txt>
+              <Txt variant="caption" color={colors.textSoft}>
+                {t('friends.inviteBody')}
+              </Txt>
+            </View>
+            <Button small variant="secondary" label={t('friends.share')} onPress={() => void shareInvite(account.code ?? '', t('friends.inviteText'))} />
+          </View>
+        ) : null}
 
         <Txt variant="heading" style={styles.section}>
           {t('profile.settings')}
@@ -304,6 +329,19 @@ function Toggle({ label, value, onChange }: { label: string; value: boolean; onC
       <Switch value={value} onValueChange={onChange} thumbColor={colors.white} trackColor={{ true: colors.primary, false: colors.borderStrong }} accessibilityLabel={label} {...WEB_SWITCH} />
     </View>
   )
+}
+
+/** the invite link through the share sheet, or onto the clipboard where there is none */
+async function shareInvite(code: string, text: string): Promise<void> {
+  const link = inviteLink(code)
+  track('invite_share')
+  try {
+    if (typeof navigator !== 'undefined' && navigator.share) await navigator.share({ title: 'Aytla', text, url: link })
+    else if (typeof navigator !== 'undefined' && navigator.clipboard) await navigator.clipboard.writeText(link)
+    else await Share.share({ message: `${text} ${link}` })
+  } catch {
+    // the sheet was closed
+  }
 }
 
 const styles = StyleSheet.create({

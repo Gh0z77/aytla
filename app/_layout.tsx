@@ -5,6 +5,7 @@ import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useEffect, type ReactNode } from 'react'
 import { AppState, Platform } from 'react-native'
+import { startAnalytics } from '../src/lib/analytics'
 import { loadCapabilities } from '../src/lib/capabilities'
 import { CLERK_PUBLISHABLE_KEY, clerkEnabled } from '../src/lib/clerk'
 import { startAutoSync, useAccount } from '../src/state/account'
@@ -24,6 +25,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     void loadCapabilities()
+    const stopAnalytics = startAnalytics(() => useAccount.getState().token)
     const stopAutoSync = startAutoSync()
     const sub = AppState.addEventListener('change', (state) => {
       if (state !== 'active') return
@@ -33,6 +35,7 @@ export default function RootLayout() {
     return () => {
       sub.remove()
       stopAutoSync()
+      stopAnalytics()
     }
   }, [tick])
 

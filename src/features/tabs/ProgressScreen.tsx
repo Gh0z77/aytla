@@ -5,6 +5,7 @@ import { colors, radius, space } from '../../theme/tokens'
 import { TabScreen } from '../shell/TabScreen'
 import { Txt } from '../../ui/Txt'
 import { TopBar } from '../path/TopBar'
+import { FriendsCard } from './FriendsCard'
 import { LeagueBody } from './LeagueScreen'
 import { QuestsBody } from './QuestsScreen'
 
@@ -26,7 +27,14 @@ export function ProgressScreen() {
           </Pressable>
         ))}
       </View>
-      {part === 'quests' ? <QuestsBody /> : <LeagueBody />}
+      {part === 'quests' ? (
+        <QuestsBody />
+      ) : (
+        <>
+          <LeagueBody />
+          <FriendsCard />
+        </>
+      )}
     </TabScreen>
   )
 }

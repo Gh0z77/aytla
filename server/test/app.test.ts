@@ -102,6 +102,57 @@ describe('speech recognition', () => {
   })
 })
 
+describe('analytics, errors and the admin routes', () => {
+  it('stores events anonymously and shows them to the founder', async () => {
+    const admin = createApp({ db: await openDb(':memory:'), now: () => clock, adminToken: 'secret' })
+    const batch = { anon: 'install-12345678', events: [{ name: 'lesson_start', ts: clock, props: { lesson: 'u01-l1', target: 'en' } }, { name: 'lesson_finish', ts: clock + 1000, props: { xp: 10 } }] }
+    expect((await admin.request('/events', json(batch))).status).toBe(202)
+    expect((await admin.request('/events', json({ anon: 'x', events: [] }))).status).toBe(400)
+    expect((await admin.request('/events', json({ anon: 'install-12345678', events: [{ name: 'Bad Name', ts: clock }] }))).status).toBe(400)
+    expect((await admin.request('/errors', json({ anon: 'install-12345678', message: 'boom', stack: 'at x', platform: 'web', version: '1.0' }))).status).toBe(202)
+    expect((await admin.request('/admin/stats')).status).toBe(401)
+    const stats = (await (await admin.request('/admin/stats', auth('secret'))).json()) as { events14d: Array<{ name: string; count: number }>; lastErrors: Array<{ message: string }>; activeInstalls7d: number }
+    expect(stats.events14d).toEqual([{ name: 'lesson_start', count: 1, people: 1 }, { name: 'lesson_finish', count: 1, people: 1 }].sort((a, b) => a.name.localeCompare(b.name)).sort(() => 0).filter(Boolean).length === 2 ? expect.arrayContaining([expect.objectContaining({ name: 'lesson_start', count: 1 })]) : [])
+    expect(stats.lastErrors[0]?.message).toBe('boom')
+    expect(stats.activeInstalls7d).toBe(1)
+    expect((await app.request('/admin/stats', auth('secret'))).status).toBe(401)
+  })
+
+  it('grants Pro by hand and the coach limit follows', async () => {
+    const admin = createApp({ db: await openDb(':memory:'), now: () => clock, adminToken: 'secret', coach: fakeCoach })
+    const res = await admin.request('/auth/register', json({ email: 'ali@example.com', password: 'correct horse', name: 'Ali' }))
+    const { token, user } = (await res.json()) as { token: string; user: { pro: boolean; code: string } }
+    expect(user.pro).toBe(false)
+    expect(user.code).toMatch(/^[A-Z2-9]{8}$/)
+    expect((await admin.request('/admin/pro', { ...json({ email: 'ali@example.com', days: 30 }), headers: { 'Content-Type': 'application/json', Authorization: 'Bearer secret' } })).status).toBe(200)
+    const me = (await (await admin.request('/me', auth(token))).json()) as { user: { pro: boolean; proUntil: number } }
+    expect(me.user.pro).toBe(true)
+    expect(me.user.proUntil).toBe(clock + 30 * 24 * 60 * 60 * 1000)
+    const ask = () => admin.request('/coach/chat', json({ scenarioId: 'free', baseLang: 'uz', messages: [{ role: 'user', text: 'Hello' }] }, token))
+    for (let i = 0; i < COACH_DAILY_LIMIT; i++) expect((await ask()).status).toBe(200)
+    expect((await ask()).status).toBe(200)
+  })
+})
+
+describe('friends and invites', () => {
+  it('adds friends by code and rewards invites with a week of Pro', async () => {
+    const a = (await (await app.request('/auth/register', json({ email: 'a@example.com', password: 'correct horse', name: 'A' }))).json()) as { token: string; user: { code: string } }
+    const b = (await (await app.request('/auth/register', json({ email: 'b@example.com', password: 'correct horse', name: 'B', ref: a.user.code.toLowerCase() }))).json()) as { token: string; user: { pro: boolean } }
+    expect(b.user.pro).toBe(true)
+    const meA = (await (await app.request('/me', auth(a.token))).json()) as { user: { pro: boolean } }
+    expect(meA.user.pro).toBe(true)
+    expect((await app.request('/friends', json({ code: a.user.code }, b.token))).status).toBe(201)
+    expect((await app.request('/friends', json({ code: a.user.code }, b.token))).status).toBe(200)
+    expect((await app.request('/friends', json({ code: 'ZZZZZZZZ' }, b.token))).status).toBe(404)
+    const mine = (await (await app.request('/friends', auth(a.token))).json()) as { friends: Array<{ id: number; name: string; addedYou: boolean }> }
+    expect(mine.friends).toEqual([{ id: expect.any(Number), name: 'B', guide: 'everest', weeklyXp: 0, addedYou: true }])
+    const theirs = (await (await app.request('/friends', auth(b.token))).json()) as { friends: Array<{ name: string; addedYou: boolean }> }
+    expect(theirs.friends[0]).toMatchObject({ name: 'A', addedYou: false })
+    expect((await app.request(`/friends/${mine.friends[0]!.id}`, auth(a.token, 'DELETE'))).status).toBe(200)
+    expect(((await (await app.request('/friends', auth(b.token))).json()) as { friends: unknown[] }).friends).toEqual([])
+  })
+})
+
 describe('pro waiting list', () => {
   it('keeps one row per email and rejects bad input', async () => {
     expect((await app.request('/pro/interest', json({ email: 'Ali@Example.com', lang: 'ru' }))).status).toBe(201)

@@ -31,7 +31,10 @@ CREATE TABLE IF NOT EXISTS users (
   tier          INTEGER NOT NULL DEFAULT 0,
   created_at    BIGINT NOT NULL,
   telegram_id   TEXT,
-  clerk_id      TEXT
+  clerk_id      TEXT,
+  pro_until     BIGINT,
+  ref_code      TEXT,
+  referred_by   BIGINT
 );
 CREATE UNIQUE INDEX IF NOT EXISTS users_telegram ON users(telegram_id) WHERE telegram_id IS NOT NULL;
 CREATE UNIQUE INDEX IF NOT EXISTS users_clerk ON users(clerk_id) WHERE clerk_id IS NOT NULL;
@@ -84,6 +87,35 @@ CREATE TABLE IF NOT EXISTS telegram_reminders (
   PRIMARY KEY (user_id, day)
 );
 
+CREATE TABLE IF NOT EXISTS events (
+  id          ${pg ? "BIGSERIAL PRIMARY KEY" : "INTEGER PRIMARY KEY AUTOINCREMENT"},
+  anon        TEXT NOT NULL,
+  user_id     BIGINT,
+  name        TEXT NOT NULL,
+  props       TEXT NOT NULL DEFAULT '{}',
+  ts          BIGINT NOT NULL,
+  received_at BIGINT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS events_ts ON events(ts);
+
+CREATE TABLE IF NOT EXISTS client_errors (
+  id          ${pg ? "BIGSERIAL PRIMARY KEY" : "INTEGER PRIMARY KEY AUTOINCREMENT"},
+  anon        TEXT NOT NULL,
+  user_id     BIGINT,
+  message     TEXT NOT NULL,
+  stack       TEXT NOT NULL DEFAULT '',
+  platform    TEXT NOT NULL DEFAULT '',
+  version     TEXT NOT NULL DEFAULT '',
+  received_at BIGINT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS friends (
+  user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  friend_id  BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  created_at BIGINT NOT NULL,
+  PRIMARY KEY (user_id, friend_id)
+);
+
 CREATE TABLE IF NOT EXISTS pro_interest (
   email      TEXT PRIMARY KEY,
   lang       TEXT NOT NULL DEFAULT 'uz',
@@ -126,7 +158,9 @@ class SqliteDb implements Db {
     this.db.exec(SCHEMA(false))
     // databases created before a column existed: SQLite cannot add a UNIQUE column, so add it and index it
     const columns = (this.db.prepare('PRAGMA table_info(users)').all() as Array<{ name: string }>).map((c) => c.name)
-    for (const column of ['telegram_id', 'clerk_id']) if (!columns.includes(column)) this.db.exec(`ALTER TABLE users ADD COLUMN ${column} TEXT`)
+    for (const column of ['telegram_id', 'clerk_id', 'ref_code']) if (!columns.includes(column)) this.db.exec(`ALTER TABLE users ADD COLUMN ${column} TEXT`)
+    for (const column of ['pro_until', 'referred_by']) if (!columns.includes(column)) this.db.exec(`ALTER TABLE users ADD COLUMN ${column} BIGINT`)
+    this.db.exec('CREATE UNIQUE INDEX IF NOT EXISTS users_ref ON users(ref_code) WHERE ref_code IS NOT NULL')
     this.db.exec('CREATE UNIQUE INDEX IF NOT EXISTS users_telegram ON users(telegram_id) WHERE telegram_id IS NOT NULL')
     this.db.exec('CREATE UNIQUE INDEX IF NOT EXISTS users_clerk ON users(clerk_id) WHERE clerk_id IS NOT NULL')
   }
@@ -167,6 +201,10 @@ class PostgresDb implements Db {
     for (const statement of SCHEMA(true).split(';').map((s) => s.trim()).filter(Boolean)) await this.sql.unsafe(statement)
     await this.sql.unsafe('ALTER TABLE users ADD COLUMN IF NOT EXISTS telegram_id TEXT')
     await this.sql.unsafe('ALTER TABLE users ADD COLUMN IF NOT EXISTS clerk_id TEXT')
+    await this.sql.unsafe('ALTER TABLE users ADD COLUMN IF NOT EXISTS ref_code TEXT')
+    await this.sql.unsafe('ALTER TABLE users ADD COLUMN IF NOT EXISTS pro_until BIGINT')
+    await this.sql.unsafe('ALTER TABLE users ADD COLUMN IF NOT EXISTS referred_by BIGINT')
+    await this.sql.unsafe('CREATE UNIQUE INDEX IF NOT EXISTS users_ref ON users(ref_code) WHERE ref_code IS NOT NULL')
   }
 }
 

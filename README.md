@@ -51,6 +51,16 @@ The app finds the API at `EXPO_PUBLIC_API_URL` (default `http://localhost:8787`)
 | `GEMINI_API_KEY` | AI conversation practice through Gemini, used when there are no Anthropic credentials |
 | `GEMINI_MODEL` | Gemini model for the coach, default `gemini-3.8-flash` |
 | `TELEGRAM_BOT_TOKEN` | turns on "sign in with Telegram" and Telegram reminders; without it the button is hidden |
+| `TELEGRAM_CHANNEL` | a channel the bot administers (e.g. `@aytla_daily`): the sentence of the day is posted there at 09:00 Tashkent time (`server/src/channel.ts`; sentences come from `server/src/sentences.json`, refreshed with `node scripts/export-sentences.mjs`) |
+| `SITE_URL` | the website, used in those posts |
+| `ADMIN_TOKEN` | bearer token for the founder's routes: `GET /admin/stats` (users, Pro, events of the last 14 days, last errors) and `POST /admin/pro {email, days}` (Pro by hand until payments exist). Unset = routes off |
+
+### Speech, analytics, friends, Pro
+
+- **Speech recognition everywhere.** Browsers with their own recogniser use it; the rest (and every phone) record a few seconds and send them to `POST /speech/transcribe`, where Gemini writes down the words in the target language (`server/src/transcribe.ts`, `src/lib/recorder*.ts`). `/health` says whether it is on. The AI coach has a microphone too.
+- **Analytics and crash reports** go to our own tables (`POST /events`, `POST /errors`, `src/lib/analytics.ts`): one random id per install, no personal data in properties. Read them with `GET /admin/stats`.
+- **Friends and invites.** Every account has an 8-character code; friends are added by code only (`/friends`), never by email. An invite link (`https://<site>/?ref=CODE`) remembered on the website gives the newcomer and the inviter a week of Pro at sign-up (`applyReferral` in `server/src/auth.ts`; the inviter is rewarded for the first ten invites).
+- **Pro** is an entitlement (`users.pro_until`): Pro learners get three times the daily AI practice. It is granted by hand with `POST /admin/pro` until a payment provider is connected.
 
 The website's "Pro" card collects emails into the `pro_interest` table (`POST /pro/interest`, one row per email) so the people who asked can be told when Pro ships; nothing is sold yet. Footer social links appear only when `EXPO_PUBLIC_SOCIAL_TELEGRAM` / `_INSTAGRAM` / `_YOUTUBE` are set in the app's `.env`, so the page never points at an account that does not exist.
 

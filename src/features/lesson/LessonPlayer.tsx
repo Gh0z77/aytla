@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import { KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native'
 import { courseFor, findLesson } from '../../content/course'
 import { buildLessonSession, buildPracticeSession, buildReviewSession, type BuiltSession } from '../../core/exercises'
+import { track } from '../../lib/analytics'
 import { gradeBank, gradeFill, gradeListen, gradeSay, gradeSelect, gradeSpeak, gradeType } from '../../core/grading'
 import { practiceItems } from '../../core/progress'
 import { answer, currentExercise, dropKinds, isFinished, sessionProgress, skip, startSession, toResult, type SessionState } from '../../core/session'
@@ -94,7 +95,9 @@ export function LessonPlayer({ lessonId }: { lessonId: string }) {
     if (done.current) return
     done.current = true
     stopSpeaking()
-    completeSession(toResult(final, Date.now()))
+    const result = toResult(final, Date.now())
+    track('lesson_finish', { lesson: lessonId, mistakes: result.mistakes, perfect: result.mistakes === 0 })
+    completeSession(result)
     router.replace('/result')
   }
 

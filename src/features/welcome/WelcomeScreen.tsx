@@ -5,6 +5,7 @@ import { Pressable, StyleSheet, TextInput, View } from 'react-native'
 import { GOAL_IDS } from '../../core/goals'
 import { BASE_LANGS, type CharacterId, type DailyGoal, type GoalId, TARGET_LANGS } from '../../core/types'
 import { LANGUAGE_NAMES, TARGET_NAMES, useT, type StringKey } from '../../i18n'
+import { track } from '../../lib/analytics'
 import { useApp } from '../../state/store'
 import { colors, radius, space } from '../../theme/tokens'
 import { Button } from '../../ui/Button'
@@ -33,12 +34,17 @@ export function WelcomeScreen() {
   const [learningGoal, setLearningGoal] = useState<GoalId>(profile.goal ?? 'everyday')
 
   const finish = () => {
+    track('onboarding_done', { target, goal: learningGoal, knowsSome })
     setProfile({ name: name.trim(), target, dailyGoalXp: goal, guide, goal: learningGoal, onboarded: true })
     // whoever already knows some English takes the placement test instead of guessing a level
     router.replace(knowsSome ? '/placement' : '/learn')
   }
 
-  const next = () => (step === STEPS - 1 ? finish() : setStep(step + 1))
+  const next = () => {
+    if (step === STEPS - 1) return finish()
+    track('onboarding_step', { step: step + 1 })
+    setStep(step + 1)
+  }
   const back = () => (step === 0 ? (router.canGoBack() ? router.back() : undefined) : setStep(step - 1))
 
   return (
